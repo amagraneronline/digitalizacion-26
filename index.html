@@ -1,57 +1,166 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Recursos de Medios y Recursos Digitales para 1.º ESO">
-  <title>Medios y Recursos Digitales · 1.º ESO</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Índice de unidades de Digitalización de 4.º ESO">
+<title>Digitalización · 4.º ESO</title>
+<style>
+:root{
+  --bg:#f4f7fb;--surface:#fff;--text:#172033;--muted:#627086;
+  --primary:#185bb5;--primary-dark:#103d79;--accent:#e8f1ff;
+  --border:#dbe4f0;--ok:#1c7a49;--okbg:#eaf8f0;
+  --pending:#7a5a12;--pendingbg:#fff7e4;--shadow:0 12px 34px rgba(20,44,78,.08);
+  --radius:20px;--max:1180px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:radial-gradient(circle at 88% 15%,rgba(112,172,255,.24),transparent 24%),linear-gradient(135deg,#0b2850,#174d91 55%,#1d67c3);color:#fff;padding:68px 20px 58px}
+.hero{max-width:var(--max);margin:auto;display:grid;grid-template-columns:1.35fr .65fr;gap:30px;align-items:end}
+.eyebrow{display:inline-block;padding:6px 11px;border:1px solid rgba(255,255,255,.24);border-radius:999px;background:rgba(255,255,255,.08);font-weight:800;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:15px}
+h1{margin:0;font-size:clamp(2.5rem,6vw,5rem);line-height:.98;letter-spacing:-.045em}
+.hero p{max-width:720px;margin:20px 0 0;font-size:1.12rem;color:#e6effd}
+.hero-panel{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:20px;backdrop-filter:blur(8px)}
+.hero-panel strong{display:block;margin-bottom:8px}.hero-panel p{margin:0;font-size:.95rem}
+main{max-width:var(--max);margin:auto;padding:36px 18px 70px}
+.intro{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;margin-bottom:25px}
+.intro h2{margin:0 0 7px;font-size:clamp(1.55rem,3vw,2.25rem);letter-spacing:-.02em}
+.intro p{margin:0;color:var(--muted);max-width:790px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;font-size:.8rem;font-weight:800;white-space:nowrap}
+.tag.available{background:var(--okbg);color:var(--ok)} .tag.pending{background:var(--pendingbg);color:var(--pending)}
+.units{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.unit{position:relative;overflow:hidden;min-height:280px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;display:flex;flex-direction:column}
+.unit:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-70px;top:-80px;background:var(--accent)}
+.unit>*{position:relative;z-index:1}
+.unit-number{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;color:#fff;background:var(--primary);font-size:1.15rem;font-weight:900;margin-bottom:18px}
+.unit h3{margin:0 0 8px;font-size:1.4rem;line-height:1.22;color:var(--primary-dark)}
+.unit p{margin:0;color:var(--muted)}
+.topics{margin:17px 0 22px;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:7px}
+.topics li{background:#f0f4f9;color:#43546c;padding:5px 9px;border-radius:8px;font-size:.82rem;font-weight:700}
+.actions{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;min-height:44px;padding:10px 15px;border-radius:11px;background:var(--primary);color:#fff;font-weight:800;transition:.18s ease}
+.button:hover,.button:focus{background:var(--primary-dark);transform:translateY(-1px);outline:none}
+.button.disabled{pointer-events:none;background:#e4e9f0;color:#8793a5}
+.block{margin-top:30px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);padding:26px;box-shadow:var(--shadow)}
+.block h2{margin-top:0}.block p{color:var(--muted)}
+.curriculum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+.curriculum article{border-radius:14px;padding:16px;background:#f8faff;border:1px solid var(--border)}
+.curriculum strong{display:block;color:var(--primary-dark);margin-bottom:5px}
+footer{max-width:var(--max);margin:auto;padding:0 18px 45px;color:var(--muted);text-align:center;font-size:.9rem}
+@media(max-width:900px){.hero,.intro{grid-template-columns:1fr}.legend{justify-content:flex-start}.curriculum{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){header{padding-top:46px}.units,.curriculum{grid-template-columns:1fr}.unit{min-height:auto}.actions{align-items:flex-start;flex-direction:column}}
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <p class="eyebrow">1.º ESO</p>
-    <h1>Medios y Recursos Digitales</h1>
-    <p>
-      Espacio de clase con los contenidos, actividades y recursos de las diferentes unidades didácticas.
-    </p>
-  </header>
+<header>
+  <div class="hero">
+    <div>
+      <span class="eyebrow">Material de la materia</span>
+      <h1>Digitalización<br>4.º ESO</h1>
+      <p>Portal de consulta de las unidades, explicaciones, actividades y materiales que utilizaremos a lo largo del curso.</p>
+    </div>
+    <aside class="hero-panel">
+      <strong>¿Cómo utilizar esta web?</strong>
+      <p>Entra en la unidad que estés trabajando en clase. Los contenidos publicados sirven para repasar explicaciones, consultar ejemplos y completar las actividades propuestas.</p>
+    </aside>
+  </div>
+</header>
 
-  <main class="container">
-    <h2 class="section-title">Inicio</h2>
-    <section class="card-grid" aria-label="Accesos principales">
-      <a class="card" href="presentacion.html">
-        <div class="card-icon" aria-hidden="true">👋</div>
-        <span class="badge">Presentación</span>
-        <h2>Bienvenida a la materia</h2>
-        <p>Presentación inicial de la asignatura y del espacio de trabajo.</p>
-        <span class="card-link">Abrir presentación →</span>
+<main>
+  <div class="intro">
+    <div>
+      <h2>Unidades de la materia</h2>
+      <p>El curso avanza desde el funcionamiento de los dispositivos y las redes hasta la creación de contenidos, la seguridad y la ciudadanía digital crítica.</p>
+    </div>
+    <div class="legend">
+      <span class="tag available">● Disponible</span>
+      <span class="tag pending">● Próximamente</span>
+    </div>
+  </div>
+
+  <section class="units">
+    
+    <article class="unit">
+	  <a href="ud01/index.html">
+      <div class="unit-number">01</div>
+      <h3>Hardware y representación digital de la información</h3>
+      <p>Conoceremos cómo funciona un ordenador por dentro, sus componentes principales, cómo representa la información y cómo se mide el almacenamiento.</p>
+      <ul class="topics"><li>Hardware</li><li>CPU</li><li>RAM</li><li>Almacenamiento</li><li>Sistema binario</li><li>KB · MB · GB · TB</li></ul>
+      <div class="actions"><a class="button" href="ud01/index.html">Entrar en la unidad →</a><span class="tag available">Disponible</span></div>
       </a>
-    </section>
+	</article>
+	
+	
+    <article class="unit">
+      <div class="unit-number">02</div>
+      <h3>Sistemas operativos</h3>
+      <p>Aprenderemos qué es un sistema operativo, qué funciones realiza y cómo configurar y mantener un equipo para adaptarlo a nuestras necesidades.</p>
+      <ul class="topics"><li>Windows · Linux</li><li>Usuarios</li><li>Archivos y carpetas</li><li>Configuración</li><li>Mantenimiento</li></ul>
+      <div class="actions"><span class="button disabled">Contenido próximamente</span><span class="tag pending">Próximamente</span></div>
+    </article>
 
-    <h2 class="section-title">Unidades didácticas</h2>
-    <section class="card-grid" aria-label="Unidades didácticas">
-      <a class="card" href="ud01/index.html">
-        <div class="card-icon" aria-hidden="true">🖥️</div>
-        <span class="badge">UD 01</span>
-        <h2>Unidad 1</h2>
-        <p>Uso y manejo del teclado</p>
-		<p>Sistema operativo. Primeros pasos</p>
-        <span class="card-link">Entrar en la unidad →</span>
-      </a>
+    <article class="unit">
+      <div class="unit-number">03</div>
+      <h3>Redes, Internet y dispositivos conectados</h3>
+      <p>Estudiaremos cómo se comunican los dispositivos, los elementos de una red doméstica y las principales conexiones alámbricas e inalámbricas.</p>
+      <ul class="topics"><li>LAN</li><li>Router</li><li>Wi-Fi</li><li>Ethernet</li><li>Internet</li><li>IoT</li></ul>
+      <div class="actions"><span class="button disabled">Contenido próximamente</span><span class="tag pending">Próximamente</span></div>
+    </article>
 
-	  <!-- href="ud02/index.html" -->
-      <a class="card" href="#">
-        <div class="card-icon" aria-hidden="true">⚙️</div>
-        <span class="badge">UD 02 - Próximamente</span>
-        <h2>Unidad 2</h2>
-        <p>Componentes hardware de un ordenador.</p>
-        <span class="card-link">Entrar en la unidad →</span>
-      </a>
-    </section>
-  </main>
+    <article class="unit">
+      <div class="unit-number">04</div>
+      <h3>Gestión de información y entorno digital</h3>
+      <p>Trabajaremos la búsqueda, selección, organización y archivo de información y la configuración de un entorno personal de aprendizaje eficiente.</p>
+      <ul class="topics"><li>Búsquedas</li><li>Fuentes</li><li>Archivos</li><li>Nube</li><li>Organización</li></ul>
+      <div class="actions"><span class="button disabled">Contenido próximamente</span><span class="tag pending">Próximamente</span></div>
+    </article>
 
-  <footer>
-    Medios y Recursos Digitales · 1.º ESO
-  </footer>
+    <article class="unit">
+      <div class="unit-number">05</div>
+      <h3>Creación y publicación de contenidos digitales</h3>
+      <p>Crearemos, integraremos y publicaremos contenidos utilizando herramientas digitales y atendiendo al formato, la audiencia y los derechos de autor.</p>
+      <ul class="topics"><li>Documentos</li><li>Multimedia</li><li>Web</li><li>Colaboración</li><li>Licencias</li></ul>
+      <div class="actions"><span class="button disabled">Contenido próximamente</span><span class="tag pending">Próximamente</span></div>
+    </article>
+
+    <article class="unit">
+      <div class="unit-number">06</div>
+      <h3>Seguridad, privacidad y bienestar digital</h3>
+      <p>Analizaremos riesgos y amenazas, aprenderemos a proteger dispositivos y datos y estudiaremos prácticas saludables de uso de la tecnología.</p>
+      <ul class="topics"><li>Contraseñas</li><li>Malware</li><li>Privacidad</li><li>Huella digital</li><li>Bienestar</li></ul>
+      <div class="actions"><span class="button disabled">Contenido próximamente</span><span class="tag pending">Próximamente</span></div>
+    </article>
+
+    <article class="unit">
+      <div class="unit-number">07</div>
+      <h3>Ciudadanía digital crítica</h3>
+      <p>Reflexionaremos sobre comunicación en red, propiedad intelectual, educación mediática, servicios digitales y comercio electrónico.</p>
+      <ul class="topics"><li>Netiqueta</li><li>Fake news</li><li>Propiedad intelectual</li><li>Servicios en línea</li><li>Comercio electrónico</li></ul>
+      <div class="actions"><span class="button disabled">Contenido próximamente</span><span class="tag pending">Próximamente</span></div>
+    </article>
+
+    <article class="unit">
+      <div class="unit-number">08</div>
+      <h3>Datos, inteligencia artificial y sostenibilidad digital</h3>
+      <p>Analizaremos el uso ético de los datos y la IA, los sesgos algorítmicos, la obsolescencia y el impacto ambiental de la digitalización.</p>
+      <ul class="topics"><li>Datos</li><li>IA</li><li>Sesgos</li><li>Sostenibilidad</li><li>Obsolescencia</li></ul>
+      <div class="actions"><span class="button disabled">Contenido próximamente</span><span class="tag pending">Próximamente</span></div>
+    </article>
+  </section>
+
+  <section class="block">
+    <h2>Ámbitos de la materia</h2>
+    <p>La organización de las unidades recorre los cuatro bloques de saberes básicos de Digitalización.</p>
+    <div class="curriculum">
+      <article><strong>A · Dispositivos y sistemas</strong>Arquitectura, sistemas operativos, redes y dispositivos conectados.</article>
+      <article><strong>B · Entorno digital</strong>Búsqueda, archivo, creación, comunicación y colaboración.</article>
+      <article><strong>C · Seguridad y bienestar</strong>Protección de dispositivos y datos, privacidad y uso saludable.</article>
+      <article><strong>D · Ciudadanía digital crítica</strong>Participación, medios, ética, datos, IA y sostenibilidad.</article>
+    </div>
+  </section>
+</main>
+
+<footer>Digitalización · 4.º ESO · Material de consulta del curso</footer>
 </body>
 </html>

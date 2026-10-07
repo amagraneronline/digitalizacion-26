@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Material de consulta de Digitalización 4.º ESO: sistema binario, conversión decimal-binario y unidades de almacenamiento." />
+  <title>Unidad 1 · Representación digital de la información | Digitalización 4.º ESO</title>
+
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --surface:#ffffff;
+      --surface-2:#eef3fb;
+      --text:#172033;
+      --muted:#5f6b7d;
+      --primary:#1f5fbf;
+      --primary-2:#163f7c;
+      --accent:#e9f2ff;
+      --success:#1d7a46;
+      --success-bg:#eaf8f0;
+      --warning:#a35c00;
+      --warning-bg:#fff4df;
+      --danger:#a83b3b;
+      --danger-bg:#fff0f0;
+      --border:#dbe3ef;
+      --shadow:0 10px 30px rgba(24,45,76,.08);
+      --radius:18px;
+      --radius-sm:12px;
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+
+    a{color:inherit}
+    button,input{font:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav{
+      max-width:var(--max);
+      margin:auto;
+      padding:10px 18px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      overflow-x:auto;
+      scrollbar-width:thin;
+    }
+
+    .brand{
+      font-weight:800;
+      color:var(--primary-2);
+      white-space:nowrap;
+      margin-right:8px;
+    }
+
+    .nav a{
+      text-decoration:none;
+      padding:8px 11px;
+      border-radius:999px;
+      color:var(--muted);
+      white-space:nowrap;
+      font-size:.94rem;
+    }
+
+    .nav a:hover,
+    .nav a:focus{
+      color:var(--primary-2);
+      background:var(--accent);
+      outline:none;
+    }
+
+    header{
+      background:
+        radial-gradient(circle at top right, rgba(31,95,191,.15), transparent 35%),
+        linear-gradient(135deg,#0f2d57,#1f5fbf);
+      color:white;
+      padding:72px 20px 60px;
+    }
+
+    .hero{
+      max-width:var(--max);
+      margin:auto;
+      display:grid;
+      grid-template-columns:1.35fr .65fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:6px 10px;
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:999px;
+      background:rgba(255,255,255,.09);
+      font-weight:700;
+      letter-spacing:.02em;
+      font-size:.86rem;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0 0 16px;
+      font-size:clamp(2.1rem,5vw,4.2rem);
+      line-height:1.02;
+      letter-spacing:-.04em;
+    }
+
+    .hero p{
+      font-size:1.12rem;
+      margin:0;
+      max-width:760px;
+      color:#e8f0ff;
+    }
+
+    .hero-card{
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:20px;
+      padding:22px;
+    }
+
+    .hero-card strong{
+      display:block;
+      margin-bottom:10px;
+    }
+
+    .hero-card ul{
+      margin:0;
+      padding-left:20px;
+    }
+
+    main{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:34px 18px 70px;
+    }
+
+    section{
+      scroll-margin-top:78px;
+      margin:26px 0;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:clamp(20px,4vw,38px);
+    }
+
+    .section-kicker{
+      color:var(--primary);
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:.78rem;
+      margin-bottom:6px;
+    }
+
+    h2{
+      margin:0 0 12px;
+      line-height:1.18;
+      font-size:clamp(1.55rem,3vw,2.35rem);
+      letter-spacing:-.02em;
+    }
+
+    h3{
+      margin:28px 0 10px;
+      line-height:1.25;
+      color:var(--primary-2);
+    }
+
+    .lead{
+      font-size:1.08rem;
+      color:var(--muted);
+      max-width:850px;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+      padding:18px;
+      background:#fff;
+    }
+
+    .card h3{margin-top:0}
+
+    .callout{
+      padding:16px 18px;
+      border-radius:var(--radius-sm);
+      border-left:5px solid var(--primary);
+      background:var(--accent);
+      margin:18px 0;
+    }
+
+    .callout.success{
+      border-color:var(--success);
+      background:var(--success-bg);
+    }
+
+    .callout.warning{
+      border-color:var(--warning);
+      background:var(--warning-bg);
+    }
+
+    .formula{
+      font-size:1.18rem;
+      font-weight:800;
+      text-align:center;
+      margin:18px 0;
+      padding:16px;
+      border-radius:12px;
+      background:#10274a;
+      color:#fff;
+      overflow:auto;
+    }
+
+    .binary{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.06em;
+    }
+
+    .steps{
+      counter-reset:paso;
+      list-style:none;
+      padding:0;
+      margin:18px 0 0;
+      display:grid;
+      gap:12px;
+    }
+
+    .steps li{
+      counter-increment:paso;
+      position:relative;
+      padding:14px 16px 14px 54px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fbfcff;
+    }
+
+    .steps li::before{
+      content:counter(paso);
+      position:absolute;
+      left:14px;
+      top:13px;
+      width:28px;
+      height:28px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--primary);
+      color:#fff;
+      font-weight:800;
+    }
+
+    .table-wrap{
+      overflow-x:auto;
+      margin:16px 0;
+      border:1px solid var(--border);
+      border-radius:12px;
+    }
+
+    table{
+      border-collapse:collapse;
+      width:100%;
+      min-width:520px;
+      background:#fff;
+    }
+
+    th,td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+    }
+
+    th{
+      background:#f1f5fb;
+      color:#233a5e;
+      font-weight:800;
+    }
+
+    tr:last-child td{border-bottom:none}
+
+    .exercise-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .exercise-list{
+      margin:0;
+      padding-left:24px;
+      columns:2;
+      column-gap:32px;
+    }
+
+    .exercise-list li{
+      margin:7px 0;
+      break-inside:avoid;
+    }
+
+    details{
+      margin-top:14px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fbfcff;
+      overflow:hidden;
+    }
+
+    summary{
+      cursor:pointer;
+      padding:14px 16px;
+      font-weight:800;
+      color:var(--primary-2);
+      user-select:none;
+    }
+
+    details > div{
+      padding:0 16px 16px;
+    }
+
+    .tool{
+      margin-top:20px;
+      border:1px solid #cbd9ee;
+      background:linear-gradient(180deg,#f9fbff,#eef4ff);
+      padding:20px;
+      border-radius:16px;
+    }
+
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      gap:12px;
+      align-items:end;
+    }
+
+    label{
+      display:block;
+      font-weight:800;
+      margin-bottom:6px;
+    }
+
+    input{
+      width:100%;
+      min-height:44px;
+      border:1px solid #b9c7dc;
+      border-radius:10px;
+      padding:10px 12px;
+      background:#fff;
+      color:var(--text);
+    }
+
+    input:focus{
+      outline:3px solid rgba(31,95,191,.15);
+      border-color:var(--primary);
+    }
+
+    button{
+      min-height:44px;
+      border:0;
+      border-radius:10px;
+      padding:10px 14px;
+      background:var(--primary);
+      color:white;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    button:hover{background:var(--primary-2)}
+
+    .result{
+      margin-top:14px;
+      padding:13px 15px;
+      border-radius:10px;
+      background:white;
+      border:1px solid var(--border);
+      min-height:52px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border-radius:999px;
+      padding:5px 9px;
+      background:#edf3fb;
+      color:#29496f;
+      font-weight:800;
+      font-size:.85rem;
+    }
+
+    .storage-scale{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:10px;
+      margin:18px 0;
+    }
+
+    .storage-scale div{
+      text-align:center;
+      padding:14px 8px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fbfcff;
+    }
+
+    .storage-scale strong{
+      display:block;
+      font-size:1.18rem;
+      color:var(--primary-2);
+    }
+
+    .checklist{
+      display:grid;
+      gap:10px;
+      padding:0;
+      list-style:none;
+      margin:18px 0 0;
+    }
+
+    .checklist li{
+      padding:12px 14px 12px 42px;
+      border-radius:10px;
+      background:#f7f9fd;
+      position:relative;
+    }
+
+    .checklist li::before{
+      content:"✓";
+      position:absolute;
+      left:14px;
+      color:var(--success);
+      font-weight:900;
+    }
+
+    footer{
+      max-width:var(--max);
+      margin:0 auto 50px;
+      padding:0 18px;
+      color:var(--muted);
+      text-align:center;
+      font-size:.92rem;
+    }
+
+    .print-only{display:none}
+
+    @media (max-width:850px){
+      .hero,
+      .grid-2,
+      .exercise-grid{
+        grid-template-columns:1fr;
+      }
+
+      .tool-grid{
+        grid-template-columns:1fr;
+      }
+
+      .storage-scale{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .exercise-list{
+        columns:1;
+      }
+    }
+
+    @media print{
+      .topbar,.tool button{display:none!important}
+      body{background:#fff}
+      header{background:#fff;color:#000;padding:24px 0}
+      .hero p{color:#333}
+      .hero{display:block}
+      .hero-card{border:1px solid #bbb;color:#000;background:#fff;margin-top:16px}
+      section{box-shadow:none;break-inside:avoid}
+      .print-only{display:block}
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="topbar" aria-label="Navegación principal">
+    <div class="nav">
+      <a class="brand" href="index.html" style="text-decoration:none">← Digitalización · 4.º ESO</a>
+      <a href="#inicio">Inicio</a>
+      <a href="#binario">Sistema binario</a>
+      <a href="#b2d">Binario → decimal</a>
+      <a href="#d2b">Decimal → binario</a>
+      <a href="#practica">Ejercicios</a>
+      <a href="#almacenamiento">Almacenamiento</a>
+      <a href="#problemas">Casos prácticos</a>
+      <a href="#resumen">Resumen</a>
+    </div>
+  </nav>
+
+  <header id="inicio">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">Unidad 1 · Hardware y representación digital</span>
+        <div style="margin-bottom:10px;font-weight:700;color:#cfe0ff">Contenido de consulta</div>
+        <h1>De los 0 y 1 a los GB y TB</h1>
+        <p>
+          Aprende cómo representa un ordenador los números, cómo convertir entre sistema decimal y binario
+          y cómo calcular el espacio que ocupan archivos, fotografías, vídeos y videojuegos.
+        </p>
+      </div>
+
+      <aside class="hero-card">
+        <strong>Al terminar este tema podrás:</strong>
+        <ul>
+          <li>Explicar qué es un bit.</li>
+          <li>Convertir binario ↔ decimal.</li>
+          <li>Interpretar KB, MB, GB y TB.</li>
+          <li>Resolver problemas reales de almacenamiento.</li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section id="binario">
+      <div class="section-kicker">1 · Conceptos básicos</div>
+      <h2>¿Cómo representa la información un ordenador?</h2>
+      <p class="lead">
+        Las personas usamos habitualmente el sistema decimal. Los dispositivos digitales, en cambio,
+        representan internamente la información mediante <strong>dos estados</strong>, que expresamos con los dígitos
+        <strong>0 y 1</strong>.
+      </p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Sistema decimal</h3>
+          <p>Utiliza diez cifras:</p>
+          <div class="formula">0 · 1 · 2 · 3 · 4 · 5 · 6 · 7 · 8 · 9</div>
+          <p>Cada posición tiene un valor diez veces mayor que la situada a su derecha.</p>
+        </article>
+
+        <article class="card">
+          <h3>Sistema binario</h3>
+          <p>Utiliza únicamente dos cifras:</p>
+          <div class="formula binary">0 · 1</div>
+          <p>Cada posición tiene un valor dos veces mayor que la situada a su derecha.</p>
+        </article>
+      </div>
+
+      <div class="callout">
+        <strong>Bit:</strong> es la unidad mínima de información digital. Un bit puede tomar únicamente
+        uno de dos valores: <strong>0</strong> o <strong>1</strong>.
+      </div>
+
+      <h3>Valor de las posiciones binarias</h3>
+      <p>De derecha a izquierda, las posiciones siguen las potencias de 2:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Potencia</th>
+              <th>2⁷</th><th>2⁶</th><th>2⁵</th><th>2⁴</th>
+              <th>2³</th><th>2²</th><th>2¹</th><th>2⁰</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Valor</th>
+              <td>128</td><td>64</td><td>32</td><td>16</td>
+              <td>8</td><td>4</td><td>2</td><td>1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout success">
+        Memorizar al menos esta serie te facilitará mucho las conversiones:
+        <strong>1 · 2 · 4 · 8 · 16 · 32 · 64 · 128</strong>.
+      </div>
+    </section>
+
+    <section id="b2d">
+      <div class="section-kicker">2 · Conversión</div>
+      <h2>De binario a decimal</h2>
+      <p class="lead">
+        Para convertir un número binario a decimal, colocamos el valor de cada posición y
+        <strong>sumamos únicamente las posiciones que contienen un 1</strong>.
+      </p>
+
+      <ol class="steps">
+        <li>Escribe el valor de cada posición: 1, 2, 4, 8, 16, 32… empezando por la derecha.</li>
+        <li>Observa qué posiciones contienen un <strong>1</strong>.</li>
+        <li>Suma los valores correspondientes a esas posiciones.</li>
+      </ol>
+
+      <h3>Ejemplo 1: <span class="binary">1011₂</span></h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Valor</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Binario</th><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="formula">8 + 2 + 1 = 11</div>
+      <p><strong>Por tanto:</strong> <span class="binary">1011₂ = 11₁₀</span></p>
+
+      <h3>Ejemplo 2: <span class="binary">11010₂</span></h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Valor</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Binario</th><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="formula">16 + 8 + 2 = 26</div>
+      <p><strong>Por tanto:</strong> <span class="binary">11010₂ = 26₁₀</span></p>
+
+      <div class="tool" aria-labelledby="tool-b2d-title">
+        <h3 id="tool-b2d-title">Comprobador: binario → decimal</h3>
+        <p>Úsalo después de hacer la conversión por tu cuenta.</p>
+        <div class="tool-grid">
+          <div>
+            <label for="binaryInput">Número binario</label>
+            <input id="binaryInput" inputmode="numeric" placeholder="Ej.: 10110" />
+          </div>
+          <button type="button" onclick="binaryToDecimal()">Comprobar</button>
+          <div>
+            <label>Resultado</label>
+            <div id="binaryResult" class="result">—</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="d2b">
+      <div class="section-kicker">3 · Conversión</div>
+      <h2>De decimal a binario</h2>
+      <p class="lead">
+        Para convertir un número decimal a binario utilizaremos el método de
+        <strong>divisiones sucesivas entre 2</strong>.
+      </p>
+
+      <ol class="steps">
+        <li>Divide el número entre <strong>2</strong>.</li>
+        <li>Anota el <strong>resto</strong> de la división: será 0 o 1.</li>
+        <li>Vuelve a dividir el cociente entre 2.</li>
+        <li>Repite hasta obtener un cociente igual a 0.</li>
+        <li>Lee los restos <strong>de abajo hacia arriba</strong>.</li>
+      </ol>
+
+      <h3>Ejemplo 1: convertir 13 a binario</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>División</th><th>Cociente</th><th>Resto</th></tr></thead>
+          <tbody>
+            <tr><td>13 ÷ 2</td><td>6</td><td>1</td></tr>
+            <tr><td>6 ÷ 2</td><td>3</td><td>0</td></tr>
+            <tr><td>3 ÷ 2</td><td>1</td><td>1</td></tr>
+            <tr><td>1 ÷ 2</td><td>0</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="formula">Restos de abajo hacia arriba → <span class="binary">1101</span></div>
+      <p><strong>Resultado:</strong> <span class="binary">13₁₀ = 1101₂</span></p>
+
+      <h3>Ejemplo 2: convertir 20 a binario</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>División</th><th>Cociente</th><th>Resto</th></tr></thead>
+          <tbody>
+            <tr><td>20 ÷ 2</td><td>10</td><td>0</td></tr>
+            <tr><td>10 ÷ 2</td><td>5</td><td>0</td></tr>
+            <tr><td>5 ÷ 2</td><td>2</td><td>1</td></tr>
+            <tr><td>2 ÷ 2</td><td>1</td><td>0</td></tr>
+            <tr><td>1 ÷ 2</td><td>0</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="formula">Restos de abajo hacia arriba → <span class="binary">10100</span></div>
+      <p><strong>Resultado:</strong> <span class="binary">20₁₀ = 10100₂</span></p>
+
+      <div class="callout warning">
+        <strong>Error típico:</strong> leer los restos desde la primera división hacia abajo.
+        Recuerda: para obtener el número binario hay que leerlos <strong>desde el último resto hasta el primero</strong>.
+      </div>
+
+      <div class="tool" aria-labelledby="tool-d2b-title">
+        <h3 id="tool-d2b-title">Comprobador: decimal → binario</h3>
+        <p>Haz primero las divisiones en tu cuaderno y utiliza después esta herramienta para comprobar.</p>
+        <div class="tool-grid">
+          <div>
+            <label for="decimalInput">Número decimal</label>
+            <input id="decimalInput" type="number" min="0" step="1" placeholder="Ej.: 25" />
+          </div>
+          <button type="button" onclick="decimalToBinary()">Comprobar</button>
+          <div>
+            <label>Resultado</label>
+            <div id="decimalResult" class="result">—</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="practica">
+      <div class="section-kicker">4 · Practica</div>
+      <h2>Ejercicios de conversión</h2>
+      <p class="lead">
+        Resuélvelos en el cuaderno mostrando el procedimiento. Después puedes desplegar las soluciones
+        para corregirte.
+      </p>
+
+      <div class="exercise-grid">
+        <article class="card">
+          <span class="badge">Binario → decimal</span>
+          <h3>Convierte:</h3>
+          <ol class="exercise-list">
+            <li><span class="binary">10₂</span></li>
+            <li><span class="binary">101₂</span></li>
+            <li><span class="binary">1000₂</span></li>
+            <li><span class="binary">1011₂</span></li>
+            <li><span class="binary">1111₂</span></li>
+            <li><span class="binary">10010₂</span></li>
+            <li><span class="binary">10101₂</span></li>
+            <li><span class="binary">11001₂</span></li>
+            <li><span class="binary">100000₂</span></li>
+            <li><span class="binary">101101₂</span></li>
+          </ol>
+
+          <details>
+            <summary>Mostrar soluciones</summary>
+            <div>
+              <ol>
+                <li>2</li><li>5</li><li>8</li><li>11</li><li>15</li>
+                <li>18</li><li>21</li><li>25</li><li>32</li><li>45</li>
+              </ol>
+            </div>
+          </details>
+        </article>
+
+        <article class="card">
+          <span class="badge">Decimal → binario</span>
+          <h3>Convierte:</h3>
+          <ol class="exercise-list">
+            <li>4</li><li>5</li><li>8</li><li>10</li><li>12</li>
+            <li>15</li><li>18</li><li>25</li><li>32</li><li>45</li>
+          </ol>
+
+          <details>
+            <summary>Mostrar soluciones</summary>
+            <div>
+              <ol>
+                <li><span class="binary">100₂</span></li>
+                <li><span class="binary">101₂</span></li>
+                <li><span class="binary">1000₂</span></li>
+                <li><span class="binary">1010₂</span></li>
+                <li><span class="binary">1100₂</span></li>
+                <li><span class="binary">1111₂</span></li>
+                <li><span class="binary">10010₂</span></li>
+                <li><span class="binary">11001₂</span></li>
+                <li><span class="binary">100000₂</span></li>
+                <li><span class="binary">101101₂</span></li>
+              </ol>
+            </div>
+          </details>
+        </article>
+      </div>
+
+      <h3>Reto: ¿cuánto es tu edad en binario?</h3>
+      <p>
+        Convierte tu edad actual a sistema binario y muestra en el cuaderno todas las divisiones realizadas.
+      </p>
+
+      <div class="tool">
+        <label for="ageInput">Comprueba tu edad</label>
+        <div class="tool-grid">
+          <input id="ageInput" type="number" min="1" max="120" step="1" placeholder="Introduce tu edad" />
+          <button type="button" onclick="ageToBinary()">Convertir</button>
+          <div id="ageResult" class="result">—</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="almacenamiento">
+      <div class="section-kicker">5 · Del bit al almacenamiento</div>
+      <h2>¿Cuánto ocupa la información?</h2>
+      <p class="lead">
+        Un bit representa un único 0 o 1. Para almacenar documentos, imágenes, audio o vídeo necesitamos
+        agrupar muchísimos bits.
+      </p>
+
+      <div class="formula">8 bits = 1 byte (B)</div>
+
+      <div class="storage-scale">
+        <div><strong>B</strong><span>Byte</span></div>
+        <div><strong>KB</strong><span>Kilobyte</span></div>
+        <div><strong>MB</strong><span>Megabyte</span></div>
+        <div><strong>GB</strong><span>Gigabyte</span></div>
+        <div><strong>TB</strong><span>Terabyte</span></div>
+      </div>
+
+      <p>En estos ejercicios utilizaremos la aproximación decimal:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Unidad</th><th>Equivale aproximadamente a</th></tr></thead>
+          <tbody>
+            <tr><td>1 KB</td><td>1.000 bytes</td></tr>
+            <tr><td>1 MB</td><td>1.000 KB</td></tr>
+            <tr><td>1 GB</td><td>1.000 MB</td></tr>
+            <tr><td>1 TB</td><td>1.000 GB</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        En informática también existen unidades binarias como <strong>KiB, MiB y GiB</strong>, basadas en múltiplos de 1.024.
+        En este tema utilizaremos 1.000 para centrarnos en la resolución de problemas.
+      </div>
+
+      <h3>¿Qué unidad suele utilizarse?</h3>
+      <div class="grid-2">
+        <article class="card">
+          <ul>
+            <li>Documento pequeño → <strong>KB</strong></li>
+            <li>Fotografía → <strong>MB</strong></li>
+            <li>Canción → <strong>MB</strong></li>
+          </ul>
+        </article>
+        <article class="card">
+          <ul>
+            <li>Película → <strong>GB</strong></li>
+            <li>Videojuego → <strong>GB</strong></li>
+            <li>SSD o disco duro → <strong>GB o TB</strong></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="problemas">
+      <div class="section-kicker">6 · Casos prácticos</div>
+      <h2>Calculamos el peso de archivos</h2>
+      <p class="lead">
+        Para saber cuánto espacio ocupa un conjunto de archivos multiplicamos el número de archivos
+        por el tamaño de cada uno y, si es necesario, convertimos después la unidad.
+      </p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Ejemplo: fotografías</h3>
+          <p>20 fotografías de 5 MB:</p>
+          <div class="formula">20 × 5 MB = 100 MB</div>
+        </article>
+        <article class="card">
+          <h3>Ejemplo: canciones</h3>
+          <p>40 canciones de 8 MB:</p>
+          <div class="formula">40 × 8 MB = 320 MB</div>
+        </article>
+      </div>
+
+      <h3>¿Caben 50 películas en un disco de 1 TB?</h3>
+      <p>Supongamos que cada película ocupa <strong>15 GB</strong>.</p>
+      <div class="formula">50 × 15 GB = 750 GB</div>
+      <p>Como <strong>1 TB = 1.000 GB</strong>:</p>
+      <div class="callout success">
+        Sí caben. Quedarían aproximadamente <strong>250 GB libres</strong>.
+      </div>
+
+      <p>¿Y si cada película ocupase 25 GB?</p>
+      <div class="formula">50 × 25 GB = 1.250 GB</div>
+      <div class="callout warning">
+        No cabrían, porque 1.250 GB supera la capacidad de 1.000 GB.
+      </div>
+
+      <h3>Ejercicios</h3>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>1. Fotografías del móvil</h3>
+          <p>Una fotografía ocupa 4 MB. Tienes 250 fotografías.</p>
+          <p><strong>¿Cuánto espacio ocupan?</strong></p>
+          <details>
+            <summary>Mostrar solución</summary>
+            <div>250 × 4 MB = 1.000 MB = <strong>1 GB</strong>.</div>
+          </details>
+        </article>
+
+        <article class="card">
+          <h3>2. Música</h3>
+          <p>Cada canción ocupa 8 MB. Tienes 500 canciones.</p>
+          <p><strong>¿Cuánto ocupan?</strong></p>
+          <details>
+            <summary>Mostrar solución</summary>
+            <div>500 × 8 MB = 4.000 MB = <strong>4 GB</strong>.</div>
+          </details>
+        </article>
+
+        <article class="card">
+          <h3>3. Vídeos</h3>
+          <p>Cada vídeo ocupa 2,5 GB. Tienes 20 vídeos.</p>
+          <p><strong>¿Cuánto ocupan?</strong></p>
+          <details>
+            <summary>Mostrar solución</summary>
+            <div>20 × 2,5 GB = <strong>50 GB</strong>.</div>
+          </details>
+        </article>
+
+        <article class="card">
+          <h3>4. Videojuegos</h3>
+          <p>Dispones de 500 GB y quieres instalar juegos de 125 GB, 90 GB, 160 GB y 80 GB.</p>
+          <p><strong>¿Caben? ¿Cuánto espacio queda?</strong></p>
+          <details>
+            <summary>Mostrar solución</summary>
+            <div>
+              Total: 125 + 90 + 160 + 80 = <strong>455 GB</strong>.<br>
+              Sí caben. Quedan <strong>45 GB libres</strong>.
+            </div>
+          </details>
+        </article>
+      </div>
+
+      <h3>Problema completo: el móvil está casi lleno</h3>
+      <div class="card">
+        <p>Un teléfono tiene <strong>128 GB</strong> de almacenamiento y actualmente contiene:</p>
+        <ul>
+          <li>Sistema operativo y aplicaciones: 34 GB</li>
+          <li>Fotografías: 28 GB</li>
+          <li>Vídeos: 31 GB</li>
+          <li>Música: 7 GB</li>
+          <li>Otros archivos: 9 GB</li>
+        </ul>
+
+        <ol>
+          <li>¿Cuánto espacio está ocupado?</li>
+          <li>¿Cuánto espacio queda libre?</li>
+          <li>Quieres grabar 10 vídeos de 2,5 GB cada uno. ¿Caben?</li>
+          <li>Si no caben, ¿cuánto espacio deberías liberar como mínimo?</li>
+        </ol>
+
+        <details>
+          <summary>Mostrar solución razonada</summary>
+          <div>
+            <p><strong>1.</strong> 34 + 28 + 31 + 7 + 9 = <strong>109 GB ocupados</strong>.</p>
+            <p><strong>2.</strong> 128 − 109 = <strong>19 GB libres</strong>.</p>
+            <p><strong>3.</strong> 10 × 2,5 = <strong>25 GB</strong>. No caben.</p>
+            <p><strong>4.</strong> 25 − 19 = <strong>6 GB</strong>. Habría que liberar como mínimo 6 GB.</p>
+          </div>
+        </details>
+      </div>
+
+      <h3>Desafío final</h3>
+      <div class="card">
+        <p>Un ordenador tiene un SSD de <strong>1 TB</strong>. Actualmente están ocupados <strong>420 GB</strong>.</p>
+        <p>Queremos añadir:</p>
+        <ul>
+          <li>25 películas de 12 GB.</li>
+          <li>15 videojuegos de 18 GB.</li>
+        </ul>
+
+        <ol>
+          <li>¿Cuánto ocupan las películas?</li>
+          <li>¿Cuánto ocupan los videojuegos?</li>
+          <li>¿Cuánto espacio queremos añadir en total?</li>
+          <li>¿Cuánto espacio estaba libre?</li>
+          <li>¿Cabe todo?</li>
+          <li>Aunque quepa, ¿sería una buena decisión? Justifica.</li>
+        </ol>
+
+        <details>
+          <summary>Mostrar solución</summary>
+          <div>
+            <p>Películas: 25 × 12 = <strong>300 GB</strong>.</p>
+            <p>Videojuegos: 15 × 18 = <strong>270 GB</strong>.</p>
+            <p>Total nuevo: 300 + 270 = <strong>570 GB</strong>.</p>
+            <p>Espacio libre inicial: 1.000 − 420 = <strong>580 GB</strong>.</p>
+            <p>Sí cabe, pero quedarían únicamente <strong>10 GB libres</strong>.</p>
+            <p>
+              Aunque matemáticamente cabe, sería poco recomendable dejar el disco prácticamente lleno.
+              Una solución sería eliminar archivos, moverlos a otra unidad o utilizar un almacenamiento de mayor capacidad.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="resumen">
+      <div class="section-kicker">7 · Para repasar</div>
+      <h2>Qué debes saber al terminar</h2>
+
+      <ul class="checklist">
+        <li>Un bit puede valer 0 o 1.</li>
+        <li>En binario, las posiciones valen 1, 2, 4, 8, 16, 32, 64, 128…</li>
+        <li>Para pasar de binario a decimal, sumamos los valores de las posiciones con 1.</li>
+        <li>Para pasar de decimal a binario, podemos realizar divisiones sucesivas entre 2 y leer los restos de abajo arriba.</li>
+        <li>8 bits forman 1 byte.</li>
+        <li>En nuestros ejercicios: 1 KB = 1.000 B, 1 MB = 1.000 KB, 1 GB = 1.000 MB y 1 TB = 1.000 GB.</li>
+        <li>Para calcular el espacio de varios archivos, multiplicamos cantidad × tamaño de cada archivo.</li>
+        <li>No basta con que algo “quepa”: también conviene valorar cuánto espacio libre quedará.</li>
+      </ul>
+
+      <div class="callout success">
+        <strong>Consejo:</strong> utiliza los comprobadores solamente después de resolver los ejercicios.
+        El objetivo no es acertar por ensayo y error, sino aprender el procedimiento.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Material de consulta · Digitalización · 4.º ESO
+  </footer>
+
+  <script>
+    function binaryToDecimal(){
+      const input = document.getElementById('binaryInput');
+      const output = document.getElementById('binaryResult');
+      const value = input.value.trim();
+
+      if(!value){
+        output.textContent = 'Introduce un número binario.';
+        return;
+      }
+
+      if(!/^[01]+$/.test(value)){
+        output.textContent = 'Un número binario solo puede contener 0 y 1.';
+        return;
+      }
+
+      output.innerHTML = '<strong>' + value + '₂ = ' + parseInt(value, 2) + '₁₀</strong>';
+    }
+
+    function decimalToBinary(){
+      const input = document.getElementById('decimalInput');
+      const output = document.getElementById('decimalResult');
+      const value = Number(input.value);
+
+      if(input.value === '' || !Number.isInteger(value) || value < 0){
+        output.textContent = 'Introduce un número entero igual o mayor que 0.';
+        return;
+      }
+
+      output.innerHTML = '<strong>' + value + '₁₀ = ' + value.toString(2) + '₂</strong>';
+    }
+
+    function ageToBinary(){
+      const input = document.getElementById('ageInput');
+      const output = document.getElementById('ageResult');
+      const value = Number(input.value);
+
+      if(input.value === '' || !Number.isInteger(value) || value < 1 || value > 120){
+        output.textContent = 'Introduce una edad válida.';
+        return;
+      }
+
+      output.innerHTML = 'Tu edad en binario es <strong class="binary">' + value.toString(2) + '₂</strong>.';
+    }
+  </script>
+</body>
+</html>
