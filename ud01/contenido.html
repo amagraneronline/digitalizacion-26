@@ -1,12 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Material de consulta de Digitalización 4.º ESO: sistema binario, conversión decimal-binario y unidades de almacenamiento." />
-  <title>Unidad 1 · Representación digital de la información | Digitalización 4.º ESO</title>
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Material de consulta de Digitalización 4.º ESO: sistema binario, conversión decimal-binario y unidades de almacenamiento." name="description"/>
+<title>Unidad 1 · Representación digital de la información | Digitalización 4.º ESO</title>
+<style>
     :root{
       --bg:#f5f7fb; 
       --surface:#ffffff;
@@ -495,586 +495,868 @@
       section{box-shadow:none;break-inside:avoid}
       .print-only{display:block}
     }
-  </style>
-</head>
+  
+.respuesta-wrap{margin-top:12px}.respuesta-wrap label{font-size:.9rem;margin:6px 0}.respuesta-actividad{margin-top:4px}.retroalimentacion{padding:10px 12px;margin-top:8px;border-radius:10px;font-size:.92rem}.retroalimentacion.correcto{background:#eaf8f0;color:#155b38}.retroalimentacion.incorrecto{background:#fff0f0;color:#8c2929}.retroalimentacion.pendiente-revision{background:#fff4df;color:#784500}.validacion-panel{margin-top:24px;padding:22px;border:2px solid #cbd9ee;background:#eef4ff;border-radius:16px}.validacion-panel button:disabled{background:#9ba9bc;cursor:not-allowed}.nota-eval{font-size:.9rem;color:#475569}#resultadoGlobal{padding:14px;margin-top:14px;background:white;border-radius:10px;font-weight:800}
 
+/* Entrega individual: archivo PDF local sin conexión ni dependencias externas */
+.entrega-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(270px,.9fr);gap:22px;align-items:start;margin-top:20px}
+.entrega-panel{background:#f7faff;border:1px solid #ccdaf0;border-radius:14px;padding:20px}
+.entrega-panel input{width:100%}
+.entrega-estado{border:1px solid var(--border);background:#fff;border-radius:12px;padding:18px}
+.entrega-estado strong{display:block;margin-bottom:8px;color:#1b3555}
+.entrega-estado p{margin:8px 0}
+.entrega-estado meter{width:100%;height:14px;accent-color:var(--primary)}
+#botonExportarPdf{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:16px;padding:12px 16px}
+#botonExportarPdf:disabled{background:#96a6b9;color:#fff;cursor:not-allowed}
+#botonExportarPdf:disabled:hover{background:#96a6b9}
+#mensajeEntrega{font-size:.94rem;color:#4e6077;margin-top:10px}
+#nombreArchivoPrevisto{font-size:.88rem;overflow-wrap:anywhere;color:#365476;margin:10px 0 0}
+.entrega-ayuda{font-size:.9rem;color:var(--muted)}
+@media(max-width:850px){.entrega-grid{grid-template-columns:1fr}}
+@media print{#entrega-moodle{display:none!important}}
+</style>
+<style>
+/* Validación progresiva, independiente para cada actividad */
+.actividad-interactiva{min-width:0}
+.validacion-bloque{margin-top:22px;padding:16px;background:#f2f6fd;border:1px solid #cbd9ee;border-radius:12px}
+.progreso-bloque{margin:0 0 10px;color:#425875;font-size:.92rem;font-weight:650}
+.boton-validar-bloque{width:100%;min-height:44px}
+.boton-validar-bloque:disabled{background:#9ba9bc;cursor:not-allowed}
+.boton-validar-bloque:disabled:hover{background:#9ba9bc}
+.resultado-bloque{margin-top:12px;padding:12px 14px;border-radius:10px;background:#fff;border:1px solid #cbd9ee;font-weight:750;color:#183b63}
+.resultado-bloque.sin-errores{border-color:#b4dcc3;background:#eaf8f0;color:#155b38}
+.retroalimentacion.informativo{border:1px solid #cbd9ee;background:#f4f7ff;color:#27425b}
+.respuesta-actividad.respuesta-ok{border-color:#2a8852}
+.respuesta-actividad.respuesta-error{border-color:#be4242}
+#practica .exercise-list li{padding-bottom:4px}
+@media print{.validacion-bloque{display:none!important}}
+</style></head>
 <body>
-  <nav class="topbar" aria-label="Navegación principal">
-    <div class="nav">
-      <a class="brand" href="index.html" style="text-decoration:none">← Digitalización · 4.º ESO</a>
-      <a href="#inicio">Inicio</a>
-      <a href="#binario">Sistema binario</a>
-      <a href="#b2d">Binario → decimal</a>
-      <a href="#d2b">Decimal → binario</a>
-      <a href="#practica">Ejercicios</a>
-      <a href="#almacenamiento">Almacenamiento</a>
-      <a href="#problemas">Casos prácticos</a>
-      <a href="#resumen">Resumen</a>
-    </div>
-  </nav>
-
-  <header id="inicio">
-    <div class="hero">
-      <div>
-        <span class="eyebrow">Unidad 1 · Hardware y representación digital</span>
-        <div style="margin-bottom:10px;font-weight:700;color:#cfe0ff">Contenido de consulta</div>
-        <h1>De los 0 y 1 a los GB y TB</h1>
-        <p>
+<nav aria-label="Navegación principal" class="topbar">
+<div class="nav">
+<a class="brand" href="index.html" style="text-decoration:none">← Digitalización · 4.º ESO</a>
+<a href="#inicio">Inicio</a>
+<a href="#binario">Sistema binario</a>
+<a href="#b2d">Binario → decimal</a>
+<a href="#d2b">Decimal → binario</a>
+<a href="#practica">Ejercicios</a>
+<a href="#almacenamiento">Almacenamiento</a>
+<a href="#problemas">Casos prácticos</a>
+<a href="#resumen">Resumen</a>
+<a href="#entrega-moodle">Entrega Moodle</a>
+<a href="#reto-final-interactivo">Actividades finales</a>
+</div>
+</nav>
+<header id="inicio">
+<div class="hero">
+<div>
+<span class="eyebrow">Unidad 1 · Hardware y representación digital</span>
+<div style="margin-bottom:10px;font-weight:700;color:#cfe0ff">Contenido de consulta</div>
+<h1>De los 0 y 1 a los GB y TB</h1>
+<p>
           Aprende cómo representa un ordenador los números, cómo convertir entre sistema decimal y binario
           y cómo calcular el espacio que ocupan archivos, fotografías, vídeos y videojuegos.
         </p>
-      </div>
-
-      <aside class="hero-card">
-        <strong>Al terminar este tema podrás:</strong>
-        <ul>
-          <li>Explicar qué es un bit.</li>
-          <li>Convertir binario ↔ decimal.</li>
-          <li>Interpretar KB, MB, GB y TB.</li>
-          <li>Resolver problemas reales de almacenamiento.</li>
-        </ul>
-      </aside>
-    </div>
-  </header>
-
-  <main>
-    <section id="binario">
-      <div class="section-kicker">1 · Conceptos básicos</div>
-      <h2>¿Cómo representa la información un ordenador?</h2>
-      <p class="lead">
+</div>
+<aside class="hero-card">
+<strong>Al terminar este tema podrás:</strong>
+<ul>
+<li>Explicar qué es un bit.</li>
+<li>Convertir binario ↔ decimal.</li>
+<li>Interpretar KB, MB, GB y TB.</li>
+<li>Resolver problemas reales de almacenamiento.</li>
+</ul>
+</aside>
+</div>
+</header>
+<main>
+<section id="binario">
+<div class="section-kicker">1 · Conceptos básicos</div>
+<h2>¿Cómo representa la información un ordenador?</h2>
+<p class="lead">
         Las personas usamos habitualmente el sistema decimal. Los dispositivos digitales, en cambio,
         representan internamente la información mediante <strong>dos estados</strong>, que expresamos con los dígitos
         <strong>0 y 1</strong>.
       </p>
-
-      <div class="grid-2">
-        <article class="card">
-          <h3>Sistema decimal</h3>
-          <p>Utiliza diez cifras:</p>
-          <div class="formula">0 · 1 · 2 · 3 · 4 · 5 · 6 · 7 · 8 · 9</div>
-          <p>Cada posición tiene un valor diez veces mayor que la situada a su derecha.</p>
-        </article>
-
-        <article class="card">
-          <h3>Sistema binario</h3>
-          <p>Utiliza únicamente dos cifras:</p>
-          <div class="formula binary">0 · 1</div>
-          <p>Cada posición tiene un valor dos veces mayor que la situada a su derecha.</p>
-        </article>
-      </div>
-
-      <div class="callout">
-        <strong>Bit:</strong> es la unidad mínima de información digital. Un bit puede tomar únicamente
+<div class="grid-2">
+<article class="card">
+<h3>Sistema decimal</h3>
+<p>Utiliza diez cifras:</p>
+<div class="formula">0 · 1 · 2 · 3 · 4 · 5 · 6 · 7 · 8 · 9</div>
+<p>Cada posición tiene un valor diez veces mayor que la situada a su derecha.</p>
+</article>
+<article class="card">
+<h3>Sistema binario</h3>
+<p>Utiliza únicamente dos cifras:</p>
+<div class="formula binary">0 · 1</div>
+<p>Cada posición tiene un valor dos veces mayor que la situada a su derecha.</p>
+</article>
+</div>
+<div class="callout">
+<strong>Bit:</strong> es la unidad mínima de información digital. Un bit puede tomar únicamente
         uno de dos valores: <strong>0</strong> o <strong>1</strong>.
       </div>
-
-      <h3>Valor de las posiciones binarias</h3>
-      <p>De derecha a izquierda, las posiciones siguen las potencias de 2:</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Potencia</th>
-              <th>2⁷</th><th>2⁶</th><th>2⁵</th><th>2⁴</th>
-              <th>2³</th><th>2²</th><th>2¹</th><th>2⁰</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Valor</th>
-              <td>128</td><td>64</td><td>32</td><td>16</td>
-              <td>8</td><td>4</td><td>2</td><td>1</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout success">
+<h3>Valor de las posiciones binarias</h3>
+<p>De derecha a izquierda, las posiciones siguen las potencias de 2:</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Potencia</th>
+<th>2⁷</th><th>2⁶</th><th>2⁵</th><th>2⁴</th>
+<th>2³</th><th>2²</th><th>2¹</th><th>2⁰</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>Valor</th>
+<td>128</td><td>64</td><td>32</td><td>16</td>
+<td>8</td><td>4</td><td>2</td><td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout success">
         Memorizar al menos esta serie te facilitará mucho las conversiones:
         <strong>1 · 2 · 4 · 8 · 16 · 32 · 64 · 128</strong>.
       </div>
-    </section>
-
-    <section id="b2d">
-      <div class="section-kicker">2 · Conversión</div>
-      <h2>De binario a decimal</h2>
-      <p class="lead">
+</section>
+<section id="b2d">
+<div class="section-kicker">2 · Conversión</div>
+<h2>De binario a decimal</h2>
+<p class="lead">
         Para convertir un número binario a decimal, colocamos el valor de cada posición y
         <strong>sumamos únicamente las posiciones que contienen un 1</strong>.
       </p>
-
-      <ol class="steps">
-        <li>Escribe el valor de cada posición: 1, 2, 4, 8, 16, 32… empezando por la derecha.</li>
-        <li>Observa qué posiciones contienen un <strong>1</strong>.</li>
-        <li>Suma los valores correspondientes a esas posiciones.</li>
-      </ol>
-
-      <h3>Ejemplo 1: <span class="binary">1011₂</span></h3>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Valor</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
-          </thead>
-          <tbody>
-            <tr><th>Binario</th><td>1</td><td>0</td><td>1</td><td>1</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="formula">8 + 2 + 1 = 11</div>
-      <p><strong>Por tanto:</strong> <span class="binary">1011₂ = 11₁₀</span></p>
-
-      <h3>Ejemplo 2: <span class="binary">11010₂</span></h3>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Valor</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
-          </thead>
-          <tbody>
-            <tr><th>Binario</th><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="formula">16 + 8 + 2 = 26</div>
-      <p><strong>Por tanto:</strong> <span class="binary">11010₂ = 26₁₀</span></p>
-
-      <div class="tool" aria-labelledby="tool-b2d-title">
-        <h3 id="tool-b2d-title">Comprobador: binario → decimal</h3>
-        <p>Úsalo después de hacer la conversión por tu cuenta.</p>
-        <div class="tool-grid">
-          <div>
-            <label for="binaryInput">Número binario</label>
-            <input id="binaryInput" inputmode="numeric" placeholder="Ej.: 10110" />
-          </div>
-          <button type="button" onclick="binaryToDecimal()">Comprobar</button>
-          <div>
-            <label>Resultado</label>
-            <div id="binaryResult" class="result">—</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="d2b">
-      <div class="section-kicker">3 · Conversión</div>
-      <h2>De decimal a binario</h2>
-      <p class="lead">
+<ol class="steps">
+<li>Escribe el valor de cada posición: 1, 2, 4, 8, 16, 32… empezando por la derecha.</li>
+<li>Observa qué posiciones contienen un <strong>1</strong>.</li>
+<li>Suma los valores correspondientes a esas posiciones.</li>
+</ol>
+<h3>Ejemplo 1: <span class="binary">1011₂</span></h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Valor</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+</thead>
+<tbody>
+<tr><th>Binario</th><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+</tbody>
+</table>
+</div>
+<div class="formula">8 + 2 + 1 = 11</div>
+<p><strong>Por tanto:</strong> <span class="binary">1011₂ = 11₁₀</span></p>
+<h3>Ejemplo 2: <span class="binary">11010₂</span></h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Valor</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+</thead>
+<tbody>
+<tr><th>Binario</th><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+</tbody>
+</table>
+</div>
+<div class="formula">16 + 8 + 2 = 26</div>
+<p><strong>Por tanto:</strong> <span class="binary">11010₂ = 26₁₀</span></p>
+</section>
+<section id="d2b">
+<div class="section-kicker">3 · Conversión</div>
+<h2>De decimal a binario</h2>
+<p class="lead">
         Para convertir un número decimal a binario utilizaremos el método de
         <strong>divisiones sucesivas entre 2</strong>.
       </p>
-
-      <ol class="steps">
-        <li>Divide el número entre <strong>2</strong>.</li>
-        <li>Anota el <strong>resto</strong> de la división: será 0 o 1.</li>
-        <li>Vuelve a dividir el cociente entre 2.</li>
-        <li>Repite hasta obtener un cociente igual a 0.</li>
-        <li>Lee los restos <strong>de abajo hacia arriba</strong>.</li>
-      </ol>
-
-      <h3>Ejemplo 1: convertir 13 a binario</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>División</th><th>Cociente</th><th>Resto</th></tr></thead>
-          <tbody>
-            <tr><td>13 ÷ 2</td><td>6</td><td>1</td></tr>
-            <tr><td>6 ÷ 2</td><td>3</td><td>0</td></tr>
-            <tr><td>3 ÷ 2</td><td>1</td><td>1</td></tr>
-            <tr><td>1 ÷ 2</td><td>0</td><td>1</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="formula">Restos de abajo hacia arriba → <span class="binary">1101</span></div>
-      <p><strong>Resultado:</strong> <span class="binary">13₁₀ = 1101₂</span></p>
-
-      <h3>Ejemplo 2: convertir 20 a binario</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>División</th><th>Cociente</th><th>Resto</th></tr></thead>
-          <tbody>
-            <tr><td>20 ÷ 2</td><td>10</td><td>0</td></tr>
-            <tr><td>10 ÷ 2</td><td>5</td><td>0</td></tr>
-            <tr><td>5 ÷ 2</td><td>2</td><td>1</td></tr>
-            <tr><td>2 ÷ 2</td><td>1</td><td>0</td></tr>
-            <tr><td>1 ÷ 2</td><td>0</td><td>1</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="formula">Restos de abajo hacia arriba → <span class="binary">10100</span></div>
-      <p><strong>Resultado:</strong> <span class="binary">20₁₀ = 10100₂</span></p>
-
-      <div class="callout warning">
-        <strong>Error típico:</strong> leer los restos desde la primera división hacia abajo.
+<ol class="steps">
+<li>Divide el número entre <strong>2</strong>.</li>
+<li>Anota el <strong>resto</strong> de la división: será 0 o 1.</li>
+<li>Vuelve a dividir el cociente entre 2.</li>
+<li>Repite hasta obtener un cociente igual a 0.</li>
+<li>Lee los restos <strong>de abajo hacia arriba</strong>.</li>
+</ol>
+<h3>Ejemplo 1: convertir 13 a binario</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>División</th><th>Cociente</th><th>Resto</th></tr></thead>
+<tbody>
+<tr><td>13 ÷ 2</td><td>6</td><td>1</td></tr>
+<tr><td>6 ÷ 2</td><td>3</td><td>0</td></tr>
+<tr><td>3 ÷ 2</td><td>1</td><td>1</td></tr>
+<tr><td>1 ÷ 2</td><td>0</td><td>1</td></tr>
+</tbody>
+</table>
+</div>
+<div class="formula">Restos de abajo hacia arriba → <span class="binary">1101</span></div>
+<p><strong>Resultado:</strong> <span class="binary">13₁₀ = 1101₂</span></p>
+<h3>Ejemplo 2: convertir 20 a binario</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>División</th><th>Cociente</th><th>Resto</th></tr></thead>
+<tbody>
+<tr><td>20 ÷ 2</td><td>10</td><td>0</td></tr>
+<tr><td>10 ÷ 2</td><td>5</td><td>0</td></tr>
+<tr><td>5 ÷ 2</td><td>2</td><td>1</td></tr>
+<tr><td>2 ÷ 2</td><td>1</td><td>0</td></tr>
+<tr><td>1 ÷ 2</td><td>0</td><td>1</td></tr>
+</tbody>
+</table>
+</div>
+<div class="formula">Restos de abajo hacia arriba → <span class="binary">10100</span></div>
+<p><strong>Resultado:</strong> <span class="binary">20₁₀ = 10100₂</span></p>
+<div class="callout warning">
+<strong>Error típico:</strong> leer los restos desde la primera división hacia abajo.
         Recuerda: para obtener el número binario hay que leerlos <strong>desde el último resto hasta el primero</strong>.
       </div>
-
-      <div class="tool" aria-labelledby="tool-d2b-title">
-        <h3 id="tool-d2b-title">Comprobador: decimal → binario</h3>
-        <p>Haz primero las divisiones en tu cuaderno y utiliza después esta herramienta para comprobar.</p>
-        <div class="tool-grid">
-          <div>
-            <label for="decimalInput">Número decimal</label>
-            <input id="decimalInput" type="number" min="0" step="1" placeholder="Ej.: 25" />
-          </div>
-          <button type="button" onclick="decimalToBinary()">Comprobar</button>
-          <div>
-            <label>Resultado</label>
-            <div id="decimalResult" class="result">—</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="practica">
-      <div class="section-kicker">4 · Practica</div>
-      <h2>Ejercicios de conversión</h2>
-      <p class="lead">
-        Resuélvelos en el cuaderno mostrando el procedimiento. Después puedes desplegar las soluciones
-        para corregirte.
-      </p>
-
-      <div class="exercise-grid">
-        <article class="card">
-          <span class="badge">Binario → decimal</span>
-          <h3>Convierte:</h3>
-          <ol class="exercise-list">
-            <li><span class="binary">10₂</span></li>
-            <li><span class="binary">101₂</span></li>
-            <li><span class="binary">1000₂</span></li>
-            <li><span class="binary">1011₂</span></li>
-            <li><span class="binary">1111₂</span></li>
-            <li><span class="binary">10010₂</span></li>
-            <li><span class="binary">10101₂</span></li>
-            <li><span class="binary">11001₂</span></li>
-            <li><span class="binary">100000₂</span></li>
-            <li><span class="binary">101101₂</span></li>
-          </ol>
-
-          <details>
-            <summary>Mostrar soluciones</summary>
-            <div>
-              <ol>
-                <li>2</li><li>5</li><li>8</li><li>11</li><li>15</li>
-                <li>18</li><li>21</li><li>25</li><li>32</li><li>45</li>
-              </ol>
-            </div>
-          </details>
-        </article>
-
-        <article class="card">
-          <span class="badge">Decimal → binario</span>
-          <h3>Convierte:</h3>
-          <ol class="exercise-list">
-            <li>4</li><li>5</li><li>8</li><li>10</li><li>12</li>
-            <li>15</li><li>18</li><li>25</li><li>32</li><li>45</li>
-          </ol>
-
-          <details>
-            <summary>Mostrar soluciones</summary>
-            <div>
-              <ol>
-                <li><span class="binary">100₂</span></li>
-                <li><span class="binary">101₂</span></li>
-                <li><span class="binary">1000₂</span></li>
-                <li><span class="binary">1010₂</span></li>
-                <li><span class="binary">1100₂</span></li>
-                <li><span class="binary">1111₂</span></li>
-                <li><span class="binary">10010₂</span></li>
-                <li><span class="binary">11001₂</span></li>
-                <li><span class="binary">100000₂</span></li>
-                <li><span class="binary">101101₂</span></li>
-              </ol>
-            </div>
-          </details>
-        </article>
-      </div>
-
-      <h3>Reto: ¿cuánto es tu edad en binario?</h3>
-      <p>
+</section>
+<section id="practica">
+<div class="section-kicker">4 · Practica</div>
+<h2>Ejercicios de conversión</h2>
+<p class="lead">Resuelve los ejercicios en tu cuaderno y escribe después tus respuestas. Podrás comprobar cada bloque cuando hayas contestado todas sus preguntas, sin necesidad de completar el resto de la página.</p>
+<div class="exercise-grid">
+<article aria-label="Actividad: Binario → decimal" class="card actividad-interactiva" data-quiz-group="1">
+<span class="badge">Binario → decimal</span>
+<h3>Convierte:</h3>
+<ol class="exercise-list">
+<li><span class="binary">10₂</span><div class="respuesta-wrap"><label for="resp_1">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="2" data-kind="numeric" id="resp_1" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">101₂</span><div class="respuesta-wrap"><label for="resp_2">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="5" data-kind="numeric" id="resp_2" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">1000₂</span><div class="respuesta-wrap"><label for="resp_3">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="8" data-kind="numeric" id="resp_3" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">1011₂</span><div class="respuesta-wrap"><label for="resp_4">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="11" data-kind="numeric" id="resp_4" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">1111₂</span><div class="respuesta-wrap"><label for="resp_5">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="15" data-kind="numeric" id="resp_5" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">10010₂</span><div class="respuesta-wrap"><label for="resp_6">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="18" data-kind="numeric" id="resp_6" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">10101₂</span><div class="respuesta-wrap"><label for="resp_7">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="21" data-kind="numeric" id="resp_7" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">11001₂</span><div class="respuesta-wrap"><label for="resp_8">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="25" data-kind="numeric" id="resp_8" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">100000₂</span><div class="respuesta-wrap"><label for="resp_9">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="32" data-kind="numeric" id="resp_9" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">101101₂</span><div class="respuesta-wrap"><label for="resp_10">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="45" data-kind="numeric" id="resp_10" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+</ol>
+<div aria-label="Validación: Binario → decimal" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-1">0 de 10 respuestas completadas.</p><button aria-describedby="progreso-bloque-1" class="boton-validar-bloque" disabled="" type="button">Comprobar bloque</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<article aria-label="Actividad: Decimal → binario" class="card actividad-interactiva" data-quiz-group="2">
+<span class="badge">Decimal → binario</span>
+<h3>Convierte:</h3>
+<ol class="exercise-list">
+<li>4<div class="respuesta-wrap"><label for="resp_11">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="100" data-kind="binary" id="resp_11" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>5<div class="respuesta-wrap"><label for="resp_12">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="101" data-kind="binary" id="resp_12" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>8<div class="respuesta-wrap"><label for="resp_13">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1000" data-kind="binary" id="resp_13" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>10<div class="respuesta-wrap"><label for="resp_14">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1010" data-kind="binary" id="resp_14" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>12<div class="respuesta-wrap"><label for="resp_15">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1100" data-kind="binary" id="resp_15" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li>15<div class="respuesta-wrap"><label for="resp_16">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1111" data-kind="binary" id="resp_16" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>18<div class="respuesta-wrap"><label for="resp_17">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="10010" data-kind="binary" id="resp_17" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>25<div class="respuesta-wrap"><label for="resp_18">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="11001" data-kind="binary" id="resp_18" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>32<div class="respuesta-wrap"><label for="resp_19">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="100000" data-kind="binary" id="resp_19" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>45<div class="respuesta-wrap"><label for="resp_20">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="101101" data-kind="binary" id="resp_20" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+</ol>
+<div aria-label="Validación: Decimal → binario" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-2">0 de 10 respuestas completadas.</p><button aria-describedby="progreso-bloque-2" class="boton-validar-bloque" disabled="" type="button">Comprobar bloque</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+</div>
+<h3>Reto: ¿cuánto es tu edad en binario?</h3>
+<p>
         Convierte tu edad actual a sistema binario y muestra en el cuaderno todas las divisiones realizadas.
       </p>
-
-      <div class="tool">
-        <label for="ageInput">Comprueba tu edad</label>
-        <div class="tool-grid">
-          <input id="ageInput" type="number" min="1" max="120" step="1" placeholder="Introduce tu edad" />
-          <button type="button" onclick="ageToBinary()">Convertir</button>
-          <div id="ageResult" class="result">—</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="almacenamiento">
-      <div class="section-kicker">5 · Del bit al almacenamiento</div>
-      <h2>¿Cuánto ocupa la información?</h2>
-      <p class="lead">
+<div aria-label="Actividad: Tu edad en binario" class="tool actividad-interactiva" data-quiz-group="3"><h3>Reto: tu edad en binario</h3><div class="respuesta-wrap"><label for="edadAlumno">¿Cuántos años tienes?</label><input autocomplete="off" class="respuesta-actividad" data-kind="age" id="edadAlumno" placeholder="Edad en años" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div class="respuesta-wrap"><label for="edadBinaria">Tu edad convertida a binario</label><input autocomplete="off" class="respuesta-actividad" data-kind="agebinary" id="edadBinaria" placeholder="Escribe la conversión binaria" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Validación: Tu edad en binario" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-3">0 de 2 respuestas completadas.</p><button aria-describedby="progreso-bloque-3" class="boton-validar-bloque" disabled="" type="button">Comprobar reto</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></div>
+</section>
+<section id="almacenamiento">
+<div class="section-kicker">5 · Del bit al almacenamiento</div>
+<h2>¿Cuánto ocupa la información?</h2>
+<p class="lead">
         Un bit representa un único 0 o 1. Para almacenar documentos, imágenes, audio o vídeo necesitamos
         agrupar muchísimos bits.
       </p>
-
-      <div class="formula">8 bits = 1 byte (B)</div>
-
-      <div class="storage-scale">
-        <div><strong>B</strong><span>Byte</span></div>
-        <div><strong>KB</strong><span>Kilobyte</span></div>
-        <div><strong>MB</strong><span>Megabyte</span></div>
-        <div><strong>GB</strong><span>Gigabyte</span></div>
-        <div><strong>TB</strong><span>Terabyte</span></div>
-      </div>
-
-      <p>En estos ejercicios utilizaremos la aproximación decimal:</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Unidad</th><th>Equivale aproximadamente a</th></tr></thead>
-          <tbody>
-            <tr><td>1 KB</td><td>1.000 bytes</td></tr>
-            <tr><td>1 MB</td><td>1.000 KB</td></tr>
-            <tr><td>1 GB</td><td>1.000 MB</td></tr>
-            <tr><td>1 TB</td><td>1.000 GB</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout">
+<div class="formula">8 bits = 1 byte (B)</div>
+<div class="storage-scale">
+<div><strong>B</strong><span>Byte</span></div>
+<div><strong>KB</strong><span>Kilobyte</span></div>
+<div><strong>MB</strong><span>Megabyte</span></div>
+<div><strong>GB</strong><span>Gigabyte</span></div>
+<div><strong>TB</strong><span>Terabyte</span></div>
+</div>
+<p>En estos ejercicios utilizaremos la aproximación decimal:</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Unidad</th><th>Equivale aproximadamente a</th></tr></thead>
+<tbody>
+<tr><td>1 KB</td><td>1.000 bytes</td></tr>
+<tr><td>1 MB</td><td>1.000 KB</td></tr>
+<tr><td>1 GB</td><td>1.000 MB</td></tr>
+<tr><td>1 TB</td><td>1.000 GB</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout">
         En informática también existen unidades binarias como <strong>KiB, MiB y GiB</strong>, basadas en múltiplos de 1.024.
         En este tema utilizaremos 1.000 para centrarnos en la resolución de problemas.
       </div>
-
-      <h3>¿Qué unidad suele utilizarse?</h3>
-      <div class="grid-2">
-        <article class="card">
-          <ul>
-            <li>Documento pequeño → <strong>KB</strong></li>
-            <li>Fotografía → <strong>MB</strong></li>
-            <li>Canción → <strong>MB</strong></li>
-          </ul>
-        </article>
-        <article class="card">
-          <ul>
-            <li>Película → <strong>GB</strong></li>
-            <li>Videojuego → <strong>GB</strong></li>
-            <li>SSD o disco duro → <strong>GB o TB</strong></li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section id="problemas">
-      <div class="section-kicker">6 · Casos prácticos</div>
-      <h2>Calculamos el peso de archivos</h2>
-      <p class="lead">
+<h3>¿Qué unidad suele utilizarse?</h3>
+<div class="grid-2">
+<article class="card">
+<ul>
+<li>Documento pequeño → <strong>KB</strong></li>
+<li>Fotografía → <strong>MB</strong></li>
+<li>Canción → <strong>MB</strong></li>
+</ul>
+</article>
+<article class="card">
+<ul>
+<li>Película → <strong>GB</strong></li>
+<li>Videojuego → <strong>GB</strong></li>
+<li>SSD o disco duro → <strong>GB o TB</strong></li>
+</ul>
+</article>
+</div>
+</section>
+<section id="problemas">
+<div class="section-kicker">6 · Casos prácticos</div>
+<h2>Calculamos el peso de archivos</h2>
+<p class="lead">
         Para saber cuánto espacio ocupa un conjunto de archivos multiplicamos el número de archivos
         por el tamaño de cada uno y, si es necesario, convertimos después la unidad.
       </p>
-
-      <div class="grid-2">
-        <article class="card">
-          <h3>Ejemplo: fotografías</h3>
-          <p>20 fotografías de 5 MB:</p>
-          <div class="formula">20 × 5 MB = 100 MB</div>
-        </article>
-        <article class="card">
-          <h3>Ejemplo: canciones</h3>
-          <p>40 canciones de 8 MB:</p>
-          <div class="formula">40 × 8 MB = 320 MB</div>
-        </article>
-      </div>
-
-      <h3>¿Caben 50 películas en un disco de 1 TB?</h3>
-      <p>Supongamos que cada película ocupa <strong>15 GB</strong>.</p>
-      <div class="formula">50 × 15 GB = 750 GB</div>
-      <p>Como <strong>1 TB = 1.000 GB</strong>:</p>
-      <div class="callout success">
+<div class="grid-2">
+<article class="card">
+<h3>Ejemplo: fotografías</h3>
+<p>20 fotografías de 5 MB:</p>
+<div class="formula">20 × 5 MB = 100 MB</div>
+</article>
+<article class="card">
+<h3>Ejemplo: canciones</h3>
+<p>40 canciones de 8 MB:</p>
+<div class="formula">40 × 8 MB = 320 MB</div>
+</article>
+</div>
+<h3>¿Caben 50 películas en un disco de 1 TB?</h3>
+<p>Supongamos que cada película ocupa <strong>15 GB</strong>.</p>
+<div class="formula">50 × 15 GB = 750 GB</div>
+<p>Como <strong>1 TB = 1.000 GB</strong>:</p>
+<div class="callout success">
         Sí caben. Quedarían aproximadamente <strong>250 GB libres</strong>.
       </div>
-
-      <p>¿Y si cada película ocupase 25 GB?</p>
-      <div class="formula">50 × 25 GB = 1.250 GB</div>
-      <div class="callout warning">
+<p>¿Y si cada película ocupase 25 GB?</p>
+<div class="formula">50 × 25 GB = 1.250 GB</div>
+<div class="callout warning">
         No cabrían, porque 1.250 GB supera la capacidad de 1.000 GB.
       </div>
+<h3>Ejercicios</h3>
+<div class="grid-2">
+<article aria-label="Actividad: Fotografías del móvil" class="card actividad-interactiva" data-quiz-group="4">
+<h3>1. Fotografías del móvil</h3>
+<p>Una fotografía ocupa 4 MB. Tienes 250 fotografías.</p>
+<p><strong>¿Cuánto espacio ocupan?</strong></p>
+<div class="respuesta-wrap"><label for="resp_23">Tu resultado en MB (o 1 GB)</label><input autocomplete="off" class="respuesta-actividad" data-answer="1000" data-explain="250 × 4 MB = 1.000 MB = 1 GB." data-kind="storage" id="resp_23" placeholder="Ej.: 1000 MB" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Validación: Fotografías del móvil" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-4">0 de 1 respuestas completadas.</p><button aria-describedby="progreso-bloque-4" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<article aria-label="Actividad: Música" class="card actividad-interactiva" data-quiz-group="5">
+<h3>2. Música</h3>
+<p>Cada canción ocupa 8 MB. Tienes 500 canciones.</p>
+<p><strong>¿Cuánto ocupan?</strong></p>
+<div class="respuesta-wrap"><label for="resp_24">Tu resultado en MB (o 4 GB)</label><input autocomplete="off" class="respuesta-actividad" data-answer="4000" data-explain="500 × 8 MB = 4.000 MB = 4 GB." data-kind="storage" id="resp_24" placeholder="Ej.: 1000 MB" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Validación: Música" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-5">0 de 1 respuestas completadas.</p><button aria-describedby="progreso-bloque-5" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<article aria-label="Actividad: Vídeos" class="card actividad-interactiva" data-quiz-group="6">
+<h3>3. Vídeos</h3>
+<p>Cada vídeo ocupa 2,5 GB. Tienes 20 vídeos.</p>
+<p><strong>¿Cuánto ocupan?</strong></p>
+<div class="respuesta-wrap"><label for="resp_25">Tu resultado en GB</label><input autocomplete="off" class="respuesta-actividad" data-answer="50" data-explain="20 × 2,5 GB = 50 GB." data-kind="storage" id="resp_25" placeholder="Ej.: 1000 MB" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Validación: Vídeos" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-6">0 de 1 respuestas completadas.</p><button aria-describedby="progreso-bloque-6" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<article aria-label="Actividad: Videojuegos" class="card actividad-interactiva" data-quiz-group="7">
+<h3>4. Videojuegos</h3>
+<p>Dispones de 500 GB y quieres instalar juegos de 125 GB, 90 GB, 160 GB y 80 GB.</p>
+<p><strong>¿Caben? ¿Cuánto espacio queda?</strong></p>
+<div class="respuesta-wrap"><label for="resp_26">¿Caben todos los videojuegos?</label><input autocomplete="off" class="respuesta-actividad" data-answer="sí" data-explain="125 + 90 + 160 + 80 = 455 GB; sí caben en 500 GB." data-kind="yesno" id="resp_26" placeholder="Sí o no" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div class="respuesta-wrap"><label for="resp_27">¿Cuántos GB quedan libres?</label><input autocomplete="off" class="respuesta-actividad" data-answer="45" data-explain="500 GB − 455 GB = 45 GB libres." data-kind="storage" id="resp_27" placeholder="Ej.: 45 GB" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Validación: Videojuegos" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-7">0 de 2 respuestas completadas.</p><button aria-describedby="progreso-bloque-7" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+</div>
+<h3>Problema completo: el móvil está casi lleno</h3>
+<div aria-label="Actividad: El móvil está casi lleno" class="card actividad-interactiva" data-quiz-group="8">
+<p>Un teléfono tiene <strong>128 GB</strong> de almacenamiento y actualmente contiene:</p>
+<ul>
+<li>Sistema operativo y aplicaciones: 34 GB</li>
+<li>Fotografías: 28 GB</li>
+<li>Vídeos: 31 GB</li>
+<li>Música: 7 GB</li>
+<li>Otros archivos: 9 GB</li>
+</ul>
+<ol>
+<li>¿Cuánto espacio está ocupado?<div class="respuesta-wrap"><label for="resp_28">GB ocupados</label><input autocomplete="off" class="respuesta-actividad" data-answer="109" data-explain="34 + 28 + 31 + 7 + 9 = 109 GB ocupados." data-kind="storage" id="resp_28" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li>¿Cuánto espacio queda libre?<div class="respuesta-wrap"><label for="resp_29">GB libres</label><input autocomplete="off" class="respuesta-actividad" data-answer="19" data-explain="128 GB − 109 GB = 19 GB libres." data-kind="storage" id="resp_29" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li>Quieres grabar 10 vídeos de 2,5 GB cada uno. ¿Caben?<div class="respuesta-wrap"><label for="resp_30">¿Caben?</label><input autocomplete="off" class="respuesta-actividad" data-answer="no" data-explain="10 × 2,5 GB = 25 GB; no caben porque solo hay 19 GB libres." data-kind="yesno" id="resp_30" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li>Si no caben, ¿cuánto espacio deberías liberar como mínimo?<div class="respuesta-wrap"><label for="resp_31">GB que liberar</label><input autocomplete="off" class="respuesta-actividad" data-answer="6" data-explain="25 GB necesarios − 19 GB libres = 6 GB que hay que liberar." data-kind="storage" id="resp_31" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+</ol>
+<div aria-label="Validación: El móvil está casi lleno" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-8">0 de 4 respuestas completadas.</p><button aria-describedby="progreso-bloque-8" class="boton-validar-bloque" disabled="" type="button">Comprobar problema</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></div>
+<h3>Desafío final</h3>
+<div aria-label="Actividad: Desafío final" class="card actividad-interactiva" data-quiz-group="9">
+<p>Un ordenador tiene un SSD de <strong>1 TB</strong>. Actualmente están ocupados <strong>420 GB</strong>.</p>
+<p>Queremos añadir:</p>
+<ul>
+<li>25 películas de 12 GB.</li>
+<li>15 videojuegos de 18 GB.</li>
+</ul>
+<ol>
+<li>¿Cuánto ocupan las películas?<div class="respuesta-wrap"><label for="resp_32">GB de películas</label><input autocomplete="off" class="respuesta-actividad" data-answer="300" data-explain="25 películas × 12 GB = 300 GB." data-kind="storage" id="resp_32" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li>¿Cuánto ocupan los videojuegos?<div class="respuesta-wrap"><label for="resp_33">GB de videojuegos</label><input autocomplete="off" class="respuesta-actividad" data-answer="270" data-explain="15 videojuegos × 18 GB = 270 GB." data-kind="storage" id="resp_33" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li>¿Cuánto espacio queremos añadir en total?<div class="respuesta-wrap"><label for="resp_34">GB por añadir</label><input autocomplete="off" class="respuesta-actividad" data-answer="570" data-explain="300 GB + 270 GB = 570 GB por añadir." data-kind="storage" id="resp_34" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li>¿Cuánto espacio estaba libre?<div class="respuesta-wrap"><label for="resp_35">GB inicialmente libres</label><input autocomplete="off" class="respuesta-actividad" data-answer="580" data-explain="1 TB = 1.000 GB; 1.000 − 420 = 580 GB libres." data-kind="storage" id="resp_35" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li>¿Cabe todo?<div class="respuesta-wrap"><label for="resp_36">¿Cabe todo?</label><input autocomplete="off" class="respuesta-actividad" data-answer="sí" data-explain="Sí: 570 GB por añadir ≤ 580 GB libres; quedarían 10 GB." data-kind="yesno" id="resp_36" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li>Aunque quepa, ¿sería una buena decisión? Justifica.<div class="respuesta-wrap"><label for="resp_37">Explica y justifica tu decisión</label><input autocomplete="off" class="respuesta-actividad" data-kind="reflection" id="resp_37" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+</ol>
+<div aria-label="Validación: Desafío final" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-9">0 de 6 respuestas completadas.</p><button aria-describedby="progreso-bloque-9" class="boton-validar-bloque" disabled="" type="button">Comprobar desafío</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></div>
+</section>
+<section id="resumen">
+<div class="section-kicker">7 · Para repasar</div>
+<h2>Qué debes saber al terminar</h2>
+<ul class="checklist">
+<li>Un bit puede valer 0 o 1.</li>
+<li>En binario, las posiciones valen 1, 2, 4, 8, 16, 32, 64, 128…</li>
+<li>Para pasar de binario a decimal, sumamos los valores de las posiciones con 1.</li>
+<li>Para pasar de decimal a binario, podemos realizar divisiones sucesivas entre 2 y leer los restos de abajo arriba.</li>
+<li>8 bits forman 1 byte.</li>
+<li>En nuestros ejercicios: 1 KB = 1.000 B, 1 MB = 1.000 KB, 1 GB = 1.000 MB y 1 TB = 1.000 GB.</li>
+<li>Para calcular el espacio de varios archivos, multiplicamos cantidad × tamaño de cada archivo.</li>
+<li>No basta con que algo “quepa”: también conviene valorar cuánto espacio libre quedará.</li>
+</ul>
+<div class="callout success">Consejo: intenta resolver los ejercicios por tu cuenta. Al terminar una actividad o bloque, comprueba las respuestas y utiliza las explicaciones para corregir tus errores.</div>
+</section>
+<section id="reto-final-interactivo">
+<div class="section-kicker">8 · Actividades finales</div>
+<h2>Comprueba lo aprendido</h2>
+<p class="lead">Responde a cada actividad y pulsa «Comprobar actividad» cuando termines. Las soluciones permanecerán ocultas hasta que hayas introducido todas las respuestas de esa actividad.</p>
+<div class="exercise-grid">
+<article aria-label="Actividad: Fotografías en 2 TB" class="card actividad-interactiva" data-quiz-group="10">
+<span class="badge">Actividad 1 · Almacenamiento</span>
+<h3>¿Cuántas fotos caben?</h3>
+<p>¿Cuántas fotos de <strong>1 MB</strong> se pueden guardar en un disco duro de <strong>2 TB</strong>?</p>
+<label for="respuestaFotos">Tu respuesta (número de fotografías)</label>
+<input class="respuesta-actividad" data-answer="2000000" data-explain="2 TB = 2.000 GB = 2.000.000 MB. Si cada foto ocupa 1 MB, caben 2.000.000 fotografías." data-kind="numeric" id="respuestaFotos" inputmode="numeric" min="0" placeholder="Escribe el número de fotografías" step="1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div>
+<div aria-label="Validación: Fotografías en 2 TB" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-10">0 de 1 respuestas completadas.</p><button aria-describedby="progreso-bloque-10" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<article aria-label="Actividad: Tu nombre en bits" class="card actividad-interactiva" data-quiz-group="11">
+<span class="badge">Actividad 2 · Bits y bytes</span>
+<h3>Tu nombre en bits</h3>
+<p>Si cada letra ocupa <strong>1 byte</strong>, ¿cuántos bits necesitamos para representar tu nombre?</p>
+<label for="nombreAlumno">Tu nombre (solo las letras, sin espacios)</label>
+<input autocomplete="off" class="respuesta-actividad" data-kind="name" id="nombreAlumno" placeholder="Escribe tu nombre" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div>
+<label for="respuestaBits" style="margin-top:12px">Tu respuesta (número de bits)</label>
+<input class="respuesta-actividad" data-kind="namebits" id="respuestaBits" inputmode="numeric" min="0" placeholder="Escribe el número de bits" step="1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div>
+<div aria-label="Validación: Tu nombre en bits" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-11">0 de 2 respuestas completadas.</p><button aria-describedby="progreso-bloque-11" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+</div>
+</section>
 
-      <h3>Ejercicios</h3>
-
-      <div class="grid-2">
-        <article class="card">
-          <h3>1. Fotografías del móvil</h3>
-          <p>Una fotografía ocupa 4 MB. Tienes 250 fotografías.</p>
-          <p><strong>¿Cuánto espacio ocupan?</strong></p>
-          <details>
-            <summary>Mostrar solución</summary>
-            <div>250 × 4 MB = 1.000 MB = <strong>1 GB</strong>.</div>
-          </details>
-        </article>
-
-        <article class="card">
-          <h3>2. Música</h3>
-          <p>Cada canción ocupa 8 MB. Tienes 500 canciones.</p>
-          <p><strong>¿Cuánto ocupan?</strong></p>
-          <details>
-            <summary>Mostrar solución</summary>
-            <div>500 × 8 MB = 4.000 MB = <strong>4 GB</strong>.</div>
-          </details>
-        </article>
-
-        <article class="card">
-          <h3>3. Vídeos</h3>
-          <p>Cada vídeo ocupa 2,5 GB. Tienes 20 vídeos.</p>
-          <p><strong>¿Cuánto ocupan?</strong></p>
-          <details>
-            <summary>Mostrar solución</summary>
-            <div>20 × 2,5 GB = <strong>50 GB</strong>.</div>
-          </details>
-        </article>
-
-        <article class="card">
-          <h3>4. Videojuegos</h3>
-          <p>Dispones de 500 GB y quieres instalar juegos de 125 GB, 90 GB, 160 GB y 80 GB.</p>
-          <p><strong>¿Caben? ¿Cuánto espacio queda?</strong></p>
-          <details>
-            <summary>Mostrar solución</summary>
-            <div>
-              Total: 125 + 90 + 160 + 80 = <strong>455 GB</strong>.<br>
-              Sí caben. Quedan <strong>45 GB libres</strong>.
-            </div>
-          </details>
-        </article>
-      </div>
-
-      <h3>Problema completo: el móvil está casi lleno</h3>
-      <div class="card">
-        <p>Un teléfono tiene <strong>128 GB</strong> de almacenamiento y actualmente contiene:</p>
-        <ul>
-          <li>Sistema operativo y aplicaciones: 34 GB</li>
-          <li>Fotografías: 28 GB</li>
-          <li>Vídeos: 31 GB</li>
-          <li>Música: 7 GB</li>
-          <li>Otros archivos: 9 GB</li>
-        </ul>
-
-        <ol>
-          <li>¿Cuánto espacio está ocupado?</li>
-          <li>¿Cuánto espacio queda libre?</li>
-          <li>Quieres grabar 10 vídeos de 2,5 GB cada uno. ¿Caben?</li>
-          <li>Si no caben, ¿cuánto espacio deberías liberar como mínimo?</li>
-        </ol>
-
-        <details>
-          <summary>Mostrar solución razonada</summary>
-          <div>
-            <p><strong>1.</strong> 34 + 28 + 31 + 7 + 9 = <strong>109 GB ocupados</strong>.</p>
-            <p><strong>2.</strong> 128 − 109 = <strong>19 GB libres</strong>.</p>
-            <p><strong>3.</strong> 10 × 2,5 = <strong>25 GB</strong>. No caben.</p>
-            <p><strong>4.</strong> 25 − 19 = <strong>6 GB</strong>. Habría que liberar como mínimo 6 GB.</p>
-          </div>
-        </details>
-      </div>
-
-      <h3>Desafío final</h3>
-      <div class="card">
-        <p>Un ordenador tiene un SSD de <strong>1 TB</strong>. Actualmente están ocupados <strong>420 GB</strong>.</p>
-        <p>Queremos añadir:</p>
-        <ul>
-          <li>25 películas de 12 GB.</li>
-          <li>15 videojuegos de 18 GB.</li>
-        </ul>
-
-        <ol>
-          <li>¿Cuánto ocupan las películas?</li>
-          <li>¿Cuánto ocupan los videojuegos?</li>
-          <li>¿Cuánto espacio queremos añadir en total?</li>
-          <li>¿Cuánto espacio estaba libre?</li>
-          <li>¿Cabe todo?</li>
-          <li>Aunque quepa, ¿sería una buena decisión? Justifica.</li>
-        </ol>
-
-        <details>
-          <summary>Mostrar solución</summary>
-          <div>
-            <p>Películas: 25 × 12 = <strong>300 GB</strong>.</p>
-            <p>Videojuegos: 15 × 18 = <strong>270 GB</strong>.</p>
-            <p>Total nuevo: 300 + 270 = <strong>570 GB</strong>.</p>
-            <p>Espacio libre inicial: 1.000 − 420 = <strong>580 GB</strong>.</p>
-            <p>Sí cabe, pero quedarían únicamente <strong>10 GB libres</strong>.</p>
-            <p>
-              Aunque matemáticamente cabe, sería poco recomendable dejar el disco prácticamente lleno.
-              Una solución sería eliminar archivos, moverlos a otra unidad o utilizar un almacenamiento de mayor capacidad.
-            </p>
-          </div>
-        </details>
-      </div>
-    </section>
-
-    <section id="resumen">
-      <div class="section-kicker">7 · Para repasar</div>
-      <h2>Qué debes saber al terminar</h2>
-
-      <ul class="checklist">
-        <li>Un bit puede valer 0 o 1.</li>
-        <li>En binario, las posiciones valen 1, 2, 4, 8, 16, 32, 64, 128…</li>
-        <li>Para pasar de binario a decimal, sumamos los valores de las posiciones con 1.</li>
-        <li>Para pasar de decimal a binario, podemos realizar divisiones sucesivas entre 2 y leer los restos de abajo arriba.</li>
-        <li>8 bits forman 1 byte.</li>
-        <li>En nuestros ejercicios: 1 KB = 1.000 B, 1 MB = 1.000 KB, 1 GB = 1.000 MB y 1 TB = 1.000 GB.</li>
-        <li>Para calcular el espacio de varios archivos, multiplicamos cantidad × tamaño de cada archivo.</li>
-        <li>No basta con que algo “quepa”: también conviene valorar cuánto espacio libre quedará.</li>
-      </ul>
-
-      <div class="callout success">
-        <strong>Consejo:</strong> utiliza los comprobadores solamente después de resolver los ejercicios.
-        El objetivo no es acertar por ensayo y error, sino aprender el procedimiento.
-      </div>
-    </section>
-  </main>
-
-  <footer>
+<section id="entrega-moodle" aria-labelledby="tituloEntrega">
+  <div class="section-kicker">9 · Entrega de la actividad</div>
+  <h2 id="tituloEntrega">Descarga tu trabajo para Moodle</h2>
+  <p class="lead">Cuando hayas contestado y comprobado todos los ejercicios, genera un PDF con tu trabajo y súbelo a la tarea correspondiente de Moodle.</p>
+  <div class="entrega-grid">
+    <div class="entrega-panel">
+      <label for="nombreCompletoPdf">Nombre y apellidos del alumno</label>
+      <input id="nombreCompletoPdf" type="text" autocomplete="name" maxlength="120" placeholder="Ej.: María García López" aria-describedby="ayudaNombrePdf" />
+      <p id="ayudaNombrePdf" class="entrega-ayuda">Escribe al menos tu nombre y un apellido. Se utilizarán para identificar el PDF.</p>
+      <button id="botonExportarPdf" type="button" disabled aria-describedby="mensajeEntrega">Descargar mi trabajo en PDF</button>
+      <p id="nombreArchivoPrevisto" aria-live="polite">Archivo: Nombre Apellidos.pdf</p>
+      <p id="mensajeEntrega" role="status" aria-live="polite">Completa y comprueba las actividades para desbloquear la descarga.</p>
+    </div>
+    <div class="entrega-estado">
+      <strong>Estado de tu trabajo</strong>
+      <label for="progresoEntrega">Respuestas completadas</label>
+      <meter id="progresoEntrega" value="0" min="0" max="40">0 de 40</meter>
+      <p id="textoRespuestasEntrega">0 de 40 respuestas completadas</p>
+      <p id="textoBloquesEntrega">0 de 11 actividades comprobadas</p>
+      <p class="entrega-ayuda">El PDF incluirá las respuestas, los aciertos y errores de la autocorrección, las preguntas de reflexión y la fecha de generación. No sustituye la valoración del profesor.</p>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>Cómo entregar:</strong> descarga el archivo <strong>Nombre Apellidos.pdf</strong>, entra en la tarea de Moodle, adjunta el documento y confirma la entrega. La web no lo envía automáticamente.
+  </div>
+</section>
+</main>
+<footer>
     Material de consulta · Digitalización · 4.º ESO
   </footer>
+<script>(function(){
+  'use strict';
+  const groups=Array.from(document.querySelectorAll('[data-quiz-group]'));
+  const normalize=v=>v.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
 
-  <script>
-    function binaryToDecimal(){
-      const input = document.getElementById('binaryInput');
-      const output = document.getElementById('binaryResult');
-      const value = input.value.trim();
+  function nonempty(f){
+    const v=f.value.trim();
+    if(!v)return false;
+    const k=f.dataset.kind;
+    if(k==='age')return /^\d+$/.test(v)&&Number(v)>=1&&Number(v)<=120;
+    if(k==='name')return /\p{L}/u.test(v);
+    if(k==='binary'||k==='agebinary')return /^[01]+$/.test(v);
+    if(k==='numeric'||k==='namebits')return /^\d+$/.test(v.replace(/[.\s]/g,''));
+    if(k==='storage')return /\d/.test(v);
+    if(k==='yesno')return ['si','no'].includes(normalize(v));
+    return v.length>=3;
+  }
 
-      if(!value){
-        output.textContent = 'Introduce un número binario.';
-        return;
-      }
+  function numericValue(v){
+    // Accepts, for example: 2000000, 2.000.000, 50 GB or 2,5 GB.
+    let t=normalize(v).replace(/\s/g,'');
+    const m=t.match(/^(\d[\d.,]*)(mb|gb|tb|bits?|fotografias?|fotos?)?$/);
+    if(!m)return null;
+    let n=m[1];
+    if(n.includes(',')&&n.includes('.'))n=n.replace(/\./g,'').replace(',','.');
+    else if(n.includes(','))n=n.replace(',','.');
+    else if(/^\d{1,3}(\.\d{3})+$/.test(n))n=n.replace(/\./g,'');
+    const val=Number(n);
+    return Number.isFinite(val)?{value:val,unit:m[2]||''}:null;
+  }
 
-      if(!/^[01]+$/.test(value)){
-        output.textContent = 'Un número binario solo puede contener 0 y 1.';
-        return;
-      }
-
-      output.innerHTML = '<strong>' + value + '₂ = ' + parseInt(value, 2) + '₁₀</strong>';
+  function check(f){
+    const v=f.value,k=f.dataset.kind;
+    let expected=f.dataset.answer;
+    if(k==='name')return {pass:true,ungraded:true,text:'Nombre registrado.'};
+    if(k==='age')return {pass:true,ungraded:true,text:'Edad registrada.'};
+    if(k==='reflection')return {pass:null,text:'Respuesta para autoevaluar: dejar solo 10 GB libres no es recomendable. Conviene liberar espacio o ampliar el almacenamiento. Compara esta idea con tu justificación.'};
+    if(k==='agebinary'){
+      const age=Number(document.getElementById('edadAlumno').value);
+      expected=age.toString(2);
+      return {pass:normalize(v).replace(/^0+(?=\d)/,'')===expected,text:'Solución: '+expected+'₂.'};
     }
-
-    function decimalToBinary(){
-      const input = document.getElementById('decimalInput');
-      const output = document.getElementById('decimalResult');
-      const value = Number(input.value);
-
-      if(input.value === '' || !Number.isInteger(value) || value < 0){
-        output.textContent = 'Introduce un número entero igual o mayor que 0.';
-        return;
-      }
-
-      output.innerHTML = '<strong>' + value + '₁₀ = ' + value.toString(2) + '₂</strong>';
+    if(k==='namebits'){
+      const nombre=document.getElementById('nombreAlumno').value.replace(/[^\p{L}]/gu,'');
+      const letras=Array.from(nombre).length;
+      expected=String(letras*8);
+      const parsed=numericValue(v);
+      return {pass:!!parsed&&parsed.value===Number(expected)&&(!parsed.unit||parsed.unit==='bit'||parsed.unit==='bits'),text:`${letras} letras × 8 = ${expected} bits.`};
     }
-
-    function ageToBinary(){
-      const input = document.getElementById('ageInput');
-      const output = document.getElementById('ageResult');
-      const value = Number(input.value);
-
-      if(input.value === '' || !Number.isInteger(value) || value < 1 || value > 120){
-        output.textContent = 'Introduce una edad válida.';
-        return;
+    if(k==='binary')return {pass:normalize(v).replace(/^0+(?=\d)/,'')===expected,text:'Solución: '+expected+'₂.'};
+    if(k==='yesno')return {pass:normalize(v)===normalize(expected),text:f.dataset.explain||('Solución: '+expected+'.')};
+    if(k==='numeric'||k==='storage'){
+      const parsed=numericValue(v),correct=Number(expected);
+      let val=parsed?parsed.value:null;
+      if(parsed&&k==='storage'){
+        if(parsed.unit==='gb'&&correct>=1000)val*=1000;
+        if(parsed.unit==='mb'&&correct<1000)val/=1000;
+        if(parsed.unit==='tb')val*=1000000;
       }
-
-      output.innerHTML = 'Tu edad en binario es <strong class="binary">' + value.toString(2) + '₂</strong>.';
+      return {pass:val===correct,text:f.dataset.explain||('Solución: '+correct.toLocaleString('es-ES')+(k==='storage'?' en la unidad solicitada.':''))};
     }
-  </script>
+    return {pass:false,text:'Revisa la respuesta.'};
+  }
+
+  groups.forEach(group=>{
+    const fields=Array.from(group.querySelectorAll('.respuesta-actividad'));
+    const btn=group.querySelector('.boton-validar-bloque');
+    const progress=group.querySelector('.progreso-bloque');
+    const outcome=group.querySelector('.resultado-bloque');
+    function updateStatus(){
+      const completed=fields.filter(nonempty).length;
+      btn.disabled=completed!==fields.length;
+      const left=fields.length-completed;
+      progress.textContent=left
+        ? `${completed} de ${fields.length} respuestas completas · faltan ${left}.`
+        : `${fields.length} de ${fields.length} respuestas completas · ya puedes comprobar.`;
+    }
+    function hideThisGroup(){
+      outcome.hidden=true;
+      outcome.textContent='';
+      fields.forEach(f=>{
+        f.classList.remove('respuesta-ok','respuesta-error');
+        f.removeAttribute('aria-invalid');
+        const feedback=f.nextElementSibling;
+        if(feedback?.classList.contains('retroalimentacion')){
+          feedback.hidden=true;
+          feedback.textContent='';
+          feedback.className='retroalimentacion';
+        }
+      });
+    }
+    fields.forEach(f=>f.addEventListener('input',()=>{
+      hideThisGroup(); // Other validated activities keep their own feedback.
+      updateStatus();
+    }));
+    btn.addEventListener('click',()=>{
+      if(fields.some(f=>!nonempty(f)))return;
+      let correct=0,gradable=0,review=0;
+      fields.forEach(f=>{
+        const result=check(f);
+        const feedback=f.nextElementSibling;
+        if(result.pass===null)review++;
+        else if(!result.ungraded){
+          gradable++;
+          if(result.pass)correct++;
+          f.classList.toggle('respuesta-ok',result.pass);
+          f.classList.toggle('respuesta-error',!result.pass);
+          f.setAttribute('aria-invalid',result.pass?'false':'true');
+        }
+        if(feedback?.classList.contains('retroalimentacion')){
+          feedback.hidden=false;
+          const tone=result.pass===null?'pendiente-revision':result.ungraded?'informativo':result.pass?'correcto':'incorrecto';
+          feedback.className='retroalimentacion '+tone;
+          feedback.textContent=(result.pass===null?'Para reflexionar: ':result.ungraded?'✓ ':result.pass?'✓ Correcta. ':'✕ Incorrecta. ')+result.text;
+        }
+      });
+      outcome.hidden=false;
+      const qualifier=review?` · ${review} respuesta de reflexión para revisar.`:'';
+      outcome.textContent=`Resultado: ${correct} de ${gradable} respuestas correctas${gradable?'.':''}${qualifier}`;
+      outcome.classList.toggle('sin-errores',correct===gradable&&review===0);
+    });
+    updateStatus();
+  });
+})();</script>
+<script>
+(function(){
+  'use strict';
+  const groups=Array.from(document.querySelectorAll('[data-quiz-group]'));
+  const allFields=Array.from(document.querySelectorAll('.respuesta-actividad'));
+  const student=document.getElementById('nombreCompletoPdf');
+  const button=document.getElementById('botonExportarPdf');
+  const message=document.getElementById('mensajeEntrega');
+  const meter=document.getElementById('progresoEntrega');
+  const textFields=document.getElementById('textoRespuestasEntrega');
+  const textGroups=document.getElementById('textoBloquesEntrega');
+  const filePreview=document.getElementById('nombreArchivoPrevisto');
+  meter.max=allFields.length;
+
+  function validFullName(value){
+    const words=value.trim().split(/\s+/u).filter(Boolean);
+    return words.length>=2 && words.every(word=>/^[\p{L}][\p{L}'’.-]*$/u.test(word));
+  }
+  function getSafeFilename(name){
+    return name.trim().replace(/[<>:"/\\|?*\u0000-\u001f]/g,'').replace(/\s+/g,' ').replace(/[. ]+$/g,'').slice(0,100)+'.pdf';
+  }
+  function groupVerified(group){
+    const outcome=group.querySelector('.resultado-bloque');
+    return !!outcome && !outcome.hidden;
+  }
+  function state(){
+    const done=allFields.filter(f=>f.value.trim().length>0).length;
+    const verified=groups.filter(groupVerified).length;
+    const named=validFullName(student.value);
+    return {done,verified,named,ready:done===allFields.length&&verified===groups.length&&named};
+  }
+  function updateSubmission(){
+    const s=state();
+    meter.value=s.done;
+    textFields.textContent=`${s.done} de ${allFields.length} respuestas completadas`;
+    textGroups.textContent=`${s.verified} de ${groups.length} actividades comprobadas`;
+    button.disabled=!s.ready;
+    filePreview.textContent='Archivo: '+(student.value.trim()?getSafeFilename(student.value):'Nombre Apellidos.pdf');
+    if(s.ready){
+      message.textContent='Trabajo completo y comprobado. Ya puedes descargar tu PDF.';
+    }else{
+      const parts=[];
+      if(s.done<allFields.length)parts.push(`${allFields.length-s.done} respuestas pendientes`);
+      if(s.verified<groups.length)parts.push(`${groups.length-s.verified} actividades por comprobar`);
+      if(!s.named)parts.push('nombre y apellidos pendientes');
+      message.textContent='Para desbloquear: '+parts.join(' · ')+'.';
+    }
+  }
+  // Escuchamos en burbuja, después del controlador de validación de cada actividad.
+  document.addEventListener('input',function(event){
+    if(event.target===student || event.target.matches('.respuesta-actividad'))updateSubmission();
+  });
+  document.addEventListener('click',function(event){
+    if(event.target.closest('.boton-validar-bloque'))updateSubmission();
+  });
+
+  // Escritor PDF compacto (A4, Helvetica/WinAnsi), incorporado en este mismo HTML.
+  // Genera un fichero PDF directamente, sin servidores, bibliotecas externas ni diálogos de impresión.
+  function pdfText(value){
+    return String(value)
+      .replace(/\u00a0/g,' ')
+      .replace(/\u2082/g,' (base 2)')
+      .replace(/[\u2080-\u2089]/g, m=>String(m.codePointAt(0)-0x2080))
+      .replace(/[\u00b2\u00b3]/g, m=>m==='²'?'2':'3')
+      .replace(/[\u2190-\u21ff]/g,' -> ')
+      .replace(/\u2264/g,' <= ').replace(/\u2265/g,' >= ')
+      .replace(/\u2713/g,'SI').replace(/[\u2715\u2717]/g,'NO')
+      .replace(/\u00d7/g,' x ').replace(/\u00f7/g,' / ')
+      .replace(/[\r\n\t]+/g,' ').replace(/\s{2,}/g,' ').trim();
+  }
+  const winAnsiExtras={8364:128,8218:130,402:131,8222:132,8230:133,8224:134,8225:135,
+    710:136,8240:137,352:138,8249:139,338:140,381:142,8216:145,8217:146,
+    8220:147,8221:148,8226:149,8211:150,8212:151,732:152,8482:153,
+    353:154,8250:155,339:156,382:158,376:159};
+  function byteString(text){
+    const src=pdfText(text);
+    let s='';
+    for(const c of src){
+      const cp=c.codePointAt(0);
+      const b=(cp>=32&&cp<=255)?cp:winAnsiExtras[cp];
+      s+=String.fromCharCode(b===undefined?63:b);
+    }
+    return s;
+  }
+  function pdfLiteral(text){
+    return byteString(text).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+  }
+  function blobFromPDF(objects,rootId){
+    const parts=['%PDF-1.4\n%\xE2\xE3\xCF\xD3\n'];
+    let offset=parts[0].length;
+    const xref=[0];
+    for(let i=1;i<objects.length;i++){
+      xref.push(offset);
+      const chunk=`${i} 0 obj\n${objects[i]}\nendobj\n`;
+      parts.push(chunk);
+      offset+=chunk.length;
+    }
+    const startxref=offset;
+    parts.push(`xref\n0 ${objects.length}\n0000000000 65535 f \n`);
+    for(let i=1;i<xref.length;i++)parts.push(String(xref[i]).padStart(10,'0')+' 00000 n \n');
+    parts.push(`trailer\n<< /Size ${objects.length} /Root ${rootId} 0 R >>\nstartxref\n${startxref}\n%%EOF\n`);
+    const full=parts.join('');
+    const bytes=new Uint8Array(full.length);
+    for(let i=0;i<full.length;i++)bytes[i]=full.charCodeAt(i)&255;
+    return new Blob([bytes],{type:'application/pdf'});
+  }
+  function makeDocument(){
+    const W=595,H=842,left=48,right=48,usable=W-left-right;
+    const pages=[];
+    let page;
+    const measure=document.createElement('canvas').getContext('2d');
+    function coord(n){return Number(n).toFixed(2)}
+    function newPage(){
+      page={commands:[],y:H-82};
+      pages.push(page);
+      page.commands.push('0.10 0.22 0.42 rg 0 795 595 47 re f');
+      page.commands.push('1 1 1 rg BT /F2 11 Tf 48 813 Td (DIGITALIZACIÓN  /  4º ESO) Tj ET');
+      page.commands.push('0.83 0.88 0.96 rg BT /F1 8.5 Tf 368 815 Td (EVIDENCIA DE ACTIVIDADES) Tj ET');
+    }
+    function ensureSpace(height){if(page.y-height<62)newPage();}
+    function line(text,opts={}){
+      const font=opts.bold?'F2':'F1', size=opts.size||9.5, leading=opts.leading||size*1.45;
+      ensureSpace(leading);
+      const x=opts.x===undefined?left:opts.x;
+      const rgb=opts.color||[0.15,0.21,0.30];
+      page.commands.push(`${rgb.join(' ')} rg BT /${font} ${coord(size)} Tf 1 0 0 1 ${coord(x)} ${coord(page.y)} Tm (${pdfLiteral(text)}) Tj ET`);
+      page.y-=leading;
+    }
+    function paragraph(text,opts={}){
+      const size=opts.size||9.5, bold=!!opts.bold, x=opts.x===undefined?left:opts.x;
+      const width=opts.width||W-right-x;
+      const cleaned=pdfText(text);
+      measure.font=`${bold?'bold ':''}${size}px Arial`;
+      const words=cleaned.split(/\s+/u);
+      let current='';
+      function render(){if(current){line(current,{...opts,size,bold,x});current='';}}
+      for(let word of words){
+        if(!word)continue;
+        while(measure.measureText(word).width>width*0.92 && word.length>1){
+          render();
+          let cut=1;
+          while(cut<word.length && measure.measureText(word.slice(0,cut+1)).width<width*0.87)cut++;
+          line(word.slice(0,cut),{...opts,size,bold,x});
+          word=word.slice(cut);
+        }
+        const test=current?current+' '+word:word;
+        if(current&&measure.measureText(test).width>width*0.92)render();
+        current=current?current+' '+word:word;
+      }
+      render();
+    }
+    function spacer(height){ensureSpace(height);page.y-=height;}
+    function divider(){ensureSpace(16);page.commands.push(`0.81 0.85 0.90 RG 0.7 w ${coord(left)} ${coord(page.y)} m ${coord(W-right)} ${coord(page.y)} l S`);page.y-=15;}
+    newPage();
+    return {
+      title(t){paragraph(t,{bold:true,size:17,leading:22,color:[0.10,0.24,0.45]});spacer(2)},
+      heading(t){spacer(7);paragraph(t,{bold:true,size:12,leading:17,color:[0.10,0.30,0.53]});spacer(2)},
+      para(t,o={}){paragraph(t,o)},
+      spacer,divider,keep(height){ensureSpace(height);},
+      toBlob(){
+        const objects=[null];
+        function add(v){objects.push(v);return objects.length-1}
+        const catalog=add('');
+        const pagesNode=add('');
+        const fontRegular=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+        const fontBold=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+        const pageRefs=[];
+        pages.forEach((pg,i)=>{
+          pg.commands.push('0.73 0.78 0.84 RG 0.5 w 48 48 m 547 48 l S');
+          pg.commands.push(`0.36 0.42 0.50 rg BT /F1 8 Tf 48 33 Td (Digitalización - 4º ESO - Actividad individual) Tj ET`);
+          pg.commands.push(`0.36 0.42 0.50 rg BT /F1 8 Tf 490 33 Td (Página ${i+1} / ${pages.length}) Tj ET`);
+          const stream=pg.commands.join('\n')+'\n';
+          const content=add(`<< /Length ${stream.length} >>\nstream\n${stream}endstream`);
+          const pageRef=add(`<< /Type /Page /Parent ${pagesNode} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${fontRegular} 0 R /F2 ${fontBold} 0 R >> >> /Contents ${content} 0 R >>`);
+          pageRefs.push(`${pageRef} 0 R`);
+        });
+        objects[catalog]=`<< /Type /Catalog /Pages ${pagesNode} 0 R >>`;
+        objects[pagesNode]=`<< /Type /Pages /Count ${pageRefs.length} /Kids [${pageRefs.join(' ')}] >>`;
+        return blobFromPDF(objects,catalog);
+      }
+    };
+  }
+  function questionFor(field){
+    const li=field.closest('li');
+    if(li){
+      const copy=li.cloneNode(true);
+      copy.querySelectorAll('.respuesta-wrap').forEach(el=>el.remove());
+      const q=copy.textContent.trim();
+      if(q)return q;
+    }
+    const label=Array.from(document.querySelectorAll('label')).find(l=>l.htmlFor===field.id);
+    return label?label.textContent.trim():'Respuesta';
+  }
+  function fieldOutcome(f){
+    const kind=f.dataset.kind;
+    if(kind==='reflection')return 'REFLEXIÓN (revisión del profesor)';
+    if(kind==='age'||kind==='name')return 'DATO INTRODUCIDO (sin calificar)';
+    if(f.classList.contains('respuesta-ok'))return 'CORRECTA';
+    if(f.classList.contains('respuesta-error'))return 'INCORRECTA';
+    return 'SIN VALIDAR';
+  }
+  function makeReport(name){
+    const doc=makeDocument();
+    let correct=0,wrong=0,reflection=0,ungraded=0;
+    allFields.forEach(f=>{
+      const o=fieldOutcome(f);
+      if(o==='CORRECTA')correct++;
+      else if(o==='INCORRECTA')wrong++;
+      else if(o.startsWith('REFLEXIÓN'))reflection++;
+      else if(o.startsWith('DATO'))ungraded++;
+    });
+    const when=new Date().toLocaleString('es-ES',{dateStyle:'medium',timeStyle:'short'});
+    doc.title('Informe individual de actividades');
+    doc.para('Unidad 1: Representación digital de la información',{size:10.5,color:[0.28,0.40,0.55]});
+    doc.spacer(10);
+    doc.para('Alumno/a: '+name,{size:12,bold:true});
+    doc.para('Fecha y hora de generación (dispositivo): '+when,{size:9.5});
+    doc.para('Estado de realización: COMPLETADO Y COMPROBADO',{size:10.5,bold:true,color:[0.08,0.42,0.29]});
+    doc.divider();
+    doc.heading('Resumen de la realización');
+    doc.para(`Respuestas registradas: ${allFields.length} de ${allFields.length}`);
+    doc.para(`Actividades validadas: ${groups.length} de ${groups.length}`);
+    doc.para(`Autocorrección: ${correct} ${correct===1?'correcta':'correctas'} y ${wrong} ${wrong===1?'incorrecta':'incorrectas'} (de ${correct+wrong} evaluables automáticamente).`);
+    doc.para(`Sin calificación automática: ${reflection} ${reflection===1?'reflexión':'reflexiones'} y ${ungraded} datos de identificación.`);
+    doc.spacer(3);
+    doc.para('La autocorrección de la web es orientativa. El profesorado revisará la entrega.',{size:8.8,color:[0.35,0.40,0.46]});
+    doc.divider();
+    doc.heading('Respuestas por actividad');
+    groups.forEach((g,idx)=>{
+      const title=g.getAttribute('aria-label')?.replace(/^Actividad:\s*/,'')||('Actividad '+(idx+1));
+      const fields=Array.from(g.querySelectorAll('.respuesta-actividad'));
+      const passed=fields.filter(f=>fieldOutcome(f)==='CORRECTA').length;
+      const wrongs=fields.filter(f=>fieldOutcome(f)==='INCORRECTA').length;
+      doc.keep(58);
+      doc.heading(`${idx+1}. ${title}`);
+      const context=Array.from(g.children).filter(el=>el.tagName==='P'||el.tagName==='UL')
+        .map(el=>el.tagName==='UL'?Array.from(el.querySelectorAll('li')).map(li=>li.textContent.trim()).join('; '):el.textContent.trim())
+        .filter(Boolean).join(' ');
+      if(context)doc.para('Enunciado: '+context,{size:8.5,leading:11.8,color:[0.34,0.40,0.47]});
+      doc.para(`Comprobada - ${passed} ${passed===1?'correcta':'correctas'}, ${wrongs} ${wrongs===1?'incorrecta':'incorrectas'}`, {size:8.6,color:[0.35,0.40,0.46]});
+      fields.forEach((f,i)=>{
+        doc.keep(49);
+        doc.para(`${i+1}) ${questionFor(f)}`,{size:9.3,bold:true,leading:12.6});
+        doc.para('Respuesta: '+f.value.trim(),{size:9.2,x:60,leading:12.8});
+        const status=fieldOutcome(f);
+        doc.para('Resultado: '+status,{size:8.8,x:60,leading:12.5,
+          color:status==='INCORRECTA'?[0.63,0.16,0.16]:status==='CORRECTA'?[0.12,0.42,0.26]:[0.36,0.38,0.44]});
+        const fb=f.nextElementSibling;
+        if((status==='INCORRECTA'||status.startsWith('REFLEXIÓN'))&&fb&&fb.classList.contains('retroalimentacion')){
+          doc.para('Observación: '+fb.textContent.replace(/^[✓✕]\s*(?:Correcta|Incorrecta)\.\s*/u,''),{size:8.4,x:60,leading:11.7,color:[0.39,0.41,0.47]});
+        }
+        doc.spacer(5);
+      });
+      if(idx!==groups.length-1)doc.divider();
+    });
+    doc.spacer(8);
+    doc.para('Documento generado en el navegador del alumno. No acredita por sí solo la autoría o identidad.',{size:8.4,color:[0.40,0.44,0.49]});
+    return doc.toBlob();
+  }
+  button.addEventListener('click',function(){
+    updateSubmission();
+    const s=state();
+    if(!s.ready)return;
+    const name=student.value.trim().replace(/\s+/g,' ');
+    try{
+      const blob=makeReport(name);
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;
+      a.download=getSafeFilename(name);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),30000);
+      message.textContent='PDF generado. Revisa tu carpeta de descargas y súbelo a Moodle.';
+    }catch(err){
+      console.error('No se pudo generar el PDF',err);
+      message.textContent='No se ha podido generar el archivo. Prueba con un navegador actualizado.';
+    }
+  });
+  updateSubmission();
+})();
+</script>
 </body>
 </html>
