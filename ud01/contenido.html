@@ -514,6 +514,13 @@
 .entrega-ayuda{font-size:.9rem;color:var(--muted)}
 @media(max-width:850px){.entrega-grid{grid-template-columns:1fr}}
 @media print{#entrega-moodle{display:none!important}}
+
+/* Antes del envío solo se muestra el progreso. La corrección se desbloquea después. */
+.aviso-soluciones{margin:0;padding:10px 12px;border-radius:8px;background:#fff;color:#51627b;font-size:.9rem;border:1px dashed #b9c7dc}
+.resumen-postentrega{margin-top:22px;padding:22px;border:1px solid var(--border);background:#fff;border-radius:14px}
+.resumen-postentrega h3{margin-top:0}
+.enlace-corregir{display:inline-block;margin-top:8px;color:var(--primary);font-weight:800}
+.respuesta-actividad:read-only{background:#f2f5f9;color:var(--text);cursor:default}
 </style>
 <style>
 /* Validación progresiva, independiente para cada actividad */
@@ -543,8 +550,8 @@
 <a href="#almacenamiento">Almacenamiento</a>
 <a href="#problemas">Casos prácticos</a>
 <a href="#resumen">Resumen</a>
-<a href="#entrega-moodle">Entrega Moodle</a>
 <a href="#reto-final-interactivo">Actividades finales</a>
+<a href="#entrega-moodle">Entrega Moodle</a>
 </div>
 </nav>
 <header id="inicio">
@@ -711,7 +718,7 @@
 <section id="practica">
 <div class="section-kicker">4 · Practica</div>
 <h2>Ejercicios de conversión</h2>
-<p class="lead">Resuelve los ejercicios en tu cuaderno y escribe después tus respuestas. Podrás comprobar cada bloque cuando hayas contestado todas sus preguntas, sin necesidad de completar el resto de la página.</p>
+<p class="lead">Resuelve los ejercicios en tu cuaderno y escribe tus respuestas. La corrección de todos los bloques se mostrará <strong>solo después de generar el PDF final</strong> para Moodle.</p>
 <div class="exercise-grid">
 <article aria-label="Actividad: Binario → decimal" class="card actividad-interactiva" data-quiz-group="1">
 <span class="badge">Binario → decimal</span>
@@ -728,7 +735,7 @@
 <li><span class="binary">100000₂</span><div class="respuesta-wrap"><label for="resp_9">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="32" data-kind="numeric" id="resp_9" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
 <li><span class="binary">101101₂</span><div class="respuesta-wrap"><label for="resp_10">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="45" data-kind="numeric" id="resp_10" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
 </ol>
-<div aria-label="Validación: Binario → decimal" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-1">0 de 10 respuestas completadas.</p><button aria-describedby="progreso-bloque-1" class="boton-validar-bloque" disabled="" type="button">Comprobar bloque</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<div aria-label="Seguimiento: Binario → decimal" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-1">0 de 10 respuestas completadas.</p><p class="aviso-soluciones" aria-describedby="progreso-bloque-1">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
 <article aria-label="Actividad: Decimal → binario" class="card actividad-interactiva" data-quiz-group="2">
 <span class="badge">Decimal → binario</span>
 <h3>Convierte:</h3>
@@ -736,13 +743,13 @@
 <li>4<div class="respuesta-wrap"><label for="resp_11">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="100" data-kind="binary" id="resp_11" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>5<div class="respuesta-wrap"><label for="resp_12">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="101" data-kind="binary" id="resp_12" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>8<div class="respuesta-wrap"><label for="resp_13">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1000" data-kind="binary" id="resp_13" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>10<div class="respuesta-wrap"><label for="resp_14">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1010" data-kind="binary" id="resp_14" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>12<div class="respuesta-wrap"><label for="resp_15">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1100" data-kind="binary" id="resp_15" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
 <li>15<div class="respuesta-wrap"><label for="resp_16">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1111" data-kind="binary" id="resp_16" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>18<div class="respuesta-wrap"><label for="resp_17">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="10010" data-kind="binary" id="resp_17" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>25<div class="respuesta-wrap"><label for="resp_18">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="11001" data-kind="binary" id="resp_18" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>32<div class="respuesta-wrap"><label for="resp_19">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="100000" data-kind="binary" id="resp_19" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>45<div class="respuesta-wrap"><label for="resp_20">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="101101" data-kind="binary" id="resp_20" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
 </ol>
-<div aria-label="Validación: Decimal → binario" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-2">0 de 10 respuestas completadas.</p><button aria-describedby="progreso-bloque-2" class="boton-validar-bloque" disabled="" type="button">Comprobar bloque</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<div aria-label="Seguimiento: Decimal → binario" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-2">0 de 10 respuestas completadas.</p><p class="aviso-soluciones" aria-describedby="progreso-bloque-2">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
 </div>
 <h3>Reto: ¿cuánto es tu edad en binario?</h3>
 <p>
         Convierte tu edad actual a sistema binario y muestra en el cuaderno todas las divisiones realizadas.
       </p>
-<div aria-label="Actividad: Tu edad en binario" class="tool actividad-interactiva" data-quiz-group="3"><h3>Reto: tu edad en binario</h3><div class="respuesta-wrap"><label for="edadAlumno">¿Cuántos años tienes?</label><input autocomplete="off" class="respuesta-actividad" data-kind="age" id="edadAlumno" placeholder="Edad en años" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div class="respuesta-wrap"><label for="edadBinaria">Tu edad convertida a binario</label><input autocomplete="off" class="respuesta-actividad" data-kind="agebinary" id="edadBinaria" placeholder="Escribe la conversión binaria" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Validación: Tu edad en binario" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-3">0 de 2 respuestas completadas.</p><button aria-describedby="progreso-bloque-3" class="boton-validar-bloque" disabled="" type="button">Comprobar reto</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></div>
+<div aria-label="Actividad: Tu edad en binario" class="tool actividad-interactiva" data-quiz-group="3"><h3>Reto: tu edad en binario</h3><div class="respuesta-wrap"><label for="edadAlumno">¿Cuántos años tienes?</label><input autocomplete="off" class="respuesta-actividad" data-kind="age" id="edadAlumno" placeholder="Edad en años" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div class="respuesta-wrap"><label for="edadBinaria">Tu edad convertida a binario</label><input autocomplete="off" class="respuesta-actividad" data-kind="agebinary" id="edadBinaria" placeholder="Escribe la conversión binaria" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Seguimiento: Tu edad en binario" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-3">0 de 2 respuestas completadas.</p><p class="aviso-soluciones" aria-describedby="progreso-bloque-3">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></div>
 </section>
 <section id="almacenamiento">
 <div class="section-kicker">5 · Del bit al almacenamiento</div>
@@ -830,22 +837,22 @@
 <h3>1. Fotografías del móvil</h3>
 <p>Una fotografía ocupa 4 MB. Tienes 250 fotografías.</p>
 <p><strong>¿Cuánto espacio ocupan?</strong></p>
-<div class="respuesta-wrap"><label for="resp_23">Tu resultado en MB (o 1 GB)</label><input autocomplete="off" class="respuesta-actividad" data-answer="1000" data-explain="250 × 4 MB = 1.000 MB = 1 GB." data-kind="storage" id="resp_23" placeholder="Ej.: 1000 MB" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Validación: Fotografías del móvil" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-4">0 de 1 respuestas completadas.</p><button aria-describedby="progreso-bloque-4" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<div class="respuesta-wrap"><label for="resp_23">Tu resultado en MB</label><input autocomplete="off" class="respuesta-actividad" data-answer="1000" data-explain="250 × 4 MB = 1.000 MB = 1 GB." data-kind="storage" id="resp_23" placeholder="Escribe tu respuesta con unidades" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Seguimiento: Fotografías del móvil" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-4">0 de 1 respuestas completadas.</p><p class="aviso-soluciones" aria-describedby="progreso-bloque-4">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
 <article aria-label="Actividad: Música" class="card actividad-interactiva" data-quiz-group="5">
 <h3>2. Música</h3>
 <p>Cada canción ocupa 8 MB. Tienes 500 canciones.</p>
 <p><strong>¿Cuánto ocupan?</strong></p>
-<div class="respuesta-wrap"><label for="resp_24">Tu resultado en MB (o 4 GB)</label><input autocomplete="off" class="respuesta-actividad" data-answer="4000" data-explain="500 × 8 MB = 4.000 MB = 4 GB." data-kind="storage" id="resp_24" placeholder="Ej.: 1000 MB" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Validación: Música" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-5">0 de 1 respuestas completadas.</p><button aria-describedby="progreso-bloque-5" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<div class="respuesta-wrap"><label for="resp_24">Tu resultado en MB</label><input autocomplete="off" class="respuesta-actividad" data-answer="4000" data-explain="500 × 8 MB = 4.000 MB = 4 GB." data-kind="storage" id="resp_24" placeholder="Escribe tu respuesta con unidades" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Seguimiento: Música" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-5">0 de 1 respuestas completadas.</p><p class="aviso-soluciones" aria-describedby="progreso-bloque-5">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
 <article aria-label="Actividad: Vídeos" class="card actividad-interactiva" data-quiz-group="6">
 <h3>3. Vídeos</h3>
 <p>Cada vídeo ocupa 2,5 GB. Tienes 20 vídeos.</p>
 <p><strong>¿Cuánto ocupan?</strong></p>
-<div class="respuesta-wrap"><label for="resp_25">Tu resultado en GB</label><input autocomplete="off" class="respuesta-actividad" data-answer="50" data-explain="20 × 2,5 GB = 50 GB." data-kind="storage" id="resp_25" placeholder="Ej.: 1000 MB" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Validación: Vídeos" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-6">0 de 1 respuestas completadas.</p><button aria-describedby="progreso-bloque-6" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<div class="respuesta-wrap"><label for="resp_25">Tu resultado en GB</label><input autocomplete="off" class="respuesta-actividad" data-answer="50" data-explain="20 × 2,5 GB = 50 GB." data-kind="storage" id="resp_25" placeholder="Escribe tu respuesta con unidades" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Seguimiento: Vídeos" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-6">0 de 1 respuestas completadas.</p><p class="aviso-soluciones" aria-describedby="progreso-bloque-6">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
 <article aria-label="Actividad: Videojuegos" class="card actividad-interactiva" data-quiz-group="7">
 <h3>4. Videojuegos</h3>
 <p>Dispones de 500 GB y quieres instalar juegos de 125 GB, 90 GB, 160 GB y 80 GB.</p>
 <p><strong>¿Caben? ¿Cuánto espacio queda?</strong></p>
-<div class="respuesta-wrap"><label for="resp_26">¿Caben todos los videojuegos?</label><input autocomplete="off" class="respuesta-actividad" data-answer="sí" data-explain="125 + 90 + 160 + 80 = 455 GB; sí caben en 500 GB." data-kind="yesno" id="resp_26" placeholder="Sí o no" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div class="respuesta-wrap"><label for="resp_27">¿Cuántos GB quedan libres?</label><input autocomplete="off" class="respuesta-actividad" data-answer="45" data-explain="500 GB − 455 GB = 45 GB libres." data-kind="storage" id="resp_27" placeholder="Ej.: 45 GB" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Validación: Videojuegos" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-7">0 de 2 respuestas completadas.</p><button aria-describedby="progreso-bloque-7" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<div class="respuesta-wrap"><label for="resp_26">¿Caben todos los videojuegos?</label><input autocomplete="off" class="respuesta-actividad" data-answer="sí" data-explain="125 + 90 + 160 + 80 = 455 GB; sí caben en 500 GB." data-kind="yesno" id="resp_26" placeholder="Sí o no" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div class="respuesta-wrap"><label for="resp_27">¿Cuántos GB quedan libres?</label><input autocomplete="off" class="respuesta-actividad" data-answer="45" data-explain="500 GB − 455 GB = 45 GB libres." data-kind="storage" id="resp_27" placeholder="Escribe el espacio disponible" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Seguimiento: Videojuegos" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-7">0 de 2 respuestas completadas.</p><p class="aviso-soluciones" aria-describedby="progreso-bloque-7">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
 </div>
 <h3>Problema completo: el móvil está casi lleno</h3>
 <div aria-label="Actividad: El móvil está casi lleno" class="card actividad-interactiva" data-quiz-group="8">
@@ -863,7 +870,7 @@
 <li>Quieres grabar 10 vídeos de 2,5 GB cada uno. ¿Caben?<div class="respuesta-wrap"><label for="resp_30">¿Caben?</label><input autocomplete="off" class="respuesta-actividad" data-answer="no" data-explain="10 × 2,5 GB = 25 GB; no caben porque solo hay 19 GB libres." data-kind="yesno" id="resp_30" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
 <li>Si no caben, ¿cuánto espacio deberías liberar como mínimo?<div class="respuesta-wrap"><label for="resp_31">GB que liberar</label><input autocomplete="off" class="respuesta-actividad" data-answer="6" data-explain="25 GB necesarios − 19 GB libres = 6 GB que hay que liberar." data-kind="storage" id="resp_31" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
 </ol>
-<div aria-label="Validación: El móvil está casi lleno" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-8">0 de 4 respuestas completadas.</p><button aria-describedby="progreso-bloque-8" class="boton-validar-bloque" disabled="" type="button">Comprobar problema</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></div>
+<div aria-label="Seguimiento: El móvil está casi lleno" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-8">0 de 4 respuestas completadas.</p><p class="aviso-soluciones" aria-describedby="progreso-bloque-8">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></div>
 <h3>Desafío final</h3>
 <div aria-label="Actividad: Desafío final" class="card actividad-interactiva" data-quiz-group="9">
 <p>Un ordenador tiene un SSD de <strong>1 TB</strong>. Actualmente están ocupados <strong>420 GB</strong>.</p>
@@ -880,7 +887,7 @@
 <li>¿Cabe todo?<div class="respuesta-wrap"><label for="resp_36">¿Cabe todo?</label><input autocomplete="off" class="respuesta-actividad" data-answer="sí" data-explain="Sí: 570 GB por añadir ≤ 580 GB libres; quedarían 10 GB." data-kind="yesno" id="resp_36" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
 <li>Aunque quepa, ¿sería una buena decisión? Justifica.<div class="respuesta-wrap"><label for="resp_37">Explica y justifica tu decisión</label><input autocomplete="off" class="respuesta-actividad" data-kind="reflection" id="resp_37" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
 </ol>
-<div aria-label="Validación: Desafío final" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-9">0 de 6 respuestas completadas.</p><button aria-describedby="progreso-bloque-9" class="boton-validar-bloque" disabled="" type="button">Comprobar desafío</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></div>
+<div aria-label="Seguimiento: Desafío final" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-9">0 de 6 respuestas completadas.</p><p class="aviso-soluciones" aria-describedby="progreso-bloque-9">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></div>
 </section>
 <section id="resumen">
 <div class="section-kicker">7 · Para repasar</div>
@@ -895,12 +902,12 @@
 <li>Para calcular el espacio de varios archivos, multiplicamos cantidad × tamaño de cada archivo.</li>
 <li>No basta con que algo “quepa”: también conviene valorar cuánto espacio libre quedará.</li>
 </ul>
-<div class="callout success">Consejo: intenta resolver los ejercicios por tu cuenta. Al terminar una actividad o bloque, comprueba las respuestas y utiliza las explicaciones para corregir tus errores.</div>
+<div class="callout success">Consejo: contesta todas las actividades antes de generar el PDF. Las soluciones y explicaciones se desbloquearán después de descargar tu trabajo.</div>
 </section>
 <section id="reto-final-interactivo">
 <div class="section-kicker">8 · Actividades finales</div>
 <h2>Comprueba lo aprendido</h2>
-<p class="lead">Responde a cada actividad y pulsa «Comprobar actividad» cuando termines. Las soluciones permanecerán ocultas hasta que hayas introducido todas las respuestas de esa actividad.</p>
+<p class="lead">Escribe tus respuestas, pero todavía no verás si son correctas. Al terminar <strong>toda la web</strong>, genera tu PDF de Moodle y se desbloquearán las soluciones.</p>
 <div class="exercise-grid">
 <article aria-label="Actividad: Fotografías en 2 TB" class="card actividad-interactiva" data-quiz-group="10">
 <span class="badge">Actividad 1 · Almacenamiento</span>
@@ -908,7 +915,7 @@
 <p>¿Cuántas fotos de <strong>1 MB</strong> se pueden guardar en un disco duro de <strong>2 TB</strong>?</p>
 <label for="respuestaFotos">Tu respuesta (número de fotografías)</label>
 <input class="respuesta-actividad" data-answer="2000000" data-explain="2 TB = 2.000 GB = 2.000.000 MB. Si cada foto ocupa 1 MB, caben 2.000.000 fotografías." data-kind="numeric" id="respuestaFotos" inputmode="numeric" min="0" placeholder="Escribe el número de fotografías" step="1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div>
-<div aria-label="Validación: Fotografías en 2 TB" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-10">0 de 1 respuestas completadas.</p><button aria-describedby="progreso-bloque-10" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<div aria-label="Seguimiento: Fotografías en 2 TB" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-10">0 de 1 respuestas completadas.</p><p class="aviso-soluciones" aria-describedby="progreso-bloque-10">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
 <article aria-label="Actividad: Tu nombre en bits" class="card actividad-interactiva" data-quiz-group="11">
 <span class="badge">Actividad 2 · Bits y bytes</span>
 <h3>Tu nombre en bits</h3>
@@ -917,41 +924,47 @@
 <input autocomplete="off" class="respuesta-actividad" data-kind="name" id="nombreAlumno" placeholder="Escribe tu nombre" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div>
 <label for="respuestaBits" style="margin-top:12px">Tu respuesta (número de bits)</label>
 <input class="respuesta-actividad" data-kind="namebits" id="respuestaBits" inputmode="numeric" min="0" placeholder="Escribe el número de bits" step="1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div>
-<div aria-label="Validación: Tu nombre en bits" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-11">0 de 2 respuestas completadas.</p><button aria-describedby="progreso-bloque-11" class="boton-validar-bloque" disabled="" type="button">Comprobar actividad</button><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<div aria-label="Seguimiento: Tu nombre en bits" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-11">0 de 2 respuestas completadas.</p><p class="aviso-soluciones" aria-describedby="progreso-bloque-11">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
 </div>
 </section>
 
 <section id="entrega-moodle" aria-labelledby="tituloEntrega">
   <div class="section-kicker">9 · Entrega de la actividad</div>
   <h2 id="tituloEntrega">Descarga tu trabajo para Moodle</h2>
-  <p class="lead">Cuando hayas contestado y comprobado todos los ejercicios, genera un PDF con tu trabajo y súbelo a la tarea correspondiente de Moodle.</p>
+  <p class="lead">Cuando hayas respondido <strong>todas las preguntas</strong>, escribe tu nombre completo y genera el PDF. Primero se guardarán tus respuestas originales y <strong>después se desbloqueará la corrección</strong> de toda la web.</p>
   <div class="entrega-grid">
     <div class="entrega-panel">
       <label for="nombreCompletoPdf">Nombre y apellidos del alumno</label>
       <input id="nombreCompletoPdf" type="text" autocomplete="name" maxlength="120" placeholder="Ej.: María García López" aria-describedby="ayudaNombrePdf" />
       <p id="ayudaNombrePdf" class="entrega-ayuda">Escribe al menos tu nombre y un apellido. Se utilizarán para identificar el PDF.</p>
-      <button id="botonExportarPdf" type="button" disabled aria-describedby="mensajeEntrega">Descargar mi trabajo en PDF</button>
+      <button id="botonExportarPdf" type="button" disabled aria-describedby="mensajeEntrega">Generar PDF y desbloquear soluciones</button>
       <p id="nombreArchivoPrevisto" aria-live="polite">Archivo: Nombre Apellidos.pdf</p>
-      <p id="mensajeEntrega" role="status" aria-live="polite">Completa y comprueba las actividades para desbloquear la descarga.</p>
+      <p id="mensajeEntrega" role="status" aria-live="polite">Completa todas las respuestas y escribe tu nombre y apellidos para desbloquear la descarga.</p>
     </div>
     <div class="entrega-estado">
       <strong>Estado de tu trabajo</strong>
       <label for="progresoEntrega">Respuestas completadas</label>
       <meter id="progresoEntrega" value="0" min="0" max="40">0 de 40</meter>
       <p id="textoRespuestasEntrega">0 de 40 respuestas completadas</p>
-      <p id="textoBloquesEntrega">0 de 11 actividades comprobadas</p>
-      <p class="entrega-ayuda">El PDF incluirá las respuestas, los aciertos y errores de la autocorrección, las preguntas de reflexión y la fecha de generación. No sustituye la valoración del profesor.</p>
+      <p id="textoBloquesEntrega">0 de 11 actividades completas</p>
+      <p class="entrega-ayuda">El PDF recoge tus <strong>respuestas originales sin soluciones ni calificaciones</strong>, junto a la fecha y tus datos. La corrección aparecerá en esta web después de generar el PDF.</p>
     </div>
   </div>
   <div class="callout">
-    <strong>Cómo entregar:</strong> descarga el archivo <strong>Nombre Apellidos.pdf</strong>, entra en la tarea de Moodle, adjunta el documento y confirma la entrega. La web no lo envía automáticamente.
+    <strong>Cómo entregar:</strong> localiza el archivo <strong>Nombre Apellidos.pdf</strong>, entra en la tarea de Moodle, adjunta el documento y confirma la entrega. La web no lo envía automáticamente.
+  </div>
+  <div id="resumenCorreccion" class="resumen-postentrega" hidden role="status" aria-live="polite">
+    <h3>Ya puedes revisar tus respuestas</h3>
+    <p id="calificacionFinal">El resultado de la autocorrección aparecerá aquí.</p>
+    <p>Consulta la corrección y las explicaciones debajo de cada ejercicio. La respuesta de reflexión requiere revisión docente.</p>
+    <a class="enlace-corregir" href="#practica">Ir a las actividades corregidas ↑</a>
   </div>
 </section>
 </main>
 <footer>
     Material de consulta · Digitalización · 4.º ESO
   </footer>
-<script>(function(){
+<script>const quizController=(function(){
   'use strict';
   const groups=Array.from(document.querySelectorAll('[data-quiz-group]'));
   const normalize=v=>v.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
@@ -1015,47 +1028,39 @@
     return {pass:false,text:'Revisa la respuesta.'};
   }
 
-  groups.forEach(group=>{
+  function updateProgress(group){
     const fields=Array.from(group.querySelectorAll('.respuesta-actividad'));
-    const btn=group.querySelector('.boton-validar-bloque');
     const progress=group.querySelector('.progreso-bloque');
-    const outcome=group.querySelector('.resultado-bloque');
-    function updateStatus(){
-      const completed=fields.filter(nonempty).length;
-      btn.disabled=completed!==fields.length;
-      const left=fields.length-completed;
-      progress.textContent=left
-        ? `${completed} de ${fields.length} respuestas completas · faltan ${left}.`
-        : `${fields.length} de ${fields.length} respuestas completas · ya puedes comprobar.`;
-    }
-    function hideThisGroup(){
-      outcome.hidden=true;
-      outcome.textContent='';
-      fields.forEach(f=>{
-        f.classList.remove('respuesta-ok','respuesta-error');
-        f.removeAttribute('aria-invalid');
-        const feedback=f.nextElementSibling;
-        if(feedback?.classList.contains('retroalimentacion')){
-          feedback.hidden=true;
-          feedback.textContent='';
-          feedback.className='retroalimentacion';
-        }
-      });
-    }
-    fields.forEach(f=>f.addEventListener('input',()=>{
-      hideThisGroup(); // Other validated activities keep their own feedback.
-      updateStatus();
-    }));
-    btn.addEventListener('click',()=>{
-      if(fields.some(f=>!nonempty(f)))return;
+    const filled=fields.filter(nonempty).length;
+    const remaining=fields.length-filled;
+    progress.textContent=remaining
+      ? `${filled} de ${fields.length} respuestas completas · faltan ${remaining}.`
+      : `${fields.length} de ${fields.length} respuestas completas · pendientes de la entrega final.`;
+  }
+
+  groups.forEach(group=>{
+    group.querySelectorAll('.respuesta-actividad').forEach(f=>{
+      f.addEventListener('input',()=>updateProgress(group));
+    });
+    updateProgress(group);
+  });
+
+  let unlocked=false;
+  function unlockCorrections(){
+    if(unlocked)return null;
+    unlocked=true;
+    let totalCorrect=0,totalGradable=0,totalReview=0;
+    groups.forEach(group=>{
+      const fields=Array.from(group.querySelectorAll('.respuesta-actividad'));
+      const outcome=group.querySelector('.resultado-bloque');
       let correct=0,gradable=0,review=0;
       fields.forEach(f=>{
         const result=check(f);
         const feedback=f.nextElementSibling;
-        if(result.pass===null)review++;
+        if(result.pass===null){review++;totalReview++;}
         else if(!result.ungraded){
-          gradable++;
-          if(result.pass)correct++;
+          gradable++;totalGradable++;
+          if(result.pass){correct++;totalCorrect++;}
           f.classList.toggle('respuesta-ok',result.pass);
           f.classList.toggle('respuesta-error',!result.pass);
           f.setAttribute('aria-invalid',result.pass?'false':'true');
@@ -1066,14 +1071,20 @@
           feedback.className='retroalimentacion '+tone;
           feedback.textContent=(result.pass===null?'Para reflexionar: ':result.ungraded?'✓ ':result.pass?'✓ Correcta. ':'✕ Incorrecta. ')+result.text;
         }
+        // Lock the delivered answers: the PDF matches exactly what the student submitted.
+        f.readOnly=true;
+        f.setAttribute('aria-readonly','true');
       });
       outcome.hidden=false;
       const qualifier=review?` · ${review} respuesta de reflexión para revisar.`:'';
       outcome.textContent=`Resultado: ${correct} de ${gradable} respuestas correctas${gradable?'.':''}${qualifier}`;
       outcome.classList.toggle('sin-errores',correct===gradable&&review===0);
+      const note=group.querySelector('.aviso-soluciones');
+      if(note){note.textContent='Corrección desbloqueada tras generar el PDF.';}
     });
-    updateStatus();
-  });
+    return {correct:totalCorrect,gradable:totalGradable,review:totalReview};
+  }
+  return {nonempty,unlockCorrections};
 })();</script>
 <script>
 (function(){
@@ -1096,39 +1107,34 @@
   function getSafeFilename(name){
     return name.trim().replace(/[<>:"/\\|?*\u0000-\u001f]/g,'').replace(/\s+/g,' ').replace(/[. ]+$/g,'').slice(0,100)+'.pdf';
   }
-  function groupVerified(group){
-    const outcome=group.querySelector('.resultado-bloque');
-    return !!outcome && !outcome.hidden;
-  }
+  let exported=false;
   function state(){
-    const done=allFields.filter(f=>f.value.trim().length>0).length;
-    const verified=groups.filter(groupVerified).length;
+    const done=allFields.filter(quizController.nonempty).length;
+    const completedGroups=groups.filter(g=>Array.from(g.querySelectorAll('.respuesta-actividad')).every(quizController.nonempty)).length;
     const named=validFullName(student.value);
-    return {done,verified,named,ready:done===allFields.length&&verified===groups.length&&named};
+    return {done,completedGroups,named,ready:done===allFields.length&&named};
   }
   function updateSubmission(){
     const s=state();
     meter.value=s.done;
     textFields.textContent=`${s.done} de ${allFields.length} respuestas completadas`;
-    textGroups.textContent=`${s.verified} de ${groups.length} actividades comprobadas`;
+    textGroups.textContent=`${s.completedGroups} de ${groups.length} actividades completas`;
     button.disabled=!s.ready;
+    button.textContent=exported?'Descargar de nuevo mi PDF':'Generar PDF y desbloquear soluciones';
     filePreview.textContent='Archivo: '+(student.value.trim()?getSafeFilename(student.value):'Nombre Apellidos.pdf');
-    if(s.ready){
-      message.textContent='Trabajo completo y comprobado. Ya puedes descargar tu PDF.';
+    if(exported){
+      message.textContent='PDF generado y descarga solicitada. La corrección ya está disponible. Sube el archivo a Moodle.';
+    }else if(s.ready){
+      message.textContent='Todas las respuestas están completas. Genera el PDF para acceder a la corrección.';
     }else{
       const parts=[];
       if(s.done<allFields.length)parts.push(`${allFields.length-s.done} respuestas pendientes`);
-      if(s.verified<groups.length)parts.push(`${groups.length-s.verified} actividades por comprobar`);
       if(!s.named)parts.push('nombre y apellidos pendientes');
       message.textContent='Para desbloquear: '+parts.join(' · ')+'.';
     }
   }
-  // Escuchamos en burbuja, después del controlador de validación de cada actividad.
   document.addEventListener('input',function(event){
     if(event.target===student || event.target.matches('.respuesta-actividad'))updateSubmission();
-  });
-  document.addEventListener('click',function(event){
-    if(event.target.closest('.boton-validar-bloque'))updateSubmission();
   });
 
   // Escritor PDF compacto (A4, Helvetica/WinAnsi), incorporado en este mismo HTML.
@@ -1268,64 +1274,38 @@
     const label=Array.from(document.querySelectorAll('label')).find(l=>l.htmlFor===field.id);
     return label?label.textContent.trim():'Respuesta';
   }
-  function fieldOutcome(f){
-    const kind=f.dataset.kind;
-    if(kind==='reflection')return 'REFLEXIÓN (revisión del profesor)';
-    if(kind==='age'||kind==='name')return 'DATO INTRODUCIDO (sin calificar)';
-    if(f.classList.contains('respuesta-ok'))return 'CORRECTA';
-    if(f.classList.contains('respuesta-error'))return 'INCORRECTA';
-    return 'SIN VALIDAR';
-  }
   function makeReport(name){
     const doc=makeDocument();
-    let correct=0,wrong=0,reflection=0,ungraded=0;
-    allFields.forEach(f=>{
-      const o=fieldOutcome(f);
-      if(o==='CORRECTA')correct++;
-      else if(o==='INCORRECTA')wrong++;
-      else if(o.startsWith('REFLEXIÓN'))reflection++;
-      else if(o.startsWith('DATO'))ungraded++;
-    });
     const when=new Date().toLocaleString('es-ES',{dateStyle:'medium',timeStyle:'short'});
-    doc.title('Informe individual de actividades');
+    doc.title('Trabajo individual de actividades');
     doc.para('Unidad 1: Representación digital de la información',{size:10.5,color:[0.28,0.40,0.55]});
     doc.spacer(10);
     doc.para('Alumno/a: '+name,{size:12,bold:true});
     doc.para('Fecha y hora de generación (dispositivo): '+when,{size:9.5});
-    doc.para('Estado de realización: COMPLETADO Y COMPROBADO',{size:10.5,bold:true,color:[0.08,0.42,0.29]});
+    doc.para('Estado de realización: TODAS LAS RESPUESTAS ENTREGADAS',{size:10.5,bold:true,color:[0.08,0.42,0.29]});
     doc.divider();
     doc.heading('Resumen de la realización');
     doc.para(`Respuestas registradas: ${allFields.length} de ${allFields.length}`);
-    doc.para(`Actividades validadas: ${groups.length} de ${groups.length}`);
-    doc.para(`Autocorrección: ${correct} ${correct===1?'correcta':'correctas'} y ${wrong} ${wrong===1?'incorrecta':'incorrectas'} (de ${correct+wrong} evaluables automáticamente).`);
-    doc.para(`Sin calificación automática: ${reflection} ${reflection===1?'reflexión':'reflexiones'} y ${ungraded} datos de identificación.`);
+    doc.para(`Actividades respondidas: ${groups.length} de ${groups.length}`);
     doc.spacer(3);
-    doc.para('La autocorrección de la web es orientativa. El profesorado revisará la entrega.',{size:8.8,color:[0.35,0.40,0.46]});
+    doc.para('Se recogen las respuestas originales del alumno, sin soluciones ni correcciones automáticas.',{size:8.8,color:[0.35,0.40,0.46]});
+    doc.para('La evaluación de las respuestas corresponde al profesor.',{size:8.8,color:[0.35,0.40,0.46]});
     doc.divider();
     doc.heading('Respuestas por actividad');
     groups.forEach((g,idx)=>{
       const title=g.getAttribute('aria-label')?.replace(/^Actividad:\s*/,'')||('Actividad '+(idx+1));
       const fields=Array.from(g.querySelectorAll('.respuesta-actividad'));
-      const passed=fields.filter(f=>fieldOutcome(f)==='CORRECTA').length;
-      const wrongs=fields.filter(f=>fieldOutcome(f)==='INCORRECTA').length;
       doc.keep(58);
       doc.heading(`${idx+1}. ${title}`);
       const context=Array.from(g.children).filter(el=>el.tagName==='P'||el.tagName==='UL')
         .map(el=>el.tagName==='UL'?Array.from(el.querySelectorAll('li')).map(li=>li.textContent.trim()).join('; '):el.textContent.trim())
         .filter(Boolean).join(' ');
       if(context)doc.para('Enunciado: '+context,{size:8.5,leading:11.8,color:[0.34,0.40,0.47]});
-      doc.para(`Comprobada - ${passed} ${passed===1?'correcta':'correctas'}, ${wrongs} ${wrongs===1?'incorrecta':'incorrectas'}`, {size:8.6,color:[0.35,0.40,0.46]});
+      doc.para(`Preguntas respondidas: ${fields.length} de ${fields.length}`,{size:8.6,color:[0.35,0.40,0.46]});
       fields.forEach((f,i)=>{
-        doc.keep(49);
+        doc.keep(43);
         doc.para(`${i+1}) ${questionFor(f)}`,{size:9.3,bold:true,leading:12.6});
-        doc.para('Respuesta: '+f.value.trim(),{size:9.2,x:60,leading:12.8});
-        const status=fieldOutcome(f);
-        doc.para('Resultado: '+status,{size:8.8,x:60,leading:12.5,
-          color:status==='INCORRECTA'?[0.63,0.16,0.16]:status==='CORRECTA'?[0.12,0.42,0.26]:[0.36,0.38,0.44]});
-        const fb=f.nextElementSibling;
-        if((status==='INCORRECTA'||status.startsWith('REFLEXIÓN'))&&fb&&fb.classList.contains('retroalimentacion')){
-          doc.para('Observación: '+fb.textContent.replace(/^[✓✕]\s*(?:Correcta|Incorrecta)\.\s*/u,''),{size:8.4,x:60,leading:11.7,color:[0.39,0.41,0.47]});
-        }
+        doc.para('Respuesta del alumno: '+f.value.trim(),{size:9.2,x:60,leading:12.8});
         doc.spacer(5);
       });
       if(idx!==groups.length-1)doc.divider();
@@ -1349,7 +1329,18 @@
       a.click();
       a.remove();
       setTimeout(()=>URL.revokeObjectURL(url),30000);
-      message.textContent='PDF generado. Revisa tu carpeta de descargas y súbelo a Moodle.';
+      if(!exported){
+        exported=true;
+        student.readOnly=true;
+        student.setAttribute('aria-readonly','true');
+        const score=quizController.unlockCorrections();
+        const summary=document.getElementById('resumenCorreccion');
+        const grade=document.getElementById('calificacionFinal');
+        grade.textContent=`Autocorrección: ${score.correct} de ${score.gradable} respuestas correctas.`+
+          (score.review?` ${score.review} pregunta de reflexión pendiente de revisión docente.`:'');
+        summary.hidden=false;
+      }
+      updateSubmission();
     }catch(err){
       console.error('No se pudo generar el PDF',err);
       message.textContent='No se ha podido generar el archivo. Prueba con un navegador actualizado.';
