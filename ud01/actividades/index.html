@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actividades de la Unidad 1 de Digitalización de 4.º ESO: tamaño de la información y binario y ASCII.">
+  <title>Actividades · Unidad 1 | Digitalización 4.º ESO</title>
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --surface:#ffffff;
+      --surface-soft:#f8faff;
+      --text:#172033;
+      --muted:#627086;
+      --primary:#185bb5;
+      --primary-dark:#103d79;
+      --accent:#e8f1ff;
+      --border:#dbe4f0;
+      --success:#1c7a49;
+      --success-bg:#eaf8f0;
+      --shadow:0 12px 34px rgba(20,44,78,.08);
+      --radius:20px;
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    a{color:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav{
+      max-width:var(--max);
+      margin:auto;
+      padding:11px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      text-decoration:none;
+      font-weight:850;
+      color:var(--primary-dark);
+    }
+
+    .back{
+      text-decoration:none;
+      font-size:.92rem;
+      font-weight:750;
+      color:var(--muted);
+      padding:7px 10px;
+      border-radius:999px;
+    }
+
+    .back:hover{
+      background:var(--accent);
+      color:var(--primary-dark);
+    }
+
+    header{
+      background:
+        radial-gradient(circle at 86% 16%,rgba(118,178,255,.25),transparent 26%),
+        radial-gradient(circle at 10% 90%,rgba(105,156,226,.14),transparent 30%),
+        linear-gradient(135deg,#0b2850 0%,#174d91 55%,#1d67c3 100%);
+      color:white;
+      padding:70px 20px 62px;
+    }
+
+    .hero{
+      max-width:var(--max);
+      margin:auto;
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:32px;
+      align-items:end;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 11px;
+      border:1px solid rgba(255,255,255,.24);
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      font-weight:800;
+      font-size:.82rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      margin-bottom:15px;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(2.35rem,5.5vw,4.6rem);
+      line-height:1;
+      letter-spacing:-.04em;
+    }
+
+    .hero p{
+      max-width:760px;
+      margin:20px 0 0;
+      font-size:1.12rem;
+      color:#e7f0fe;
+    }
+
+    .hero-panel{
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:20px;
+      padding:21px;
+      backdrop-filter:blur(8px);
+    }
+
+    .hero-panel strong{
+      display:block;
+      margin-bottom:8px;
+    }
+
+    .hero-panel p{
+      margin:0;
+      font-size:.96rem;
+    }
+
+    main{
+      max-width:var(--max);
+      margin:auto;
+      padding:38px 18px 70px;
+    }
+
+    .intro{
+      margin-bottom:24px;
+    }
+
+    .intro h2{
+      margin:0 0 7px;
+      font-size:clamp(1.55rem,3vw,2.2rem);
+      letter-spacing:-.02em;
+    }
+
+    .intro p{
+      margin:0;
+      max-width:820px;
+      color:var(--muted);
+    }
+
+    .resources{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .resource-link{
+      display:block;
+      min-width:0;
+      color:inherit;
+      text-decoration:none;
+      border-radius:var(--radius);
+    }
+
+    .resource{
+      position:relative;
+      overflow:hidden;
+      min-height:330px;
+      height:100%;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:25px;
+      display:flex;
+      flex-direction:column;
+      cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .resource-link:hover .resource,
+    .resource-link:focus-visible .resource{
+      transform:translateY(-4px);
+      box-shadow:0 18px 42px rgba(20,44,78,.15);
+      border-color:#a9c5e8;
+    }
+
+    .resource-link:focus-visible{
+      outline:3px solid rgba(24,91,181,.22);
+      outline-offset:4px;
+    }
+
+    .resource::after{
+      content:"";
+      position:absolute;
+      width:165px;
+      height:165px;
+      border-radius:50%;
+      top:-75px;
+      right:-62px;
+      background:var(--accent);
+      z-index:0;
+    }
+
+    .resource > *{
+      position:relative;
+      z-index:1;
+    }
+
+    .icon{
+      width:52px;
+      height:52px;
+      display:grid;
+      place-items:center;
+      border-radius:15px;
+      background:var(--primary);
+      color:#fff;
+      font-size:1.45rem;
+      font-weight:900;
+      margin-bottom:20px;
+    }
+
+    .resource h3{
+      margin:0 0 10px;
+      color:var(--primary-dark);
+      font-size:1.36rem;
+      line-height:1.22;
+    }
+
+    .resource p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .topics{
+      list-style:none;
+      padding:0;
+      margin:18px 0 23px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+    }
+
+    .topics li{
+      padding:5px 9px;
+      border-radius:8px;
+      background:#f0f4f9;
+      color:#45566d;
+      font-size:.8rem;
+      font-weight:750;
+    }
+
+    .button{
+      margin-top:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      min-height:48px;
+      padding:11px 15px;
+      border-radius:11px;
+      text-decoration:none;
+      background:var(--primary);
+      color:#fff;
+      font-weight:850;
+      transition:.18s ease;
+    }
+
+    .button:hover,
+    .button:focus{
+      background:var(--primary-dark);
+      transform:translateY(-1px);
+      outline:none;
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      width:max-content;
+      padding:5px 9px;
+      margin-bottom:12px;
+      border-radius:999px;
+      background:var(--success-bg);
+      color:var(--success);
+      font-weight:800;
+      font-size:.78rem;
+    }
+
+    .route{
+      margin-top:30px;
+      padding:25px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .route h2{
+      margin:0 0 8px;
+      font-size:1.45rem;
+      color:var(--primary-dark);
+    }
+
+    .route p{
+      margin:0 0 18px;
+      color:var(--muted);
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+
+    .step{
+      position:relative;
+      padding:15px 15px 15px 46px;
+      border-radius:12px;
+      background:var(--surface-soft);
+      border:1px solid var(--border);
+    }
+
+    .step b{
+      position:absolute;
+      left:13px;
+      top:14px;
+      width:25px;
+      height:25px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--primary);
+      color:#fff;
+      font-size:.8rem;
+    }
+
+    footer{
+      max-width:var(--max);
+      margin:auto;
+      padding:0 18px 46px;
+      color:var(--muted);
+      text-align:center;
+      font-size:.9rem;
+    }
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .resources{grid-template-columns:1fr}
+      .resource{min-height:auto}
+      .steps{grid-template-columns:1fr}
+    }
+
+    @media(max-width:600px){
+      .nav{align-items:flex-start;flex-direction:column}
+      header{padding-top:50px}
+    }
+  
+    /* Índice de actividades: dos tarjetas en orden de trabajo */
+    .resources{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .resource{min-height:340px}
+    .resource .topics{margin-top:16px}
+    .activity-number{display:inline-block;color:#fff;font-weight:850;opacity:.83;font-size:.83rem;margin:0 0 12px}
+    .route .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .breadcrumb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:1120px;margin:0 auto 13px;font-size:.82rem;color:#dbeaff}
+    .breadcrumb a{color:inherit;text-decoration:none}
+    .breadcrumb a:hover{text-decoration:underline}
+    @media(max-width:900px){.resources,.route .steps{grid-template-columns:1fr}}
+    @media(prefers-reduced-motion:reduce){.resource,.button{transition:none}.resource-link:hover .resource{transform:none}}
+</style>
+</head>
+<body>
+  <nav class="topbar" aria-label="Navegación principal">
+    <div class="nav">
+      <a class="brand" href="../index.html">Digitalización · 4.º ESO</a>
+      <a class="back" href="../index.html">← Volver a la Unidad 1</a>
+    </div>
+  </nav>
+  <header>
+    <div class="breadcrumb"><a href="../index.html">Unidad 1</a><span aria-hidden="true">›</span><span>Actividades</span></div>
+    <div class="hero">
+      <div>
+        <span class="eyebrow">Unidad 1 · Trabajo en clase</span>
+        <h1>Actividades de la unidad</h1>
+        <p>Pon en práctica lo aprendido sobre la representación digital de la información con las actividades de esta unidad.</p>
+      </div>
+      <aside class="hero-panel">
+        <strong>2 actividades</strong>
+        <p>Elige una actividad para comenzar. Puedes volver a este índice siempre que lo necesites.</p>
+      </aside>
+    </div>
+  </header>
+  <main>
+    <section class="intro">
+      <h2>¿Qué actividad vamos a realizar?</h2>
+      <p>Accede a cada actividad desde su tarjeta. Sigue las indicaciones y completa las tareas de clase.</p>
+    </section>
+    <section class="resources" aria-label="Listado de actividades">
+      <a class="resource-link" href="actividad_tamano_informacion.html" aria-label="Abrir la actividad 1: Tamaño de la información">
+        <article class="resource">
+          <div class="icon" aria-hidden="true">01</div>
+          <span class="status">Actividad interactiva</span>
+          <h3>Tamaño de la información</h3>
+          <p>Resuelve ejercicios sobre bits, bytes, conversiones de binario y decimal y capacidad de almacenamiento. Al finalizar, genera el PDF para entregar en Moodle.</p>
+          <ul class="topics">
+            <li>Bits y bytes</li><li>KB · MB · GB · TB</li><li>Problemas</li><li>Entrega PDF</li>
+          </ul>
+          <span class="button" aria-hidden="true"><span>Comenzar actividad</span><span>→</span></span>
+        </article>
+      </a>
+      <a class="resource-link" href="actividad_binario_ascii.html" aria-label="Abrir la actividad 2: Binario y código ASCII">
+        <article class="resource">
+          <div class="icon" aria-hidden="true">02</div>
+          <span class="status">Actividad</span>
+          <h3>Binario y código ASCII</h3>
+          <p>Accede al trabajo sobre la representación de letras, números y símbolos mediante códigos binarios y ASCII.</p>
+          <ul class="topics">
+            <li>Sistema binario</li><li>ASCII</li><li>Caracteres</li><li>Codificación</li>
+          </ul>
+          <span class="button" aria-hidden="true"><span>Abrir actividad</span><span>→</span></span>
+        </article>
+      </a>
+    </section>
+    <section class="route">
+      <h2>Cómo trabajar</h2>
+      <p>Lee las instrucciones de la actividad elegida y realiza los ejercicios en el orden propuesto.</p>
+      <div class="steps">
+        <div class="step"><b>1</b><strong>Selecciona una actividad</strong><div>Abre la tarjeta indicada por el profesor.</div></div>
+        <div class="step"><b>2</b><strong>Completa el trabajo</strong><div>Realiza las tareas y sigue las instrucciones de entrega que aparezcan en cada actividad.</div></div>
+      </div>
+    </section>
+  </main>
+  <footer>Unidad 1 · Actividades · Digitalización · 4.º ESO</footer>
+</body>
+</html>

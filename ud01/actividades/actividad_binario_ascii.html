@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descifra tu Nombre en Binario | 4º ESO</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti para efectos de celebración -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-full flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="bg-slate-800/80 backdrop-blur-md border-b border-slate-700/60 sticky top-0 z-30">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indigo-600 p-2.5 rounded-xl shadow-lg shadow-indigo-500/30">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-white tracking-tight">Tecnología y Digitalización</h1>
+                    <p class="text-xs text-indigo-400 font-medium">4º de ESO — Conversor Binario ASCII (Mayús. y Minús.)</p>
+                </div>
+            </div>
+            <button onclick="toggleModal('asciiModal')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-medium rounded-lg transition border border-slate-600 shadow-sm">
+                <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                Ver Tabla ASCII Completa
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl w-full mx-auto px-4 py-8 flex-grow">
+        
+        <!-- Welcome Hero Card -->
+        <div class="bg-gradient-to-br from-indigo-900/40 via-slate-800 to-slate-800 border border-indigo-500/20 rounded-2xl p-6 sm:p-8 shadow-xl mb-8 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10">
+                <span class="inline-block px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-xs font-semibold mb-3 border border-indigo-500/30">Actividad Práctica Avanzada</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Transforma tu nombre (Mayúsculas y Minúsculas)</h2>
+                <p class="text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+                    Indica cuántas letras tiene tu nombre. La aplicación generará los huecos para introducir los 8 bits de cada carácter. Recuerda que las letras mayúsculas y minúsculas tienen códigos ASCII totalmente diferentes (ej. 'A' es 65 y 'a' es 97).
+                </p>
+            </div>
+        </div>
+
+        <!-- Paso 1: Selección de número de letras -->
+        <div id="step1-card" class="bg-slate-800 border border-slate-700/80 rounded-2xl p-6 sm:p-8 shadow-lg transition-all duration-300 mb-8">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">1</div>
+                <h3 class="text-lg font-semibold text-white">Configura la longitud de tu nombre</h3>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-full sm:w-auto flex-1 max-w-xs">
+                    <label for="numLetters" class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Número de letras ($n$)</label>
+                    <input type="number" id="numLetters" min="1" max="20" value="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-lg font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                </div>
+                <button onclick="generateInputs()" class="w-full sm:w-auto mt-2 sm:mt-6 px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 transition flex items-center justify-center gap-2">
+                    <span>Generar Huecos</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Paso 2: Generación dinámica de huecos (Oculto inicialmente) -->
+        <div id="step2-container" class="hidden space-y-6">
+            <div class="bg-slate-800 border border-slate-700/80 rounded-2xl p-6 sm:p-8 shadow-lg">
+                <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">2</div>
+                        <h3 class="text-lg font-semibold text-white">Introduce la secuencia de 8 bits para cada letra</h3>
+                    </div>
+                    <button onclick="resetForm()" class="text-xs text-slate-400 hover:text-indigo-400 transition flex items-center gap-1 font-medium">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        Reiniciar
+                    </button>
+                </div>
+
+                <p class="text-slate-400 text-xs sm:text-sm mb-6">
+                    Anota opcionalmente la letra exacta que estás codificando (mayúscula o minúscula) y escribe sus 8 ceros y unos correspondientes.
+                </p>
+
+                <div id="inputsList" class="space-y-4">
+                    <!-- Filas generadas dinámicamente -->
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-slate-700/65 flex justify-end">
+                    <button onclick="convertBinary()" class="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-xl shadow-emerald-600/30 transition flex items-center justify-center gap-3 text-base">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        ¡Convertir y Comprobar!
+                    </button>
+                </div>
+            </div>
+
+            <!-- Resultado en Pantalla -->
+            <div id="resultCard" class="hidden bg-gradient-to-r from-slate-800 to-indigo-950/60 border border-indigo-500/30 rounded-2xl p-6 sm:p-8 shadow-xl text-center transform transition-all duration-500">
+                <span class="text-xs uppercase tracking-widest text-indigo-400 font-semibold mb-2 block">Nombre decodificado con éxito</span>
+                <div id="resultText" class="text-3xl sm:text-5xl font-extrabold text-white font-mono my-4 tracking-wider drop-shadow-md">
+                    <!-- Aquí aparece el nombre -->
+                </div>
+                <p id="resultDetails" class="text-slate-300 text-sm max-w-lg mx-auto leading-relaxed">
+                    ¡Has decodificado correctamente todos los bytes manteniendo las mayúsculas y minúsculas!
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800/50 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>Departamento de Tecnología — 4º de ESO — Actividad interactiva de codificación de la información.</p>
+    </footer>
+
+    <!-- Modal de Ayuda Tabla ASCII Completa (Mayús. y Minús.) -->
+    <div id="asciiModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="p-4 sm:p-6 border-b border-slate-800 flex justify-between items-center bg-slate-800/50">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    <h3 class="text-lg font-bold text-white">Tabla ASCII (Mayúsculas y Minúsculas)</h3>
+                </div>
+                <button onclick="toggleModal('asciiModal')" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div class="p-4 sm:p-6 overflow-y-auto space-y-4">
+                <p class="text-xs text-slate-400">Observa cómo cada letra minúscula tiene un valor decimal diferente (97 a 122) al de su versión en mayúscula (65 a 90):</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 font-mono text-xs">
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">A / a</span><span class="text-slate-400">65 / 97</span><span class="text-slate-300">01000001 / 01100001</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">B / b</span><span class="text-slate-400">66 / 98</span><span class="text-slate-300">01000010 / 01100010</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">C / c</span><span class="text-slate-400">67 / 99</span><span class="text-slate-300">01000011 / 01100011</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">D / d</span><span class="text-slate-400">68 / 100</span><span class="text-slate-300">01000100 / 01100100</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">E / e</span><span class="text-slate-400">69 / 101</span><span class="text-slate-300">01000101 / 01100101</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">F / f</span><span class="text-slate-400">70 / 102</span><span class="text-slate-300">01000110 / 01100110</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">G / g</span><span class="text-slate-400">71 / 103</span><span class="text-slate-300">01000111 / 01100111</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">H / h</span><span class="text-slate-400">72 / 104</span><span class="text-slate-300">01001000 / 01101000</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">I / i</span><span class="text-slate-400">73 / 105</span><span class="text-slate-300">01001001 / 01101001</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">J / j</span><span class="text-slate-400">74 / 106</span><span class="text-slate-300">01001010 / 01101010</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">K / k</span><span class="text-slate-400">75 / 107</span><span class="text-slate-300">01001011 / 01101011</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">L / l</span><span class="text-slate-400">76 / 108</span><span class="text-slate-300">01001100 / 01101100</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">M / m</span><span class="text-slate-400">77 / 109</span><span class="text-slate-300">01001101 / 01101101</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">N / n</span><span class="text-slate-400">78 / 110</span><span class="text-slate-300">01001110 / 01101110</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">Ñ / ñ</span><span class="text-slate-400">209 / 241</span><span class="text-slate-300">11010001 / 11110001</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">O / o</span><span class="text-slate-400">79 / 111</span><span class="text-slate-300">01001111 / 01101111</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">P / p</span><span class="text-slate-400">80 / 112</span><span class="text-slate-300">01010000 / 01110000</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">Q / q</span><span class="text-slate-400">81 / 113</span><span class="text-slate-300">01010001 / 01110001</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">R / r</span><span class="text-slate-400">82 / 114</span><span class="text-slate-300">01010010 / 01110010</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">S / s</span><span class="text-slate-400">83 / 115</span><span class="text-slate-300">01010011 / 01110011</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">T / t</span><span class="text-slate-400">84 / 116</span><span class="text-slate-300">01010100 / 01110100</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">U / u</span><span class="text-slate-400">85 / 117</span><span class="text-slate-300">01010101 / 01110101</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">V / v</span><span class="text-slate-400">86 / 118</span><span class="text-slate-300">01010110 / 01110110</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">W / w</span><span class="text-slate-400">87 / 119</span><span class="text-slate-300">01010111 / 01110111</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">X / x</span><span class="text-slate-400">88 / 120</span><span class="text-slate-300">01011000 / 01111000</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">Y / y</span><span class="text-slate-400">89 / 121</span><span class="text-slate-300">01011001 / 01111001</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">Z / z</span><span class="text-slate-400">90 / 122</span><span class="text-slate-300">01011010 / 01111010</span></div>
+                    <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700/60 flex justify-between items-center"><span class="font-bold text-indigo-400">Espacio</span><span class="text-slate-400">32</span><span class="text-slate-300">00100000</span></div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-slate-800 bg-slate-800/50 flex justify-end">
+                <button onclick="toggleModal('asciiModal')" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg transition">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de lógica de la aplicación -->
+    <script>
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.toggle('hidden');
+        }
+
+        function generateInputs() {
+            const num = parseInt(document.getElementById('numLetters').value);
+            const container = document.getElementById('inputsList');
+            container.innerHTML = '';
+
+            if (isNaN(num) || num < 1 || num > 20) {
+                alertCustom("Por favor, introduce un número válido de letras (entre 1 y 20).");
+                return;
+            }
+
+            for (let i = 0; i < num; i++) {
+                const row = document.createElement('div');
+                row.className = 'bg-slate-900/60 border border-slate-700/60 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition hover:border-slate-600';
+                
+                row.innerHTML = `
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        <span class="w-7 h-7 rounded-lg bg-slate-800 text-indigo-400 flex items-center justify-center font-mono text-xs font-bold border border-slate-700">#${i+1}</span>
+                        <div class="flex flex-col">
+                            <label class="text-xs text-slate-400 font-medium">Letra ${i+1} (Mayús/Minús)</label>
+                            <input type="text" maxlength="1" placeholder="Letra" class="letter-hint-input w-16 bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-center text-white font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                    </div>
+
+                    <div class="flex-1 w-full sm:w-auto">
+                        <label class="block text-xs text-slate-400 font-medium mb-1">Secuencia de 8 bits (ceros y unos)</label>
+                        <div class="flex gap-1.5 justify-start sm:justify-end flex-wrap bit-group" data-index="${i}">
+                            ${generateBitInputs()}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(row);
+            }
+
+            document.getElementById('step2-container').classList.remove('hidden');
+            document.getElementById('resultCard').classList.add('hidden');
+            
+            document.getElementById('step2-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generateBitInputs() {
+            let html = '';
+            for (let b = 0; b < 8; b++) {
+                html += `<input type="text" maxlength="1" inputmode="numeric" pattern="[0-1]*" class="bit-box w-9 h-11 sm:w-10 sm:h-12 bg-slate-800 border border-slate-700 text-white font-mono text-center text-lg font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition shadow-inner" oninput="handleBitInput(this)" onkeydown="handleBitKeyDown(event, this)">`;
+            }
+            return html;
+        }
+
+        function handleBitInput(input) {
+            const val = input.value;
+            if (val !== '0' && val !== '1') {
+                input.value = '';
+                return;
+            }
+            if (val && input.nextElementSibling) {
+                input.nextElementSibling.focus();
+                input.nextElementSibling.select();
+            }
+        }
+
+        function handleBitKeyDown(e, input) {
+            if (e.key === 'Backspace' && !input.value && input.previousElementSibling) {
+                input.previousElementSibling.focus();
+                input.previousElementSibling.select();
+            }
+        }
+
+        function convertBinary() {
+            const bitGroups = document.querySelectorAll('.bit-group');
+            let decodedString = '';
+
+            bitGroups.forEach(group => {
+                const inputs = group.querySelectorAll('.bit-box');
+                let binaryString = '';
+                inputs.forEach(inp => {
+                    binaryString += (inp.value === '1' ? '1' : '0');
+                });
+
+                // Conversión nativa ASCII preservando mayúsculas y minúsculas exactas
+                const decimalValue = parseInt(binaryString, 2);
+                const character = String.fromCharCode(decimalValue);
+                decodedString += character;
+            });
+
+            const resultCard = document.getElementById('resultCard');
+            const resultText = document.getElementById('resultText');
+            
+            resultText.textContent = decodedString;
+            resultCard.classList.remove('hidden');
+            resultCard.scrollIntoView({ behavior: 'smooth' });
+
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        function resetForm() {
+            document.getElementById('step2-container').classList.add('hidden');
+            document.getElementById('numLetters').value = 4;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function alertCustom(message) {
+            const div = document.createElement('div');
+            div.className = 'fixed top-5 left-1/2 transform -translate-x-1/2 bg-amber-600 text-white px-6 py-3 rounded-xl shadow-2xl z-50 text-sm font-semibold flex items-center gap-2 animate-bounce';
+            div.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>${message}`;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 3500);
+        }
+    </script>
+</body>
+</html>
