@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ficha nueva de Digitalización 4.º ESO sobre bytes, KB, MB, GB y TB, autocorregible y con entrega en PDF para Moodle.">
+  <title>Actividad 1 · Bytes y almacenamiento | Digitalización 4.º ESO</title>
+  <style>
+    :root{--bg:#f4f7fb;--surface:#fff;--surface-soft:#f8faff;--text:#172033;--muted:#627086;--primary:#185bb5;--primary-dark:#103d79;--accent:#e8f1ff;--border:#dbe4f0;--success:#1c7a49;--success-bg:#eaf8f0;--danger:#9e3232;--danger-bg:#fff0f0;--shadow:0 12px 34px rgba(20,44,78,.08);--radius:20px;--max:1120px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.58}a{color:inherit}button,input,select{font:inherit}button{cursor:pointer}
+    .topbar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}.nav{max-width:var(--max);margin:auto;padding:12px 20px;display:flex;justify-content:space-between;gap:12px;align-items:center}.brand{font-weight:850;color:var(--primary-dark);text-decoration:none}.back{color:var(--muted);font-size:.92rem;font-weight:700;text-decoration:none}.back:hover{color:var(--primary)}
+    header{background:radial-gradient(circle at 87% 14%,rgba(118,178,255,.26),transparent 28%),linear-gradient(135deg,#0b2850,#174d91 57%,#1d67c3);color:#fff;padding:64px 20px 65px}.hero{max-width:var(--max);margin:auto;display:grid;grid-template-columns:1.28fr .72fr;gap:30px;align-items:center}.eyebrow{display:inline-block;padding:6px 11px;border:1px solid rgba(255,255,255,.27);border-radius:99px;background:rgba(255,255,255,.09);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:.82rem}h1{margin:15px 0;line-height:1.05;font-size:clamp(2.4rem,5vw,4.3rem);letter-spacing:-.04em}.hero p{font-size:1.08rem;color:#e7f0fe;max-width:680px;margin:0}.hero-panel{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.10);padding:22px;border-radius:20px}.hero-panel strong{display:block;margin:0 0 10px}.hero-panel p{font-size:.96rem}.hero-panel ul{padding-left:20px;margin:8px 0 0;color:#f4f8ff}
+    main{max-width:var(--max);margin:auto;padding:30px 18px 60px}.section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(20px,3.4vw,35px);margin:20px 0;scroll-margin-top:80px}.section-heading{display:flex;align-items:flex-start;gap:15px}.block-number{flex-shrink:0;width:55px;height:55px;border-radius:16px;display:grid;place-items:center;background:var(--primary);color:white;font-size:1.15rem;font-weight:850}.kicker{display:block;text-transform:uppercase;letter-spacing:.09em;color:var(--primary);font-size:.77rem;font-weight:850;margin-bottom:5px}h2{font-size:clamp(1.45rem,2.75vw,2.1rem);line-height:1.18;margin:0 0 10px;letter-spacing:-.02em}.lead{color:var(--muted);margin:8px 0 0}.section-heading+.lead{margin-left:70px}.rule-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:20px 0}.rule{padding:13px 8px;text-align:center;border-radius:12px;border:1px solid var(--border);background:var(--surface-soft)}.rule b{display:block;font-size:1.1rem;color:var(--primary-dark)}.rule small{display:block;color:var(--muted);font-size:.8rem}.note{border-left:4px solid var(--primary);border-radius:10px;padding:14px 17px;background:var(--accent);margin:17px 0}.note strong{color:var(--primary-dark)}.tiny{font-size:.9rem;color:var(--muted)}
+    .questions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:24px 0 0}.question{border:1px solid var(--border);border-radius:15px;padding:16px;background:#fbfcff;display:flex;flex-direction:column;gap:12px;min-width:0}.question.wide{grid-column:1/-1}.qtop{display:flex;align-items:flex-start;gap:11px}.qnum{display:grid;place-items:center;flex-shrink:0;border:1px solid #bad0ed;background:#e8f1ff;color:var(--primary-dark);border-radius:10px;min-width:35px;height:34px;font-size:.85rem;font-weight:850}.qtext{font-size:.97rem;line-height:1.43;font-weight:720;margin:3px 0 0}.answer-row{display:flex;align-items:center;gap:8px;margin-top:auto}.answer{width:100%;min-width:0;max-width:280px;background:white;border:1.5px solid #aebfd8;border-radius:10px;color:var(--text);padding:11px 12px;min-height:46px}.answer:focus-visible{outline:3px solid #cde0fb;border-color:var(--primary)}.answer:disabled{opacity:.95;background:#f2f5fa}.unit{padding:8px 10px;background:#eef3fa;border-radius:8px;color:#435570;font-weight:700;white-space:nowrap;font-size:.9rem}.feedback{border-radius:10px;border:1px solid transparent;padding:12px 13px;font-size:.9rem;line-height:1.45}.feedback[hidden],.results[hidden]{display:none!important}.feedback.good{color:#185936;background:#eaf8f0;border-color:#aedbbf}.feedback.bad{color:#792c2c;background:#fff0f0;border-color:#f0c4c4}.feedback strong{display:block;margin-bottom:3px}
+    .jump{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px;padding-top:17px;border-top:1px solid var(--border);font-weight:700;color:var(--muted)}.jump a{color:var(--primary);font-weight:800;text-decoration:none}.jump a:hover{text-decoration:underline}.tag{font-size:.84rem;background:#f0f4fa;color:#49617e;border-radius:9px;padding:6px 10px;font-weight:750}.submit-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.progress-box{padding:18px;border:1px solid var(--border);background:var(--surface-soft);border-radius:15px}.progress-box progress{width:100%;height:14px;accent-color:var(--primary);display:block;margin:12px 0}.progress-box strong{font-size:1.08rem}.progress-box p{color:var(--muted);font-size:.92rem;margin:8px 0 0}.name-label{display:block;font-weight:800;margin:0 0 8px}.name{min-height:49px;width:100%;padding:10px 13px;border:1.5px solid #aebfd8;border-radius:10px}.name:focus-visible{outline:3px solid #cde0fb;border-color:var(--primary)}.primary-btn{width:100%;padding:14px 18px;background:var(--primary);color:white;border:0;border-radius:11px;font-weight:850;font-size:1rem;margin-top:15px;min-height:52px}.primary-btn:disabled{cursor:not-allowed;background:#b4c0cf;color:#42536a}.primary-btn:not(:disabled):hover{background:var(--primary-dark)}.hint{color:var(--muted);font-size:.89rem;margin:9px 0}.statusline{margin:14px 0 0;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:#f7f9fe;color:#3b4e68;font-weight:700;font-size:.9rem}.results{background:#f6fbf8;border:1px solid #b6dbc8;border-radius:15px;padding:20px;margin-top:24px}.results h3{margin:0 0 8px;color:#175c3b;font-size:1.3rem}.score{font-size:1.6rem;color:#145d39;font-weight:850;margin:8px 0}.results p{margin:8px 0}.results small{color:var(--muted)}footer{max-width:var(--max);margin:auto;padding:6px 18px 38px;text-align:center;color:var(--muted);font-size:.88rem}
+    @media(max-width:850px){.hero{grid-template-columns:1fr}.rule-grid{grid-template-columns:repeat(3,1fr)}.questions{grid-template-columns:1fr}.submit-grid{grid-template-columns:1fr}}@media(max-width:560px){.nav{flex-wrap:wrap}header{padding:48px 18px}.rule-grid{grid-template-columns:repeat(2,1fr)}.section-heading+.lead{margin-left:0}.section-heading{align-items:center}.questions{gap:10px}.section{padding:18px}.jump{flex-wrap:wrap}.unit{font-size:.8rem}}
+    @media print{.topbar,.jump,.primary-btn{display:none!important}body{background:white}header{background:#fff;color:#111;padding:22px}.hero p{color:#333}.hero-panel{color:#111;border-color:#ddd;background:white}.section{box-shadow:none;break-inside:auto}.question{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <nav class="topbar" aria-label="Navegación de la unidad"><div class="nav">
+    <a class="brand" href="../index.html">← Actividades · Unidad 1</a>
+    <a class="back" href="#entrega">Ir a la entrega del PDF ↓</a>
+  </div></nav>
+  <header><div class="hero"><div>
+    <span class="eyebrow">Unidad 1 · Actividad 1</span>
+    <h1>¿Cuánto ocupa la información?</h1>
+    <p>Resuelve una ficha nueva de conversiones y problemas de almacenamiento con bytes, kilobytes, megabytes, gigabytes y terabytes. Al terminar, entrega tu resultado en Moodle.</p>
+  </div><aside class="hero-panel">
+    <strong>Tu misión</strong><ul>
+      <li>5 bloques · 26 preguntas.</li>
+      <li>Introduce un número en cada ejercicio o elige una opción.</li>
+      <li>El PDF se habilita al completar toda la ficha.</li>
+      <li>La corrección se revela solo después de generar el PDF.</li>
+    </ul>
+  </aside></div></header>
+  <main>
+    <section class="section" aria-labelledby="instrucciones"><span class="kicker">Antes de empezar</span>
+      <h2 id="instrucciones">Recuerda estas equivalencias</h2>
+      <p class="lead">Para toda la ficha utilizaremos los <strong>múltiplos decimales de 1.000</strong>. Las unidades binarias (KiB, MiB, GiB) no se usan en estos ejercicios.</p>
+      <div class="rule-grid" aria-label="Equivalencias de almacenamiento">
+        <div class="rule"><b>1 byte</b><small>8 bits</small></div>
+        <div class="rule"><b>1 KB</b><small>1.000 B</small></div>
+        <div class="rule"><b>1 MB</b><small>1.000 KB</small></div>
+        <div class="rule"><b>1 GB</b><small>1.000 MB</small></div>
+        <div class="rule"><b>1 TB</b><small>1.000 GB</small></div>
+      </div>
+      <div class="note"><strong>Cómo se calcula:</strong> para pasar a una unidad más pequeña multiplicamos por 1.000 (o por 8 entre bytes y bits). Para pasar a una unidad más grande dividimos. Ejemplo: 1,8 GB = 1.800 MB.</div>
+      <p class="tiny">Escribe solo el número, sin la unidad; esta aparece junto a la casilla. Se aceptan decimales con coma o punto: 2,5 y 2.5. Las comparaciones se responden mediante el desplegable. Todas las preguntas cuentan un punto.</p>
+    </section>
+    <section class="section" id="bloque-1" aria-labelledby="h-bloque-1">
+      <div class="section-heading"><span class="block-number" aria-hidden="true">01</span><div>
+      <span class="kicker">Fundamentos</span><h2 id="h-bloque-1">De bits a bytes y kilobytes</h2></div></div>
+      <p class="lead">Empieza con equivalencias directas entre las unidades más pequeñas.</p>
+      <div class="questions" id="questions-1">
+        <div class="question" data-question="q01">
+          <div class="qtop"><span class="qnum">01</span><label for="q01" class="qtext">¿Cuántos bits hay en 1 byte?</label></div>
+          <div class="answer-row"><input id="q01" class="answer" data-qid="q01" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 1"><span class="unit">bits</span></div>
+          <div id="result-q01" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q02">
+          <div class="qtop"><span class="qnum">02</span><label for="q02" class="qtext">¿Cuántos bytes son 48 bits?</label></div>
+          <div class="answer-row"><input id="q02" class="answer" data-qid="q02" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 2"><span class="unit">bytes</span></div>
+          <div id="result-q02" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q03">
+          <div class="qtop"><span class="qnum">03</span><label for="q03" class="qtext">¿Cuántos bits son 7 bytes?</label></div>
+          <div class="answer-row"><input id="q03" class="answer" data-qid="q03" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 3"><span class="unit">bits</span></div>
+          <div id="result-q03" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q04">
+          <div class="qtop"><span class="qnum">04</span><label for="q04" class="qtext">¿Cuántos KB son 3.000 bytes?</label></div>
+          <div class="answer-row"><input id="q04" class="answer" data-qid="q04" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 4"><span class="unit">KB</span></div>
+          <div id="result-q04" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q05">
+          <div class="qtop"><span class="qnum">05</span><label for="q05" class="qtext">¿Cuántos bytes son 9 KB?</label></div>
+          <div class="answer-row"><input id="q05" class="answer" data-qid="q05" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 5"><span class="unit">bytes</span></div>
+          <div id="result-q05" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q06">
+          <div class="qtop"><span class="qnum">06</span><label for="q06" class="qtext">¿Cuántos KB son 1 MB?</label></div>
+          <div class="answer-row"><input id="q06" class="answer" data-qid="q06" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 6"><span class="unit">KB</span></div>
+          <div id="result-q06" class="feedback" hidden aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="jump"><span class="tag">Responde todas las preguntas antes de corregir</span><a href="#bloque-2">Siguiente bloque →</a></div>
+    </section>
+    <section class="section" id="bloque-2" aria-labelledby="h-bloque-2">
+      <div class="section-heading"><span class="block-number" aria-hidden="true">02</span><div>
+      <span class="kicker">Conversiones</span><h2 id="h-bloque-2">Cambiamos de unidad</h2></div></div>
+      <p class="lead">Realiza cada conversión usando los múltiplos de 1.000. Puedes responder con decimales cuando sea necesario.</p>
+      <div class="questions" id="questions-2">
+        <div class="question" data-question="q07">
+          <div class="qtop"><span class="qnum">07</span><label for="q07" class="qtext">Convierte 12 MB a KB.</label></div>
+          <div class="answer-row"><input id="q07" class="answer" data-qid="q07" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 7"><span class="unit">KB</span></div>
+          <div id="result-q07" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q08">
+          <div class="qtop"><span class="qnum">08</span><label for="q08" class="qtext">Convierte 8.500 KB a MB.</label></div>
+          <div class="answer-row"><input id="q08" class="answer" data-qid="q08" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 8"><span class="unit">MB</span></div>
+          <div id="result-q08" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q09">
+          <div class="qtop"><span class="qnum">09</span><label for="q09" class="qtext">Convierte 0,75 GB a MB.</label></div>
+          <div class="answer-row"><input id="q09" class="answer" data-qid="q09" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 9"><span class="unit">MB</span></div>
+          <div id="result-q09" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q10">
+          <div class="qtop"><span class="qnum">10</span><label for="q10" class="qtext">Convierte 2.350 MB a GB.</label></div>
+          <div class="answer-row"><input id="q10" class="answer" data-qid="q10" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 10"><span class="unit">GB</span></div>
+          <div id="result-q10" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q11">
+          <div class="qtop"><span class="qnum">11</span><label for="q11" class="qtext">Convierte 3 TB a GB.</label></div>
+          <div class="answer-row"><input id="q11" class="answer" data-qid="q11" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 11"><span class="unit">GB</span></div>
+          <div id="result-q11" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q12">
+          <div class="qtop"><span class="qnum">12</span><label for="q12" class="qtext">Convierte 0,4 TB a MB.</label></div>
+          <div class="answer-row"><input id="q12" class="answer" data-qid="q12" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 12"><span class="unit">MB</span></div>
+          <div id="result-q12" class="feedback" hidden aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="jump"><span class="tag">Responde todas las preguntas antes de corregir</span><a href="#bloque-3">Siguiente bloque →</a></div>
+    </section>
+    <section class="section" id="bloque-3" aria-labelledby="h-bloque-3">
+      <div class="section-heading"><span class="block-number" aria-hidden="true">03</span><div>
+      <span class="kicker">Comparar</span><h2 id="h-bloque-3">¿Qué archivo ocupa más?</h2></div></div>
+      <p class="lead">Indica si la primera cantidad es menor, igual o mayor que la segunda.</p>
+      <div class="questions" id="questions-3">
+        <div class="question" data-question="q13">
+          <div class="qtop"><span class="qnum">13</span><label for="q13" class="qtext">900 MB es ... que 1 GB.</label></div>
+          <div class="answer-row"><select id="q13" class="answer" data-qid="q13" aria-label="Respuesta a la pregunta 13">
+                <option value="">Selecciona una opción</option><option value="menor">Menor</option><option value="igual">Igual</option><option value="mayor">Mayor</option></select></div>
+          <div id="result-q13" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q14">
+          <div class="qtop"><span class="qnum">14</span><label for="q14" class="qtext">2,5 GB es ... que 2.500 MB.</label></div>
+          <div class="answer-row"><select id="q14" class="answer" data-qid="q14" aria-label="Respuesta a la pregunta 14">
+                <option value="">Selecciona una opción</option><option value="menor">Menor</option><option value="igual">Igual</option><option value="mayor">Mayor</option></select></div>
+          <div id="result-q14" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q15">
+          <div class="qtop"><span class="qnum">15</span><label for="q15" class="qtext">1,2 TB es ... que 950 GB.</label></div>
+          <div class="answer-row"><select id="q15" class="answer" data-qid="q15" aria-label="Respuesta a la pregunta 15">
+                <option value="">Selecciona una opción</option><option value="menor">Menor</option><option value="igual">Igual</option><option value="mayor">Mayor</option></select></div>
+          <div id="result-q15" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q16">
+          <div class="qtop"><span class="qnum">16</span><label for="q16" class="qtext">2.000.000 bytes es ... que 1,5 MB.</label></div>
+          <div class="answer-row"><select id="q16" class="answer" data-qid="q16" aria-label="Respuesta a la pregunta 16">
+                <option value="">Selecciona una opción</option><option value="menor">Menor</option><option value="igual">Igual</option><option value="mayor">Mayor</option></select></div>
+          <div id="result-q16" class="feedback" hidden aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="jump"><span class="tag">Responde todas las preguntas antes de corregir</span><a href="#bloque-4">Siguiente bloque →</a></div>
+    </section>
+    <section class="section" id="bloque-4" aria-labelledby="h-bloque-4">
+      <div class="section-heading"><span class="block-number" aria-hidden="true">04</span><div>
+      <span class="kicker">Situaciones reales</span><h2 id="h-bloque-4">Fotos, canciones y dispositivos</h2></div></div>
+      <p class="lead">Aplica las conversiones para calcular almacenamiento en situaciones cotidianas.</p>
+      <div class="questions" id="questions-4">
+        <div class="question" data-question="q17">
+          <div class="qtop"><span class="qnum">17</span><label for="q17" class="qtext">120 fotografías ocupan 5 MB cada una. ¿Cuánto ocupan en total?</label></div>
+          <div class="answer-row"><input id="q17" class="answer" data-qid="q17" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 17"><span class="unit">MB</span></div>
+          <div id="result-q17" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q18">
+          <div class="qtop"><span class="qnum">18</span><label for="q18" class="qtext">30 canciones ocupan 8 MB cada una. ¿Cuánto ocupan entre todas?</label></div>
+          <div class="answer-row"><input id="q18" class="answer" data-qid="q18" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 18"><span class="unit">MB</span></div>
+          <div id="result-q18" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q19">
+          <div class="qtop"><span class="qnum">19</span><label for="q19" class="qtext">800 fotografías ocupan 2,5 MB cada una. ¿Cuántos GB ocupan en total?</label></div>
+          <div class="answer-row"><input id="q19" class="answer" data-qid="q19" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 19"><span class="unit">GB</span></div>
+          <div id="result-q19" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q20">
+          <div class="qtop"><span class="qnum">20</span><label for="q20" class="qtext">Un USB de 64 GB está vacío. ¿Cuántos archivos de 4 GB caben como máximo?</label></div>
+          <div class="answer-row"><input id="q20" class="answer" data-qid="q20" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 20"><span class="unit">archivos</span></div>
+          <div id="result-q20" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q21">
+          <div class="qtop"><span class="qnum">21</span><label for="q21" class="qtext">Un disco de 2 TB está vacío. ¿Cuántas fotografías de 4 MB caben en él?</label></div>
+          <div class="answer-row"><input id="q21" class="answer" data-qid="q21" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 21"><span class="unit">fotografías</span></div>
+          <div id="result-q21" class="feedback" hidden aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="jump"><span class="tag">Responde todas las preguntas antes de corregir</span><a href="#bloque-5">Siguiente bloque →</a></div>
+    </section>
+    <section class="section" id="bloque-5" aria-labelledby="h-bloque-5">
+      <div class="section-heading"><span class="block-number" aria-hidden="true">05</span><div>
+      <span class="kicker">Reto final</span><h2 id="h-bloque-5">¿Cabe todo en el móvil?</h2></div></div>
+      <p class="lead">Un móvil tiene 128 GB de almacenamiento. El sistema ocupa 34 GB; las fotos, 28 GB; los vídeos, 31 GB; y las aplicaciones, 9 GB. Después quieres grabar 8 vídeos nuevos de 3 GB cada uno.</p>
+      <div class="questions" id="questions-5">
+        <div class="question" data-question="q22">
+          <div class="qtop"><span class="qnum">22</span><label for="q22" class="qtext">¿Cuántos GB están ocupados inicialmente?</label></div>
+          <div class="answer-row"><input id="q22" class="answer" data-qid="q22" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 22"><span class="unit">GB</span></div>
+          <div id="result-q22" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q23">
+          <div class="qtop"><span class="qnum">23</span><label for="q23" class="qtext">¿Cuántos GB libres hay antes de grabar los nuevos vídeos?</label></div>
+          <div class="answer-row"><input id="q23" class="answer" data-qid="q23" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 23"><span class="unit">GB</span></div>
+          <div id="result-q23" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q24">
+          <div class="qtop"><span class="qnum">24</span><label for="q24" class="qtext">¿Cuántos GB ocupan los 8 vídeos nuevos?</label></div>
+          <div class="answer-row"><input id="q24" class="answer" data-qid="q24" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 24"><span class="unit">GB</span></div>
+          <div id="result-q24" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q25">
+          <div class="qtop"><span class="qnum">25</span><label for="q25" class="qtext">Si se guardan los 8 vídeos, ¿cuántos GB quedan libres?</label></div>
+          <div class="answer-row"><input id="q25" class="answer" data-qid="q25" inputmode="decimal" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu resultado" aria-label="Respuesta a la pregunta 25"><span class="unit">GB</span></div>
+          <div id="result-q25" class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <div class="question" data-question="q26">
+          <div class="qtop"><span class="qnum">26</span><label for="q26" class="qtext">¿Cabe después otro vídeo adicional de 4 GB?</label></div>
+          <div class="answer-row"><select id="q26" class="answer" data-qid="q26" aria-label="Respuesta a la pregunta 26">
+                <option value="">Selecciona una opción</option><option value="si">Sí</option><option value="no">No</option></select></div>
+          <div id="result-q26" class="feedback" hidden aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="jump"><span class="tag">Responde todas las preguntas antes de corregir</span><a href="#entrega">Ir a generar el PDF →</a></div>
+    </section>
+    <section class="section" id="entrega" aria-labelledby="entrega-titulo"><span class="kicker">Entrega para Moodle</span>
+      <h2 id="entrega-titulo">Termina la ficha y descarga tu PDF</h2>
+      <p class="lead">Responde todas las preguntas y escribe tu nombre completo. El PDF incluirá <strong>tus 26 respuestas, las soluciones, el balance de aciertos y tu resultado final</strong>. Las soluciones permanecerán ocultas en la web hasta que se haya generado el archivo.</p>
+      <div class="submit-grid" style="margin-top:22px">
+        <div class="progress-box"><strong id="status-count">0 de 26 preguntas respondidas</strong>
+          <progress id="progress" max="26" value="0" aria-label="Preguntas completadas"></progress>
+          <p id="status-blocks">0 de 5 bloques completados</p><p>Completar un campo no significa acertarlo: la corrección aparece al finalizar.</p>
+        </div>
+        <div><label class="name-label" for="student-name">Nombre y apellidos del alumno/a</label>
+          <input class="name" id="student-name" type="text" autocomplete="name" placeholder="Ej.: María García López" maxlength="110" required>
+          <p class="hint" id="filename">Archivo: Nombre Apellidos.pdf</p>
+          <button id="export-pdf" class="primary-btn" type="button" disabled>Generar PDF y ver mi resultado</button>
+          <p id="submission-status" class="statusline" role="status" aria-live="polite">Completa las preguntas y escribe tu nombre y apellidos.</p>
+        </div>
+      </div>
+      <div class="results" id="overall-results" hidden aria-live="polite">
+        <h3>Autocorrección desbloqueada</h3>
+        <p id="score-label" class="score"></p>
+        <p>Consulta debajo de cada ejercicio si has acertado y el procedimiento correcto. Descarga tu archivo y súbelo a la tarea correspondiente de Moodle.</p>
+        <small>El resultado automático es orientativo. Un PDF descargado no prueba por sí solo la autoría o identidad del alumno.</small>
+      </div>
+    </section>
+  </main>
+  <footer>Unidad 1 · Digitalización · 4.º ESO · Actividad 1: Tamaño de la información</footer>
+<script>
+(function(){
+  'use strict';
+  const BLOCKS=[{"id":"bloque-1","num":"01","tag":"Fundamentos","title":"De bits a bytes y kilobytes","description":"Empieza con equivalencias directas entre las unidades más pequeñas.","questions":[{"id":"q01","text":"¿Cuántos bits hay en 1 byte?","unit":"bits","value":8,"explain":"1 byte = 8 bits."},{"id":"q02","text":"¿Cuántos bytes son 48 bits?","unit":"bytes","value":6,"explain":"48 ÷ 8 = 6 bytes."},{"id":"q03","text":"¿Cuántos bits son 7 bytes?","unit":"bits","value":56,"explain":"7 × 8 = 56 bits."},{"id":"q04","text":"¿Cuántos KB son 3.000 bytes?","unit":"KB","value":3,"explain":"3.000 ÷ 1.000 = 3 KB."},{"id":"q05","text":"¿Cuántos bytes son 9 KB?","unit":"bytes","value":9000,"explain":"9 × 1.000 = 9.000 bytes."},{"id":"q06","text":"¿Cuántos KB son 1 MB?","unit":"KB","value":1000,"explain":"1 MB equivale a 1.000 KB."}]},{"id":"bloque-2","num":"02","tag":"Conversiones","title":"Cambiamos de unidad","description":"Realiza cada conversión usando los múltiplos de 1.000. Puedes responder con decimales cuando sea necesario.","questions":[{"id":"q07","text":"Convierte 12 MB a KB.","unit":"KB","value":12000,"explain":"12 × 1.000 = 12.000 KB."},{"id":"q08","text":"Convierte 8.500 KB a MB.","unit":"MB","value":8.5,"explain":"8.500 ÷ 1.000 = 8,5 MB."},{"id":"q09","text":"Convierte 0,75 GB a MB.","unit":"MB","value":750,"explain":"0,75 × 1.000 = 750 MB."},{"id":"q10","text":"Convierte 2.350 MB a GB.","unit":"GB","value":2.35,"explain":"2.350 ÷ 1.000 = 2,35 GB."},{"id":"q11","text":"Convierte 3 TB a GB.","unit":"GB","value":3000,"explain":"3 × 1.000 = 3.000 GB."},{"id":"q12","text":"Convierte 0,4 TB a MB.","unit":"MB","value":400000,"explain":"0,4 × 1.000 × 1.000 = 400.000 MB."}]},{"id":"bloque-3","num":"03","tag":"Comparar","title":"¿Qué archivo ocupa más?","description":"Indica si la primera cantidad es menor, igual o mayor que la segunda.","questions":[{"id":"q13","text":"900 MB es ... que 1 GB.","kind":"choice","value":"menor","explain":"1 GB = 1.000 MB; 900 MB es menor."},{"id":"q14","text":"2,5 GB es ... que 2.500 MB.","kind":"choice","value":"igual","explain":"2,5 GB = 2.500 MB; ocupan exactamente lo mismo."},{"id":"q15","text":"1,2 TB es ... que 950 GB.","kind":"choice","value":"mayor","explain":"1,2 TB = 1.200 GB, que es mayor que 950 GB."},{"id":"q16","text":"2.000.000 bytes es ... que 1,5 MB.","kind":"choice","value":"mayor","explain":"2.000.000 bytes = 2 MB; 2 MB es mayor que 1,5 MB."}]},{"id":"bloque-4","num":"04","tag":"Situaciones reales","title":"Fotos, canciones y dispositivos","description":"Aplica las conversiones para calcular almacenamiento en situaciones cotidianas.","questions":[{"id":"q17","text":"120 fotografías ocupan 5 MB cada una. ¿Cuánto ocupan en total?","unit":"MB","value":600,"explain":"120 × 5 MB = 600 MB."},{"id":"q18","text":"30 canciones ocupan 8 MB cada una. ¿Cuánto ocupan entre todas?","unit":"MB","value":240,"explain":"30 × 8 MB = 240 MB."},{"id":"q19","text":"800 fotografías ocupan 2,5 MB cada una. ¿Cuántos GB ocupan en total?","unit":"GB","value":2,"explain":"800 × 2,5 MB = 2.000 MB = 2 GB."},{"id":"q20","text":"Un USB de 64 GB está vacío. ¿Cuántos archivos de 4 GB caben como máximo?","unit":"archivos","value":16,"explain":"64 GB ÷ 4 GB = 16 archivos."},{"id":"q21","text":"Un disco de 2 TB está vacío. ¿Cuántas fotografías de 4 MB caben en él?","unit":"fotografías","value":500000,"explain":"2 TB = 2.000.000 MB; 2.000.000 ÷ 4 = 500.000 fotografías. Suponemos que todo el espacio está disponible."}]},{"id":"bloque-5","num":"05","tag":"Reto final","title":"¿Cabe todo en el móvil?","description":"Un móvil tiene 128 GB de almacenamiento. El sistema ocupa 34 GB; las fotos, 28 GB; los vídeos, 31 GB; y las aplicaciones, 9 GB. Después quieres grabar 8 vídeos nuevos de 3 GB cada uno.","questions":[{"id":"q22","text":"¿Cuántos GB están ocupados inicialmente?","unit":"GB","value":102,"explain":"34 + 28 + 31 + 9 = 102 GB ocupados."},{"id":"q23","text":"¿Cuántos GB libres hay antes de grabar los nuevos vídeos?","unit":"GB","value":26,"explain":"128 − 102 = 26 GB libres."},{"id":"q24","text":"¿Cuántos GB ocupan los 8 vídeos nuevos?","unit":"GB","value":24,"explain":"8 × 3 = 24 GB."},{"id":"q25","text":"Si se guardan los 8 vídeos, ¿cuántos GB quedan libres?","unit":"GB","value":2,"explain":"26 − 24 = 2 GB libres."},{"id":"q26","text":"¿Cabe después otro vídeo adicional de 4 GB?","kind":"yesno","value":"no","explain":"No. Solo quedan 2 GB libres y el vídeo ocuparía 4 GB."}]}];
+  const QUESTIONS=BLOCKS.flatMap(b=>b.questions);
+  const byId=id=>document.getElementById(id);
+  const inputs=QUESTIONS.map(q=>byId(q.id));
+  const nameInput=byId('student-name');
+  const exportButton=byId('export-pdf');
+  const message=byId('submission-status');
+  const numDone=byId('status-count');
+  const blocksDone=byId('status-blocks');
+  const progress=byId('progress');
+  const filename=byId('filename');
+  const summary=byId('overall-results');
+  let exported=false;
+
+  function readyAnswer(input){return input.value.trim()!=='';}
+  function validFullName(value){
+    const parts=value.trim().split(/\s+/u).filter(Boolean);
+    return parts.length>=2 && parts.every(p=>/^[\p{L}][\p{L}'’.-]*$/u.test(p));
+  }
+  function safeFileName(value){
+    return value.trim().replace(/[^\p{L}\p{N} .'’\-]/gu,'').replace(/\s+/g,' ').replace(/[. ]+$/g,'').slice(0,100)+'.pdf';
+  }
+  function progressState(){
+    const done=inputs.filter(readyAnswer).length;
+    const blocks=BLOCKS.filter(b=>b.questions.every(q=>readyAnswer(byId(q.id)))).length;
+    return {done,blocks,validName:validFullName(nameInput.value),ready:done===QUESTIONS.length&&validFullName(nameInput.value)};
+  }
+  function updateProgress(){
+    const state=progressState();
+    numDone.textContent=`${state.done} de ${QUESTIONS.length} preguntas respondidas`;
+    blocksDone.textContent=`${state.blocks} de ${BLOCKS.length} bloques completados`;
+    progress.value=state.done;
+    filename.textContent='Archivo: '+(nameInput.value.trim()?safeFileName(nameInput.value):'Nombre Apellidos.pdf');
+    exportButton.disabled=!state.ready;
+    exportButton.textContent=exported?'Descargar de nuevo el PDF':'Generar PDF y ver mi resultado';
+    if(exported)message.textContent='PDF generado. La autocorrección está visible. Sube el documento descargado a Moodle.';
+    else if(state.ready)message.textContent='¡Ficha completa! Genera el PDF para desbloquear la corrección.';
+    else {
+      const missing=[];
+      if(state.done!==QUESTIONS.length)missing.push(`${QUESTIONS.length-state.done} respuestas pendientes`);
+      if(!state.validName)missing.push('nombre y apellidos completos pendientes');
+      message.textContent='Para finalizar: '+missing.join(' · ')+'.';
+    }
+  }
+  function numericValue(raw){
+    let s=raw.trim().replace(/[\s\u00a0]/g,'');
+    if(!s)return NaN;
+    if(/^[+-]?\d{1,3}(\.\d{3})+(,\d+)?$/.test(s))s=s.replace(/\./g,'').replace(',','.');
+    else if(/^[+-]?\d{1,3}(,\d{3})+(\.\d+)?$/.test(s))s=s.replace(/,/g,'');
+    else if(s.includes(',')&&s.includes('.')){
+      if(s.lastIndexOf(',')>s.lastIndexOf('.'))s=s.replace(/\./g,'').replace(',','.');
+      else s=s.replace(/,/g,'');
+    } else s=s.replace(',','.');
+    if(!/^[+-]?(?:\d+\.?\d*|\.\d+)$/.test(s))return NaN;
+    return Number(s);
+  }
+  function formatNumber(n){
+    return new Intl.NumberFormat('es-ES',{maximumFractionDigits:10,useGrouping:true}).format(n);
+  }
+  function answerText(q){
+    if(q.kind==='choice')return q.value.toUpperCase();
+    if(q.kind==='yesno')return q.value==='si'?'Sí':'No';
+    return formatNumber(q.value)+' '+q.unit;
+  }
+  function grade(){
+    return QUESTIONS.map(q=>{
+      const response=byId(q.id).value.trim();
+      let correct=false;
+      if(q.kind==='choice'||q.kind==='yesno')correct=response===q.value;
+      else {
+        const number=numericValue(response);
+        correct=Number.isFinite(number)&&Math.abs(number-q.value)<=1e-8*Math.max(1,Math.abs(q.value));
+      }
+      return {...q,response,correct,expected:answerText(q)};
+    });
+  }
+  function showCorrections(rows){
+    rows.forEach(r=>{
+      const box=byId('result-'+r.id);
+      box.hidden=false;
+      box.className='feedback '+(r.correct?'good':'bad');
+      const heading=document.createElement('strong');
+      heading.textContent=r.correct?'✓ Respuesta correcta':'✕ Respuesta incorrecta';
+      const answer=document.createElement('div');
+      answer.textContent='Solución: '+r.expected+'. '+r.explain;
+      box.replaceChildren(heading,answer);
+      byId(r.id).disabled=true;
+    });
+    nameInput.readOnly=true;
+    summary.hidden=false;
+    const hits=rows.filter(r=>r.correct).length;
+    byId('score-label').textContent=`${hits} de ${rows.length} respuestas correctas · ${Math.round(100*hits/rows.length)} %`;
+  }
+
+  // Escritor PDF autocontenido, compatible con lectura sin conexión.
+  function pdfText(value){
+    return String(value)
+      .replace(/\u00a0/g,' ')
+      .replace(/\u2082/g,' (base 2)')
+      .replace(/[\u2080-\u2089]/g, m=>String(m.codePointAt(0)-0x2080))
+      .replace(/[\u00b2\u00b3]/g, m=>m==='²'?'2':'3')
+      .replace(/[\u2190-\u21ff]/g,' -> ')
+      .replace(/\u2264/g,' <= ').replace(/\u2265/g,' >= ')
+      .replace(/\u2713/g,'SI').replace(/[\u2715\u2717]/g,'NO')
+      .replace(/\u00d7/g,' x ').replace(/\u00f7/g,' / ')
+      .replace(/[\r\n\t]+/g,' ').replace(/\s{2,}/g,' ').trim();
+  }
+  const winAnsiExtras={8364:128,8218:130,402:131,8222:132,8230:133,8224:134,8225:135,
+    710:136,8240:137,352:138,8249:139,338:140,381:142,8216:145,8217:146,
+    8220:147,8221:148,8226:149,8211:150,8212:151,732:152,8482:153,
+    353:154,8250:155,339:156,382:158,376:159};
+  function byteString(text){
+    const src=pdfText(text);
+    let s='';
+    for(const c of src){
+      const cp=c.codePointAt(0);
+      const b=(cp>=32&&cp<=255)?cp:winAnsiExtras[cp];
+      s+=String.fromCharCode(b===undefined?63:b);
+    }
+    return s;
+  }
+  function pdfLiteral(text){
+    return byteString(text).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+  }
+  function blobFromPDF(objects,rootId){
+    const parts=['%PDF-1.4\n%\xE2\xE3\xCF\xD3\n'];
+    let offset=parts[0].length;
+    const xref=[0];
+    for(let i=1;i<objects.length;i++){
+      xref.push(offset);
+      const chunk=`${i} 0 obj\n${objects[i]}\nendobj\n`;
+      parts.push(chunk);
+      offset+=chunk.length;
+    }
+    const startxref=offset;
+    parts.push(`xref\n0 ${objects.length}\n0000000000 65535 f \n`);
+    for(let i=1;i<xref.length;i++)parts.push(String(xref[i]).padStart(10,'0')+' 00000 n \n');
+    parts.push(`trailer\n<< /Size ${objects.length} /Root ${rootId} 0 R >>\nstartxref\n${startxref}\n%%EOF\n`);
+    const full=parts.join('');
+    const bytes=new Uint8Array(full.length);
+    for(let i=0;i<full.length;i++)bytes[i]=full.charCodeAt(i)&255;
+    return new Blob([bytes],{type:'application/pdf'});
+  }
+  function makeDocument(){
+    const W=595,H=842,left=48,right=48,usable=W-left-right;
+    const pages=[];
+    let page;
+    const measure=document.createElement('canvas').getContext('2d');
+    function coord(n){return Number(n).toFixed(2)}
+    function newPage(){
+      page={commands:[],y:H-82};
+      pages.push(page);
+      page.commands.push('0.10 0.22 0.42 rg 0 795 595 47 re f');
+      page.commands.push('1 1 1 rg BT /F2 11 Tf 48 813 Td (DIGITALIZACIÓN  /  4º ESO) Tj ET');
+      page.commands.push('0.83 0.88 0.96 rg BT /F1 8.5 Tf 368 815 Td (EVIDENCIA DE ACTIVIDADES) Tj ET');
+    }
+    function ensureSpace(height){if(page.y-height<62)newPage();}
+    function line(text,opts={}){
+      const font=opts.bold?'F2':'F1', size=opts.size||9.5, leading=opts.leading||size*1.45;
+      ensureSpace(leading);
+      const x=opts.x===undefined?left:opts.x;
+      const rgb=opts.color||[0.15,0.21,0.30];
+      page.commands.push(`${rgb.join(' ')} rg BT /${font} ${coord(size)} Tf 1 0 0 1 ${coord(x)} ${coord(page.y)} Tm (${pdfLiteral(text)}) Tj ET`);
+      page.y-=leading;
+    }
+    function paragraph(text,opts={}){
+      const size=opts.size||9.5, bold=!!opts.bold, x=opts.x===undefined?left:opts.x;
+      const width=opts.width||W-right-x;
+      const cleaned=pdfText(text);
+      measure.font=`${bold?'bold ':''}${size}px Arial`;
+      const words=cleaned.split(/\s+/u);
+      let current='';
+      function render(){if(current){line(current,{...opts,size,bold,x});current='';}}
+      for(let word of words){
+        if(!word)continue;
+        while(measure.measureText(word).width>width*0.92 && word.length>1){
+          render();
+          let cut=1;
+          while(cut<word.length && measure.measureText(word.slice(0,cut+1)).width<width*0.87)cut++;
+          line(word.slice(0,cut),{...opts,size,bold,x});
+          word=word.slice(cut);
+        }
+        const test=current?current+' '+word:word;
+        if(current&&measure.measureText(test).width>width*0.92)render();
+        current=current?current+' '+word:word;
+      }
+      render();
+    }
+    function spacer(height){ensureSpace(height);page.y-=height;}
+    function divider(){ensureSpace(16);page.commands.push(`0.81 0.85 0.90 RG 0.7 w ${coord(left)} ${coord(page.y)} m ${coord(W-right)} ${coord(page.y)} l S`);page.y-=15;}
+    newPage();
+    return {
+      title(t){paragraph(t,{bold:true,size:17,leading:22,color:[0.10,0.24,0.45]});spacer(2)},
+      heading(t){spacer(7);paragraph(t,{bold:true,size:12,leading:17,color:[0.10,0.30,0.53]});spacer(2)},
+      para(t,o={}){paragraph(t,o)},
+      spacer,divider,keep(height){ensureSpace(height);},
+      toBlob(){
+        const objects=[null];
+        function add(v){objects.push(v);return objects.length-1}
+        const catalog=add('');
+        const pagesNode=add('');
+        const fontRegular=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+        const fontBold=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+        const pageRefs=[];
+        pages.forEach((pg,i)=>{
+          pg.commands.push('0.73 0.78 0.84 RG 0.5 w 48 48 m 547 48 l S');
+          pg.commands.push(`0.36 0.42 0.50 rg BT /F1 8 Tf 48 33 Td (Digitalización - 4º ESO - Actividad individual) Tj ET`);
+          pg.commands.push(`0.36 0.42 0.50 rg BT /F1 8 Tf 490 33 Td (Página ${i+1} / ${pages.length}) Tj ET`);
+          const stream=pg.commands.join('\n')+'\n';
+          const content=add(`<< /Length ${stream.length} >>\nstream\n${stream}endstream`);
+          const pageRef=add(`<< /Type /Page /Parent ${pagesNode} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${fontRegular} 0 R /F2 ${fontBold} 0 R >> >> /Contents ${content} 0 R >>`);
+          pageRefs.push(`${pageRef} 0 R`);
+        });
+        objects[catalog]=`<< /Type /Catalog /Pages ${pagesNode} 0 R >>`;
+        objects[pagesNode]=`<< /Type /Pages /Count ${pageRefs.length} /Kids [${pageRefs.join(' ')}] >>`;
+        return blobFromPDF(objects,catalog);
+      }
+    };
+  }
+
+
+  function makeReport(student, rows){
+    const doc=makeDocument();
+    const hits=rows.filter(r=>r.correct).length;
+    const date=new Date().toLocaleString('es-ES',{dateStyle:'long',timeStyle:'short'});
+    const filename=safeFileName(student);
+    doc.title('ACTIVIDAD 1 · TAMAÑO DE LA INFORMACIÓN');
+    doc.para('Unidad 1 · Digitalización · 4.º ESO',{size:10.3,color:[0.28,0.40,0.55]});
+    doc.spacer(12);
+    doc.para('Nombre completo: '+student,{size:12,bold:true});
+    doc.para('Fecha de generación: '+date,{size:9.4});
+    doc.para('Fichero de entrega: '+filename,{size:9.4});
+    doc.divider();
+    doc.heading('RESULTADO GENERAL');
+    doc.para(`${hits} de ${rows.length} respuestas correctas (${Math.round(hits*100/rows.length)} %)`,{size:15,bold:true,color:[0.09,0.37,0.61],leading:23});
+    doc.para(`${rows.length-hits} respuestas incorrectas · ${rows.length} preguntas realizadas · ${BLOCKS.length} bloques completos`,{size:10});
+    doc.para('Criterio de corrección: cada respuesta correcta suma 1 punto. Todos los cálculos utilizan múltiplos decimales de 1.000.',{size:9,leading:13});
+    doc.para('Esta autocorrección es orientativa. La revisión y calificación final corresponden al profesor.',{size:9,color:[0.36,0.42,0.49],leading:13});
+    doc.divider();
+    let index=0;
+    BLOCKS.forEach((b,n)=>{
+      doc.keep(92);
+      doc.heading(`${n+1}. ${b.title.toUpperCase()}`);
+      doc.para(b.description,{size:8.8,color:[0.39,0.45,0.52],leading:13});
+      const group=rows.slice(index,index+b.questions.length);index+=b.questions.length;
+      doc.para(`Aciertos del bloque: ${group.filter(r=>r.correct).length} de ${group.length}`,{size:9.2,bold:true,color:[0.18,0.36,0.57]});
+      group.forEach(r=>{
+        doc.keep(74);
+        doc.para(`${Number(r.id.slice(1))}. ${r.text}`,{size:9.7,bold:true,leading:14});
+        doc.para('Respuesta del alumno: '+r.response+(r.kind?'':' '+r.unit),{size:9.2,x:61,leading:13});
+        doc.para(r.correct?'Resultado: CORRECTA':'Resultado: INCORRECTA',
+          {size:9.2,x:61,bold:true,leading:13,color:r.correct?[0.10,0.44,0.27]:[0.65,0.18,0.18]});
+        doc.para('Solución: '+r.expected,{size:9.1,x:61,leading:13});
+        doc.para('Procedimiento: '+r.explain,{size:8.75,x:61,leading:12.5,color:[0.33,0.40,0.48]});
+        doc.spacer(7);
+      });
+      if(n!==BLOCKS.length-1)doc.divider();
+    });
+    doc.spacer(12);
+    doc.para('Documento generado desde una actividad web local. No acredita por sí mismo la identidad ni la autoría.',{size:8.5,color:[0.38,0.43,0.50]});
+    return doc.toBlob();
+  }
+  exportButton.addEventListener('click',()=>{
+    const state=progressState();
+    if(exported===false&&!state.ready)return;
+    try{
+      const student=nameInput.value.trim().replace(/\s+/gu,' ');
+      const rows=grade();
+      const blob=makeReport(student, rows);
+      const url=URL.createObjectURL(blob);
+      const link=document.createElement('a');
+      link.href=url;link.download=safeFileName(student);
+      document.body.appendChild(link);link.click();link.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),30000);
+      if(!exported){exported=true;showCorrections(rows);}
+      updateProgress();
+    }catch(err){
+      console.error('Error de exportación PDF',err);
+      message.textContent='No se pudo generar el PDF. Inténtalo con un navegador actualizado.';
+    }
+  });
+  [...inputs,nameInput].forEach(input=>{
+    input.addEventListener('input',updateProgress);
+    input.addEventListener('change',updateProgress);
+  });
+  updateProgress();
+})();
+</script>
+</body>
+</html>
