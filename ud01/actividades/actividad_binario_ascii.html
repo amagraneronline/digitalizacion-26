@@ -39,13 +39,13 @@
                 </div>
                 <div>
                     <h1 class="text-lg font-bold text-white tracking-tight">Tecnología y Digitalización</h1>
-                    <p class="text-xs text-indigo-400 font-medium">4º de ESO — Conversor Binario ASCII (Mayús. y Minús.)</p>
+                    <p class="text-xs text-indigo-400 font-medium">4º de ESO — Conversor Binario ASCII + Decimal</p>
                 </div>
             </div>
-            <a href="https://ascii.cl/es/index.htm" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-medium rounded-lg transition border border-slate-600 shadow-sm" aria-label="Ver tabla ASCII completa (se abre en una pestaña nueva)">
+            <button onclick="toggleModal('asciiModal')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-medium rounded-lg transition border border-slate-600 shadow-sm">
                 <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                 Ver Tabla ASCII Completa
-            </a>
+            </button>
         </div>
     </header>
 
@@ -56,10 +56,10 @@
         <div class="bg-gradient-to-br from-indigo-900/40 via-slate-800 to-slate-800 border border-indigo-500/20 rounded-2xl p-6 sm:p-8 shadow-xl mb-8 relative overflow-hidden">
             <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
             <div class="relative z-10">
-                <span class="inline-block px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-xs font-semibold mb-3 border border-indigo-500/30">Actividad Práctica Avanzada</span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Transforma tu nombre (Mayúsculas y Minúsculas)</h2>
+                <span class="inline-block px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-xs font-semibold mb-3 border border-indigo-500/30">Actividad Práctica Completa</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Transforma tu nombre: Decimal + Binario</h2>
                 <p class="text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
-                    Indica cuántas letras tiene tu nombre. La aplicación generará los huecos para introducir los 8 bits de cada carácter. Recuerda que las letras mayúsculas y minúsculas tienen códigos ASCII totalmente diferentes (ej. 'A' es 65 y 'a' es 97).
+                    Indica cuántas letras tiene tu nombre (1 a 12). Para cada letra, deberás escribir la <strong>letra original</strong>, su <strong>código decimal ASCII</strong> y su equivalencia en <strong>8 bits en binario</strong>. ¡Comprobaremos si todo encaja perfectamente!
                 </p>
             </div>
         </div>
@@ -73,8 +73,8 @@
             
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <div class="w-full sm:w-auto flex-1 max-w-xs">
-                    <label for="numLetters" class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Número de letras ($n$)</label>
-                    <input type="number" id="numLetters" min="1" max="20" value="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-lg font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                    <label for="numLetters" class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Número de letras ($n$ entre 1 y 12)</label>
+                    <input type="number" id="numLetters" min="1" max="12" value="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-lg font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
                 </div>
                 <button onclick="generateInputs()" class="w-full sm:w-auto mt-2 sm:mt-6 px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 transition flex items-center justify-center gap-2">
                     <span>Generar Huecos</span>
@@ -89,7 +89,7 @@
                 <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">2</div>
-                        <h3 class="text-lg font-semibold text-white">Introduce la secuencia de 8 bits para cada letra</h3>
+                        <h3 class="text-lg font-semibold text-white">Rellena los datos para cada letra</h3>
                     </div>
                     <button onclick="resetForm()" class="text-xs text-slate-400 hover:text-indigo-400 transition flex items-center gap-1 font-medium">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
@@ -98,7 +98,7 @@
                 </div>
 
                 <p class="text-slate-400 text-xs sm:text-sm mb-6">
-                    Anota opcionalmente la letra exacta que estás codificando (mayúscula o minúscula) y escribe sus 8 ceros y unos correspondientes.
+                    Introduce la letra original, su valor Decimal ASCII correspondiente (0-255) y la secuencia exacta de 8 bits.
                 </p>
 
                 <div id="inputsList" class="space-y-4">
@@ -115,12 +115,12 @@
 
             <!-- Resultado en Pantalla -->
             <div id="resultCard" class="hidden bg-gradient-to-r from-slate-800 to-indigo-950/60 border border-indigo-500/30 rounded-2xl p-6 sm:p-8 shadow-xl text-center transform transition-all duration-500">
-                <span class="text-xs uppercase tracking-widest text-indigo-400 font-semibold mb-2 block">Nombre decodificado con éxito</span>
+                <span class="text-xs uppercase tracking-widest text-indigo-400 font-semibold mb-2 block">Nombre decodificado</span>
                 <div id="resultText" class="text-3xl sm:text-5xl font-extrabold text-white font-mono my-4 tracking-wider drop-shadow-md">
                     <!-- Aquí aparece el nombre -->
                 </div>
                 <p id="resultDetails" class="text-slate-300 text-sm max-w-lg mx-auto leading-relaxed">
-                    ¡Has decodificado correctamente todos los bytes manteniendo las mayúsculas y minúsculas!
+                    <!-- Detalles del resultado -->
                 </p>
             </div>
         </div>
@@ -197,29 +197,39 @@
             const container = document.getElementById('inputsList');
             container.innerHTML = '';
 
-            if (isNaN(num) || num < 1 || num > 20) {
-                alertCustom("Por favor, introduce un número válido de letras (entre 1 y 20).");
+            if (isNaN(num) || num < 1 || num > 12) {
+                alertCustom("Por favor, introduce un número válido de letras (entre 1 y 12).");
                 return;
             }
 
             for (let i = 0; i < num; i++) {
                 const row = document.createElement('div');
-                row.className = 'bg-slate-900/60 border border-slate-700/60 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition hover:border-slate-600';
+                row.className = 'letter-row bg-slate-900/60 border border-slate-700/60 rounded-xl p-4 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 transition hover:border-slate-600 relative';
+                row.id = `row-${i}`;
                 
                 row.innerHTML = `
-                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <div class="flex items-center gap-3 w-full lg:w-auto flex-wrap sm:flex-nowrap">
                         <span class="w-7 h-7 rounded-lg bg-slate-800 text-indigo-400 flex items-center justify-center font-mono text-xs font-bold border border-slate-700">#${i+1}</span>
+                        
                         <div class="flex flex-col">
-                            <label class="text-xs text-slate-400 font-medium">Letra ${i+1} (Mayús/Minús)</label>
-                            <input type="text" maxlength="1" placeholder="Letra" class="letter-hint-input w-16 bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-center text-white font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <label class="text-xs text-slate-400 font-medium mb-1">Letra ${i+1}</label>
+                            <input type="text" maxlength="1" placeholder="ej. A" class="letter-char-input w-20 bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-2 text-center text-white font-bold text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label class="text-xs text-slate-400 font-medium mb-1">Decimal ASCII (0-255)</label>
+                            <input type="number" min="0" max="255" placeholder="ej. 65" class="decimal-ascii-input w-28 bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-2 text-center text-indigo-300 font-mono text-base font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
                     </div>
 
-                    <div class="flex-1 w-full sm:w-auto">
-                        <label class="block text-xs text-slate-400 font-medium mb-1">Secuencia de 8 bits (ceros y unos)</label>
-                        <div class="flex gap-1.5 justify-start sm:justify-end flex-wrap bit-group" data-index="${i}">
+                    <div class="flex-1 w-full lg:w-auto">
+                        <label class="block text-xs text-slate-400 font-medium mb-1">Secuencia de 8 bits</label>
+                        <div class="flex gap-1.5 justify-start lg:justify-end flex-wrap bit-group" data-index="${i}">
                             ${generateBitInputs()}
                         </div>
+                    </div>
+
+                    <div class="feedback-badge hidden w-full lg:w-auto text-xs font-semibold rounded-lg px-3 py-1.5 flex items-center gap-1.5 justify-center">
                     </div>
                 `;
                 container.appendChild(row);
@@ -234,7 +244,7 @@
         function generateBitInputs() {
             let html = '';
             for (let b = 0; b < 8; b++) {
-                html += `<input type="text" maxlength="1" inputmode="numeric" pattern="[0-1]*" class="bit-box w-9 h-11 sm:w-10 sm:h-12 bg-slate-800 border border-slate-700 text-white font-mono text-center text-lg font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition shadow-inner" oninput="handleBitInput(this)" onkeydown="handleBitKeyDown(event, this)">`;
+                html += `<input type="text" maxlength="1" inputmode="numeric" pattern="[0-1]*" class="bit-box w-8 h-10 sm:w-10 sm:h-12 bg-slate-800 border border-slate-700 text-white font-mono text-center text-lg font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition shadow-inner" oninput="handleBitInput(this)" onkeydown="handleBitKeyDown(event, this)">`;
             }
             return html;
         }
@@ -255,38 +265,102 @@
             if (e.key === 'Backspace' && !input.value && input.previousElementSibling) {
                 input.previousElementSibling.focus();
                 input.previousElementSibling.select();
+            } else if (e.key === 'ArrowLeft' && input.previousElementSibling) {
+                input.previousElementSibling.focus();
+            } else if (e.key === 'ArrowRight' && input.nextElementSibling) {
+                input.nextElementSibling.focus();
             }
         }
 
         function convertBinary() {
-            const bitGroups = document.querySelectorAll('.bit-group');
+            const rows = document.querySelectorAll('.letter-row');
             let decodedString = '';
+            let allCorrect = true;
+            let errorsCount = 0;
 
-            bitGroups.forEach(group => {
-                const inputs = group.querySelectorAll('.bit-box');
+            rows.forEach((row, idx) => {
+                const charInput = row.querySelector('.letter-char-input');
+                const decimalInput = row.querySelector('.decimal-ascii-input');
+                const bitInputs = row.querySelectorAll('.bit-box');
+                const feedbackBadge = row.querySelector('.feedback-badge');
+
+                const enteredChar = charInput.value;
+                const enteredDecimal = parseInt(decimalInput.value, 10);
+                
                 let binaryString = '';
-                inputs.forEach(inp => {
+                bitInputs.forEach(inp => {
                     binaryString += (inp.value === '1' ? '1' : '0');
                 });
+                const binaryValue = parseInt(binaryString, 2);
 
-                // Conversión nativa ASCII preservando mayúsculas y minúsculas exactas
-                const decimalValue = parseInt(binaryString, 2);
-                const character = String.fromCharCode(decimalValue);
-                decodedString += character;
+                // Reset visual state
+                row.classList.remove('border-emerald-500', 'border-rose-500', 'bg-emerald-950/20', 'bg-rose-950/20');
+                feedbackBadge.classList.add('hidden');
+
+                if (!enteredChar || isNaN(enteredDecimal)) {
+                    allCorrect = false;
+                    errorsCount++;
+                    row.classList.add('border-rose-500', 'bg-rose-950/20');
+                    feedbackBadge.className = 'feedback-badge text-xs font-semibold rounded-lg px-3 py-1.5 flex items-center gap-1.5 justify-center bg-rose-500/20 text-rose-300 border border-rose-500/30';
+                    feedbackBadge.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> Datos incompletos`;
+                    feedbackBadge.classList.remove('hidden');
+                    return;
+                }
+
+                const expectedDecimalFromChar = enteredChar.charCodeAt(0);
+                const isCharDecimalMatch = (expectedDecimalFromChar === enteredDecimal);
+                const isDecimalBinaryMatch = (enteredDecimal === binaryValue);
+
+                if (isCharDecimalMatch && isDecimalBinaryMatch) {
+                    row.classList.add('border-emerald-500', 'bg-emerald-950/20');
+                    feedbackBadge.className = 'feedback-badge text-xs font-semibold rounded-lg px-3 py-1.5 flex items-center gap-1.5 justify-center bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+                    feedbackBadge.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> ¡Correcto! (${enteredDecimal} = ${binaryString})`;
+                    feedbackBadge.classList.remove('hidden');
+                    decodedString += enteredChar;
+                } else {
+                    allCorrect = false;
+                    errorsCount++;
+                    row.classList.add('border-rose-500', 'bg-rose-950/20');
+                    feedbackBadge.className = 'feedback-badge text-xs font-semibold rounded-lg px-3 py-1.5 flex items-center gap-1.5 justify-center bg-rose-500/20 text-rose-300 border border-rose-500/30';
+                    
+                    let errorMsg = '';
+                    if (!isCharDecimalMatch && !isDecimalBinaryMatch) {
+                        errorMsg = `Revisa el decimal (esperado ${expectedDecimalFromChar}) y el binario`;
+                    } else if (!isCharDecimalMatch) {
+                        errorMsg = `Decimal incorrecto para '${enteredChar}' (debería ser ${expectedDecimalFromChar})`;
+                    } else {
+                        errorMsg = `El binario (${binaryValue}) no equivale al decimal ${enteredDecimal}`;
+                    }
+                    
+                    feedbackBadge.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> ${errorMsg}`;
+                    feedbackBadge.classList.remove('hidden');
+                    
+                    // Decodificamos lo que haya salido del binario para mostrar el intento
+                    decodedString += String.fromCharCode(binaryValue);
+                }
             });
 
             const resultCard = document.getElementById('resultCard');
             const resultText = document.getElementById('resultText');
+            const resultDetails = document.getElementById('resultDetails');
             
-            resultText.textContent = decodedString;
+            resultText.textContent = decodedString || '---';
             resultCard.classList.remove('hidden');
-            resultCard.scrollIntoView({ behavior: 'smooth' });
 
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
+            if (allCorrect) {
+                resultDetails.className = "text-emerald-400 text-sm max-w-lg mx-auto leading-relaxed font-medium";
+                resultDetails.textContent = "¡Excelente trabajo! Has introducido correctamente la letra, su código ASCII decimal y su representación de 8 bits en binario.";
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.6 }
+                });
+            } else {
+                resultDetails.className = "text-amber-400 text-sm max-w-lg mx-auto leading-relaxed font-medium";
+                resultDetails.textContent = `Atención: Tienes ${errorsCount} error(es) o campos incompletos. Revisa las indicaciones en rojo arriba.`;
+            }
+
+            resultCard.scrollIntoView({ behavior: 'smooth' });
         }
 
         function resetForm() {

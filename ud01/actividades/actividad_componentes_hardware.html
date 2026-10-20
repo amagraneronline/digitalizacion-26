@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10233b">
-<meta name="description" content="Ocho actividades interactivas y autoevaluables para repasar los componentes hardware esenciales del ordenador. Medios y Recursos Digitales, 1.º ESO.">
-<title>Reto hardware · 1.º ESO · Medios y Recursos Digitales</title>
+<meta name="description" content="Ocho actividades interactivas y autoevaluables para repasar los componentes hardware esenciales del ordenador. Digitalización Digitales, 4.º ESO.">
+<title>Reto hardware · 4.º ESO · Digitalización Digitales</title>
 <style>
   :root{--ink:#192b40;--soft:#5a6c81;--line:#dfe8f0;--paper:#fff;--base:#f3f7fb;--navy:#10233b;--teal:#0d938b;--teal-dark:#06756f;--cyan:#dff8f4;--amber:#d68121;--amber-soft:#fff0d7;--red:#ae3d40;--red-soft:#fff0f1;--good:#16734d;--good-soft:#e5f6ec;--round:19px;--shadow:0 14px 45px rgba(17,43,75,.065)}
   *{box-sizing:border-box}
@@ -155,8 +155,8 @@
 <header class="top">
   <div class="container">
     <div class="utility">
-      <div class="brand"><div class="logo" aria-hidden="true">▦</div><span>Medios y Recursos Digitales</span></div>
-      <span class="chipline">UNIDAD 02 &nbsp;·&nbsp; 1.º ESO</span>
+      <div class="brand"><div class="logo" aria-hidden="true">▦</div><span>Digitalización</span></div>
+      <span class="chipline">UNIDAD 01 &nbsp;·&nbsp; 4.º ESO</span>
     </div>
     <div class="hero">
       <div class="hero-body">
@@ -186,7 +186,7 @@
     </main>
   </div>
   <footer class="note-area">
-    <div>Actividad de repaso · Componentes hardware esenciales · 1.º ESO<br>Ilustraciones esquemáticas originales. Sin bibliotecas externas y funcional sin conexión.</div>
+    <div>Actividad de repaso · Componentes hardware esenciales · 4.º ESO<br>Ilustraciones esquemáticas originales. Sin bibliotecas externas y funcional sin conexión.</div>
     <div><a href="https://amagraneronline.github.io/mrd-26/ud02/contenido.html" target="_blank" rel="noopener noreferrer">Consultar los contenidos de la unidad ↗</a></div>
   </footer>
 </div>
@@ -481,7 +481,7 @@
   }
   function downloadResults(){
     const d=reportData(),now=new Date();
-    const lines=['INFORME DE AUTOEVALUACIÓN — COMPONENTES HARDWARE','Medios y Recursos Digitales · 1.º ESO','Fecha: '+now.toLocaleString('es-ES'),'','Actividades corregidas: '+d.done+' de 8','Aciertos primer intento (total 8 actividades): '+d.first+' / '+d.max,'Aciertos actuales (total 8 actividades): '+d.current+' / '+d.max,'',...activities.map((a,i)=>`${i+1}. ${a.title}\n   Primer intento: ${state.first[a.id]?state.first[a.id].score+' / '+a.items.length:'pendiente'}\n   Actual: ${state.checked[a.id]?state.checked[a.id].score+' / '+a.items.length:'pendiente'}`),'','Evaluación formativa; las actividades pendientes cuentan como 0 en el total.','Datos generados localmente; no se transmiten a ningún servidor.'];
+    const lines=['INFORME DE AUTOEVALUACIÓN — COMPONENTES HARDWARE','Digitalización Digitales · 4.º ESO','Fecha: '+now.toLocaleString('es-ES'),'','Actividades corregidas: '+d.done+' de 8','Aciertos primer intento (total 8 actividades): '+d.first+' / '+d.max,'Aciertos actuales (total 8 actividades): '+d.current+' / '+d.max,'',...activities.map((a,i)=>`${i+1}. ${a.title}\n   Primer intento: ${state.first[a.id]?state.first[a.id].score+' / '+a.items.length:'pendiente'}\n   Actual: ${state.checked[a.id]?state.checked[a.id].score+' / '+a.items.length:'pendiente'}`),'','Evaluación formativa; las actividades pendientes cuentan como 0 en el total.','Datos generados localmente; no se transmiten a ningún servidor.'];
     const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
     const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='autoevaluacion_hardware_1ESO.txt';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
