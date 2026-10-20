@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Práctica de conversiones decimal-binario para Digitalización de 4.º ESO.">
+<title>Práctica de conversiones | Digitalización 4.º ESO</title>
+<style>
+    :root{
+      --bg:#f5f7fb; 
+      --surface:#ffffff;
+      --surface-2:#eef3fb;
+      --text:#172033;
+      --muted:#5f6b7d;
+      --primary:#1f5fbf;
+      --primary-2:#163f7c;
+      --accent:#e9f2ff;
+      --success:#1d7a46;
+      --success-bg:#eaf8f0;
+      --warning:#a35c00;
+      --warning-bg:#fff4df;
+      --danger:#a83b3b;
+      --danger-bg:#fff0f0;
+      --border:#dbe3ef;
+      --shadow:0 10px 30px rgba(24,45,76,.08);
+      --radius:18px;
+      --radius-sm:12px;
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+
+    a{color:inherit}
+    button,input{font:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav{
+      max-width:var(--max);
+      margin:auto;
+      padding:10px 18px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      overflow-x:auto;
+      scrollbar-width:thin;
+    }
+
+    .brand{
+      font-weight:800;
+      color:var(--primary-2);
+      white-space:nowrap;
+      margin-right:8px;
+    }
+
+    .nav a{
+      text-decoration:none;
+      padding:8px 11px;
+      border-radius:999px;
+      color:var(--muted);
+      white-space:nowrap;
+      font-size:.94rem;
+    }
+
+    .nav a:hover,
+    .nav a:focus{
+      color:var(--primary-2);
+      background:var(--accent);
+      outline:none;
+    }
+
+    header{
+      background:
+        radial-gradient(circle at top right, rgba(31,95,191,.15), transparent 35%),
+        linear-gradient(135deg,#0f2d57,#1f5fbf);
+      color:white;
+      padding:72px 20px 60px;
+    }
+
+    .hero{
+      max-width:var(--max);
+      margin:auto;
+      display:grid;
+      grid-template-columns:1.35fr .65fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:6px 10px;
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:999px;
+      background:rgba(255,255,255,.09);
+      font-weight:700;
+      letter-spacing:.02em;
+      font-size:.86rem;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0 0 16px;
+      font-size:clamp(2.1rem,5vw,4.2rem);
+      line-height:1.02;
+      letter-spacing:-.04em;
+    }
+
+    .hero p{
+      font-size:1.12rem;
+      margin:0;
+      max-width:760px;
+      color:#e8f0ff;
+    }
+
+    .hero-card{
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:20px;
+      padding:22px;
+    }
+
+    .hero-card strong{
+      display:block;
+      margin-bottom:10px;
+    }
+
+    .hero-card ul{
+      margin:0;
+      padding-left:20px;
+    }
+
+    main{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:34px 18px 70px;
+    }
+
+    section{
+      scroll-margin-top:78px;
+      margin:26px 0;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:clamp(20px,4vw,38px);
+    }
+
+    .section-kicker{
+      color:var(--primary);
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:.78rem;
+      margin-bottom:6px;
+    }
+
+    h2{
+      margin:0 0 12px;
+      line-height:1.18;
+      font-size:clamp(1.55rem,3vw,2.35rem);
+      letter-spacing:-.02em;
+    }
+
+    h3{
+      margin:28px 0 10px;
+      line-height:1.25;
+      color:var(--primary-2);
+    }
+
+    .lead{
+      font-size:1.08rem;
+      color:var(--muted);
+      max-width:850px;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+      padding:18px;
+      background:#fff;
+    }
+
+    .card h3{margin-top:0}
+
+    .callout{
+      padding:16px 18px;
+      border-radius:var(--radius-sm);
+      border-left:5px solid var(--primary);
+      background:var(--accent);
+      margin:18px 0;
+    }
+
+    .callout.success{
+      border-color:var(--success);
+      background:var(--success-bg);
+    }
+
+    .callout.warning{
+      border-color:var(--warning);
+      background:var(--warning-bg);
+    }
+
+    .formula{
+      font-size:1.18rem;
+      font-weight:800;
+      text-align:center;
+      margin:18px 0;
+      padding:16px;
+      border-radius:12px;
+      background:#10274a;
+      color:#fff;
+      overflow:auto;
+    }
+
+    .binary{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.06em;
+    }
+
+    .steps{
+      counter-reset:paso;
+      list-style:none;
+      padding:0;
+      margin:18px 0 0;
+      display:grid;
+      gap:12px;
+    }
+
+    .steps li{
+      counter-increment:paso;
+      position:relative;
+      padding:14px 16px 14px 54px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fbfcff;
+    }
+
+    .steps li::before{
+      content:counter(paso);
+      position:absolute;
+      left:14px;
+      top:13px;
+      width:28px;
+      height:28px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--primary);
+      color:#fff;
+      font-weight:800;
+    }
+
+    .table-wrap{
+      overflow-x:auto;
+      margin:16px 0;
+      border:1px solid var(--border);
+      border-radius:12px;
+    }
+
+    table{
+      border-collapse:collapse;
+      width:100%;
+      min-width:520px;
+      background:#fff;
+    }
+
+    th,td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+    }
+
+    th{
+      background:#f1f5fb;
+      color:#233a5e;
+      font-weight:800;
+    }
+
+    tr:last-child td{border-bottom:none}
+
+    .exercise-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .exercise-list{
+      margin:0;
+      padding-left:24px;
+      columns:2;
+      column-gap:32px;
+    }
+
+    .exercise-list li{
+      margin:7px 0;
+      break-inside:avoid;
+    }
+
+    details{
+      margin-top:14px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fbfcff;
+      overflow:hidden;
+    }
+
+    summary{
+      cursor:pointer;
+      padding:14px 16px;
+      font-weight:800;
+      color:var(--primary-2);
+      user-select:none;
+    }
+
+    details > div{
+      padding:0 16px 16px;
+    }
+
+    .tool{
+      margin-top:20px;
+      border:1px solid #cbd9ee;
+      background:linear-gradient(180deg,#f9fbff,#eef4ff);
+      padding:20px;
+      border-radius:16px;
+    }
+
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      gap:12px;
+      align-items:end;
+    }
+
+    label{
+      display:block;
+      font-weight:800;
+      margin-bottom:6px;
+    }
+
+    input{
+      width:100%;
+      min-height:44px;
+      border:1px solid #b9c7dc;
+      border-radius:10px;
+      padding:10px 12px;
+      background:#fff;
+      color:var(--text);
+    }
+
+    input:focus{
+      outline:3px solid rgba(31,95,191,.15);
+      border-color:var(--primary);
+    }
+
+    button{
+      min-height:44px;
+      border:0;
+      border-radius:10px;
+      padding:10px 14px;
+      background:var(--primary);
+      color:white;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    button:hover{background:var(--primary-2)}
+
+    .result{
+      margin-top:14px;
+      padding:13px 15px;
+      border-radius:10px;
+      background:white;
+      border:1px solid var(--border);
+      min-height:52px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border-radius:999px;
+      padding:5px 9px;
+      background:#edf3fb;
+      color:#29496f;
+      font-weight:800;
+      font-size:.85rem;
+    }
+
+    .storage-scale{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:10px;
+      margin:18px 0;
+    }
+
+    .storage-scale div{
+      text-align:center;
+      padding:14px 8px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fbfcff;
+    }
+
+    .storage-scale strong{
+      display:block;
+      font-size:1.18rem;
+      color:var(--primary-2);
+    }
+
+    .checklist{
+      display:grid;
+      gap:10px;
+      padding:0;
+      list-style:none;
+      margin:18px 0 0;
+    }
+
+    .checklist li{
+      padding:12px 14px 12px 42px;
+      border-radius:10px;
+      background:#f7f9fd;
+      position:relative;
+    }
+
+    .checklist li::before{
+      content:"✓";
+      position:absolute;
+      left:14px;
+      color:var(--success);
+      font-weight:900;
+    }
+
+    footer{
+      max-width:var(--max);
+      margin:0 auto 50px;
+      padding:0 18px;
+      color:var(--muted);
+      text-align:center;
+      font-size:.92rem;
+    }
+
+    .print-only{display:none}
+
+    @media (max-width:850px){
+      .hero,
+      .grid-2,
+      .exercise-grid{
+        grid-template-columns:1fr;
+      }
+
+      .tool-grid{
+        grid-template-columns:1fr;
+      }
+
+      .storage-scale{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .exercise-list{
+        columns:1;
+      }
+    }
+
+    @media print{
+      .topbar,.tool button{display:none!important}
+      body{background:#fff}
+      header{background:#fff;color:#000;padding:24px 0}
+      .hero p{color:#333}
+      .hero{display:block}
+      .hero-card{border:1px solid #bbb;color:#000;background:#fff;margin-top:16px}
+      section{box-shadow:none;break-inside:avoid}
+      .print-only{display:block}
+    }
+  
+.respuesta-wrap{margin-top:12px}.respuesta-wrap label{font-size:.9rem;margin:6px 0}.respuesta-actividad{margin-top:4px}.retroalimentacion{padding:10px 12px;margin-top:8px;border-radius:10px;font-size:.92rem}.retroalimentacion.correcto{background:#eaf8f0;color:#155b38}.retroalimentacion.incorrecto{background:#fff0f0;color:#8c2929}.retroalimentacion.pendiente-revision{background:#fff4df;color:#784500}.validacion-panel{margin-top:24px;padding:22px;border:2px solid #cbd9ee;background:#eef4ff;border-radius:16px}.validacion-panel button:disabled{background:#9ba9bc;cursor:not-allowed}.nota-eval{font-size:.9rem;color:#475569}#resultadoGlobal{padding:14px;margin-top:14px;background:white;border-radius:10px;font-weight:800}
+
+/* Entrega individual: archivo PDF local sin conexión ni dependencias externas */
+.entrega-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(270px,.9fr);gap:22px;align-items:start;margin-top:20px}
+.entrega-panel{background:#f7faff;border:1px solid #ccdaf0;border-radius:14px;padding:20px}
+.entrega-panel input{width:100%}
+.entrega-estado{border:1px solid var(--border);background:#fff;border-radius:12px;padding:18px}
+.entrega-estado strong{display:block;margin-bottom:8px;color:#1b3555}
+.entrega-estado p{margin:8px 0}
+.entrega-estado meter{width:100%;height:14px;accent-color:var(--primary)}
+#botonExportarPdf{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:16px;padding:12px 16px}
+#botonExportarPdf:disabled{background:#96a6b9;color:#fff;cursor:not-allowed}
+#botonExportarPdf:disabled:hover{background:#96a6b9}
+#mensajeEntrega{font-size:.94rem;color:#4e6077;margin-top:10px}
+#nombreArchivoPrevisto{font-size:.88rem;overflow-wrap:anywhere;color:#365476;margin:10px 0 0}
+.entrega-ayuda{font-size:.9rem;color:var(--muted)}
+@media(max-width:850px){.entrega-grid{grid-template-columns:1fr}}
+@media print{#entrega-moodle{display:none!important}}
+
+/* Antes del envío solo se muestra el progreso. La corrección se desbloquea después. */
+.aviso-soluciones{margin:0;padding:10px 12px;border-radius:8px;background:#fff;color:#51627b;font-size:.9rem;border:1px dashed #b9c7dc}
+.resumen-postentrega{margin-top:22px;padding:22px;border:1px solid var(--border);background:#fff;border-radius:14px}
+.resumen-postentrega h3{margin-top:0}
+.enlace-corregir{display:inline-block;margin-top:8px;color:var(--primary);font-weight:800}
+.respuesta-actividad:read-only{background:#f2f5f9;color:var(--text);cursor:default}
+</style>
+<style>
+/* Validación progresiva, independiente para cada actividad */
+.actividad-interactiva{min-width:0}
+.validacion-bloque{margin-top:22px;padding:16px;background:#f2f6fd;border:1px solid #cbd9ee;border-radius:12px}
+.progreso-bloque{margin:0 0 10px;color:#425875;font-size:.92rem;font-weight:650}
+.boton-validar-bloque{width:100%;min-height:44px}
+.boton-validar-bloque:disabled{background:#9ba9bc;cursor:not-allowed}
+.boton-validar-bloque:disabled:hover{background:#9ba9bc}
+.resultado-bloque{margin-top:12px;padding:12px 14px;border-radius:10px;background:#fff;border:1px solid #cbd9ee;font-weight:750;color:#183b63}
+.resultado-bloque.sin-errores{border-color:#b4dcc3;background:#eaf8f0;color:#155b38}
+.retroalimentacion.informativo{border:1px solid #cbd9ee;background:#f4f7ff;color:#27425b}
+.respuesta-actividad.respuesta-ok{border-color:#2a8852}
+.respuesta-actividad.respuesta-error{border-color:#be4242}
+#practica .exercise-list li{padding-bottom:4px}
+@media print{.validacion-bloque{display:none!important}}
+</style>
+<style>
+  .figure-card{
+    margin:22px 0;
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:#fbfcff;
+    padding:16px;
+    text-align:center;
+  }
+  .figure-card img{
+    display:block;
+    width:100%;
+    max-width:980px;
+    height:auto;
+    margin:0 auto;
+    border-radius:10px;
+  }
+  .figure-card figcaption{
+    margin-top:10px;
+    color:var(--muted);
+    font-size:.92rem;
+  }
+  .page-switch{
+    margin-left:auto;
+    background:var(--primary);
+    color:#fff!important;
+    font-weight:800;
+  }
+  .page-switch:hover,.page-switch:focus{
+    background:var(--primary-2)!important;
+    color:#fff!important;
+  }
+  .conversion-rule{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+    margin:18px 0;
+  }
+  .conversion-rule .card{margin:0}
+  @media(max-width:720px){
+    .conversion-rule{grid-template-columns:1fr}
+    .page-switch{margin-left:0}
+  }
+</style>
+
+<style>
+  .page-switch{
+    margin-left:auto;
+    background:var(--primary);
+    color:#fff!important;
+    font-weight:800;
+  }
+  .page-switch:hover,.page-switch:focus{
+    background:var(--primary-2)!important;
+    color:#fff!important;
+  }
+  .related-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:18px;
+    padding:11px 15px;
+    border-radius:10px;
+    background:var(--accent);
+    color:var(--primary-2);
+    text-decoration:none;
+    font-weight:800;
+    border:1px solid #cbd9ee;
+  }
+  .related-link:hover,.related-link:focus{
+    background:#dce9fb;
+    outline:none;
+  }
+  @media(max-width:760px){
+    .page-switch{margin-left:0}
+  }
+</style>
+
+</head>
+<body>
+
+<nav aria-label="Navegación principal" class="topbar">
+  <div class="nav">
+    <a class="brand" href="index.html" style="text-decoration:none">← Unidad 1</a>
+    <a href="#practica">Conversiones</a>
+    <a href="#comprueba">Comprueba lo aprendido</a>
+    <a href="#entrega-moodle">Entrega Moodle</a>
+    <a href="contenido.html">Teoría</a>
+    <a class="page-switch" href="almacenamiento.html">Problemas de almacenamiento →</a>
+  </div>
+</nav>
+
+
+<header id="inicio">
+  <div class="hero">
+    <div>
+      <span class="eyebrow">Unidad 1 · Representación digital</span>
+      <div style="margin-bottom:10px;font-weight:700;color:#cfe0ff">Práctica de conversiones</div>
+      <h1>Decimal y binario</h1>
+      <p>Practica la conversión entre sistema decimal y sistema binario hasta dominar ambos procedimientos.</p>
+    </div>
+    <aside class="hero-card">
+      <strong>En esta práctica trabajarás:</strong>
+      <ul>
+        <li>Binario → decimal.</li>
+        <li>Decimal → binario.</li>
+        <li>Tu edad en binario.</li>
+        <li>Retos finales de conversión.</li>
+      </ul>
+    </aside>
+  </div>
+</header>
+
+<main>
+<section id="practica">
+<div class="section-kicker">1 · Conversiones</div>
+<h2>Ejercicios de conversión</h2>
+<p class="lead">Resuelve los ejercicios en tu cuaderno y escribe tus respuestas. La corrección de todos los bloques se mostrará <strong>solo después de generar el PDF final</strong> para Moodle.</p><a class="related-link" href="contenido.html">← Consultar la explicación teórica</a>
+<div class="exercise-grid">
+<article aria-label="Actividad: Binario → decimal" class="card actividad-interactiva" data-quiz-group="1">
+<span class="badge">Binario → decimal</span>
+<h3>Convierte:</h3>
+<ol class="exercise-list">
+<li><span class="binary">10₂</span><div class="respuesta-wrap"><label for="resp_1">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="2" data-kind="numeric" id="resp_1" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">101₂</span><div class="respuesta-wrap"><label for="resp_2">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="5" data-kind="numeric" id="resp_2" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">1000₂</span><div class="respuesta-wrap"><label for="resp_3">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="8" data-kind="numeric" id="resp_3" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">1011₂</span><div class="respuesta-wrap"><label for="resp_4">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="11" data-kind="numeric" id="resp_4" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">1111₂</span><div class="respuesta-wrap"><label for="resp_5">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="15" data-kind="numeric" id="resp_5" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">10010₂</span><div class="respuesta-wrap"><label for="resp_6">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="18" data-kind="numeric" id="resp_6" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">10101₂</span><div class="respuesta-wrap"><label for="resp_7">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="21" data-kind="numeric" id="resp_7" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">11001₂</span><div class="respuesta-wrap"><label for="resp_8">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="25" data-kind="numeric" id="resp_8" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">100000₂</span><div class="respuesta-wrap"><label for="resp_9">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="32" data-kind="numeric" id="resp_9" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li><span class="binary">101101₂</span><div class="respuesta-wrap"><label for="resp_10">Tu respuesta en decimal</label><input autocomplete="off" class="respuesta-actividad" data-answer="45" data-kind="numeric" id="resp_10" placeholder="Escribe tu respuesta" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+</ol>
+<div aria-label="Seguimiento: Binario → decimal" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-1">0 de 10 respuestas completadas.</p><p aria-describedby="progreso-bloque-1" class="aviso-soluciones">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+<article aria-label="Actividad: Decimal → binario" class="card actividad-interactiva" data-quiz-group="2">
+<span class="badge">Decimal → binario</span>
+<h3>Convierte:</h3>
+<ol class="exercise-list">
+<li>4<div class="respuesta-wrap"><label for="resp_11">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="100" data-kind="binary" id="resp_11" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>5<div class="respuesta-wrap"><label for="resp_12">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="101" data-kind="binary" id="resp_12" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>8<div class="respuesta-wrap"><label for="resp_13">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1000" data-kind="binary" id="resp_13" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>10<div class="respuesta-wrap"><label for="resp_14">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1010" data-kind="binary" id="resp_14" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>12<div class="respuesta-wrap"><label for="resp_15">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1100" data-kind="binary" id="resp_15" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+<li>15<div class="respuesta-wrap"><label for="resp_16">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="1111" data-kind="binary" id="resp_16" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>18<div class="respuesta-wrap"><label for="resp_17">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="10010" data-kind="binary" id="resp_17" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>25<div class="respuesta-wrap"><label for="resp_18">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="11001" data-kind="binary" id="resp_18" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>32<div class="respuesta-wrap"><label for="resp_19">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="100000" data-kind="binary" id="resp_19" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li><li>45<div class="respuesta-wrap"><label for="resp_20">Tu respuesta en binario</label><input autocomplete="off" class="respuesta-actividad" data-answer="101101" data-kind="binary" id="resp_20" placeholder="Solo 0 y 1" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div></li>
+</ol>
+<div aria-label="Seguimiento: Decimal → binario" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-2">0 de 10 respuestas completadas.</p><p aria-describedby="progreso-bloque-2" class="aviso-soluciones">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></article>
+</div>
+<h3>Reto: ¿cuánto es tu edad en binario?</h3>
+<p>
+        Convierte tu edad actual a sistema binario y muestra en el cuaderno todas las divisiones realizadas.
+      </p>
+<div aria-label="Actividad: Tu edad en binario" class="tool actividad-interactiva" data-quiz-group="3"><h3>Reto: tu edad en binario</h3><div class="respuesta-wrap"><label for="edadAlumno">¿Cuántos años tienes?</label><input autocomplete="off" class="respuesta-actividad" data-kind="age" id="edadAlumno" placeholder="Edad en años" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div class="respuesta-wrap"><label for="edadBinaria">Tu edad convertida a binario</label><input autocomplete="off" class="respuesta-actividad" data-kind="agebinary" id="edadBinaria" placeholder="Escribe la conversión binaria" type="text"/><div aria-live="polite" class="retroalimentacion" hidden="hidden"></div></div><div aria-label="Seguimiento: Tu edad en binario" class="validacion-bloque" role="group"><p aria-live="polite" class="progreso-bloque" id="progreso-bloque-3">0 de 2 respuestas completadas.</p><p aria-describedby="progreso-bloque-3" class="aviso-soluciones">Soluciones ocultas hasta generar el PDF final.</p><div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div></div></div>
+</section>
+<section id="comprueba">
+<div class="section-kicker">2 · Comprueba lo aprendido</div>
+<h2>Comprueba lo aprendido</h2>
+<p class="lead">
+    Resuelve estas conversiones sin consultar los ejemplos. La corrección se mostrará únicamente
+    después de generar el PDF final.
+  </p>
+<div class="exercise-grid">
+<article aria-label="Actividad: Conversión final decimal a binario" class="card actividad-interactiva" data-quiz-group="conversion-final-1">
+<span class="badge">Reto 1 · Decimal → binario</span>
+<h3>Convierte 29 a binario</h3>
+<p>Realiza las divisiones sucesivas entre 2 y escribe el resultado final.</p>
+<div class="respuesta-wrap">
+<label for="conv_final_1">29₁₀ = ?₂</label>
+<input autocomplete="off" class="respuesta-actividad" data-answer="11101" data-kind="binary" id="conv_final_1" placeholder="Solo 0 y 1" type="text"/>
+<div aria-live="polite" class="retroalimentacion" hidden=""></div>
+</div>
+<div class="validacion-bloque" role="group">
+<p aria-live="polite" class="progreso-bloque">0 de 1 respuestas completadas.</p>
+<p class="aviso-soluciones">Soluciones ocultas hasta generar el PDF final.</p>
+<div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div>
+</div>
+</article>
+<article aria-label="Actividad: Conversión final binario a decimal" class="card actividad-interactiva" data-quiz-group="conversion-final-2">
+<span class="badge">Reto 2 · Binario → decimal</span>
+<h3>Convierte 110101₂ a decimal</h3>
+<p>Utiliza el valor de las posiciones y suma únicamente las que contienen un 1.</p>
+<div class="respuesta-wrap">
+<label for="conv_final_2">110101₂ = ?₁₀</label>
+<input autocomplete="off" class="respuesta-actividad" data-answer="53" data-kind="numeric" id="conv_final_2" placeholder="Escribe el número decimal" type="text"/>
+<div aria-live="polite" class="retroalimentacion" hidden=""></div>
+</div>
+<div class="validacion-bloque" role="group">
+<p aria-live="polite" class="progreso-bloque">0 de 1 respuestas completadas.</p>
+<p class="aviso-soluciones">Soluciones ocultas hasta generar el PDF final.</p>
+<div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div>
+</div>
+</article>
+<article aria-label="Actividad: Conversión final 42 a binario" class="card actividad-interactiva" data-quiz-group="conversion-final-3">
+<span class="badge">Reto 3 · Conversión</span>
+<h3>Convierte 42 a binario</h3>
+<p>Comprueba que el resultado obtenido vuelve a valer 42 al pasarlo a decimal.</p>
+<div class="respuesta-wrap">
+<label for="conv_final_3">42₁₀ = ?₂</label>
+<input autocomplete="off" class="respuesta-actividad" data-answer="101010" data-kind="binary" id="conv_final_3" placeholder="Solo 0 y 1" type="text"/>
+<div aria-live="polite" class="retroalimentacion" hidden=""></div>
+</div>
+<div class="validacion-bloque" role="group">
+<p aria-live="polite" class="progreso-bloque">0 de 1 respuestas completadas.</p>
+<p class="aviso-soluciones">Soluciones ocultas hasta generar el PDF final.</p>
+<div aria-live="polite" class="resultado-bloque" hidden="" role="status"></div>
+</div>
+</article>
+</div>
+</section>
+<section aria-labelledby="tituloEntrega" id="entrega-moodle">
+<div class="section-kicker">3 · Entrega de la actividad</div>
+<h2 id="tituloEntrega">Descarga tu trabajo para Moodle</h2>
+<p class="lead">Cuando hayas respondido <strong>todas las preguntas de esta práctica de conversiones</strong>, escribe tu nombre completo y genera el PDF. Primero se guardarán tus respuestas originales y <strong>después se desbloqueará la corrección</strong>.</p>
+<div class="entrega-grid">
+<div class="entrega-panel">
+<label for="nombreCompletoPdf">Nombre y apellidos del alumno</label>
+<input aria-describedby="ayudaNombrePdf" autocomplete="name" id="nombreCompletoPdf" maxlength="120" placeholder="Ej.: María García López" type="text"/>
+<p class="entrega-ayuda" id="ayudaNombrePdf">Escribe al menos tu nombre y un apellido. Se utilizarán para identificar el PDF.</p>
+<button aria-describedby="mensajeEntrega" disabled="" id="botonExportarPdf" type="button">Generar PDF y desbloquear soluciones</button>
+<p aria-live="polite" id="nombreArchivoPrevisto">Archivo: Nombre Apellidos.pdf</p>
+<p aria-live="polite" id="mensajeEntrega" role="status">Completa todas las respuestas y escribe tu nombre y apellidos para desbloquear la descarga.</p>
+</div>
+<div class="entrega-estado">
+<strong>Estado de tu trabajo</strong>
+<label for="progresoEntrega">Respuestas completadas</label>
+<meter id="progresoEntrega" max="40" min="0" value="0">0 de 40</meter>
+<p id="textoRespuestasEntrega">0 de 40 respuestas completadas</p>
+<p id="textoBloquesEntrega">0 de 11 actividades completas</p>
+<p class="entrega-ayuda">El PDF recoge tus <strong>respuestas originales sin soluciones ni calificaciones</strong> de esta página. La corrección aparecerá después de generar el PDF.</p>
+</div>
+</div>
+<div class="callout">
+<strong>Cómo entregar:</strong> localiza el archivo <strong>Nombre Apellidos.pdf</strong>, entra en la tarea de Moodle, adjunta el documento y confirma la entrega. La web no lo envía automáticamente.
+  </div>
+<div aria-live="polite" class="resumen-postentrega" hidden="" id="resumenCorreccion" role="status">
+<h3>Ya puedes revisar tus respuestas</h3>
+<p id="calificacionFinal">El resultado de la autocorrección aparecerá aquí.</p>
+<p>Consulta la corrección y las explicaciones debajo de cada ejercicio. La respuesta de reflexión requiere revisión docente.</p>
+<a class="enlace-corregir" href="#practica">Ir a las actividades corregidas ↑</a>
+</div>
+</section>
+</main>
+<footer>Práctica de conversiones · Digitalización · 4.º ESO</footer>
+<script>const quizController=(function(){
+  'use strict';
+  const groups=Array.from(document.querySelectorAll('[data-quiz-group]'));
+  const normalize=v=>v.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+
+  function nonempty(f){
+    const v=f.value.trim();
+    if(!v)return false;
+    const k=f.dataset.kind;
+    if(k==='age')return /^\d+$/.test(v)&&Number(v)>=1&&Number(v)<=120;
+    if(k==='name')return /\p{L}/u.test(v);
+    if(k==='binary'||k==='agebinary')return /^[01]+$/.test(v);
+    if(k==='numeric'||k==='namebits')return /^\d+$/.test(v.replace(/[.\s]/g,''));
+    if(k==='storage')return /\d/.test(v);
+    if(k==='yesno')return ['si','no'].includes(normalize(v));
+    return v.length>=3;
+  }
+
+  function numericValue(v){
+    // Accepts, for example: 2000000, 2.000.000, 50 GB or 2,5 GB.
+    let t=normalize(v).replace(/\s/g,'');
+    const m=t.match(/^(\d[\d.,]*)(mb|gb|tb|bits?|fotografias?|fotos?)?$/);
+    if(!m)return null;
+    let n=m[1];
+    if(n.includes(',')&&n.includes('.'))n=n.replace(/\./g,'').replace(',','.');
+    else if(n.includes(','))n=n.replace(',','.');
+    else if(/^\d{1,3}(\.\d{3})+$/.test(n))n=n.replace(/\./g,'');
+    const val=Number(n);
+    return Number.isFinite(val)?{value:val,unit:m[2]||''}:null;
+  }
+
+  function check(f){
+    const v=f.value,k=f.dataset.kind;
+    let expected=f.dataset.answer;
+    if(k==='name')return {pass:true,ungraded:true,text:'Nombre registrado.'};
+    if(k==='age')return {pass:true,ungraded:true,text:'Edad registrada.'};
+    if(k==='reflection')return {pass:null,text:'Respuesta para autoevaluar: dejar solo 10 GB libres no es recomendable. Conviene liberar espacio o ampliar el almacenamiento. Compara esta idea con tu justificación.'};
+    if(k==='agebinary'){
+      const age=Number(document.getElementById('edadAlumno').value);
+      expected=age.toString(2);
+      return {pass:normalize(v).replace(/^0+(?=\d)/,'')===expected,text:'Solución: '+expected+'₂.'};
+    }
+    if(k==='namebits'){
+      const nombre=document.getElementById('nombreAlumno').value.replace(/[^\p{L}]/gu,'');
+      const letras=Array.from(nombre).length;
+      expected=String(letras*8);
+      const parsed=numericValue(v);
+      return {pass:!!parsed&&parsed.value===Number(expected)&&(!parsed.unit||parsed.unit==='bit'||parsed.unit==='bits'),text:`${letras} letras × 8 = ${expected} bits.`};
+    }
+    if(k==='binary')return {pass:normalize(v).replace(/^0+(?=\d)/,'')===expected,text:'Solución: '+expected+'₂.'};
+    if(k==='yesno')return {pass:normalize(v)===normalize(expected),text:f.dataset.explain||('Solución: '+expected+'.')};
+    if(k==='numeric'||k==='storage'){
+      const parsed=numericValue(v),correct=Number(expected);
+      let val=parsed?parsed.value:null;
+      if(parsed&&k==='storage'){
+        if(parsed.unit==='gb'&&correct>=1000)val*=1000;
+        if(parsed.unit==='mb'&&correct<1000)val/=1000;
+        if(parsed.unit==='tb')val*=1000000;
+      }
+      return {pass:val===correct,text:f.dataset.explain||('Solución: '+correct.toLocaleString('es-ES')+(k==='storage'?' en la unidad solicitada.':''))};
+    }
+    return {pass:false,text:'Revisa la respuesta.'};
+  }
+
+  function updateProgress(group){
+    const fields=Array.from(group.querySelectorAll('.respuesta-actividad'));
+    const progress=group.querySelector('.progreso-bloque');
+    const filled=fields.filter(nonempty).length;
+    const remaining=fields.length-filled;
+    progress.textContent=remaining
+      ? `${filled} de ${fields.length} respuestas completas · faltan ${remaining}.`
+      : `${fields.length} de ${fields.length} respuestas completas · pendientes de la entrega final.`;
+  }
+
+  groups.forEach(group=>{
+    group.querySelectorAll('.respuesta-actividad').forEach(f=>{
+      f.addEventListener('input',()=>updateProgress(group));
+    });
+    updateProgress(group);
+  });
+
+  let unlocked=false;
+  function unlockCorrections(){
+    if(unlocked)return null;
+    unlocked=true;
+    let totalCorrect=0,totalGradable=0,totalReview=0;
+    groups.forEach(group=>{
+      const fields=Array.from(group.querySelectorAll('.respuesta-actividad'));
+      const outcome=group.querySelector('.resultado-bloque');
+      let correct=0,gradable=0,review=0;
+      fields.forEach(f=>{
+        const result=check(f);
+        const feedback=f.nextElementSibling;
+        if(result.pass===null){review++;totalReview++;}
+        else if(!result.ungraded){
+          gradable++;totalGradable++;
+          if(result.pass){correct++;totalCorrect++;}
+          f.classList.toggle('respuesta-ok',result.pass);
+          f.classList.toggle('respuesta-error',!result.pass);
+          f.setAttribute('aria-invalid',result.pass?'false':'true');
+        }
+        if(feedback?.classList.contains('retroalimentacion')){
+          feedback.hidden=false;
+          const tone=result.pass===null?'pendiente-revision':result.ungraded?'informativo':result.pass?'correcto':'incorrecto';
+          feedback.className='retroalimentacion '+tone;
+          feedback.textContent=(result.pass===null?'Para reflexionar: ':result.ungraded?'✓ ':result.pass?'✓ Correcta. ':'✕ Incorrecta. ')+result.text;
+        }
+        // Lock the delivered answers: the PDF matches exactly what the student submitted.
+        f.readOnly=true;
+        f.setAttribute('aria-readonly','true');
+      });
+      outcome.hidden=false;
+      const qualifier=review?` · ${review} respuesta de reflexión para revisar.`:'';
+      outcome.textContent=`Resultado: ${correct} de ${gradable} respuestas correctas${gradable?'.':''}${qualifier}`;
+      outcome.classList.toggle('sin-errores',correct===gradable&&review===0);
+      const note=group.querySelector('.aviso-soluciones');
+      if(note){note.textContent='Corrección desbloqueada tras generar el PDF.';}
+    });
+    return {correct:totalCorrect,gradable:totalGradable,review:totalReview};
+  }
+  return {nonempty,unlockCorrections};
+})();</script>
+<script>
+(function(){
+  'use strict';
+  const groups=Array.from(document.querySelectorAll('[data-quiz-group]'));
+  const allFields=Array.from(document.querySelectorAll('.respuesta-actividad'));
+  const student=document.getElementById('nombreCompletoPdf');
+  const button=document.getElementById('botonExportarPdf');
+  const message=document.getElementById('mensajeEntrega');
+  const meter=document.getElementById('progresoEntrega');
+  const textFields=document.getElementById('textoRespuestasEntrega');
+  const textGroups=document.getElementById('textoBloquesEntrega');
+  const filePreview=document.getElementById('nombreArchivoPrevisto');
+  meter.max=allFields.length;
+
+  function validFullName(value){
+    const words=value.trim().split(/\s+/u).filter(Boolean);
+    return words.length>=2 && words.every(word=>/^[\p{L}][\p{L}'’.-]*$/u.test(word));
+  }
+  function getSafeFilename(name){
+    return name.trim().replace(/[<>:"/\\|?*\u0000-\u001f]/g,'').replace(/\s+/g,' ').replace(/[. ]+$/g,'').slice(0,100)+'.pdf';
+  }
+  let exported=false;
+  function state(){
+    const done=allFields.filter(quizController.nonempty).length;
+    const completedGroups=groups.filter(g=>Array.from(g.querySelectorAll('.respuesta-actividad')).every(quizController.nonempty)).length;
+    const named=validFullName(student.value);
+    return {done,completedGroups,named,ready:done===allFields.length&&named};
+  }
+  function updateSubmission(){
+    const s=state();
+    meter.value=s.done;
+    textFields.textContent=`${s.done} de ${allFields.length} respuestas completadas`;
+    textGroups.textContent=`${s.completedGroups} de ${groups.length} actividades completas`;
+    button.disabled=!s.ready;
+    button.textContent=exported?'Descargar de nuevo mi PDF':'Generar PDF y desbloquear soluciones';
+    filePreview.textContent='Archivo: '+(student.value.trim()?getSafeFilename(student.value):'Nombre Apellidos.pdf');
+    if(exported){
+      message.textContent='PDF generado y descarga solicitada. La corrección ya está disponible. Sube el archivo a Moodle.';
+    }else if(s.ready){
+      message.textContent='Todas las respuestas están completas. Genera el PDF para acceder a la corrección.';
+    }else{
+      const parts=[];
+      if(s.done<allFields.length)parts.push(`${allFields.length-s.done} respuestas pendientes`);
+      if(!s.named)parts.push('nombre y apellidos pendientes');
+      message.textContent='Para desbloquear: '+parts.join(' · ')+'.';
+    }
+  }
+  document.addEventListener('input',function(event){
+    if(event.target===student || event.target.matches('.respuesta-actividad'))updateSubmission();
+  });
+
+  // Escritor PDF compacto (A4, Helvetica/WinAnsi), incorporado en este mismo HTML.
+  // Genera un fichero PDF directamente, sin servidores, bibliotecas externas ni diálogos de impresión.
+  function pdfText(value){
+    return String(value)
+      .replace(/\u00a0/g,' ')
+      .replace(/\u2082/g,' (base 2)')
+      .replace(/[\u2080-\u2089]/g, m=>String(m.codePointAt(0)-0x2080))
+      .replace(/[\u00b2\u00b3]/g, m=>m==='²'?'2':'3')
+      .replace(/[\u2190-\u21ff]/g,' -> ')
+      .replace(/\u2264/g,' <= ').replace(/\u2265/g,' >= ')
+      .replace(/\u2713/g,'SI').replace(/[\u2715\u2717]/g,'NO')
+      .replace(/\u00d7/g,' x ').replace(/\u00f7/g,' / ')
+      .replace(/[\r\n\t]+/g,' ').replace(/\s{2,}/g,' ').trim();
+  }
+  const winAnsiExtras={8364:128,8218:130,402:131,8222:132,8230:133,8224:134,8225:135,
+    710:136,8240:137,352:138,8249:139,338:140,381:142,8216:145,8217:146,
+    8220:147,8221:148,8226:149,8211:150,8212:151,732:152,8482:153,
+    353:154,8250:155,339:156,382:158,376:159};
+  function byteString(text){
+    const src=pdfText(text);
+    let s='';
+    for(const c of src){
+      const cp=c.codePointAt(0);
+      const b=(cp>=32&&cp<=255)?cp:winAnsiExtras[cp];
+      s+=String.fromCharCode(b===undefined?63:b);
+    }
+    return s;
+  }
+  function pdfLiteral(text){
+    return byteString(text).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+  }
+  function blobFromPDF(objects,rootId){
+    const parts=['%PDF-1.4\n%\xE2\xE3\xCF\xD3\n'];
+    let offset=parts[0].length;
+    const xref=[0];
+    for(let i=1;i<objects.length;i++){
+      xref.push(offset);
+      const chunk=`${i} 0 obj\n${objects[i]}\nendobj\n`;
+      parts.push(chunk);
+      offset+=chunk.length;
+    }
+    const startxref=offset;
+    parts.push(`xref\n0 ${objects.length}\n0000000000 65535 f \n`);
+    for(let i=1;i<xref.length;i++)parts.push(String(xref[i]).padStart(10,'0')+' 00000 n \n');
+    parts.push(`trailer\n<< /Size ${objects.length} /Root ${rootId} 0 R >>\nstartxref\n${startxref}\n%%EOF\n`);
+    const full=parts.join('');
+    const bytes=new Uint8Array(full.length);
+    for(let i=0;i<full.length;i++)bytes[i]=full.charCodeAt(i)&255;
+    return new Blob([bytes],{type:'application/pdf'});
+  }
+  function makeDocument(){
+    const W=595,H=842,left=48,right=48,usable=W-left-right;
+    const pages=[];
+    let page;
+    const measure=document.createElement('canvas').getContext('2d');
+    function coord(n){return Number(n).toFixed(2)}
+    function newPage(){
+      page={commands:[],y:H-82};
+      pages.push(page);
+      page.commands.push('0.10 0.22 0.42 rg 0 795 595 47 re f');
+      page.commands.push('1 1 1 rg BT /F2 11 Tf 48 813 Td (DIGITALIZACIÓN  /  4º ESO) Tj ET');
+      page.commands.push('0.83 0.88 0.96 rg BT /F1 8.5 Tf 368 815 Td (EVIDENCIA DE ACTIVIDADES) Tj ET');
+    }
+    function ensureSpace(height){if(page.y-height<62)newPage();}
+    function line(text,opts={}){
+      const font=opts.bold?'F2':'F1', size=opts.size||9.5, leading=opts.leading||size*1.45;
+      ensureSpace(leading);
+      const x=opts.x===undefined?left:opts.x;
+      const rgb=opts.color||[0.15,0.21,0.30];
+      page.commands.push(`${rgb.join(' ')} rg BT /${font} ${coord(size)} Tf 1 0 0 1 ${coord(x)} ${coord(page.y)} Tm (${pdfLiteral(text)}) Tj ET`);
+      page.y-=leading;
+    }
+    function paragraph(text,opts={}){
+      const size=opts.size||9.5, bold=!!opts.bold, x=opts.x===undefined?left:opts.x;
+      const width=opts.width||W-right-x;
+      const cleaned=pdfText(text);
+      measure.font=`${bold?'bold ':''}${size}px Arial`;
+      const words=cleaned.split(/\s+/u);
+      let current='';
+      function render(){if(current){line(current,{...opts,size,bold,x});current='';}}
+      for(let word of words){
+        if(!word)continue;
+        while(measure.measureText(word).width>width*0.92 && word.length>1){
+          render();
+          let cut=1;
+          while(cut<word.length && measure.measureText(word.slice(0,cut+1)).width<width*0.87)cut++;
+          line(word.slice(0,cut),{...opts,size,bold,x});
+          word=word.slice(cut);
+        }
+        const test=current?current+' '+word:word;
+        if(current&&measure.measureText(test).width>width*0.92)render();
+        current=current?current+' '+word:word;
+      }
+      render();
+    }
+    function spacer(height){ensureSpace(height);page.y-=height;}
+    function divider(){ensureSpace(16);page.commands.push(`0.81 0.85 0.90 RG 0.7 w ${coord(left)} ${coord(page.y)} m ${coord(W-right)} ${coord(page.y)} l S`);page.y-=15;}
+    newPage();
+    return {
+      title(t){paragraph(t,{bold:true,size:17,leading:22,color:[0.10,0.24,0.45]});spacer(2)},
+      heading(t){spacer(7);paragraph(t,{bold:true,size:12,leading:17,color:[0.10,0.30,0.53]});spacer(2)},
+      para(t,o={}){paragraph(t,o)},
+      spacer,divider,keep(height){ensureSpace(height);},
+      toBlob(){
+        const objects=[null];
+        function add(v){objects.push(v);return objects.length-1}
+        const catalog=add('');
+        const pagesNode=add('');
+        const fontRegular=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+        const fontBold=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+        const pageRefs=[];
+        pages.forEach((pg,i)=>{
+          pg.commands.push('0.73 0.78 0.84 RG 0.5 w 48 48 m 547 48 l S');
+          pg.commands.push(`0.36 0.42 0.50 rg BT /F1 8 Tf 48 33 Td (Digitalización - 4º ESO - Actividad individual) Tj ET`);
+          pg.commands.push(`0.36 0.42 0.50 rg BT /F1 8 Tf 490 33 Td (Página ${i+1} / ${pages.length}) Tj ET`);
+          const stream=pg.commands.join('\n')+'\n';
+          const content=add(`<< /Length ${stream.length} >>\nstream\n${stream}endstream`);
+          const pageRef=add(`<< /Type /Page /Parent ${pagesNode} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${fontRegular} 0 R /F2 ${fontBold} 0 R >> >> /Contents ${content} 0 R >>`);
+          pageRefs.push(`${pageRef} 0 R`);
+        });
+        objects[catalog]=`<< /Type /Catalog /Pages ${pagesNode} 0 R >>`;
+        objects[pagesNode]=`<< /Type /Pages /Count ${pageRefs.length} /Kids [${pageRefs.join(' ')}] >>`;
+        return blobFromPDF(objects,catalog);
+      }
+    };
+  }
+  function questionFor(field){
+    const li=field.closest('li');
+    if(li){
+      const copy=li.cloneNode(true);
+      copy.querySelectorAll('.respuesta-wrap').forEach(el=>el.remove());
+      const q=copy.textContent.trim();
+      if(q)return q;
+    }
+    const label=Array.from(document.querySelectorAll('label')).find(l=>l.htmlFor===field.id);
+    return label?label.textContent.trim():'Respuesta';
+  }
+  function makeReport(name){
+    const doc=makeDocument();
+    const when=new Date().toLocaleString('es-ES',{dateStyle:'medium',timeStyle:'short'});
+    doc.title('Trabajo individual · Conversiones binarias');
+    doc.para('Unidad 1: Conversión entre decimal y binario',{size:10.5,color:[0.28,0.40,0.55]});
+    doc.spacer(10);
+    doc.para('Alumno/a: '+name,{size:12,bold:true});
+    doc.para('Fecha y hora de generación (dispositivo): '+when,{size:9.5});
+    doc.para('Estado de realización: TODAS LAS RESPUESTAS ENTREGADAS',{size:10.5,bold:true,color:[0.08,0.42,0.29]});
+    doc.divider();
+    doc.heading('Resumen de la realización');
+    doc.para(`Respuestas registradas: ${allFields.length} de ${allFields.length}`);
+    doc.para(`Actividades respondidas: ${groups.length} de ${groups.length}`);
+    doc.spacer(3);
+    doc.para('Se recogen las respuestas originales del alumno, sin soluciones ni correcciones automáticas.',{size:8.8,color:[0.35,0.40,0.46]});
+    doc.para('La evaluación de las respuestas corresponde al profesor.',{size:8.8,color:[0.35,0.40,0.46]});
+    doc.divider();
+    doc.heading('Respuestas por actividad');
+    groups.forEach((g,idx)=>{
+      const title=g.getAttribute('aria-label')?.replace(/^Actividad:\s*/,'')||('Actividad '+(idx+1));
+      const fields=Array.from(g.querySelectorAll('.respuesta-actividad'));
+      doc.keep(58);
+      doc.heading(`${idx+1}. ${title}`);
+      const context=Array.from(g.children).filter(el=>el.tagName==='P'||el.tagName==='UL')
+        .map(el=>el.tagName==='UL'?Array.from(el.querySelectorAll('li')).map(li=>li.textContent.trim()).join('; '):el.textContent.trim())
+        .filter(Boolean).join(' ');
+      if(context)doc.para('Enunciado: '+context,{size:8.5,leading:11.8,color:[0.34,0.40,0.47]});
+      doc.para(`Preguntas respondidas: ${fields.length} de ${fields.length}`,{size:8.6,color:[0.35,0.40,0.46]});
+      fields.forEach((f,i)=>{
+        doc.keep(43);
+        doc.para(`${i+1}) ${questionFor(f)}`,{size:9.3,bold:true,leading:12.6});
+        doc.para('Respuesta del alumno: '+f.value.trim(),{size:9.2,x:60,leading:12.8});
+        doc.spacer(5);
+      });
+      if(idx!==groups.length-1)doc.divider();
+    });
+    doc.spacer(8);
+    doc.para('Documento generado en el navegador del alumno. No acredita por sí solo la autoría o identidad.',{size:8.4,color:[0.40,0.44,0.49]});
+    return doc.toBlob();
+  }
+  button.addEventListener('click',function(){
+    updateSubmission();
+    const s=state();
+    if(!s.ready)return;
+    const name=student.value.trim().replace(/\s+/g,' ');
+    try{
+      const blob=makeReport(name);
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;
+      a.download=getSafeFilename(name);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),30000);
+      if(!exported){
+        exported=true;
+        student.readOnly=true;
+        student.setAttribute('aria-readonly','true');
+        const score=quizController.unlockCorrections();
+        const summary=document.getElementById('resumenCorreccion');
+        const grade=document.getElementById('calificacionFinal');
+        grade.textContent=`Autocorrección: ${score.correct} de ${score.gradable} respuestas correctas.`+
+          (score.review?` ${score.review} pregunta de reflexión pendiente de revisión docente.`:'');
+        summary.hidden=false;
+      }
+      updateSubmission();
+    }catch(err){
+      console.error('No se pudo generar el PDF',err);
+      message.textContent='No se ha podido generar el archivo. Prueba con un navegador actualizado.';
+    }
+  });
+  updateSubmission();
+})();
+</script>
+</body>
+</html>

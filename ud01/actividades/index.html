@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Actividades de la Unidad 1 de Digitalización de 4.º ESO: tamaño de la información, binario y ASCII, y componentes hardware.">
-  <title>Actividades · Unidad 1 | Digitalización 4.º ESO</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Prácticas y actividades de la Unidad 1 de Digitalización de 4.º ESO: conversión binario-decimal, almacenamiento, tamaño de la información, ASCII y componentes hardware." name="description"/>
+<title>Prácticas y actividades · Unidad 1 | Digitalización 4.º ESO</title>
+<style>
     :root{
       --bg:#f4f7fb;
       --surface:#ffffff;
@@ -380,81 +381,133 @@
     .breadcrumb a:hover{text-decoration:underline}
     @media(max-width:900px){.resources,.route .steps{grid-template-columns:1fr}}
     @media(prefers-reduced-motion:reduce){.resource,.button{transition:none}.resource-link:hover .resource{transform:none}}
-</style>
+
+    .activities-separator{
+      grid-column:1/-1;
+      margin:8px 0 -2px;
+      padding-top:7px;
+      border-top:1px solid var(--border);
+      color:var(--primary-dark);
+      font-weight:850;
+      font-size:.95rem;
+      letter-spacing:.01em;
+    }
+    .activities-separator span{
+      display:inline-block;
+      background:var(--bg);
+      padding-right:12px;
+      transform:translateY(-20px);
+    }
+    </style>
 </head>
 <body>
-  <nav class="topbar" aria-label="Navegación principal">
-    <div class="nav">
-      <a class="brand" href="../index.html">Digitalización · 4.º ESO</a>
-      <a class="back" href="../index.html">← Volver a la Unidad 1</a>
-    </div>
-  </nav>
-  <header>
-    <div class="breadcrumb"><a href="../index.html">Unidad 1</a><span aria-hidden="true">›</span><span>Actividades</span></div>
-    <div class="hero">
-      <div>
-        <span class="eyebrow">Unidad 1 · Trabajo en clase</span>
-        <h1>Actividades de la unidad</h1>
-        <p>Pon en práctica lo aprendido sobre los componentes de un ordenador y la representación digital de la información.</p>
-      </div>
-      <aside class="hero-panel">
-        <strong>3 actividades</strong>
-        <p>Elige una actividad para comenzar. Puedes volver a este índice siempre que lo necesites.</p>
-      </aside>
-    </div>
-  </header>
-  <main>
-    <section class="intro">
-      <h2>¿Qué actividad vamos a realizar?</h2>
-      <p>Accede a cada actividad desde su tarjeta. Sigue las indicaciones y completa las tareas de clase.</p>
-    </section>
-    <section class="resources" aria-label="Listado de actividades">
-      <a class="resource-link" href="actividad_tamano_informacion.html" aria-label="Abrir la actividad 1: Tamaño de la información">
-        <article class="resource">
-          <div class="icon" aria-hidden="true">01</div>
-          <span class="status">Actividad interactiva</span>
-          <h3>Tamaño de la información</h3>
-          <p>Resuelve ejercicios sobre bits, bytes, conversiones de binario y decimal y capacidad de almacenamiento. Al finalizar, genera el PDF para entregar en Moodle.</p>
-          <ul class="topics">
-            <li>Bits y bytes</li><li>KB · MB · GB · TB</li><li>Problemas</li><li>Entrega PDF</li>
-          </ul>
-          <span class="button" aria-hidden="true"><span>Comenzar actividad</span><span>→</span></span>
-        </article>
-      </a>
-      <a class="resource-link" href="actividad_binario_ascii.html" aria-label="Abrir la actividad 2: Binario y código ASCII">
-        <article class="resource">
-          <div class="icon" aria-hidden="true">02</div>
-          <span class="status">Actividad</span>
-          <h3>Binario y código ASCII</h3>
-          <p>Accede al trabajo sobre la representación de letras, números y símbolos mediante códigos binarios y ASCII.</p>
-          <ul class="topics">
-            <li>Sistema binario</li><li>ASCII</li><li>Caracteres</li><li>Codificación</li>
-          </ul>
-          <span class="button" aria-hidden="true"><span>Abrir actividad</span><span>→</span></span>
-        </article>
-      </a>
-      <a class="resource-link" href="actividad_componentes_hardware.html" aria-label="Abrir la actividad 3: Componentes hardware del ordenador">
-        <article class="resource">
-          <div class="icon" aria-hidden="true">03</div>
-          <span class="status">Actividad interactiva</span>
-          <h3>Componentes hardware del ordenador</h3>
-          <p>Supera ocho retos de autoevaluación sobre los componentes del ordenador, sus funciones, conexiones y situaciones prácticas. Comprueba tus respuestas y revisa el informe de resultados.</p>
-          <ul class="topics">
-            <li>CPU · RAM</li><li>Placa base</li><li>HDD · SSD</li><li>Conectores</li><li>8 retos</li>
-          </ul>
-          <span class="button" aria-hidden="true"><span>Comenzar actividad</span><span>→</span></span>
-        </article>
-      </a>
-    </section>
-    <section class="route">
-      <h2>Cómo trabajar</h2>
-      <p>Lee las instrucciones de la actividad elegida y realiza los ejercicios en el orden propuesto.</p>
-      <div class="steps">
-        <div class="step"><b>1</b><strong>Selecciona una actividad</strong><div>Abre la tarjeta indicada por el profesor.</div></div>
-        <div class="step"><b>2</b><strong>Completa el trabajo</strong><div>Realiza las tareas y sigue las instrucciones de entrega que aparezcan en cada actividad.</div></div>
-      </div>
-    </section>
-  </main>
-  <footer>Unidad 1 · Actividades · Digitalización · 4.º ESO</footer>
+<nav aria-label="Navegación principal" class="topbar">
+<div class="nav">
+<a class="brand" href="../index.html">Digitalización · 4.º ESO</a>
+<a class="back" href="../index.html">← Volver a la Unidad 1</a>
+</div>
+</nav>
+<header>
+<div class="breadcrumb"><a href="../index.html">Unidad 1</a><span aria-hidden="true">›</span><span>Actividades</span></div>
+<div class="hero">
+<div>
+<span class="eyebrow">Unidad 1 · Trabajo en clase</span>
+<h1>Prácticas y actividades de la unidad</h1>
+<p>Practica primero los procedimientos de conversión y almacenamiento y continúa después con las actividades de aplicación de la unidad.</p>
+</div>
+<aside class="hero-panel">
+<strong>5 propuestas de trabajo</strong>
+<p>Las dos primeras son prácticas específicas y, a continuación, encontrarás las actividades de la unidad.</p>
+</aside>
+</div>
+</header>
+<main>
+<section class="intro">
+<h2>¿Qué práctica o actividad vamos a realizar?</h2>
+<p>Accede a cada propuesta desde su tarjeta. Las prácticas aparecen primero para afianzar los procedimientos antes de realizar las actividades.</p>
+</section>
+<section aria-label="Listado de actividades" class="resources"><a aria-label="Abrir la práctica 1: Conversión entre binario y decimal" class="resource-link" href="practica_binario_decimal.html">
+<article class="resource">
+<div aria-hidden="true" class="icon">01</div>
+<span class="status">Práctica interactiva</span>
+<h3>Conversión binario ↔ decimal</h3>
+<p>
+      Practica paso a paso la conversión entre sistema decimal y sistema binario.
+      Incluye ejercicios, retos finales y generación del PDF para Moodle.
+    </p>
+<ul class="topics">
+<li>Binario → decimal</li>
+<li>Decimal → binario</li>
+<li>Divisiones entre 2</li>
+<li>Potencias de 2</li>
+<li>Entrega PDF</li>
+</ul>
+<span aria-hidden="true" class="button">
+<span>Comenzar práctica</span><span>→</span>
+</span>
+</article>
+</a><a aria-label="Abrir la práctica 2: Problemas de almacenamiento" class="resource-link" href="practica_almacenamiento.html">
+<article class="resource">
+<div aria-hidden="true" class="icon">02</div>
+<span class="status">Práctica interactiva</span>
+<h3>Problemas de almacenamiento</h3>
+<p>
+      Resuelve situaciones prácticas con bits, bytes, KB, MB, GB y TB.
+      Calcula espacio ocupado, espacio libre y si distintos archivos caben en un dispositivo.
+    </p>
+<ul class="topics">
+<li>Bytes</li>
+<li>KB · MB · GB · TB</li>
+<li>Conversiones</li>
+<li>Capacidad</li>
+<li>Entrega PDF</li>
+</ul>
+<span aria-hidden="true" class="button">
+<span>Comenzar práctica</span><span>→</span>
+</span>
+</article>
+</a><div aria-hidden="true" class="activities-separator">
+<span>Actividades de aplicación</span>
+</div><a aria-label="Abrir la actividad 3: Tamaño de la información" class="resource-link" href="actividad_tamano_informacion.html">
+<article class="resource">
+<div aria-hidden="true" class="icon">03</div>
+<span class="status">Actividad interactiva</span>
+<h3>Tamaño de la información</h3>
+<p>Resuelve ejercicios sobre bits, bytes, conversiones de binario y decimal y capacidad de almacenamiento. Al finalizar, genera el PDF para entregar en Moodle.</p>
+<ul class="topics">
+<li>Bits y bytes</li><li>KB · MB · GB · TB</li><li>Problemas</li><li>Entrega PDF</li>
+</ul>
+<span aria-hidden="true" class="button"><span>Comenzar actividad</span><span>→</span></span>
+</article>
+</a><a aria-label="Abrir la actividad 4: Binario y código ASCII" class="resource-link" href="actividad_binario_ascii.html">
+<article class="resource">
+<div aria-hidden="true" class="icon">04</div>
+<span class="status">Actividad</span>
+<h3>Binario y código ASCII</h3>
+<p>Accede al trabajo sobre la representación de letras, números y símbolos mediante códigos binarios y ASCII.</p>
+<ul class="topics">
+<li>Sistema binario</li><li>ASCII</li><li>Caracteres</li><li>Codificación</li>
+</ul>
+<span aria-hidden="true" class="button"><span>Abrir actividad</span><span>→</span></span>
+</article>
+</a><a aria-label="Abrir la actividad 5: Componentes hardware del ordenador" class="resource-link" href="actividad_componentes_hardware.html">
+<article class="resource">
+<div aria-hidden="true" class="icon">05</div>
+<span class="status">Actividad interactiva</span>
+<h3>Componentes hardware del ordenador</h3>
+<p>Supera ocho retos de autoevaluación sobre los componentes del ordenador, sus funciones, conexiones y situaciones prácticas. Comprueba tus respuestas y revisa el informe de resultados.</p>
+<ul class="topics">
+<li>CPU · RAM</li><li>Placa base</li><li>HDD · SSD</li><li>Conectores</li><li>8 retos</li>
+</ul>
+<span aria-hidden="true" class="button"><span>Comenzar actividad</span><span>→</span></span>
+</article>
+</a></section>
+<section class="route">
+<h2>Cómo trabajar</h2>
+<p>Comienza por las prácticas indicadas por el profesor y continúa con las actividades de aplicación cuando hayas afianzado los procedimientos.</p>
+<div class="steps"><div class="step"><b>1</b><strong>Practica los procedimientos</strong><div>Trabaja la conversión binario-decimal y los problemas de almacenamiento.</div></div><div class="step"><b>2</b><strong>Realiza las actividades</strong><div>Aplica lo aprendido en las actividades propuestas de la unidad.</div></div><div class="step"><b>3</b><strong>Completa la entrega</strong><div>Sigue las instrucciones de cada página y entrega en Moodle cuando corresponda.</div></div></div>
+</section>
+</main>
+<footer>Unidad 1 · Actividades · Digitalización · 4.º ESO</footer>
 </body>
 </html>
