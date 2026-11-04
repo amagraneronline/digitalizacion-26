@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Actividad interactiva para ordenar las etapas del arranque de un ordenador con Windows. Digitalización, 4.º de ESO.">
+  <title>Ordena el arranque del ordenador · 4.º ESO</title>
+  <style>
+    :root {
+      --navy:#152d43;--navy-2:#244660;--teal:#067f83;--teal-dark:#05686b;
+      --bg:#f4f7fa;--white:#ffffff;--text:#1c2d3e;--muted:#536779;
+      --border:#d8e3eb;--pale:#eaf6f6;--gold:#f5bf56;
+      --success:#16734e;--success-bg:#e9f7ef;
+      --warn:#955f11;--warn-bg:#fff5e5;
+      --shadow:0 12px 34px rgba(18,45,66,.075);
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-size:16px;line-height:1.55}
+    button{font:inherit;cursor:pointer}
+    button:focus-visible,.handle:focus-visible{outline:3px solid #f2a900;outline-offset:3px}
+    .topbar{background:var(--navy);color:white}
+    .top-inner{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:14px 25px}
+    .brand{font-weight:800;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+    .brand-icon{border:1px solid #89c9cc;color:#96e4e5;border-radius:8px;display:grid;place-items:center;width:36px;height:36px;font-size:20px}
+    .subject{font-size:.8rem;color:#c2e5e4;border:1px solid #53768b;border-radius:30px;padding:5px 11px;white-space:nowrap}
+    main{max-width:1100px;margin:auto;padding:34px 24px 70px}
+    .eyebrow{display:inline-flex;color:var(--teal-dark);background:#dff2f2;border-radius:24px;font-size:.76rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px}
+    h1{font-size:clamp(1.9rem,4.5vw,3rem);letter-spacing:-.045em;line-height:1.1;color:var(--navy);margin:15px 0 14px}
+    .lead{max-width:780px;color:var(--muted);font-size:1.075rem;margin:0 0 27px}
+    .layout{display:grid;grid-template-columns:minmax(0,1.58fr) minmax(265px,.72fr);gap:22px;align-items:start}
+    .panel,.aside-card{background:var(--white);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow)}
+    .panel{padding:26px}
+    .activity-heading{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap}
+    h2{font-size:1.26rem;color:var(--navy);margin:0;letter-spacing:-.02em}
+    .count{background:var(--pale);color:var(--teal-dark);border-radius:50px;padding:6px 11px;font-size:.8rem;font-weight:750}
+    .instructions{margin:8px 0 20px;color:var(--muted);font-size:.92rem}
+    .step-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px}
+    .step-card{border:1.5px solid var(--border);border-radius:12px;background:#fff;min-height:96px;display:grid;grid-template-columns:38px minmax(0,1fr) 48px;gap:11px;align-items:center;padding:12px 11px 12px 9px;box-shadow:0 3px 8px rgba(20,55,76,.035);transition:border-color .15s,background-color .15s,box-shadow .15s}
+    .step-card:hover{border-color:#a7c5ce}
+    .step-card.is-dragging{background:#e9f7f7;border:2px dashed #36a1a6;opacity:.6}
+    .step-card.is-correct{border-color:#8bc7a4;background:var(--success-bg)}
+    .step-card.is-incorrect{border-color:#e4b46b;background:var(--warn-bg)}
+    .position{display:flex;flex-direction:column;gap:3px;align-items:center;align-self:stretch;justify-content:center;color:#8a9baa;font-size:.7rem;font-weight:800;letter-spacing:.035em}
+    .position span{font-size:1.16rem;color:var(--teal-dark)}
+    .step-main{min-width:0;display:grid;gap:4px}
+    .card-topline{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+    .card-id{font-size:.74rem;letter-spacing:.055em;text-transform:uppercase;font-weight:850;color:var(--teal-dark)}
+    .card-state{font-size:.73rem;font-weight:800;border-radius:100px;padding:1px 7px}
+    .card-state.good{color:var(--success);background:#d6efe1}
+    .card-state.bad{color:var(--warn);background:#ffe7ba}
+    .step-copy{font-size:.93rem;line-height:1.45;margin:0;color:var(--text)}
+    .card-actions{display:flex;flex-direction:column;gap:5px;align-items:stretch}
+    .mini{border:1px solid #cbdce5;background:#f7fafb;border-radius:7px;height:28px;color:var(--navy-2);display:grid;place-items:center;font-size:1rem;font-weight:750;line-height:1;padding:0}
+    .mini:hover:not(:disabled){background:#e3f3f4;border-color:#7dbfc1}
+    .mini:disabled{cursor:not-allowed;opacity:.35}
+    .handle{height:30px;display:grid;place-items:center;background:none;border:0;color:var(--teal);touch-action:none;border-radius:7px;user-select:none;-webkit-user-select:none;cursor:grab;outline-offset:1px}
+    .handle:active{cursor:grabbing}
+    .handle:disabled{cursor:default;opacity:.35}
+    .handle svg{width:18px;height:18px;pointer-events:none}
+    .drag-ghost{position:fixed;z-index:999;pointer-events:none;width:min(530px,calc(100vw - 30px));box-shadow:0 17px 35px rgba(23,52,72,.2);border:2px solid var(--teal);background:#fff;border-radius:12px;opacity:.97;padding:14px;transform:rotate(-.3deg);line-height:1.35}
+    .drag-ghost .ghost-label{display:block;color:var(--teal-dark);font-size:.75rem;font-weight:800;letter-spacing:.06em;margin-bottom:5px}
+    .drag-ghost p{font-size:.89rem;margin:0}
+    .controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:23px;align-items:center}
+    .btn{border:1.5px solid transparent;border-radius:9px;padding:11px 17px;font-size:.91rem;font-weight:800;min-height:44px;transition:background .15s,transform .15s}
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{background:var(--teal);color:#fff}.btn-primary:hover:not(:disabled){background:var(--teal-dark)}
+    .btn-outline{background:white;color:var(--navy-2);border-color:#b8cdd9}.btn-outline:hover:not(:disabled){background:#eaf5f6}
+    .btn:disabled{opacity:.5;cursor:not-allowed}
+    .result{border-radius:13px;border:1px solid var(--border);padding:17px 19px;margin-top:20px;scroll-margin-top:22px}
+    .result.hidden,.hidden{display:none!important}
+    .result.good{background:var(--success-bg);border-color:#a9d6bd}
+    .result.review{background:var(--warn-bg);border-color:#efd3a1}
+    .result-title{font-size:1.13rem;font-weight:850;color:var(--navy);margin:0 0 4px}
+    .result-score{margin:0 0 6px;font-size:.94rem;font-weight:750}
+    .result-feedback{margin:0;font-size:.92rem}
+    .result-note{margin:10px 0 0;font-weight:750;font-size:.86rem}
+    .aside{display:grid;gap:17px}
+    .aside-card{padding:22px}
+    .aside-card h3{font-size:1.05rem;margin:0 0 13px;color:var(--navy)}
+    .aside-card p{color:var(--muted);font-size:.91rem;line-height:1.55;margin:0}
+    .helper-list{counter-reset:helper;list-style:none;padding:0;margin:0;display:grid;gap:13px}
+    .helper-list li{display:grid;grid-template-columns:26px 1fr;align-items:start;gap:10px;color:var(--text);font-size:.88rem;line-height:1.45}
+    .helper-list li::before{counter-increment:helper;content:counter(helper);width:24px;height:24px;border-radius:50%;background:var(--pale);color:var(--teal-dark);font-size:.8rem;font-weight:850;display:grid;place-items:center}
+    .divider{height:1px;background:var(--border);margin:17px 0}
+    .reflection{border-top:4px solid var(--teal)}
+    .reflection .tag{display:inline-block;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--teal-dark);font-weight:850;margin-bottom:8px}
+    .reflection strong{color:var(--navy)}
+    .footer{margin-top:26px;text-align:center;font-size:.79rem;color:#667b8c}
+    @media(max-width:790px){main{padding-top:27px}.layout{grid-template-columns:minmax(0,1fr)}.aside{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:600px){.top-inner{padding:12px 16px}.brand{font-size:.86rem}.brand-icon{width:31px;height:31px}.subject{font-size:.71rem}.aside{grid-template-columns:1fr}main{padding:23px 13px 45px}.panel{padding:16px 12px}.step-card{grid-template-columns:31px minmax(0,1fr) 38px;gap:8px;padding:10px 6px}.step-copy{font-size:.87rem}.card-actions{gap:4px}.mini{height:29px}.controls .btn{flex:1 1 auto}.lead{font-size:.98rem}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+    @media print{.topbar,.controls,.card-actions,.aside-card:first-child,.footer{display:none!important}.layout{display:block}body{background:white}.panel,.aside-card{box-shadow:none}.step-card{break-inside:avoid}main{padding:0}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="top-inner">
+      <div class="brand"><span class="brand-icon" aria-hidden="true">⏻</span><span>AULA DIGITAL · ACTIVIDAD INTERACTIVA</span></div>
+      <span class="subject">Digitalización · 4.º ESO</span>
+    </div>
+  </header>
+  <main>
+    <span class="eyebrow">Sistemas operativos · Reto de secuenciación</span>
+    <h1>Ordena el arranque<br>del ordenador</h1>
+    <p class="lead">¿Qué sucede desde que pulsas el botón de encendido hasta que puedes utilizar Windows? Coloca las cinco etapas en el orden correcto y comprueba tu respuesta.</p>
+    <div class="layout">
+      <section class="panel" aria-labelledby="task-title">
+        <div class="activity-heading">
+          <h2 id="task-title">Las cinco etapas</h2>
+          <span class="count" id="count-label">5 tarjetas · 1 secuencia</span>
+        </div>
+        <p class="instructions" id="instructions">Arrastra las tarjetas usando el icono <strong>⠿</strong>. También puedes usar las flechas ↑ ↓ de cada tarjeta. Cuando termines, pulsa <strong>Comprobar</strong>.</p>
+        <ol id="step-list" class="step-list" aria-label="Tarjetas para ordenar" aria-describedby="instructions"></ol>
+        <div class="controls">
+          <button id="check-button" class="btn btn-primary" type="button">Comprobar orden</button>
+          <button id="solution-button" class="btn btn-outline hidden" type="button">Mostrar solución</button>
+          <button id="retry-button" class="btn btn-outline" type="button">Mezclar de nuevo</button>
+        </div>
+        <section id="result" class="result hidden" aria-live="polite" aria-atomic="true" tabindex="-1">
+          <p class="result-title" id="result-title"></p>
+          <p class="result-score" id="result-score"></p>
+          <p class="result-feedback" id="result-feedback"></p>
+          <p class="result-note hidden" id="result-note"></p>
+        </section>
+        <p id="announcer" class="visually-hidden" aria-live="polite"></p>
+      </section>
+      <aside class="aside" aria-label="Información para realizar la actividad">
+        <div class="aside-card">
+          <h3>Cómo realizar el reto</h3>
+          <ol class="helper-list">
+            <li>Lee con atención cada etapa del arranque del ordenador.</li>
+            <li>Ordena las tarjetas de arriba abajo según cuándo ocurre cada acción.</li>
+            <li>Comprueba el resultado. Si hay errores, vuelve a intentarlo.</li>
+          </ol>
+          <div class="divider"></div>
+          <p><strong>Accesibilidad:</strong> en móvil puedes arrastrar desde el icono o tocar ↑ y ↓. Con teclado, sitúate en el icono y pulsa las flechas arriba o abajo.</p>
+        </div>
+        <div class="aside-card reflection">
+          <span class="tag">Pregunta para reflexionar</span>
+          <h3>¿Quién arranca primero?</h3>
+          <p>Al terminar, explica con tus palabras: <strong>¿por qué la UEFI puede mostrar un error cuando Windows todavía no ha comenzado a iniciarse?</strong></p>
+        </div>
+      </aside>
+    </div>
+    <p class="footer">Actividad de aprendizaje autónomo · Funciona sin cuentas, descargas adicionales ni conexión a servicios externos. Las respuestas no se envían ni se guardan.</p>
+  </main>
+  <script>
+    'use strict';
+    // Se mantiene el contenido y el orden correcto del archivo H5P original.
+    const STEPS = [
+      {id:'D',text:'Al pulsar el botón, el ordenador recibe energía y el procesador empieza a ejecutar instrucciones iniciales.'},
+      {id:'B',text:'La UEFI inicializa componentes del ordenador y realiza comprobaciones básicas del hardware.'},
+      {id:'E',text:'La UEFI inicia el Administrador de arranque de Windows, que después pone en marcha el cargador del sistema.'},
+      {id:'C',text:'El cargador prepara el núcleo de Windows y los controladores esenciales para que el sistema empiece a funcionar.'},
+      {id:'A',text:'Ya se han iniciado los componentes necesarios de Windows y aparece la pantalla de inicio de sesión o el escritorio.'}
+    ];
+    const FEEDBACK = {
+      low:'Busca los dos extremos. ¿Qué acción enciende el ordenador? ¿Qué pantalla indica que Windows ya ha arrancado? Después, coloca las tres tarjetas restantes.',
+      mid:'Revisa las tarjetas que mencionan la UEFI, el Administrador de arranque y el cargador. Fíjate en quién pone en marcha a quién.',
+      perfect:'Has ordenado las cinco etapas. Explica con tus palabras por qué la UEFI puede mostrar un error aunque Windows todavía no se haya iniciado.'
+    };
+    const list = document.querySelector('#step-list');
+    const checkButton = document.querySelector('#check-button');
+    const retryButton = document.querySelector('#retry-button');
+    const solutionButton = document.querySelector('#solution-button');
+    const result = document.querySelector('#result');
+    const resultTitle = document.querySelector('#result-title');
+    const resultScore = document.querySelector('#result-score');
+    const resultFeedback = document.querySelector('#result-feedback');
+    const resultNote = document.querySelector('#result-note');
+    const announcer = document.querySelector('#announcer');
+    let locked = false;
+    let attemptScore = null;
+    let pointerDrag = null;
+    const gripIcon = '<svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor"><circle cx="6" cy="4" r="1.6"/><circle cx="14" cy="4" r="1.6"/><circle cx="6" cy="10" r="1.6"/><circle cx="14" cy="10" r="1.6"/><circle cx="6" cy="16" r="1.6"/><circle cx="14" cy="16" r="1.6"/></svg>';
+
+    function shuffleOrder() {
+      const values = STEPS.map(step => step.id);
+      for (let i = values.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [values[i],values[j]] = [values[j],values[i]];
+      }
+      if (values.every((id,i) => id === STEPS[i].id)) {
+        [values[0],values[1]] = [values[1],values[0]];
+      }
+      return values;
+    }
+    function makeCard(id) {
+      const step = STEPS.find(s => s.id === id);
+      const card = document.createElement('li');
+      card.className = 'step-card';
+      card.dataset.id = id;
+      card.innerHTML = `
+        <div class="position" aria-hidden="true">POS<span class="slot-number"></span></div>
+        <div class="step-main"><div class="card-topline"><span class="card-id">Tarjeta ${id}</span><span class="card-state hidden"></span></div><p class="step-copy"></p></div>
+        <div class="card-actions">
+          <button class="handle" type="button" aria-label="Mover tarjeta ${id} arrastrando o con flechas de teclado" title="Arrastrar o usar flechas del teclado">${gripIcon}</button>
+          <button class="mini up" type="button" aria-label="Subir tarjeta ${id}" title="Subir tarjeta">↑</button>
+          <button class="mini down" type="button" aria-label="Bajar tarjeta ${id}" title="Bajar tarjeta">↓</button>
+        </div>`;
+      card.querySelector('.step-copy').textContent = step.text;
+      return card;
+    }
+    function cards() { return [...list.querySelectorAll('.step-card')]; }
+    function order() { return cards().map(c => c.dataset.id); }
+    function refreshPositions() {
+      const all = cards();
+      all.forEach((card,i) => {
+        card.querySelector('.slot-number').textContent = String(i + 1).padStart(2,'0');
+        card.querySelector('.up').disabled = locked || i === 0;
+        card.querySelector('.down').disabled = locked || i === all.length - 1;
+        card.querySelector('.handle').disabled = locked;
+      });
+    }
+    function clearMarks() {
+      for(const card of cards()) {
+        card.classList.remove('is-correct','is-incorrect','is-dragging');
+        const state = card.querySelector('.card-state');
+        state.textContent = '';
+        state.className = 'card-state hidden';
+      }
+    }
+    function markAnswers(showAllCorrect = false) {
+      const ids = order();
+      cards().forEach((card,i) => {
+        const correct = showAllCorrect || ids[i] === STEPS[i].id;
+        const state = card.querySelector('.card-state');
+        card.classList.toggle('is-correct', correct);
+        card.classList.toggle('is-incorrect', !correct);
+        state.className = 'card-state ' + (correct ? 'good' : 'bad');
+        state.textContent = correct ? 'En su posición' : 'Revisar posición';
+      });
+    }
+    function moveCard(card, delta) {
+      if(locked) return;
+      const all = cards();
+      const index = all.indexOf(card);
+      const target = index + delta;
+      if(target < 0 || target >= all.length) return;
+      if(delta < 0) list.insertBefore(card,all[target]);
+      else list.insertBefore(all[target],card);
+      refreshPositions();
+      card.querySelector('.handle').focus({preventScroll:true});
+      announcer.textContent = `Tarjeta ${card.dataset.id} movida a la posición ${target + 1} de ${all.length}.`;
+    }
+    list.addEventListener('click', (event) => {
+      if(locked) return;
+      const button = event.target.closest('button.mini');
+      if(!button) return;
+      const card = button.closest('.step-card');
+      moveCard(card,button.classList.contains('up') ? -1 : 1);
+    });
+    list.addEventListener('keydown', event => {
+      if(locked || !event.target.classList.contains('handle')) return;
+      if(event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+        event.preventDefault();
+        moveCard(event.target.closest('.step-card'), event.key === 'ArrowUp' ? -1 : 1);
+      }
+    });
+    // Pointer Events: arrastrar funciona con ratón, pantalla táctil y lápiz.
+    list.addEventListener('pointerdown', event => {
+      const handle = event.target.closest('.handle');
+      if(locked || !handle || event.button !== 0) return;
+      const card = handle.closest('.step-card');
+      pointerDrag = {card,handle,id:event.pointerId,startX:event.clientX,startY:event.clientY,active:false,ghost:null,offsetX:0};
+      list.setPointerCapture(event.pointerId);
+    });
+    function moveGhost(e) {
+      if(!pointerDrag || !pointerDrag.ghost) return;
+      pointerDrag.ghost.style.left = `${Math.max(10,Math.min(e.clientX - pointerDrag.offsetX, window.innerWidth - pointerDrag.ghost.offsetWidth - 10))}px`;
+      pointerDrag.ghost.style.top = `${Math.max(5,Math.min(e.clientY - 38, window.innerHeight - 75))}px`;
+    }
+    list.addEventListener('pointermove', event => {
+      const d = pointerDrag;
+      if(!d || event.pointerId !== d.id) return;
+      if(!d.active && Math.hypot(event.clientX-d.startX,event.clientY-d.startY) > 7) {
+        d.active = true;
+        d.card.classList.add('is-dragging');
+        d.ghost = document.createElement('div');
+        d.ghost.className = 'drag-ghost';
+        const txt = STEPS.find(s => s.id === d.card.dataset.id).text;
+        const label = document.createElement('span');label.className='ghost-label';label.textContent=`TARJETA ${d.card.dataset.id}`;
+        const p=document.createElement('p');p.textContent=txt;
+        d.ghost.append(label,p);document.body.appendChild(d.ghost);
+        d.offsetX = Math.min(130,Math.max(25,event.clientX - d.card.getBoundingClientRect().left));
+      }
+      if(!d.active) return;
+      event.preventDefault();
+      moveGhost(event);
+      const others=cards().filter(card => card !== d.card);
+      const next=others.find(card => event.clientY < card.getBoundingClientRect().top + card.getBoundingClientRect().height/2);
+      if(next) list.insertBefore(d.card,next);
+      else list.appendChild(d.card);
+      refreshPositions();
+    });
+    function endPointer(event) {
+      const d=pointerDrag;
+      if(!d || event.pointerId !== d.id) return;
+      pointerDrag=null;
+      if(d.ghost) d.ghost.remove();
+      d.card.classList.remove('is-dragging');
+      if(d.active) {
+        refreshPositions();
+        announcer.textContent=`Tarjeta ${d.card.dataset.id} colocada en la posición ${cards().indexOf(d.card)+1}.`;
+      }
+    }
+    list.addEventListener('pointerup',endPointer);
+    list.addEventListener('pointercancel',endPointer);
+    list.addEventListener('lostpointercapture',endPointer);
+
+    function check() {
+      if(locked) return;
+      locked=true;
+      const answer=order();
+      attemptScore=answer.filter((id,i)=>id===STEPS[i].id).length;
+      const percent=Math.round(100*attemptScore/STEPS.length);
+      const feedback=percent===100 ? FEEDBACK.perfect : (percent<=39 ? FEEDBACK.low : FEEDBACK.mid);
+      markAnswers();refreshPositions();
+      checkButton.disabled=true;
+      solutionButton.classList.remove('hidden');
+      retryButton.textContent='Volver a intentarlo';
+      result.className='result '+(percent===100 ? 'good' : 'review');
+      resultTitle.textContent=percent===100?'¡Secuencia correcta!':'Revisa el orden de las tarjetas';
+      resultScore.textContent=`Resultado: ${attemptScore} de ${STEPS.length} posiciones correctas (${percent} %).`;
+      resultFeedback.textContent=feedback;
+      resultNote.classList.add('hidden');
+      result.focus({preventScroll:true});
+      result.scrollIntoView({block:'nearest',behavior:'smooth'});
+    }
+    function showSolution() {
+      if(attemptScore===null) return;
+      const existing=new Map(cards().map(card=>[card.dataset.id,card]));
+      STEPS.forEach(step=>list.appendChild(existing.get(step.id)));
+      refreshPositions();markAnswers(true);
+      result.className='result good';
+      resultTitle.textContent='Este es el orden correcto';
+      resultScore.textContent=`Resultado de tu intento: ${attemptScore} de ${STEPS.length} posiciones correctas.`;
+      resultFeedback.textContent='Lee las cinco etapas de arriba abajo para comprender cómo se inicia Windows.';
+      resultNote.textContent='Mostrar la solución no modifica tu puntuación. Puedes volver a intentarlo.';
+      resultNote.classList.remove('hidden');
+      solutionButton.classList.add('hidden');
+      result.focus({preventScroll:true});
+    }
+    function restart() {
+      locked=false;attemptScore=null;
+      list.replaceChildren(...shuffleOrder().map(makeCard));
+      clearMarks();refreshPositions();
+      checkButton.disabled=false;
+      solutionButton.classList.add('hidden');
+      retryButton.textContent='Mezclar de nuevo';
+      result.className='result hidden';
+      resultNote.classList.add('hidden');
+      announcer.textContent='Tarjetas mezcladas. Ordena de nuevo las cinco etapas.';
+    }
+    checkButton.addEventListener('click',check);
+    solutionButton.addEventListener('click',showSolution);
+    retryButton.addEventListener('click',restart);
+    // Clase accesible para mensajes enviados a lectores de pantalla sin alterar el diseño.
+    const sheet=document.createElement('style');
+    sheet.textContent='.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}';
+    document.head.appendChild(sheet);
+    restart();
+  </script>
+</body>
+</html>

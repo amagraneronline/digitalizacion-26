@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Definición y utilidad del sistema operativo. Del usuario al hardware a través de un ejemplo de audio en clase. Digitalización, 4.º de ESO.">
+  <title>¿Qué es un sistema operativo? · Digitalización · 4.º ESO</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #faf9f4;
+      --ink: #173c39;
+      --text: #273d3b;
+      --teal: #006d62;
+      --muted: #49635f;
+      --rule: #cad6cd;
+      --pale: #ddeee4;
+      --lime: #ddf47d;
+      --deep: #103e3a;
+      color: var(--text);
+      background: #e7ece6;
+      font-family: Arial, Helvetica, "Nimbus Sans", sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-size: 18px; line-height: 1.45; }
+    h1, h2, h3, p, ol { margin: 0; }
+    h1, h2, h3 { color: var(--ink); }
+    ol { list-style: none; padding: 0; }
+    svg { display: block; max-width: 100%; }
+    .sheet {
+      width: min(100%, 1100px);
+      margin: 28px auto;
+      padding: 35px clamp(28px, 5vw, 58px);
+      background: var(--paper);
+      box-shadow: 0 6px 38px rgba(26,55,43,.08);
+    }
+    .masthead, .masthead span { display: flex; align-items: center; }
+    .masthead {
+      justify-content: space-between; gap: 10px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #a7bdb0;
+      color: var(--ink); font-size: 14px; font-weight: 700;
+      line-height: 1.15; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .masthead span { gap: 10px; }
+    .mark { width: 21px; height: 21px; flex: none; }
+    .hero {
+      display: grid; grid-template-columns: 1.62fr 1fr; gap: 18px; align-items: center;
+      margin: 29px 0 27px;
+    }
+    .kicker, .column-labels, .tag, .credit {
+      color: var(--teal); font: 700 14px/1.35 "Courier New","Liberation Mono",monospace;
+      text-transform: uppercase; letter-spacing: .065em;
+    }
+    h1 {
+      margin-top: 8px; font-size: clamp(44px, 5.8vw, 65px);
+      line-height: 1.025; letter-spacing: -.048em;
+    }
+    h1 em { color: var(--teal); font-style: normal; }
+    .definition { max-width: 53ch; margin-top: 16px; font-size: 21px; line-height: 1.36; }
+    .monitor { width: 100%; height: auto; }
+    h2 { font-size: clamp(30px, 3.8vw, 40px); line-height: 1.1; letter-spacing: -.035em; }
+    h3 { font-size: 23px; line-height: 1.15; letter-spacing: -.022em; }
+    .kicker + h2 { margin-top: 5px; }
+    .purpose {
+      display: grid; grid-template-columns: minmax(200px,.8fr) minmax(0,1.8fr);
+      align-items: center; column-gap: 27px; padding: 22px 25px;
+      background: #e5efe3; border-radius: 13px;
+    }
+    .purpose h2 { font-size: clamp(27px, 3.1vw, 34px); }
+    .purpose > p { border-left: 1px solid #b0c7b5; padding-left: 27px; font-size: 20px; }
+    .scheme { margin: 33px 0 22px; }
+    .intro { margin-top: 6px; font-size: 19px; }
+    .flow {
+      display: grid; grid-template-columns: repeat(4,minmax(0,1fr));
+      position: relative; isolation: isolate; margin: 16px -2px 0;
+    }
+    .flow li { position: relative; padding: 21px 9px 16px; text-align: center; }
+    .flow .intermediario::before {
+      content: ""; position: absolute; inset: 0 4px; border-radius: 14px; z-index: -1;
+      background: #e6efe3;
+    }
+    .node {
+      display: grid; place-items: center; width: 63px; height: 63px;
+      margin: 0 auto 14px; border: 1.4px solid #c0d8c8; border-radius: 50%;
+      background: var(--pale);
+    }
+    .intermediario .node { background: var(--lime); border-color: #86a66d; }
+    .icon { width: 30px; height: 30px; }
+    .role-copy p { margin: 6px auto 0; max-width: 23ch; font-size: 17px; line-height: 1.38; }
+    .link-arrow {
+      position: absolute; z-index: 1; top: 28px;
+      left: calc(50% + 39px); width: calc(100% - 78px);
+      display: flex; flex-direction: column; align-items: stretch; gap: 6px;
+      color: var(--muted); font-size: 13px; font-weight: 700; line-height: 16px;
+      white-space: nowrap;
+    }
+    .link-arrow i { position: relative; display: block; height: 2px; width: 100%; background: #4c7e6e; }
+    .link-arrow i::after {
+      content: ""; position: absolute; right: 0; top: 50%; width: 8px; height: 8px;
+      border-right: 2px solid #4c7e6e; border-top: 2px solid #4c7e6e;
+      transform: translateY(-50%) rotate(45deg);
+    }
+    .case-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 22px;
+      padding: 20px 26px; border-radius: 13px; background: var(--deep); color: #e0ece6;
+    }
+    .case-head .kicker { color: var(--lime); }
+    .case-head h2 { color: white; }
+    .case-head h2 + p { margin-top: 6px; }
+    .audio-badge { width: clamp(85px, 12vw, 126px); height: auto; flex: none; }
+    .column-labels, .examples li {
+      display: grid; grid-template-columns: minmax(0,.92fr) minmax(0,2fr);
+      align-items: center; gap: 25px;
+    }
+    .column-labels { margin-top: 20px; padding-bottom: 7px; border-bottom: 1px solid #86a297; color: var(--muted); font-size: 13px; }
+    .examples li { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+    .tag { display: block; margin-bottom: 4px; font-size: 13px; }
+    .switch { margin-top: 17px; padding: 17px 19px; display: flex; align-items: center; gap: 16px; background: #eff2e7; border-radius: 11px; }
+    .headphones { width: 32px; flex: none; }
+    .switch h3 { font-size: 21px; }
+    .switch p { margin-top: 3px; }
+    footer { padding-top: 22px; color: var(--muted); font-size: 14px; }
+    footer > div { display: grid; grid-template-columns: 150px 225px 1fr; gap: 12px; align-items: baseline; padding: 3px 0; }
+    .credit { font-size: 12px; color: var(--muted); }
+    footer a { color: var(--teal); text-underline-offset: 3px; justify-self: start; }
+    footer a:hover { color: var(--ink); }
+    a:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+    .print-poster { display: none; }
+    @media (max-width: 1099px) { .sheet { margin: 0 auto; } }
+    @media (max-width: 760px) {
+      .sheet { padding: 24px; }
+      .hero { grid-template-columns: 1fr; margin: 23px 0; gap: 12px; }
+      h1 { font-size: clamp(38px,8vw,59px); }
+      .definition { font-size: 19px; }
+      .monitor { width: min(100%,310px); margin: 0 auto; }
+      .purpose { grid-template-columns: 1fr; gap: 9px; padding: 19px 21px; }
+      .purpose > p { border: 0; padding: 0; font-size: 18px; }
+      .scheme { margin: 26px 0; }
+      .flow { grid-template-columns: 1fr; margin: 13px 0 0; }
+      .flow li { display: grid; grid-template-columns: 53px minmax(0,1fr); gap: 0 12px; align-items: start; text-align: start; padding: 11px 12px; }
+      .flow .intermediario::before { inset: 0; }
+      .node { width: 49px; height: 49px; margin: 0; }
+      .icon { width: 25px; height: 25px; }
+      .role-copy p { max-width: none; margin: 3px 0 0; }
+      .link-arrow {
+        grid-column: 1/-1; position: relative; width: auto; inset: auto;
+        display: flex; flex-direction: row-reverse; justify-content: flex-end;
+        align-items: center; gap: 10px; margin: 8px 0 0 24px; font-size: 13px;
+      }
+      .link-arrow i { width: 2px; height: 19px; }
+      .link-arrow i::after { right: auto; left: 50%; top: auto; bottom: 0; transform: translateX(-50%) rotate(135deg); }
+      .audio-badge { width: 76px; }
+      footer > div { grid-template-columns: 120px minmax(0,1fr); row-gap: 3px; padding: 6px 0; }
+      footer > div a:last-child { grid-column: 2; }
+    }
+    @media (max-width: 510px) {
+      .sheet { padding: 19px 18px 24px; }
+      body { font-size: 17px; }
+      .masthead { font-size: 11px; }
+      .masthead span { gap: 7px; }
+      .mark { width: 17px; height: 17px; }
+      h1 { font-size: clamp(33px,9.5vw,47px); }
+      .definition { margin-top: 10px; }
+      .intro { font-size: 17px; }
+      h3 { font-size: 21px; }
+      .case-head { padding: 18px; gap: 8px; }
+      .case-head h2 { font-size: 27px; }
+      .audio-badge { display: none; }
+      .column-labels { display: none; }
+      .examples { margin-top: 4px; }
+      .examples li { grid-template-columns: 1fr; gap: 5px; }
+      .switch { align-items: flex-start; padding: 14px; gap: 9px; }
+      .headphones { width: 25px; margin-top: 2px; }
+      .switch h3 { font-size: 19px; }
+      footer > div { display: flex; flex-direction: column; gap: 3px; }
+    }
+    @page { size: A4 portrait; margin: 7mm; }
+    @media print {
+      html, body { margin: 0; padding: 0; background: white; }
+      .sheet { display: none; }
+      .print-poster { display: block; width: 100%; break-inside: avoid; }
+      .print-poster svg { display: block; width: 100%; height: auto; max-height: 281mm; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header>
+      <div class="masthead"><span><svg xmlns="http://www.w3.org/2000/svg" class="mark" viewBox="0 0 21 21" aria-hidden="true" focusable="false">
+<g transform="translate(0 0)">
+<rect x="0" y="0" width="9" height="9" rx="1.1" fill="#006D62"/><rect x="12" y="0" width="9" height="9" rx="1.1" fill="#173C39"/><rect x="0" y="12" width="9" height="9" rx="1.1" fill="#173C39"/><rect x="12" y="12" width="9" height="9" rx="1.1" fill="#91B64F"/>
+</g>
+</svg> Digitalización</span><span>4.º de ESO</span></div>
+      <div class="hero"><div>
+        <p class="kicker">A / Definición</p>
+        <h1>¿Qué es un<br><em>sistema operativo?</em></h1>
+        <p class="definition">Un sistema operativo (SO) es el software básico de un dispositivo. Hace de intermediario entre las aplicaciones y el hardware, la parte física del equipo.</p>
+      </div><svg xmlns="http://www.w3.org/2000/svg" class="monitor" viewBox="0 5 370 202" role="img" aria-label="Un ordenador con un reproductor de audio en pantalla y un altavoz a su lado." focusable="false">
+<title>Un ordenador con un reproductor de audio en pantalla y un altavoz a su lado.</title>
+<path d="M18 195H352" fill="none" stroke="#B7CABF" stroke-width="1.5" stroke-linecap="round"/>
+<path d="m120 141-6 38h48l-6-38Z" fill="#91B4A4" stroke="#173C39" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M104 176h68l13 9-2 4H91l-1-4Z" fill="#C3DCCB" stroke="#173C39" stroke-width="1.7" stroke-linejoin="round"/>
+<path d="M93 185h88" fill="none" stroke="#63877A" stroke-width="1.2"/>
+<rect x="16" y="22" width="253" height="140" rx="12" fill="#ACCCBA" stroke="#173C39" stroke-width="2.1"/>
+<rect x="13" y="18" width="253" height="140" rx="11" fill="#466D62" stroke="#173C39" stroke-width="2.5"/>
+<rect x="21" y="26" width="237" height="117" rx="5" fill="#DDEDE1" stroke="#173C39" stroke-width="1.4"/>
+<path d="m24 120 47-30m-38 38 38-24m121-60 37-15" fill="none" stroke="#C1D6C8" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="139.5" cy="150.5" r="2.2" fill="#DDF47D"/>
+<rect x="41" y="44" width="196" height="86" rx="6" fill="#B3CABC"/>
+<rect x="38" y="40" width="196" height="86" rx="6" fill="#F9FBF2" stroke="#173C39" stroke-width="1.65"/>
+<path d="M44 40h184a6 6 0 0 1 6 6v14H38V46a6 6 0 0 1 6-6Z" fill="#A9CFC0"/>
+<path d="M38 60h196" fill="none" stroke="#638A7D" stroke-width="1.1"/>
+<circle cx="48" cy="50" r="2" fill="#006D62"/>
+<circle cx="55" cy="50" r="2" fill="#619481"/>
+<text x="67" y="54" fill="#103E3A" font-size="11.8" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Reproductor</text>
+<circle cx="71" cy="90" r="18" fill="#DDF47D" stroke="#B3CA70" stroke-width="1"/>
+<path d="M67 82v16l12-8Z" fill="#103E3A" stroke="#103E3A" stroke-width="1.15" stroke-linejoin="round"/>
+<path d="M104.0 83v6" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M111.2 79.5v13" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M118.4 74.5v23" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M125.6 80.5v11" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M132.8 76.5v19" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M140.0 72v28" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M147.2 78v16" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M154.4 82v8" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M161.6 77.5v17" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M168.8 74v24" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M176.0 79.5v13" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M183.2 76v20" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M190.4 82v8" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M197.60000000000002 80v12" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M204.8 83.5v5" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/>
+<path d="M104 109h108" fill="none" stroke="#BDCEC0" stroke-width="2.8" stroke-linecap="round"/>
+<path d="M104 109h41" fill="none" stroke="#528A75" stroke-width="2.8" stroke-linecap="round"/>
+<circle cx="145" cy="109" r="3.4" fill="#006D62"/>
+<path d="m277 91 14-8 47 4 1 96-12 7-1-94Z" fill="#708E7B" stroke="#173C39" stroke-width="1.9" stroke-linejoin="round"/>
+<path d="m326 96 12-9 1 96-12 7Z" fill="#537767" stroke="#173C39" stroke-width="1.6" stroke-linejoin="round"/>
+<path d="m277 91 49 5 1 94-50-6Z" fill="#D1E2CB" stroke="#173C39" stroke-width="1.9" stroke-linejoin="round"/>
+<circle cx="301" cy="113" r="7" fill="#769986" stroke="#173C39" stroke-width="1.7"/>
+<circle cx="301" cy="113" r="2.5" fill="#103E3A"/>
+<circle cx="301" cy="152" r="17" fill="#799D89" stroke="#173C39" stroke-width="1.8"/>
+<circle cx="301" cy="152" r="10.5" fill="#A9C5A9" stroke="#173C39" stroke-width="1.2"/>
+<circle cx="301" cy="152" r="4.4" fill="#103E3A"/>
+<path d="M348 116q10 9 0 18m6-26q17 16 0 34" fill="none" stroke="#006D62" stroke-width="2.8" stroke-linecap="round"/>
+</svg></div>
+    </header>
+    <section class="purpose" aria-labelledby="utilidad">
+      <div><p class="kicker">B / Utilidad</p><h2 id="utilidad">¿Para qué sirve?</h2></div>
+      <p>Te permite utilizar un ordenador, un móvil o una tableta a través de sus aplicaciones. Así puedes redactar un trabajo o hablar por videollamada.</p>
+    </section>
+    <section class="scheme" aria-labelledby="esquema">
+      <p class="kicker">C / Esquema</p><h2 id="esquema">Del usuario al hardware</h2>
+      <p class="intro">Las flechas muestran el camino que sigue una petición.</p>
+      <ol class="flow">
+          <li>
+            <span class="node"><svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g transform="translate(0 0) scale(1)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="UserRound">
+<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>
+</g>
+</svg></span><div class="role-copy"><h3>Usuario</h3><p>Decide qué quiere hacer y lo indica en la aplicación.</p></div>
+            <div class="link-arrow" aria-hidden="true"><span>da una orden</span><i></i></div>
+          </li>
+          <li>
+            <span class="node"><svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g transform="translate(0 0) scale(1)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="AppWindow">
+<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/>
+</g>
+</svg></span><div class="role-copy"><h3>Aplicación</h3><p>Recoge la orden y pide al SO lo que necesita para llevarla a cabo.</p></div>
+            <div class="link-arrow" aria-hidden="true"><span>pide un servicio</span><i></i></div>
+          </li>
+          <li class="intermediario">
+            <span class="node"><svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g transform="translate(0 0) scale(1)" fill="none" stroke="#103E3A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Layers">
+<path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>
+</g>
+</svg></span><div class="role-copy"><h3>Sistema operativo</h3><p>Recibe la petición y se comunica con el dispositivo adecuado.</p></div>
+            <div class="link-arrow" aria-hidden="true"><span>envía la orden</span><i></i></div>
+          </li>
+          <li>
+            <span class="node"><svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g transform="translate(0 0) scale(1)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Cpu">
+<path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/>
+</g>
+</svg></span><div class="role-copy"><h3>Hardware</h3><p>Es la parte física del equipo que lleva a cabo la acción solicitada.</p></div>
+            
+          </li>
+      </ol>
+    </section>
+    <section aria-labelledby="caso">
+      <div class="case-head"><div><p class="kicker">D / Caso de aula</p>
+        <h2 id="caso">Escuchas un diálogo en clase</h2><p>Tienes una grabación abierta en el ordenador y quieres oír una frase en inglés.</p></div><svg xmlns="http://www.w3.org/2000/svg" class="audio-badge" viewBox="0 0 127 61" aria-hidden="true" focusable="false">
+<circle cx="25" cy="30" r="20.5" fill="#DDF47D"/><path d="M20 21v18l13-9Z" fill="#103E3A" stroke="#103E3A" stroke-width="1" stroke-linejoin="round"/><path d="M60 25.5v9" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M66 19.5v21" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M72 13.5v33" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M78 22.5v15" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M84 16.5v27" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M90 9.5v41" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M96 19.5v21" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M102 24v12" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M108 16v28" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M114 21.5v17" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M120 27v6" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/>
+</svg>
+      </div>
+      <div class="column-labels" aria-hidden="true"><span>Quién interviene</span><span>Qué ocurre</span></div>
+      <ol class="examples">
+          <li>
+            <div><span class="tag">01 / Usuario</span><h3>Tú</h3></div>
+            <p>Pulsas el botón «Reproducir» para escuchar cómo se pronuncia la frase.</p>
+          </li>
+          <li>
+            <div><span class="tag">02 / Aplicación</span><h3>El reproductor</h3></div>
+            <p>Prepara los datos de audio de la grabación y pide a Windows que los reproduzca.</p>
+          </li>
+          <li>
+            <div><span class="tag">03 / Sistema operativo</span><h3>Windows</h3></div>
+            <p>Envía el audio a la salida elegida mediante el controlador de sonido, el programa que le permite comunicarse con ese dispositivo.</p>
+          </li>
+          <li>
+            <div><span class="tag">04 / Hardware</span><h3>Los altavoces</h3></div>
+            <p>Convierten la señal de audio en vibraciones del aire. Así llega la frase a tus oídos.</p>
+          </li>
+      </ol>
+      <aside class="switch" aria-labelledby="salida">
+        <svg xmlns="http://www.w3.org/2000/svg" class="headphones" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g transform="translate(0 0) scale(1)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Headphones">
+<path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>
+</g>
+</svg><div><h3 id="salida">¿Y si eliges los auriculares como salida?</h3><p>Windows envía la misma grabación a los auriculares. Sigues usando el mismo reproductor.</p></div>
+      </aside>
+    </section>
+    <footer>
+      <div><span class="credit">Para contrastar</span><a href="https://www.ibm.com/es-es/think/topics/operating-systems">IBM · Sistemas operativos</a><a href="https://learn.microsoft.com/es-es/windows-hardware/drivers/audio/windows-audio-architecture">Microsoft Learn · Arquitectura de audio</a></div>
+      <div><span class="credit">Iconos SVG</span><a href="https://lucide.dev/">Lucide Icons and Contributors</a><a href="https://lucide.dev/license">Licencia de los iconos</a></div>
+    </footer>
+  </main>
+  <div class="print-poster" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="210mm" height="297mm" viewBox="0 0 1050 1485" role="img" xml:lang="es" aria-labelledby="impreso-titulo-poster impreso-descripcion-poster">
+<title id="impreso-titulo-poster">¿Qué es un sistema operativo?</title>
+<desc id="impreso-descripcion-poster">Un sistema operativo (SO) es el software básico de un dispositivo. Hace de intermediario entre las aplicaciones y el hardware, la parte física del equipo. Te permite utilizar un ordenador, un móvil o una tableta a través de sus aplicaciones. Así puedes redactar un trabajo o hablar por videollamada. Del usuario al hardware. Usuario. Decide qué quiere hacer y lo indica en la aplicación. Aplicación. Recoge la orden y pide al SO lo que necesita para llevarla a cabo. Sistema operativo. Recibe la petición y se comunica con el dispositivo adecuado. Hardware. Es la parte física del equipo que lleva a cabo la acción solicitada. Escuchas un diálogo en clase. Tienes una grabación abierta en el ordenador y quieres oír una frase en inglés. Tú. Pulsas el botón «Reproducir» para escuchar cómo se pronuncia la frase. El reproductor. Prepara los datos de audio de la grabación y pide a Windows que los reproduzca. Windows. Envía el audio a la salida elegida mediante el controlador de sonido, el programa que le permite comunicarse con ese dispositivo. Los altavoces. Convierten la señal de audio en vibraciones del aire. Así llega la frase a tus oídos. ¿Y si eliges los auriculares como salida? Windows envía la misma grabación a los auriculares. Sigues usando el mismo reproductor.</desc>
+<metadata>Ilustración del reproductor y diagrama originales en SVG. Iconos de Lucide 1.8.0, https://lucide.dev/.
+ISC License
+
+Copyright (c) 2026 Lucide Icons and Contributors
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot; AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+---
+
+The following Lucide icons are derived from the Feather project:
+
+airplay, alert-circle, alert-octagon, alert-triangle, aperture, arrow-down-circle, arrow-down-left, arrow-down-right, arrow-down, arrow-left-circle, arrow-left, arrow-right-circle, arrow-right, arrow-up-circle, arrow-up-left, arrow-up-right, arrow-up, at-sign, calendar, cast, check, chevron-down, chevron-left, chevron-right, chevron-up, chevrons-down, chevrons-left, chevrons-right, chevrons-up, circle, clipboard, clock, code, columns, command, compass, corner-down-left, corner-down-right, corner-left-down, corner-left-up, corner-right-down, corner-right-up, corner-up-left, corner-up-right, crosshair, database, divide-circle, divide-square, dollar-sign, download, external-link, feather, frown, hash, headphones, help-circle, info, italic, key, layout, life-buoy, link-2, link, loader, lock, log-in, log-out, maximize, meh, minimize, minimize-2, minus-circle, minus-square, minus, monitor, moon, more-horizontal, more-vertical, move, music, navigation-2, navigation, octagon, pause-circle, percent, plus-circle, plus-square, plus, power, radio, rss, search, server, share, shopping-bag, sidebar, smartphone, smile, square, table-2, tablet, target, terminal, trash-2, trash, triangle, tv, type, upload, x-circle, x-octagon, x-square, x, zoom-in, zoom-out
+
+The MIT License (MIT) (for the icons listed above)
+
+Copyright (c) 2013-present Cole Bemis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</metadata>
+<rect x="0" y="0" width="1050" height="1485" fill="#FAF9F4"/>
+<g transform="translate(52 31)">
+<rect x="0" y="0" width="9" height="9" rx="1.1" fill="#006D62"/><rect x="12" y="0" width="9" height="9" rx="1.1" fill="#173C39"/><rect x="0" y="12" width="9" height="9" rx="1.1" fill="#173C39"/><rect x="12" y="12" width="9" height="9" rx="1.1" fill="#91B64F"/>
+</g>
+<text x="85" y="47" fill="#173C39" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="1.7">DIGITALIZACIÓN</text>
+<text x="998" y="47" fill="#173C39" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="end" letter-spacing="1.5">4.º DE ESO</text>
+<path d="M52 69H998" fill="none" stroke="#A7BDB0" stroke-width="1.5"/>
+<text x="52" y="107" fill="#006D62" font-size="15" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="1.0">A   /   DEFINICIÓN</text>
+<text x="49" y="174" fill="#173C39" font-size="64" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-2.35">¿Qué es un</text>
+<text x="49" y="242" fill="#006D62" font-size="64" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-2.35">sistema operativo?</text>
+<text x="54" y="282" fill="#273D3B" font-size="22" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Un sistema operativo (SO) es el software básico de un</text>
+<text x="54" y="309" fill="#273D3B" font-size="22" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">dispositivo. Hace de intermediario entre las aplicaciones y</text>
+<text x="54" y="336" fill="#273D3B" font-size="22" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">el hardware, la parte física del equipo.</text>
+<g transform="translate(640 101) scale(.99)">
+<path d="M18 195H352" fill="none" stroke="#B7CABF" stroke-width="1.5" stroke-linecap="round"/>
+<path d="m120 141-6 38h48l-6-38Z" fill="#91B4A4" stroke="#173C39" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M104 176h68l13 9-2 4H91l-1-4Z" fill="#C3DCCB" stroke="#173C39" stroke-width="1.7" stroke-linejoin="round"/>
+<path d="M93 185h88" fill="none" stroke="#63877A" stroke-width="1.2"/>
+<rect x="16" y="22" width="253" height="140" rx="12" fill="#ACCCBA" stroke="#173C39" stroke-width="2.1"/>
+<rect x="13" y="18" width="253" height="140" rx="11" fill="#466D62" stroke="#173C39" stroke-width="2.5"/>
+<rect x="21" y="26" width="237" height="117" rx="5" fill="#DDEDE1" stroke="#173C39" stroke-width="1.4"/>
+<path d="m24 120 47-30m-38 38 38-24m121-60 37-15" fill="none" stroke="#C1D6C8" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="139.5" cy="150.5" r="2.2" fill="#DDF47D"/>
+<rect x="41" y="44" width="196" height="86" rx="6" fill="#B3CABC"/>
+<rect x="38" y="40" width="196" height="86" rx="6" fill="#F9FBF2" stroke="#173C39" stroke-width="1.65"/>
+<path d="M44 40h184a6 6 0 0 1 6 6v14H38V46a6 6 0 0 1 6-6Z" fill="#A9CFC0"/>
+<path d="M38 60h196" fill="none" stroke="#638A7D" stroke-width="1.1"/>
+<circle cx="48" cy="50" r="2" fill="#006D62"/>
+<circle cx="55" cy="50" r="2" fill="#619481"/>
+<text x="67" y="54" fill="#103E3A" font-size="11.8" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Reproductor</text>
+<circle cx="71" cy="90" r="18" fill="#DDF47D" stroke="#B3CA70" stroke-width="1"/>
+<path d="M67 82v16l12-8Z" fill="#103E3A" stroke="#103E3A" stroke-width="1.15" stroke-linejoin="round"/>
+<path d="M104.0 83v6" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M111.2 79.5v13" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M118.4 74.5v23" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M125.6 80.5v11" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M132.8 76.5v19" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M140.0 72v28" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M147.2 78v16" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M154.4 82v8" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M161.6 77.5v17" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M168.8 74v24" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M176.0 79.5v13" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M183.2 76v20" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M190.4 82v8" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M197.60000000000002 80v12" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/><path d="M204.8 83.5v5" fill="none" stroke="#006D62" stroke-width="3.6" stroke-linecap="round"/>
+<path d="M104 109h108" fill="none" stroke="#BDCEC0" stroke-width="2.8" stroke-linecap="round"/>
+<path d="M104 109h41" fill="none" stroke="#528A75" stroke-width="2.8" stroke-linecap="round"/>
+<circle cx="145" cy="109" r="3.4" fill="#006D62"/>
+<path d="m277 91 14-8 47 4 1 96-12 7-1-94Z" fill="#708E7B" stroke="#173C39" stroke-width="1.9" stroke-linejoin="round"/>
+<path d="m326 96 12-9 1 96-12 7Z" fill="#537767" stroke="#173C39" stroke-width="1.6" stroke-linejoin="round"/>
+<path d="m277 91 49 5 1 94-50-6Z" fill="#D1E2CB" stroke="#173C39" stroke-width="1.9" stroke-linejoin="round"/>
+<circle cx="301" cy="113" r="7" fill="#769986" stroke="#173C39" stroke-width="1.7"/>
+<circle cx="301" cy="113" r="2.5" fill="#103E3A"/>
+<circle cx="301" cy="152" r="17" fill="#799D89" stroke="#173C39" stroke-width="1.8"/>
+<circle cx="301" cy="152" r="10.5" fill="#A9C5A9" stroke="#173C39" stroke-width="1.2"/>
+<circle cx="301" cy="152" r="4.4" fill="#103E3A"/>
+<path d="M348 116q10 9 0 18m6-26q17 16 0 34" fill="none" stroke="#006D62" stroke-width="2.8" stroke-linecap="round"/>
+</g>
+<rect x="52" y="366" width="946" height="126" rx="13" fill="#E5EFE3"/>
+<text x="76" y="404" fill="#006D62" font-size="15" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="1">B   /   UTILIDAD</text>
+<text x="74" y="447" fill="#173C39" font-size="33" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-1.05">¿Para qué sirve?</text>
+<path d="M351 388v80" fill="none" stroke="#B0C7B5" stroke-width="1.2"/>
+<text x="379" y="409.0" fill="#273D3B" font-size="21" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Te permite utilizar un ordenador, un móvil o una tableta a</text>
+<text x="379" y="434.5" fill="#273D3B" font-size="21" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">través de sus aplicaciones. Así puedes redactar un trabajo o</text>
+<text x="379" y="460.0" fill="#273D3B" font-size="21" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">hablar por videollamada.</text>
+<text x="52" y="534" fill="#006D62" font-size="15" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="1">C   /   ESQUEMA</text>
+<text x="50" y="578" fill="#173C39" font-size="40" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-1.1">Del usuario al hardware</text>
+<text x="53" y="610" fill="#273D3B" font-size="21" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Las flechas muestran el camino que sigue una petición.</text>
+<g transform="translate(0 624)" id="impreso-diagrama">
+<rect x="532" y="4" width="228" height="204" rx="15" fill="#E6EFE3"/>
+<path d="M203 55H359m-7-5 7 5-7 5" fill="none" stroke="#4C7E6E" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="281.0" y="41" fill="#49635F" font-size="15.5" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">da una orden</text>
+<path d="M446 55H602m-7-5 7 5-7 5" fill="none" stroke="#4C7E6E" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="524.0" y="41" fill="#49635F" font-size="15.5" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">pide un servicio</text>
+<path d="M689 55H845m-7-5 7 5-7 5" fill="none" stroke="#4C7E6E" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="767.0" y="41" fill="#49635F" font-size="15.5" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">envía la orden</text>
+<g id="impreso-esquema-usuario">
+<circle cx="160" cy="55" r="31" fill="#DDEEE4" stroke="#C0D8C8" stroke-width="1.4"/>
+<g transform="translate(145 40) scale(1.25)" fill="none" stroke="#006D62" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" data-lucide="UserRound">
+<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>
+</g>
+<text x="160" y="113" fill="#173C39" font-size="25" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle" letter-spacing="-0.75">Usuario</text>
+<text x="160" y="139" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">Decide qué quiere hacer y</text>
+<text x="160" y="160" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">lo indica en la aplicación.</text>
+</g>
+<g id="impreso-esquema-aplicacion">
+<circle cx="403" cy="55" r="31" fill="#DDEEE4" stroke="#C0D8C8" stroke-width="1.4"/>
+<g transform="translate(388 40) scale(1.25)" fill="none" stroke="#006D62" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" data-lucide="AppWindow">
+<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/>
+</g>
+<text x="403" y="113" fill="#173C39" font-size="25" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle" letter-spacing="-0.75">Aplicación</text>
+<text x="403" y="139" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">Recoge la orden y pide al</text>
+<text x="403" y="160" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">SO lo que necesita para</text>
+<text x="403" y="181" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">llevarla a cabo.</text>
+</g>
+<g id="impreso-esquema-sistema">
+<circle cx="646" cy="55" r="31" fill="#DDF47D" stroke="#86A66D" stroke-width="1.4"/>
+<g transform="translate(631 40) scale(1.25)" fill="none" stroke="#103E3A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" data-lucide="Layers">
+<path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>
+</g>
+<text x="646" y="113" fill="#173C39" font-size="25" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle" letter-spacing="-0.75">Sistema operativo</text>
+<text x="646" y="139" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">Recibe la petición y se</text>
+<text x="646" y="160" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">comunica con el</text>
+<text x="646" y="181" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">dispositivo adecuado.</text>
+</g>
+<g id="impreso-esquema-hardware">
+<circle cx="889" cy="55" r="31" fill="#DDEEE4" stroke="#C0D8C8" stroke-width="1.4"/>
+<g transform="translate(874 40) scale(1.25)" fill="none" stroke="#006D62" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" data-lucide="Cpu">
+<path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/>
+</g>
+<text x="889" y="113" fill="#173C39" font-size="25" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle" letter-spacing="-0.75">Hardware</text>
+<text x="889" y="139" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">Es la parte física del</text>
+<text x="889" y="160" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">equipo que lleva a cabo la</text>
+<text x="889" y="181" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">acción solicitada.</text>
+</g>
+</g>
+<rect x="52" y="853" width="946" height="119" rx="14" fill="#103E3A"/>
+<text x="77" y="885" fill="#DDF47D" font-size="15" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="1">D   /   CASO DE AULA</text>
+<text x="75" y="926" fill="#FFFFFF" font-size="39" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-1.1">Escuchas un diálogo en clase</text>
+<text x="77" y="954" fill="#E0ECE6" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Tienes una grabación abierta en el ordenador y quieres oír una frase en inglés.</text>
+<g transform="translate(842 879)">
+<circle cx="25" cy="30" r="20.5" fill="#DDF47D"/><path d="M20 21v18l13-9Z" fill="#103E3A" stroke="#103E3A" stroke-width="1" stroke-linejoin="round"/><path d="M60 25.5v9" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M66 19.5v21" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M72 13.5v33" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M78 22.5v15" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M84 16.5v27" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M90 9.5v41" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M96 19.5v21" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M102 24v12" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M108 16v28" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M114 21.5v17" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/><path d="M120 27v6" fill="none" stroke="#AEDAC6" stroke-width="3" stroke-linecap="round"/>
+</g>
+<text x="52" y="1007" fill="#49635F" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.8">QUIÉN INTERVIENE</text>
+<text x="360" y="1007" fill="#49635F" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.8">QUÉ OCURRE</text>
+<path d="M52 1019H998" fill="none" stroke="#86A297" stroke-width="1.3"/>
+<g id="impreso-ejemplo-usuario">
+<text x="52" y="1043" fill="#006D62" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.3">01  /  USUARIO</text>
+<text x="52" y="1071" fill="#173C39" font-size="24" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-0.45">Tú</text>
+<text x="360" y="1059.0" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Pulsas el botón «Reproducir» para escuchar cómo se pronuncia la frase.</text>
+<path d="M52 1087H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<g id="impreso-ejemplo-aplicacion">
+<text x="52" y="1111" fill="#006D62" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.3">02  /  APLICACIÓN</text>
+<text x="52" y="1139" fill="#173C39" font-size="24" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-0.45">El reproductor</text>
+<text x="360" y="1116.5" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Prepara los datos de audio de la grabación y pide a Windows que los</text>
+<text x="360" y="1137.5" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">reproduzca.</text>
+<path d="M52 1155H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<g id="impreso-ejemplo-sistema">
+<text x="52" y="1179" fill="#006D62" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.3">03  /  SISTEMA OPERATIVO</text>
+<text x="52" y="1207" fill="#173C39" font-size="24" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-0.45">Windows</text>
+<text x="360" y="1184.5" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Envía el audio a la salida elegida mediante el controlador de sonido, el</text>
+<text x="360" y="1205.5" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">programa que le permite comunicarse con ese dispositivo.</text>
+<path d="M52 1223H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<g id="impreso-ejemplo-hardware">
+<text x="52" y="1247" fill="#006D62" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.3">04  /  HARDWARE</text>
+<text x="52" y="1275" fill="#173C39" font-size="24" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-0.45">Los altavoces</text>
+<text x="360" y="1252.5" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Convierten la señal de audio en vibraciones del aire. Así llega la frase a</text>
+<text x="360" y="1273.5" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">tus oídos.</text>
+<path d="M52 1291H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<rect x="52" y="1307" width="946" height="80" rx="12" fill="#EFF2E7"/>
+<g transform="translate(70 1326) scale(1.375)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Headphones">
+<path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>
+</g>
+<text x="119" y="1336" fill="#173C39" font-size="21" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-0.4">¿Y si eliges los auriculares como salida?</text>
+<text x="119" y="1363" fill="#273D3B" font-size="18" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Windows envía la misma grabación a los auriculares. Sigues usando el mismo reproductor.</text>
+<text x="52" y="1425" fill="#49635F" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.75">PARA CONTRASTAR</text>
+<a href="https://www.ibm.com/es-es/think/topics/operating-systems" xlink:href="https://www.ibm.com/es-es/think/topics/operating-systems" aria-label="IBM. ¿Qué es un sistema operativo?"><text x="235" y="1425" fill="#006D62" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-decoration="underline">IBM · Sistemas operativos</text></a>
+<a href="https://learn.microsoft.com/es-es/windows-hardware/drivers/audio/windows-audio-architecture" xlink:href="https://learn.microsoft.com/es-es/windows-hardware/drivers/audio/windows-audio-architecture" aria-label="Microsoft Learn. Arquitectura de audio de Windows"><text x="493" y="1425" fill="#006D62" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-decoration="underline">Microsoft Learn · Arquitectura de audio</text></a>
+<text x="52" y="1456" fill="#49635F" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.75">ICONOS SVG</text>
+<a href="https://lucide.dev/" xlink:href="https://lucide.dev/" aria-label="Lucide. Iconos SVG"><text x="235" y="1456" fill="#006D62" font-size="15.5" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-decoration="underline">Lucide Icons and Contributors</text></a>
+<a href="https://lucide.dev/license" xlink:href="https://lucide.dev/license" aria-label="Licencia de los iconos de Lucide"><text x="493" y="1456" fill="#006D62" font-size="15.5" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-decoration="underline">Licencia de los iconos</text></a>
+</svg>
+  </div>
+</body>
+</html>

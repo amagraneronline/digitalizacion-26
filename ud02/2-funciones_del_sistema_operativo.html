@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cinco funciones del sistema operativo explicadas con un informe de clase. Infografía de Digitalización para 4.º de ESO.">
+  <title>¿Qué hace un sistema operativo? · Digitalización · 4.º ESO</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #faf9f4;
+      --ink: #173c39;
+      --text: #273d3b;
+      --teal: #006d62;
+      --muted: #49635f;
+      --rule: #cad6cd;
+      --pale: #ddeee4;
+      --lime: #ddf47d;
+      --deep: #103e3a;
+      font-family: Arial, Helvetica, "Nimbus Sans", sans-serif;
+      color: var(--text);
+      background: #e7ece6;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-size: 17px; line-height: 1.45; }
+    .sheet {
+      width: min(100%, 1100px);
+      margin: 28px auto;
+      padding: 35px clamp(28px, 5vw, 58px) 35px;
+      background: var(--paper);
+      box-shadow: 0 6px 38px rgba(26, 55, 43, .08);
+    }
+    h1, h2, h3, p, ol { margin: 0; }
+    h1, h2, h3 { color: var(--ink); }
+    ol { list-style: none; padding: 0; }
+    .masthead, .brand {
+      display: flex;
+      align-items: center;
+    }
+    .masthead {
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #a7bdb0;
+      font-size: 14px;
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+    .brand { gap: 10px; }
+    .brand-mark { display: block; width: 21px; height: 21px; flex: none; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.36fr 1fr;
+      align-items: center;
+      column-gap: 16px;
+      margin: 32px 0 41px;
+    }
+    h1 { font-size: clamp(46px, 5.8vw, 66px); line-height: 1.025; letter-spacing: -.048em; }
+    h1 em { color: var(--teal); font-style: normal; }
+    .hero p { margin-top: 19px; max-width: 51ch; font-size: 21px; line-height: 1.37; }
+    .hero-art { display: block; width: 100%; height: auto; }
+    .kicker, .num, .example-tag, .column-titles, .credit-label {
+      font-family: "Courier New", "Liberation Mono", monospace;
+      font-weight: 700;
+    }
+    .kicker, .example-tag, .column-titles, .credit-label {
+      text-transform: uppercase;
+      letter-spacing: .065em;
+    }
+    .kicker { font-size: 14px; color: var(--teal); }
+    h2 { font-size: clamp(31px, 4.1vw, 41px); line-height: 1.08; letter-spacing: -.039em; }
+    .kicker + h2 { margin-top: 6px; }
+    .functions { margin-top: 17px; border-top: 2px solid #7b9b8e; }
+    .function {
+      display: grid;
+      grid-template-columns: 26px 48px minmax(0, 1fr) 19%;
+      column-gap: 15px;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .num { align-self: start; margin-top: 5px; color: var(--teal); font-size: 16px; }
+    .pictogram {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      background: var(--pale);
+      border-radius: 12px;
+    }
+    .glyph { width: 26px; height: 26px; }
+    h3 { font-size: 23px; line-height: 1.16; letter-spacing: -.025em; }
+    .copy p { margin-top: 4px; max-width: 65ch; }
+    .mini { width: 100%; height: auto; }
+    .case { margin-top: 25px; }
+    .case-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 19px 26px 20px;
+      border-radius: 13px;
+      background: var(--deep);
+      color: #e0ece6;
+    }
+    .case-head h2 { color: white; }
+    .case-head .kicker { color: var(--lime); }
+    .case-head h2 + p { margin-top: 6px; font-size: 18px; }
+    .paper-file { width: 99px; height: auto; margin-right: 12px; transform: rotate(-5deg); flex: none; }
+    .column-titles, .example {
+      display: grid;
+      grid-template-columns: 31.5% minmax(0, 1fr);
+      gap: 20px;
+    }
+    .column-titles {
+      padding: 22px 0 8px;
+      border-bottom: 1px solid #86a297;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .example { align-items: center; padding: 15px 0; border-bottom: 1px solid var(--rule); }
+    .example-tag { display: inline-block; margin-bottom: 4px; color: var(--teal); font-size: 13px; }
+    .example h3 { font-size: 22px; }
+    .example p { max-width: 67ch; }
+    footer { padding-top: 24px; color: var(--muted); font-size: 14px; line-height: 1.45; }
+    footer > div { display: grid; grid-template-columns: 150px 225px 1fr; gap: 12px; align-items: baseline; padding: 3px 0; }
+    .credit-label { font-size: 12px; }
+    footer a { color: var(--teal); text-underline-offset: 3px; text-decoration-thickness: 1px; justify-self: start; }
+    footer a:hover { color: var(--ink); }
+    a:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; border-radius: 2px; }
+    .print-poster { display: none; }
+    @media (max-width: 1099px) {
+      .sheet { margin: 0 auto; }
+    }
+    @media (max-width: 740px) {
+      .sheet { padding: 23px 23px 30px; }
+      .hero { grid-template-columns: 1fr; margin: 28px 0 22px; gap: 6px; }
+      h1 { font-size: clamp(37px, 8.4vw, 58px); }
+      .hero p { margin-top: 11px; font-size: 18px; }
+      .hero-art { width: min(78%, 370px); margin: 0 auto; }
+      .function { grid-template-columns: 26px 41px minmax(0, 1fr); column-gap: 10px; row-gap: 8px; align-items: start; }
+      .pictogram { width: 39px; height: 39px; border-radius: 9px; }
+      .glyph { width: 23px; height: 23px; }
+      .mini { grid-column: 3; width: min(164px, 100%); }
+      .column-titles, .example { grid-template-columns: 38% minmax(0, 1fr); gap: 12px; }
+      footer > div { grid-template-columns: 120px 1fr; }
+      footer > div a:last-child { grid-column: 2; }
+      footer > div { row-gap: 3px; margin-bottom: 6px; }
+    }
+    @media (max-width: 500px) {
+      .sheet { padding: 19px 18px 24px; }
+      .masthead { font-size: 11px; gap: 5px; }
+      .brand { gap: 7px; }
+      .brand-mark { width: 17px; height: 17px; }
+      .hero-art { width: min(100%, 350px); }
+      h2 { font-size: 30px; }
+      .functions { margin-top: 13px; }
+      .function { grid-template-columns: 20px 36px minmax(0, 1fr); gap: 8px; padding: 18px 0; align-items: start; }
+      .num { font-size: 14px; margin-top: 7px; }
+      .pictogram { width: 34px; height: 34px; }
+      .glyph { width: 21px; height: 21px; }
+      h3, .example h3 { font-size: 20px; }
+      .copy p { margin-top: 5px; }
+      .case-head { padding: 17px; gap: 8px; }
+      .case-head h2 { font-size: 27px; }
+      .case-head h2 + p { font-size: 16px; }
+      .paper-file { width: 53px; margin: 0; }
+      .column-titles { display: none; }
+      .examples { margin-top: 6px; }
+      .example { grid-template-columns: 1fr; padding: 14px 0; gap: 5px; }
+      footer > div { display: flex; flex-direction: column; gap: 4px; margin-bottom: 13px; }
+      .credit-label { margin-bottom: 1px; }
+    }
+    @page { size: A4 portrait; margin: 7mm; }
+    @media print {
+      html, body { margin: 0; padding: 0; border: 0; background: white; }
+      .sheet { display: none; }
+      .print-poster { display: block; width: 100%; break-inside: avoid; }
+      .print-poster svg { display: block; width: 100%; height: auto; max-height: 281mm; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header>
+      <div class="masthead"><div class="brand"><svg xmlns="http://www.w3.org/2000/svg" class="brand-mark" viewBox="0 0 21 21" aria-hidden="true" focusable="false">
+<g transform="translate(0 0)">
+<rect x="0" y="0" width="9" height="9" rx="1.1" fill="#006D62"/><rect x="12" y="0" width="9" height="9" rx="1.1" fill="#173C39"/><rect x="0" y="12" width="9" height="9" rx="1.1" fill="#173C39"/><rect x="12" y="12" width="9" height="9" rx="1.1" fill="#91B64F"/>
+</g>
+</svg> Digitalización</div><span>4.º de ESO</span></div>
+      <div class="hero">
+        <div><h1>¿Qué hace un<br><em>sistema operativo?</em></h1><p>El sistema operativo (SO) coordina los recursos del ordenador para que puedas usar tus aplicaciones.</p></div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="hero-art" viewBox="0 8 423 235" role="img" aria-label="Una aplicación se comunica con el sistema operativo, que gestiona el hardware." focusable="false">
+<title>Una aplicación se comunica con el sistema operativo, que gestiona el hardware.</title>
+<path d="M16 89 V200" fill="none" stroke="#92ABA0" stroke-width="1.1" stroke-dasharray="3 5"/>
+<path d="M167 122 V232" fill="none" stroke="#92ABA0" stroke-width="1.1" stroke-dasharray="3 5"/>
+<path d="M240 76 V187" fill="none" stroke="#92ABA0" stroke-width="1.1" stroke-dasharray="3 5"/>
+<g transform="translate(0 143)">
+<path d="M14.4 31.4 167.4 80.3 167.4 88.3 14.4 39.4Z" fill="#437866" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><path d="M167.4 80.3 238 49 238 57 167.4 88.3Z" fill="#183F37" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><g transform="matrix(1 .32 -.72 .32 85 0)">
+<rect x="0" y="0" width="153" height="98" fill="#29594E" stroke="#173C39" stroke-width="2.1" vector-effect="non-scaling-stroke"/><path d="M16 14 V27 H47 V48" fill="none" stroke="#6FA592" stroke-width="1.4"/><path d="M103 45 H116 V20 H140" fill="none" stroke="#6FA592" stroke-width="1.5"/><circle cx="140" cy="20" r="1.8" fill="#92B6A3"/><path d="M23 14 V29 H54 V48" fill="none" stroke="#6FA592" stroke-width="1.4"/><path d="M103 52 H119 V24 H140" fill="none" stroke="#6FA592" stroke-width="1.5"/><circle cx="140" cy="24" r="1.8" fill="#92B6A3"/><path d="M30 14 V31 H61 V48" fill="none" stroke="#6FA592" stroke-width="1.4"/><path d="M103 59 H122 V28 H140" fill="none" stroke="#6FA592" stroke-width="1.5"/><circle cx="140" cy="28" r="1.8" fill="#92B6A3"/><path d="M37 14 V33 H68 V48" fill="none" stroke="#6FA592" stroke-width="1.4"/><path d="M103 66 H125 V32 H140" fill="none" stroke="#6FA592" stroke-width="1.5"/><circle cx="140" cy="32" r="1.8" fill="#92B6A3"/><rect x="49" y="34" width="50" height="40" rx="2" fill="#193F3B" stroke="#A5C4AE" stroke-width="1.4"/><rect x="57" y="40" width="34" height="28" rx="1.5" fill="#467461"/><rect x="18" y="70" width="19" height="13" rx="1" fill="#476E61"/><rect x="111" y="66" width="22" height="11" rx="1" fill="#B1B477"/><path d="M51 34v-5 M51 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M58 34v-5 M58 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M65 34v-5 M65 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M72 34v-5 M72 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M79 34v-5 M79 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M86 34v-5 M86 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M93 34v-5 M93 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/>
+</g>
+</g>
+<g transform="translate(0 87)">
+<path d="M14.4 31.4 167.4 80.3 167.4 88.3 14.4 39.4Z" fill="#AAD15F" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><path d="M167.4 80.3 238 49 238 57 167.4 88.3Z" fill="#86A952" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><g transform="matrix(1 .32 -.72 .32 85 0)">
+<rect x="0" y="0" width="153" height="98" fill="#DDF47D" stroke="#173C39" stroke-width="2.1" vector-effect="non-scaling-stroke"/><rect x="9" y="10" width="132" height="78" rx="2" fill="none" stroke="#83AA5F" stroke-width="1"/><text x="21" y="65" fill="#103E3A" font-size="45" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">SO</text><path d="M93 31h35m-35 10h23m-23 10h29" fill="none" stroke="#628D52" stroke-width="2.4"/><circle cx="120" cy="72" r="3" fill="#527A44"/><circle cx="131" cy="72" r="3" fill="#527A44"/>
+</g>
+</g>
+<g transform="translate(0 31)">
+<path d="M14.4 31.4 167.4 80.3 167.4 88.3 14.4 39.4Z" fill="#A2C9B9" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><path d="M167.4 80.3 238 49 238 57 167.4 88.3Z" fill="#80AF9C" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><g transform="matrix(1 .32 -.72 .32 85 0)">
+<rect x="0" y="0" width="153" height="98" fill="#E0EFE6" stroke="#173C39" stroke-width="2.1" vector-effect="non-scaling-stroke"/><rect x="9" y="10" width="134" height="77" rx="2" fill="#FBFCF7" stroke="#40726C" stroke-width="2.2"/><rect x="9" y="10" width="134" height="15" rx="2" fill="#A4CFC4"/><path d="M9 26h134" fill="none" stroke="#40726C" stroke-width="1.5"/><circle cx="17" cy="18" r="2.4" fill="#173C39"/><circle cx="25" cy="18" r="2.4" fill="#173C39"/><circle cx="33" cy="18" r="2.4" fill="#173C39"/><rect x="20" y="38" width="30" height="32" rx="1.5" fill="#D3E5DB"/><path d="m23 65 9-13 5 7 5-9 6 15Z" fill="#78A795"/><circle cx="28" cy="46" r="3.2" fill="#E4AF6F"/><path d="M60 43h62m-62 10h47m-47 10h55" fill="none" stroke="#5C8278" stroke-width="2.4"/><path d="M20 78h75" fill="none" stroke="#92AFA3" stroke-width="2.0"/>
+</g>
+</g>
+<path d="M239 80h12l9-9h13" fill="none" stroke="#63867C" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="239" cy="80" r="2.4" fill="#006D62"/>
+<text x="280" y="76" fill="#173C39" font-size="16" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Aplicación</text>
+<path d="M239 136h12l9-9h13" fill="none" stroke="#63867C" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="239" cy="136" r="2.4" fill="#006D62"/>
+<text x="280" y="132" fill="#006D62" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Sistema operativo</text>
+<path d="M239 192h12l9-9h13" fill="none" stroke="#63867C" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="239" cy="192" r="2.4" fill="#006D62"/>
+<text x="280" y="188" fill="#173C39" font-size="16" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Hardware</text>
+</svg>
+      </div>
+    </header>
+    <section aria-labelledby="conceptos">
+      <p class="kicker">A / Conceptos</p>
+      <h2 id="conceptos">Cinco funciones principales</h2>
+      <ol class="functions">
+        <li class="function" id="funcion-cpu">
+          <span class="num" aria-hidden="true">01</span>
+          <span class="pictogram"><svg xmlns="http://www.w3.org/2000/svg" class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g transform="translate(0 0) scale(1)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Cpu">
+<path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/>
+</g>
+</svg></span>
+          <div class="copy"><h3>Procesos y CPU</h3><p>Al ejecutar un programa se crean uno o más procesos. El SO reparte entre ellos el tiempo del procesador (CPU).</p></div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="mini" viewBox="0 0 194 56" aria-hidden="true" focusable="false">
+<rect x="13" y="4" width="39" height="25" rx="4" fill="#006D62"/>
+<text x="32.5" y="22" fill="#FFFFFF" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" text-anchor="middle">A</text>
+<rect x="55" y="4" width="39" height="25" rx="4" fill="#DCE9D7"/>
+<text x="74.5" y="22" fill="#173C39" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" text-anchor="middle">B</text>
+<rect x="97" y="4" width="39" height="25" rx="4" fill="#006D62"/>
+<text x="116.5" y="22" fill="#FFFFFF" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" text-anchor="middle">A</text>
+<rect x="139" y="4" width="39" height="25" rx="4" fill="#DCE9D7"/>
+<text x="158.5" y="22" fill="#173C39" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" text-anchor="middle">B</text>
+<text x="13" y="50" fill="#49635F" font-size="15" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Turnos de A y B en la CPU</text>
+</svg>
+        </li>
+        <li class="function" id="funcion-ram">
+          <span class="num" aria-hidden="true">02</span>
+          <span class="pictogram"><svg xmlns="http://www.w3.org/2000/svg" class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g transform="translate(0 0) scale(1)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="MemoryStick">
+<path d="M12 12v-2"/><path d="M12 18v-2"/><path d="M16 12v-2"/><path d="M16 18v-2"/><path d="M2 11h1.5"/><path d="M20 18v-2"/><path d="M20.5 11H22"/><path d="M4 18v-2"/><path d="M8 12v-2"/><path d="M8 18v-2"/><rect x="2" y="6" width="20" height="10" rx="2"/>
+</g>
+</svg></span>
+          <div class="copy"><h3>Memoria RAM</h3><p>El SO asigna a cada programa espacio en la memoria temporal (RAM) y lo libera cuando el programa termina.</p></div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="mini" viewBox="0 0 194 56" aria-hidden="true" focusable="false">
+<rect x="13" y="5" width="165" height="23" rx="4" fill="none" stroke="#6A8C7E" stroke-width="1.4"/>
+<rect x="17" y="9" width="17" height="15" rx="1.4" fill="#006D62"/>
+<rect x="37" y="9" width="17" height="15" rx="1.4" fill="#006D62"/>
+<rect x="57" y="9" width="17" height="15" rx="1.4" fill="#006D62"/>
+<rect x="77" y="9" width="17" height="15" rx="1.4" fill="#006D62"/>
+<rect x="97" y="9" width="17" height="15" rx="1.4" fill="#006D62"/>
+<rect x="117" y="9" width="17" height="15" rx="1.4" fill="#E3ECDC"/>
+<rect x="137" y="9" width="17" height="15" rx="1.4" fill="#E3ECDC"/>
+<rect x="157" y="9" width="17" height="15" rx="1.4" fill="#E3ECDC"/>
+<text x="13" y="50" fill="#49635F" font-size="15" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">En uso</text>
+<text x="178" y="50" fill="#49635F" font-size="15" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="end">Libre</text>
+</svg>
+        </li>
+        <li class="function" id="funcion-archivos">
+          <span class="num" aria-hidden="true">03</span>
+          <span class="pictogram"><svg xmlns="http://www.w3.org/2000/svg" class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g transform="translate(0 0) scale(1)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="FolderOpen">
+<path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/>
+</g>
+</svg></span>
+          <div class="copy"><h3>Archivos y carpetas</h3><p>El SO organiza los archivos en carpetas dentro del almacenamiento. Permite guardarlos, localizarlos, moverlos o borrarlos.</p></div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="mini" viewBox="0 0 194 56" aria-hidden="true" focusable="false">
+<g transform="translate(13 2) scale(0.916667)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Folder">
+<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>
+</g>
+<text x="44" y="19" fill="#173C39" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Carpeta</text>
+<path d="M23 29v14h18" fill="none" stroke="#829E90" stroke-width="1.5" stroke-linejoin="round"/>
+<g transform="translate(48 32) scale(0.875)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="FileText">
+<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+</g>
+<text x="78" y="48" fill="#49635F" font-size="16" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Archivo</text>
+</svg>
+        </li>
+        <li class="function" id="funcion-perifericos">
+          <span class="num" aria-hidden="true">04</span>
+          <span class="pictogram"><svg xmlns="http://www.w3.org/2000/svg" class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g transform="translate(0 0) scale(1)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Printer">
+<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/>
+</g>
+</svg></span>
+          <div class="copy"><h3>Dispositivos y periféricos</h3><p>El SO usa programas llamados controladores para comunicarse con dispositivos como el teclado o la impresora.</p></div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="mini" viewBox="0 0 194 56" aria-hidden="true" focusable="false">
+<rect x="13" y="13" width="38" height="29" rx="5" fill="#DDEEE4"/>
+<text x="32" y="33" fill="#173C39" font-size="16" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" text-anchor="middle">SO</text>
+<path d="M57 29h75m-5-4 5 4-5 4" fill="none" stroke="#5C8176" stroke-width="1.65" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="95" y="17" fill="#49635F" font-size="13.3" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">Controlador</text>
+<g transform="translate(144 12) scale(1.29167)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Printer">
+<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/>
+</g>
+</svg>
+        </li>
+        <li class="function" id="funcion-permisos">
+          <span class="num" aria-hidden="true">05</span>
+          <span class="pictogram"><svg xmlns="http://www.w3.org/2000/svg" class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g transform="translate(0 0) scale(1)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="ShieldCheck">
+<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>
+</g>
+</svg></span>
+          <div class="copy"><h3>Usuarios y permisos</h3><p>El SO identifica al usuario y comprueba qué acciones tiene permitidas, como leer, modificar o borrar un archivo.</p></div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="mini" viewBox="0 0 194 56" aria-hidden="true" focusable="false">
+<g transform="translate(17 3) scale(1.16667)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Eye">
+<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>
+</g>
+<g transform="translate(101 3) scale(1.125)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Pencil">
+<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/>
+</g>
+<text x="32" y="49" fill="#49635F" font-size="15" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">Leer</text>
+<text x="116" y="49" fill="#49635F" font-size="15" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">Editar</text>
+<path d="M75 9v34" fill="none" stroke="#CAD6CD" stroke-width="1.3"/>
+</svg>
+        </li>
+      </ol>
+    </section>
+    <section class="case" aria-labelledby="caso">
+      <div class="case-head">
+        <div><p class="kicker">B / Caso de aula</p><h2 id="caso">Un informe para clase</h2><p>Preparas un informe en Word en el ordenador del aula.</p></div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="paper-file" viewBox="0 0 108 92" aria-hidden="true" focusable="false">
+<path d="M16 8h67l19 18v60H16Z" fill="#49736A" stroke="#173E39" stroke-width="1.4"/><path d="M9 2h66l18 18v61H9Z" fill="#DDF47D" stroke="#103E3A" stroke-width="1.4"/><path d="M74 2v19h19" fill="#A7CF67" stroke="#103E3A" stroke-width="1.4" stroke-linejoin="round"/><path d="M21 25h32m-32 7h21" fill="none" stroke="#7F9E52" stroke-width="1.6" stroke-linecap="round"/><text x="20" y="58" fill="#103E3A" font-size="23" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace">.docx</text><path d="M20 68h52" fill="none" stroke="#769750" stroke-width="1.2"/>
+</svg>
+      </div>
+      <div class="column-titles" aria-hidden="true"><span>Lo que haces</span><span>Lo que hace el sistema operativo</span></div>
+      <ol class="examples">
+        <li class="example" id="ejemplo-cpu">
+          <div><span class="example-tag">01 / Procesos y CPU</span><h3>Consultas una web</h3></div>
+          <p>Escribes en Word mientras el navegador carga una página. El SO reparte tiempo de CPU entre los dos programas.</p>
+        </li>
+        <li class="example" id="ejemplo-ram">
+          <div><span class="example-tag">02 / Memoria RAM</span><h3>Insertas una foto</h3></div>
+          <p>Word pide más memoria para editar la foto. El SO le asigna RAM y la recupera cuando cierras el programa.</p>
+        </li>
+        <li class="example" id="ejemplo-archivos">
+          <div><span class="example-tag">03 / Archivos y carpetas</span><h3>Pulsas «Guardar»</h3></div>
+          <p>Word pide al SO que escriba Informe.docx en el disco. Aunque apagues el equipo, el archivo seguirá en su carpeta.</p>
+        </li>
+        <li class="example" id="ejemplo-perifericos">
+          <div><span class="example-tag">04 / Dispositivos</span><h3>Imprimes una copia</h3></div>
+          <p>El SO pone el informe en la cola de impresión y lo envía a la impresora del aula mediante su controlador.</p>
+        </li>
+        <li class="example" id="ejemplo-permisos">
+          <div><span class="example-tag">05 / Usuarios y permisos</span><h3>Tu compañero lo abre</h3></div>
+          <p>Su cuenta tiene permiso de lectura. El SO le deja abrir el informe e impide que guarde cambios en el original.</p>
+        </li>
+      </ol>
+    </section>
+    <footer>
+      <div><span class="credit-label">Para contrastar</span><a href="https://www.ibm.com/es-es/think/topics/operating-systems">IBM · Sistemas operativos</a><a href="https://learn.microsoft.com/es-es/windows/security/identity-protection/access-control/access-control">Microsoft Learn · Control de acceso</a></div>
+      <div><span class="credit-label">Iconos SVG</span><a href="https://lucide.dev/">Lucide Icons and Contributors</a><a href="https://lucide.dev/license">Licencia ISC</a></div>
+    </footer>
+  </main>
+  <!-- El póster conserva el texto, los enlaces y los vectores al imprimir en A4.
+       Los avisos de licencia de Lucide 1.8.0 están en el elemento metadata. -->
+  <div class="print-poster" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="210mm" height="297mm" viewBox="0 0 1050 1485" role="img" xml:lang="es" aria-labelledby="impreso-poster-title impreso-poster-desc">
+<title id="impreso-poster-title">¿Qué hace un sistema operativo?</title>
+<desc id="impreso-poster-desc">Infografía de Digitalización para 4.º de ESO. ¿Qué hace un sistema operativo? 1. Procesos y CPU. Al ejecutar un programa se crean uno o más procesos. El SO reparte entre ellos el tiempo del procesador (CPU). 2. Memoria RAM. El SO asigna a cada programa espacio en la memoria temporal (RAM) y lo libera cuando el programa termina. 3. Archivos y carpetas. El SO organiza los archivos en carpetas dentro del almacenamiento. Permite guardarlos, localizarlos, moverlos o borrarlos. 4. Dispositivos y periféricos. El SO usa programas llamados controladores para comunicarse con dispositivos como el teclado o la impresora. 5. Usuarios y permisos. El SO identifica al usuario y comprueba qué acciones tiene permitidas, como leer, modificar o borrar un archivo. Un informe para clase Consultas una web. Escribes en Word mientras el navegador carga una página. El SO reparte tiempo de CPU entre los dos programas. Insertas una foto. Word pide más memoria para editar la foto. El SO le asigna RAM y la recupera cuando cierras el programa. Pulsas «Guardar». Word pide al SO que escriba Informe.docx en el disco. Aunque apagues el equipo, el archivo seguirá en su carpeta. Imprimes una copia. El SO pone el informe en la cola de impresión y lo envía a la impresora del aula mediante su controlador. Tu compañero lo abre. Su cuenta tiene permiso de lectura. El SO le deja abrir el informe e impide que guarde cambios en el original.</desc>
+<metadata>Ilustración y diagramas originales en SVG. Pictogramas de Lucide, versión 1.8.0, https://lucide.dev/.
+ISC License
+
+Copyright (c) 2026 Lucide Icons and Contributors
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot; AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+---
+
+The following Lucide icons are derived from the Feather project:
+
+airplay, alert-circle, alert-octagon, alert-triangle, aperture, arrow-down-circle, arrow-down-left, arrow-down-right, arrow-down, arrow-left-circle, arrow-left, arrow-right-circle, arrow-right, arrow-up-circle, arrow-up-left, arrow-up-right, arrow-up, at-sign, calendar, cast, check, chevron-down, chevron-left, chevron-right, chevron-up, chevrons-down, chevrons-left, chevrons-right, chevrons-up, circle, clipboard, clock, code, columns, command, compass, corner-down-left, corner-down-right, corner-left-down, corner-left-up, corner-right-down, corner-right-up, corner-up-left, corner-up-right, crosshair, database, divide-circle, divide-square, dollar-sign, download, external-link, feather, frown, hash, headphones, help-circle, info, italic, key, layout, life-buoy, link-2, link, loader, lock, log-in, log-out, maximize, meh, minimize, minimize-2, minus-circle, minus-square, minus, monitor, moon, more-horizontal, more-vertical, move, music, navigation-2, navigation, octagon, pause-circle, percent, plus-circle, plus-square, plus, power, radio, rss, search, server, share, shopping-bag, sidebar, smartphone, smile, square, table-2, tablet, target, terminal, trash-2, trash, triangle, tv, type, upload, x-circle, x-octagon, x-square, x, zoom-in, zoom-out
+
+The MIT License (MIT) (for the icons listed above)
+
+Copyright (c) 2013-present Cole Bemis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</metadata>
+<rect x="0" y="0" width="1050" height="1485" fill="#FAF9F4"/>
+<g transform="translate(52 31)">
+<rect x="0" y="0" width="9" height="9" rx="1.1" fill="#006D62"/><rect x="12" y="0" width="9" height="9" rx="1.1" fill="#173C39"/><rect x="0" y="12" width="9" height="9" rx="1.1" fill="#173C39"/><rect x="12" y="12" width="9" height="9" rx="1.1" fill="#91B64F"/>
+</g>
+<text x="85" y="47" fill="#173C39" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="1.7">DIGITALIZACIÓN</text>
+<text x="998" y="47" fill="#173C39" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="end" letter-spacing="1.5">4.º DE ESO</text>
+<path d="M52 69H998" fill="none" stroke="#A7BDB0" stroke-width="1.5"/>
+<text x="50" y="151" fill="#173C39" font-size="65" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-2.4">¿Qué hace un</text>
+<text x="50" y="221" fill="#006D62" font-size="65" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-2.4">sistema operativo?</text>
+<text x="54" y="264" fill="#273D3B" font-size="23" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">El sistema operativo (SO) coordina los recursos del</text>
+<text x="54" y="292" fill="#273D3B" font-size="23" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">ordenador para que puedas usar tus aplicaciones.</text>
+<g transform="translate(611 74) scale(.965)">
+<path d="M16 89 V200" fill="none" stroke="#92ABA0" stroke-width="1.1" stroke-dasharray="3 5"/>
+<path d="M167 122 V232" fill="none" stroke="#92ABA0" stroke-width="1.1" stroke-dasharray="3 5"/>
+<path d="M240 76 V187" fill="none" stroke="#92ABA0" stroke-width="1.1" stroke-dasharray="3 5"/>
+<g transform="translate(0 143)">
+<path d="M14.4 31.4 167.4 80.3 167.4 88.3 14.4 39.4Z" fill="#437866" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><path d="M167.4 80.3 238 49 238 57 167.4 88.3Z" fill="#183F37" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><g transform="matrix(1 .32 -.72 .32 85 0)">
+<rect x="0" y="0" width="153" height="98" fill="#29594E" stroke="#173C39" stroke-width="2.1" vector-effect="non-scaling-stroke"/><path d="M16 14 V27 H47 V48" fill="none" stroke="#6FA592" stroke-width="1.4"/><path d="M103 45 H116 V20 H140" fill="none" stroke="#6FA592" stroke-width="1.5"/><circle cx="140" cy="20" r="1.8" fill="#92B6A3"/><path d="M23 14 V29 H54 V48" fill="none" stroke="#6FA592" stroke-width="1.4"/><path d="M103 52 H119 V24 H140" fill="none" stroke="#6FA592" stroke-width="1.5"/><circle cx="140" cy="24" r="1.8" fill="#92B6A3"/><path d="M30 14 V31 H61 V48" fill="none" stroke="#6FA592" stroke-width="1.4"/><path d="M103 59 H122 V28 H140" fill="none" stroke="#6FA592" stroke-width="1.5"/><circle cx="140" cy="28" r="1.8" fill="#92B6A3"/><path d="M37 14 V33 H68 V48" fill="none" stroke="#6FA592" stroke-width="1.4"/><path d="M103 66 H125 V32 H140" fill="none" stroke="#6FA592" stroke-width="1.5"/><circle cx="140" cy="32" r="1.8" fill="#92B6A3"/><rect x="49" y="34" width="50" height="40" rx="2" fill="#193F3B" stroke="#A5C4AE" stroke-width="1.4"/><rect x="57" y="40" width="34" height="28" rx="1.5" fill="#467461"/><rect x="18" y="70" width="19" height="13" rx="1" fill="#476E61"/><rect x="111" y="66" width="22" height="11" rx="1" fill="#B1B477"/><path d="M51 34v-5 M51 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M58 34v-5 M58 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M65 34v-5 M65 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M72 34v-5 M72 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M79 34v-5 M79 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M86 34v-5 M86 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/><path d="M93 34v-5 M93 74v5" fill="none" stroke="#ACC0A2" stroke-width="1.75"/>
+</g>
+</g>
+<g transform="translate(0 87)">
+<path d="M14.4 31.4 167.4 80.3 167.4 88.3 14.4 39.4Z" fill="#AAD15F" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><path d="M167.4 80.3 238 49 238 57 167.4 88.3Z" fill="#86A952" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><g transform="matrix(1 .32 -.72 .32 85 0)">
+<rect x="0" y="0" width="153" height="98" fill="#DDF47D" stroke="#173C39" stroke-width="2.1" vector-effect="non-scaling-stroke"/><rect x="9" y="10" width="132" height="78" rx="2" fill="none" stroke="#83AA5F" stroke-width="1"/><text x="21" y="65" fill="#103E3A" font-size="45" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">SO</text><path d="M93 31h35m-35 10h23m-23 10h29" fill="none" stroke="#628D52" stroke-width="2.4"/><circle cx="120" cy="72" r="3" fill="#527A44"/><circle cx="131" cy="72" r="3" fill="#527A44"/>
+</g>
+</g>
+<g transform="translate(0 31)">
+<path d="M14.4 31.4 167.4 80.3 167.4 88.3 14.4 39.4Z" fill="#A2C9B9" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><path d="M167.4 80.3 238 49 238 57 167.4 88.3Z" fill="#80AF9C" stroke="#173C39" stroke-width="1.35" stroke-linejoin="round"/><g transform="matrix(1 .32 -.72 .32 85 0)">
+<rect x="0" y="0" width="153" height="98" fill="#E0EFE6" stroke="#173C39" stroke-width="2.1" vector-effect="non-scaling-stroke"/><rect x="9" y="10" width="134" height="77" rx="2" fill="#FBFCF7" stroke="#40726C" stroke-width="2.2"/><rect x="9" y="10" width="134" height="15" rx="2" fill="#A4CFC4"/><path d="M9 26h134" fill="none" stroke="#40726C" stroke-width="1.5"/><circle cx="17" cy="18" r="2.4" fill="#173C39"/><circle cx="25" cy="18" r="2.4" fill="#173C39"/><circle cx="33" cy="18" r="2.4" fill="#173C39"/><rect x="20" y="38" width="30" height="32" rx="1.5" fill="#D3E5DB"/><path d="m23 65 9-13 5 7 5-9 6 15Z" fill="#78A795"/><circle cx="28" cy="46" r="3.2" fill="#E4AF6F"/><path d="M60 43h62m-62 10h47m-47 10h55" fill="none" stroke="#5C8278" stroke-width="2.4"/><path d="M20 78h75" fill="none" stroke="#92AFA3" stroke-width="2.0"/>
+</g>
+</g>
+<path d="M239 80h12l9-9h13" fill="none" stroke="#63867C" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="239" cy="80" r="2.4" fill="#006D62"/>
+<text x="280" y="76" fill="#173C39" font-size="16" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Aplicación</text>
+<path d="M239 136h12l9-9h13" fill="none" stroke="#63867C" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="239" cy="136" r="2.4" fill="#006D62"/>
+<text x="280" y="132" fill="#006D62" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Sistema operativo</text>
+<path d="M239 192h12l9-9h13" fill="none" stroke="#63867C" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="239" cy="192" r="2.4" fill="#006D62"/>
+<text x="280" y="188" fill="#173C39" font-size="16" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Hardware</text>
+</g>
+<text x="52" y="339" fill="#006D62" font-size="15" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="1.0">A   /   CONCEPTOS</text>
+<text x="50" y="379" fill="#173C39" font-size="40" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-1.05">Cinco funciones principales</text>
+<path d="M52 397H998" fill="none" stroke="#6C9284" stroke-width="1.6"/>
+<g id="impreso-funcion-cpu">
+<text x="52" y="435" fill="#006D62" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace">01</text>
+<rect x="88" y="416" width="47" height="47" rx="12" fill="#DDEEE4"/>
+<g transform="translate(98.5 426.5) scale(1.08333)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Cpu">
+<path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/>
+</g>
+<text x="153" y="429" fill="#173C39" font-size="24" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Procesos y CPU</text>
+<text x="154" y="452" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Al ejecutar un programa se crean uno o más procesos. El SO reparte</text>
+<text x="154" y="474" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">entre ellos el tiempo del procesador (CPU).</text>
+<g transform="translate(795 415)">
+<rect x="13" y="4" width="39" height="25" rx="4" fill="#006D62"/>
+<text x="32.5" y="22" fill="#FFFFFF" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" text-anchor="middle">A</text>
+<rect x="55" y="4" width="39" height="25" rx="4" fill="#DCE9D7"/>
+<text x="74.5" y="22" fill="#173C39" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" text-anchor="middle">B</text>
+<rect x="97" y="4" width="39" height="25" rx="4" fill="#006D62"/>
+<text x="116.5" y="22" fill="#FFFFFF" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" text-anchor="middle">A</text>
+<rect x="139" y="4" width="39" height="25" rx="4" fill="#DCE9D7"/>
+<text x="158.5" y="22" fill="#173C39" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" text-anchor="middle">B</text>
+<text x="13" y="50" fill="#49635F" font-size="15" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Turnos de A y B en la CPU</text>
+</g>
+<path d="M52 485H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<g id="impreso-funcion-ram">
+<text x="52" y="523" fill="#006D62" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace">02</text>
+<rect x="88" y="504" width="47" height="47" rx="12" fill="#DDEEE4"/>
+<g transform="translate(98.5 514.5) scale(1.08333)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="MemoryStick">
+<path d="M12 12v-2"/><path d="M12 18v-2"/><path d="M16 12v-2"/><path d="M16 18v-2"/><path d="M2 11h1.5"/><path d="M20 18v-2"/><path d="M20.5 11H22"/><path d="M4 18v-2"/><path d="M8 12v-2"/><path d="M8 18v-2"/><rect x="2" y="6" width="20" height="10" rx="2"/>
+</g>
+<text x="153" y="517" fill="#173C39" font-size="24" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Memoria RAM</text>
+<text x="154" y="540" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">El SO asigna a cada programa espacio en la memoria temporal</text>
+<text x="154" y="562" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">(RAM) y lo libera cuando el programa termina.</text>
+<g transform="translate(795 503)">
+<rect x="13" y="5" width="165" height="23" rx="4" fill="none" stroke="#6A8C7E" stroke-width="1.4"/>
+<rect x="17" y="9" width="17" height="15" rx="1.4" fill="#006D62"/>
+<rect x="37" y="9" width="17" height="15" rx="1.4" fill="#006D62"/>
+<rect x="57" y="9" width="17" height="15" rx="1.4" fill="#006D62"/>
+<rect x="77" y="9" width="17" height="15" rx="1.4" fill="#006D62"/>
+<rect x="97" y="9" width="17" height="15" rx="1.4" fill="#006D62"/>
+<rect x="117" y="9" width="17" height="15" rx="1.4" fill="#E3ECDC"/>
+<rect x="137" y="9" width="17" height="15" rx="1.4" fill="#E3ECDC"/>
+<rect x="157" y="9" width="17" height="15" rx="1.4" fill="#E3ECDC"/>
+<text x="13" y="50" fill="#49635F" font-size="15" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">En uso</text>
+<text x="178" y="50" fill="#49635F" font-size="15" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="end">Libre</text>
+</g>
+<path d="M52 573H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<g id="impreso-funcion-archivos">
+<text x="52" y="611" fill="#006D62" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace">03</text>
+<rect x="88" y="592" width="47" height="47" rx="12" fill="#DDEEE4"/>
+<g transform="translate(98.5 602.5) scale(1.08333)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="FolderOpen">
+<path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/>
+</g>
+<text x="153" y="605" fill="#173C39" font-size="24" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Archivos y carpetas</text>
+<text x="154" y="628" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">El SO organiza los archivos en carpetas dentro del almacenamiento.</text>
+<text x="154" y="650" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Permite guardarlos, localizarlos, moverlos o borrarlos.</text>
+<g transform="translate(795 591)">
+<g transform="translate(13 2) scale(0.916667)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Folder">
+<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>
+</g>
+<text x="44" y="19" fill="#173C39" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Carpeta</text>
+<path d="M23 29v14h18" fill="none" stroke="#829E90" stroke-width="1.5" stroke-linejoin="round"/>
+<g transform="translate(48 32) scale(0.875)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="FileText">
+<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+</g>
+<text x="78" y="48" fill="#49635F" font-size="16" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Archivo</text>
+</g>
+<path d="M52 661H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<g id="impreso-funcion-perifericos">
+<text x="52" y="699" fill="#006D62" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace">04</text>
+<rect x="88" y="680" width="47" height="47" rx="12" fill="#DDEEE4"/>
+<g transform="translate(98.5 690.5) scale(1.08333)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Printer">
+<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/>
+</g>
+<text x="153" y="693" fill="#173C39" font-size="24" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Dispositivos y periféricos</text>
+<text x="154" y="716" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">El SO usa programas llamados controladores para comunicarse con</text>
+<text x="154" y="738" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">dispositivos como el teclado o la impresora.</text>
+<g transform="translate(795 679)">
+<rect x="13" y="13" width="38" height="29" rx="5" fill="#DDEEE4"/>
+<text x="32" y="33" fill="#173C39" font-size="16" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" text-anchor="middle">SO</text>
+<path d="M57 29h75m-5-4 5 4-5 4" fill="none" stroke="#5C8176" stroke-width="1.65" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="95" y="17" fill="#49635F" font-size="13.3" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">Controlador</text>
+<g transform="translate(144 12) scale(1.29167)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Printer">
+<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/>
+</g>
+</g>
+<path d="M52 749H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<g id="impreso-funcion-permisos">
+<text x="52" y="787" fill="#006D62" font-size="17" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace">05</text>
+<rect x="88" y="768" width="47" height="47" rx="12" fill="#DDEEE4"/>
+<g transform="translate(98.5 778.5) scale(1.08333)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="ShieldCheck">
+<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>
+</g>
+<text x="153" y="781" fill="#173C39" font-size="24" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Usuarios y permisos</text>
+<text x="154" y="804" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">El SO identifica al usuario y comprueba qué acciones tiene</text>
+<text x="154" y="826" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">permitidas, como leer, modificar o borrar un archivo.</text>
+<g transform="translate(795 767)">
+<g transform="translate(17 3) scale(1.16667)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Eye">
+<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>
+</g>
+<g transform="translate(101 3) scale(1.125)" fill="none" stroke="#006D62" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-lucide="Pencil">
+<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/>
+</g>
+<text x="32" y="49" fill="#49635F" font-size="15" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">Leer</text>
+<text x="116" y="49" fill="#49635F" font-size="15" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-anchor="middle">Editar</text>
+<path d="M75 9v34" fill="none" stroke="#CAD6CD" stroke-width="1.3"/>
+</g>
+<path d="M52 837H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<rect x="52" y="861" width="946" height="120" rx="14" fill="#103E3A"/>
+<text x="78" y="892" fill="#DDF47D" font-size="15" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="1.0">B   /   CASO DE AULA</text>
+<text x="76" y="936" fill="#FFFFFF" font-size="40" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" letter-spacing="-1">Un informe para clase</text>
+<text x="78" y="964" fill="#E0ECE6" font-size="20" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Preparas un informe en Word en el ordenador del aula.</text>
+<g transform="translate(852 879) rotate(-5 53 42)">
+<path d="M16 8h67l19 18v60H16Z" fill="#49736A" stroke="#173E39" stroke-width="1.4"/><path d="M9 2h66l18 18v61H9Z" fill="#DDF47D" stroke="#103E3A" stroke-width="1.4"/><path d="M74 2v19h19" fill="#A7CF67" stroke="#103E3A" stroke-width="1.4" stroke-linejoin="round"/><path d="M21 25h32m-32 7h21" fill="none" stroke="#7F9E52" stroke-width="1.6" stroke-linecap="round"/><text x="20" y="58" fill="#103E3A" font-size="23" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace">.docx</text><path d="M20 68h52" fill="none" stroke="#769750" stroke-width="1.2"/>
+</g>
+<text x="52" y="1017" fill="#49635F" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.9">LO QUE HACES</text>
+<text x="383" y="1017" fill="#49635F" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.9">LO QUE HACE EL SISTEMA OPERATIVO</text>
+<path d="M52 1028H998" fill="none" stroke="#86A297" stroke-width="1.35"/>
+<g id="impreso-ejemplo-cpu">
+<text x="53" y="1053" fill="#006D62" font-size="14.2" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.28">01  /  PROCESOS Y CPU</text>
+<text x="52" y="1081" fill="#173C39" font-size="23" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Consultas una web</text>
+<text x="383" y="1059" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Escribes en Word mientras el navegador carga una página. El SO</text>
+<text x="383" y="1082" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">reparte tiempo de CPU entre los dos programas.</text>
+<path d="M52 1100H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<g id="impreso-ejemplo-ram">
+<text x="53" y="1125" fill="#006D62" font-size="14.2" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.28">02  /  MEMORIA RAM</text>
+<text x="52" y="1153" fill="#173C39" font-size="23" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Insertas una foto</text>
+<text x="383" y="1131" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Word pide más memoria para editar la foto. El SO le asigna RAM y la</text>
+<text x="383" y="1154" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">recupera cuando cierras el programa.</text>
+<path d="M52 1172H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<g id="impreso-ejemplo-archivos">
+<text x="53" y="1197" fill="#006D62" font-size="14.2" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.28">03  /  ARCHIVOS Y CARPETAS</text>
+<text x="52" y="1225" fill="#173C39" font-size="23" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Pulsas «Guardar»</text>
+<text x="383" y="1203" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Word pide al SO que escriba Informe.docx en el disco. Aunque</text>
+<text x="383" y="1226" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">apagues el equipo, el archivo seguirá en su carpeta.</text>
+<path d="M52 1244H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<g id="impreso-ejemplo-perifericos">
+<text x="53" y="1269" fill="#006D62" font-size="14.2" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.28">04  /  DISPOSITIVOS</text>
+<text x="52" y="1297" fill="#173C39" font-size="23" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Imprimes una copia</text>
+<text x="383" y="1275" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">El SO pone el informe en la cola de impresión y lo envía a la impresora</text>
+<text x="383" y="1298" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">del aula mediante su controlador.</text>
+<path d="M52 1316H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<g id="impreso-ejemplo-permisos">
+<text x="53" y="1341" fill="#006D62" font-size="14.2" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.28">05  /  USUARIOS Y PERMISOS</text>
+<text x="52" y="1369" fill="#173C39" font-size="23" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Tu compañero lo abre</text>
+<text x="383" y="1347" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">Su cuenta tiene permiso de lectura. El SO le deja abrir el informe e</text>
+<text x="383" y="1370" fill="#273D3B" font-size="19" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif">impide que guarde cambios en el original.</text>
+<path d="M52 1388H998" fill="none" stroke="#CAD6CD" stroke-width="1.1"/>
+</g>
+<text x="52" y="1425" fill="#49635F" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.75">PARA CONTRASTAR</text>
+<a href="https://www.ibm.com/es-es/think/topics/operating-systems" xlink:href="https://www.ibm.com/es-es/think/topics/operating-systems" aria-label="IBM. ¿Qué es un sistema operativo?"><text x="233" y="1425" fill="#006D62" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-decoration="underline">IBM · Sistemas operativos</text></a>
+<a href="https://learn.microsoft.com/es-es/windows/security/identity-protection/access-control/access-control" xlink:href="https://learn.microsoft.com/es-es/windows/security/identity-protection/access-control/access-control" aria-label="Microsoft Learn. Introducción al control de acceso"><text x="492" y="1425" fill="#006D62" font-size="16" font-weight="700" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-decoration="underline">Microsoft Learn · Control de acceso</text></a>
+<text x="52" y="1456" fill="#49635F" font-size="14" font-weight="700" font-family="'Courier New', 'Liberation Mono', monospace" letter-spacing="0.75">ICONOS SVG</text>
+<a href="https://lucide.dev/" xlink:href="https://lucide.dev/" aria-label="Crédito de los iconos. Lucide"><text x="233" y="1456" fill="#006D62" font-size="15.5" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-decoration="underline">Lucide Icons and Contributors</text></a>
+<a href="https://lucide.dev/license" xlink:href="https://lucide.dev/license" aria-label="Licencia de los iconos de Lucide"><text x="492" y="1456" fill="#006D62" font-size="15.5" font-weight="400" font-family="Arial, Helvetica, 'Nimbus Sans', sans-serif" text-decoration="underline">Licencia ISC</text></a>
+</svg>
+  </div>
+</body>
+</html>
