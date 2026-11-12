@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Infografía visual para 4.º de ESO: clasificación de los sistemas operativos según licencia, dispositivo e interfaz.">
+  <title>Clasificación de los sistemas operativos · Digitalización · 4.º ESO</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #faf9f4;
+      --canvas: #e7ece6;
+      --ink: #173c39;
+      --text: #273d3b;
+      --teal: #006d62;
+      --muted: #526a63;
+      --line: #cad6cd;
+      --pale: #ddeee4;
+      --mint: #eaf4ee;
+      --lime: #ddf47d;
+      --deep: #103e3a;
+      --amber: #f0ca84;
+      --soft-amber: #faefd1;
+      --soft-lime: #ecf4d3;
+      --sans: Arial, Helvetica, "Nimbus Sans", sans-serif;
+      --mono: "Courier New", "Liberation Mono", monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--canvas);color:var(--text);font:17px/1.45 var(--sans)}
+    a{color:var(--teal);text-underline-offset:3px}
+    a:hover{color:var(--ink)}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:4px}
+    .document{max-width:1100px;margin:26px auto 40px}
+    .topbar{position:sticky;top:10px;z-index:10;display:flex;justify-content:flex-end;padding:0 2px 10px}
+    .print-button{font:700 13px var(--sans);color:var(--ink);background:#ffffffea;border:1px solid #b9cdc2;border-radius:999px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 14px rgba(20,48,40,.08);display:flex;align-items:center;gap:8px}
+    .print-button:hover{background:#f4fff5}
+    .print-button svg{width:17px;height:17px}
+    .sheet{width:100%;padding:36px clamp(30px,5.3vw,58px) 34px;margin-bottom:22px;background:var(--paper);box-shadow:0 8px 42px rgba(17,48,38,.09);overflow:hidden}
+    h1,h2,h3,p,ol,ul{margin:0}
+    h1,h2,h3{color:var(--ink)}
+    .masthead{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #a7bdb0;padding-bottom:15px;color:var(--ink);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand-mark{width:21px;height:21px;flex:0 0 auto}
+    .page-info{white-space:nowrap}
+    .eyebrow,.kicker,.chip,.mini-label,.summary-tag,.foot-label{font-family:var(--mono);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+    .hero{display:grid;grid-template-columns:1.13fr .87fr;align-items:center;gap:18px;margin:32px 0 34px}
+    .eyebrow{font-size:14px;color:var(--teal);margin-bottom:9px}
+    h1{font-size:clamp(46px,5.4vw,64px);line-height:1.04;letter-spacing:-.055em}
+    h1 em{color:var(--teal);font-style:normal}
+    .lead{max-width:49ch;margin-top:18px;font-size:20px;line-height:1.38}
+    .hero-art{display:block;width:100%;height:auto}
+    .kicker{color:var(--teal);font-size:13px}
+    h2{font-size:clamp(30px,3.7vw,41px);line-height:1.09;letter-spacing:-.04em;margin-top:5px}
+    .section{margin-top:26px}
+    .cards-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+    .card{border:1px solid #bfd1c5;border-radius:14px;padding:18px 18px 16px;background:#fff}
+    .card.dark{background:var(--deep);color:#ebf4ef;border-color:#2a5e58}
+    .card.dark h3,.card.dark p,.card.dark li,.card.dark strong{color:inherit}
+    .card-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .icon-box{width:48px;height:48px;border-radius:12px;background:var(--pale);display:grid;place-items:center;color:var(--teal);flex:0 0 auto}
+    .card.dark .icon-box{background:#2d5f58;color:var(--lime)}
+    .ico{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .icon-box svg{width:28px;height:28px}
+    h3{font-size:23px;line-height:1.16;letter-spacing:-.028em}
+    .card p{margin-top:4px}
+    .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:var(--mint);color:var(--ink);font-size:12px}
+    .card.dark .chip{background:#2a5a54;color:#e9f3ef}
+    .chip .dot{width:8px;height:8px;border-radius:50%;background:var(--teal)}
+    .card.dark .chip .dot{background:var(--lime)}
+    .implication{margin-top:13px;padding-top:12px;border-top:1px solid rgba(100,128,120,.28)}
+    .implication strong{display:block;color:var(--ink);font-size:15px}
+    .card.dark .implication{border-top:1px solid rgba(220,244,125,.18)}
+    .card.dark .implication strong{color:#fff}
+    .note{margin-top:14px;padding:12px 16px;border-left:5px solid var(--teal);background:#e8f2e7;font-size:16px}
+    .split-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .split-head p{color:var(--muted);font-size:15px}
+    .device-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:15px}
+    .device-card{padding:18px;border-radius:14px;background:var(--mint);border:1px solid #c8dacf}
+    .device-card.mobile{background:#fff8ec;border-color:#e1d1b2}
+    .device-visual{margin-top:10px;border-radius:12px;background:#fff;padding:14px;display:grid;place-items:center;min-height:180px}
+    .device-card.mobile .device-visual{background:#fffdf7}
+    .device-list{margin-top:12px;padding-left:18px}
+    .device-list li{margin-top:5px}
+    .examples{margin-top:10px;font-size:15px}
+    .footer{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .footer strong{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.045em;color:var(--ink)}
+
+    .hero-2{display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;margin:30px 0 23px}
+    .hero-2 p:last-child{margin-top:10px;font-size:18px}
+    .big-number{font:700 92px/1 var(--mono);color:#d2e6da;letter-spacing:-.08em;padding-right:8px}
+    .interface-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
+    .interface{border-radius:14px;padding:20px 18px;border:1px solid #c2d3c8;background:#fff}
+    .interface.cli{background:var(--deep);color:#eaf4ef;border-color:#2b5f58}
+    .interface.cli h3,.interface.cli p,.interface.cli li,.interface.cli strong{color:inherit}
+    .interface-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .interface.cli .icon-box{background:#2c5d56;color:var(--lime)}
+    .interface .mini-label{font-size:11px;color:var(--muted);margin-bottom:3px}
+    .interface.cli .mini-label{color:#bdd6cb}
+    .interface ul{margin-top:10px;padding-left:18px}
+    .interface li{margin-top:5px}
+    .task-compare{margin-top:22px}
+    .compare-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:13px}
+    .compare-card{border:1px solid #c1d3c7;border-radius:14px;padding:16px;background:#fff}
+    .compare-card.terminal{background:#13211f;color:#eef6f0;border-color:#274e48}
+    .compare-card.terminal h3,.compare-card.terminal p{color:inherit}
+    .panel{margin-top:11px;border-radius:10px;overflow:hidden;border:1px solid #cad6cd;background:#f8fbf8}
+    .terminal .panel{border-color:#315953;background:#143f3a}
+    .panel-bar{height:24px;background:#cbe2d7;display:flex;align-items:center;gap:6px;padding:0 10px}
+    .terminal .panel-bar{background:#2e6158}
+    .ball{width:8px;height:8px;border-radius:50%;background:var(--teal)}
+    .terminal .ball{background:#d6ebdf}
+    .panel-body{padding:14px;min-height:110px}
+    .panel-body svg{display:block;width:100%;height:auto}
+    .result{margin-top:10px;font-size:14.5px;color:var(--muted)}
+    .terminal .result{color:#cfe4da}
+    .summary-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:24px}
+    .summary-card{border-radius:14px;padding:18px;background:var(--deep);color:#eef5f0}
+    .summary-card h3{color:#fff;font-size:22px}
+    .summary-card .kicker{color:var(--lime)}
+    .scheme{margin-top:13px;display:grid;gap:12px}
+    .scheme-box{background:#214e47;border:1px solid #3a7067;border-radius:11px;padding:12px 13px}
+    .scheme-box strong{display:block;color:#fff;font-size:15px}
+    .scheme-box p{margin-top:7px;font-size:14px;line-height:1.35;color:#d8e9e1}
+    .questions{border:1px solid #bfd1c4;border-radius:14px;padding:18px 19px;background:#fff}
+    .questions h3{font-size:21px}
+    .questions ol{list-style:none;padding:0;margin-top:10px;counter-reset:q}
+    .questions li{position:relative;padding-left:25px;margin-top:7px;font-size:14.5px;line-height:1.33}
+    .questions li::before{counter-increment:q;content:counter(q, decimal-leading-zero);position:absolute;left:0;top:1px;color:var(--teal);font:700 12px var(--mono)}
+
+    @media (max-width: 860px){
+      .document{margin:0 auto 20px}
+      .sheet{margin-bottom:12px;padding:27px 25px 30px}
+      .hero{grid-template-columns:1fr;gap:8px}
+      h1{font-size:clamp(38px,6vw,56px)}
+      .lead{font-size:18px}
+      .cards-2,.device-grid,.interface-grid,.compare-wrap,.summary-grid{grid-template-columns:1fr}
+    }
+    @media (max-width: 560px){
+      .masthead{font-size:11px;letter-spacing:.07em}
+      .sheet{padding:21px 17px 25px}
+      .page-info{font-size:10px}
+      .hero{margin:24px 0 24px}
+      .hero-art{max-width:320px;margin:0 auto}
+      .lead{margin-top:13px}
+      h2{font-size:29px}
+      h3{font-size:21px}
+      .hero-2{margin:22px 0 18px}
+      .big-number{display:none}
+      .hero-2 p:last-child{font-size:16px}
+      .device-visual{min-height:150px}
+      .footer{flex-direction:column}
+    }
+
+    @page{size:A4 portrait;margin:9mm}
+    @media print{
+      html,body{margin:0;padding:0;background:white!important}
+      .document{margin:0;max-width:none}
+      .topbar{display:none!important}
+      .sheet{width:100%;margin:0;padding:0;box-shadow:none;overflow:visible;background:var(--paper)}
+      .sheet:first-of-type{break-after:page;page-break-after:always}
+      body{font-size:13.2px;line-height:1.34}
+      .masthead{font-size:9.6px;padding-bottom:10px}
+      .brand-mark{width:16px;height:16px}
+      .hero{margin:24px 0 21px;gap:12px}
+      .eyebrow{font-size:10px;margin-bottom:7px}
+      h1{font-size:39px;line-height:1.05}
+      .lead{font-size:15.5px;margin-top:12px}
+      h2{font-size:26px}
+      .kicker{font-size:10px}
+      h3{font-size:17px}
+      .section{margin-top:20px}
+      .cards-2,.device-grid,.interface-grid,.compare-wrap,.summary-grid{gap:12px}
+      .card,.device-card,.interface,.compare-card,.summary-card,.questions{padding:13px 14px}
+      .icon-box{width:36px;height:36px;border-radius:9px}
+      .icon-box svg{width:22px;height:22px}
+      .card p,.device-card p,.interface p,.questions li,.scheme-box p{font-size:12.5px}
+      .chip-row{gap:6px;margin-top:9px}
+      .chip{font-size:10px;padding:5px 8px}
+      .implication{margin-top:10px;padding-top:9px}
+      .implication strong{font-size:12px}
+      .note{margin-top:10px;padding:10px 12px;font-size:12.4px}
+      .split-head p{font-size:10.5px}
+      .device-visual{min-height:125px;margin-top:8px;padding:10px}
+      .device-list{margin-top:9px}
+      .examples{margin-top:8px;font-size:12px}
+      .footer{margin-top:15px;padding-top:10px;font-size:8.8px}
+      .footer strong{font-size:8.6px}
+      .hero-2{margin:22px 0 15px}
+      .hero-2 p:last-child{font-size:13px;margin-top:7px}
+      .big-number{display:block;font-size:68px}
+      .interface ul{margin-top:8px}
+      .panel{margin-top:8px}
+      .panel-bar{height:18px;padding:0 8px}
+      .ball{width:6px;height:6px}
+      .panel-body{padding:10px;min-height:84px}
+      .result{margin-top:8px;font-size:11.4px}
+      .summary-card h3,.questions h3{font-size:17px}
+      .scheme{gap:9px;margin-top:10px}
+      .scheme-box{padding:9px 10px}
+      .scheme-box strong{font-size:12px}
+    }
+  </style>
+</head>
+<body>
+  <div class="document">
+    <div class="topbar">
+      <button class="print-button" type="button" onclick="window.print()" aria-label="Imprimir infografía">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ico" d="M6 9V3h12v6"/><path class="ico" d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect class="ico" x="6" y="14" width="12" height="8" rx="1"/></svg>
+        Imprimir / guardar en PDF
+      </button>
+    </div>
+
+    <section class="sheet">
+      <header class="masthead">
+        <div class="brand">
+          <svg xmlns="http://www.w3.org/2000/svg" class="brand-mark" viewBox="0 0 21 21" aria-hidden="true" focusable="false">
+            <rect x="0" y="0" width="9" height="9" rx="1.1" fill="#006D62"/>
+            <rect x="12" y="0" width="9" height="9" rx="1.1" fill="#173C39"/>
+            <rect x="0" y="12" width="9" height="9" rx="1.1" fill="#173C39"/>
+            <rect x="12" y="12" width="9" height="9" rx="1.1" fill="#91B64F"/>
+          </svg>
+          <span>Digitalización</span>
+        </div>
+        <span class="page-info">4.º de ESO · Página 1/2</span>
+      </header>
+
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Infografía de clasificación</p>
+          <h1>¿Cómo se clasifican los <em>sistemas operativos?</em></h1>
+          <p class="lead">Podemos clasificarlos de varias maneras: según su licencia, el dispositivo para el que están pensados y la forma en que nos comunicamos con ellos.</p>
+        </div>
+        <svg class="hero-art" viewBox="0 0 410 255" role="img" aria-label="Esquema con un sistema operativo clasificado por licencia, dispositivo e interfaz.">
+          <rect x="146" y="92" width="118" height="70" rx="14" fill="#DDF47D" stroke="#173C39" stroke-width="2"/>
+          <text x="205" y="123" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#103E3A">SO</text>
+          <text x="205" y="146" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#173C39">Sistema operativo</text>
+
+          <rect x="18" y="18" width="112" height="54" rx="12" fill="#E4F1EA" stroke="#7DA396"/>
+          <text x="74" y="41" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#173C39">Licencia</text>
+          <text x="74" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#49635F">Libre / Privativa</text>
+
+          <rect x="280" y="18" width="112" height="54" rx="12" fill="#FAEFCE" stroke="#C69A5A"/>
+          <text x="336" y="41" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#173C39">Dispositivo</text>
+          <text x="336" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#49635F">Escritorio / Móvil</text>
+
+          <rect x="92" y="189" width="226" height="48" rx="12" fill="#163F3A" stroke="#173C39"/>
+          <text x="205" y="211" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">Interfaz</text>
+          <text x="205" y="227" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#DCEAE5">GUI · ventanas e iconos · CLI · comandos</text>
+
+          <path d="M146 113 C109 95, 94 83, 74 72" fill="none" stroke="#7A9A8F" stroke-width="2"/>
+          <path d="M264 113 C301 95, 316 83, 336 72" fill="none" stroke="#B78D4D" stroke-width="2"/>
+          <path d="M205 162 V188" fill="none" stroke="#6F8E84" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <section class="section" aria-labelledby="licencia">
+        <p class="kicker">A / Según su licencia</p>
+        <h2 id="licencia">Libres o privativos</h2>
+        <div class="cards-2">
+          <article class="card">
+            <div class="card-head">
+              <div class="icon-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ico" d="M8 11V7a4 4 0 0 1 8 0v4"/><rect class="ico" x="5" y="11" width="14" height="10" rx="2"/><path class="ico" d="m10 16 2 2 4-4"/></svg>
+              </div>
+              <div>
+                <h3>Software libre</h3>
+              </div>
+            </div>
+            <p>Su licencia permite <strong>usar</strong> el sistema, <strong>estudiar</strong> su código fuente, <strong>modificarlo</strong> y <strong>compartirlo</strong> respetando las condiciones de esa licencia.</p>
+            <div class="chip-row" aria-label="Ejemplos de sistemas operativos de software libre">
+              <span class="chip"><span class="dot"></span>Debian</span>
+              <span class="chip"><span class="dot"></span>Ubuntu</span>
+              <span class="chip"><span class="dot"></span>Fedora</span>
+            </div>
+            <div class="implication">
+              <strong>¿Qué implica usarlo?</strong>
+              <p>Podemos conocer cómo funciona, adaptarlo y compartir mejoras. Libre <strong>no siempre significa gratis</strong>.</p>
+            </div>
+          </article>
+
+          <article class="card dark">
+            <div class="card-head">
+              <div class="icon-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ico" d="M16 11V7a4 4 0 0 0-8 0v4"/><rect class="ico" x="5" y="11" width="14" height="10" rx="2"/><circle class="ico" cx="12" cy="16" r="1.5"/></svg>
+              </div>
+              <div>
+                <h3>Software privativo</h3>
+              </div>
+            </div>
+            <p>Su código fuente <strong>no está disponible libremente</strong> y la licencia limita lo que el usuario puede hacer con el sistema.</p>
+            <div class="chip-row" aria-label="Ejemplos de sistemas operativos privativos">
+              <span class="chip"><span class="dot"></span>Windows</span>
+              <span class="chip"><span class="dot"></span>macOS</span>
+              <span class="chip"><span class="dot"></span>iOS</span>
+            </div>
+            <div class="implication">
+              <strong>¿Qué implica usarlo?</strong>
+              <p>Podemos utilizarlo según su licencia, pero no modificar ni distribuir libremente su código. El desarrollo depende sobre todo de la empresa responsable.</p>
+            </div>
+          </article>
+        </div>
+        <p class="note"><strong>Idea clave:</strong> que un sistema operativo sea gratuito no significa que sea libre. Lo importante son los permisos que concede su licencia.</p>
+      </section>
+
+      <section class="section" aria-labelledby="dispositivo">
+        <div class="split-head">
+          <div>
+            <p class="kicker">B / Según el dispositivo</p>
+            <h2 id="dispositivo">Escritorio o móvil</h2>
+          </div>
+          <p>Cada sistema operativo se diseña pensando en el tipo de aparato en el que va a funcionar.</p>
+        </div>
+
+        <div class="device-grid">
+          <article class="device-card">
+            <h3>Escritorio</h3>
+            <p>Está pensado para ordenadores de sobremesa y portátiles.</p>
+            <div class="device-visual">
+              <svg viewBox="0 0 250 150" aria-hidden="true">
+                <rect x="42" y="18" width="166" height="96" rx="8" fill="#F9FCF8" stroke="#507E74" stroke-width="3"/>
+                <rect x="52" y="28" width="146" height="76" rx="4" fill="#DDEEE4"/>
+                <path d="M109 118h32l8 14H101Z" fill="#9ABAAE" stroke="#507E74" stroke-width="2"/>
+                <rect x="83" y="132" width="84" height="8" rx="4" fill="#507E74"/>
+                <rect x="66" y="125" width="118" height="8" rx="4" fill="#E9F4EE" stroke="#8AAC9F"/>
+                <g fill="#4B7368">
+                  <circle cx="71" cy="66" r="10"/>
+                  <rect x="89" y="57" width="82" height="8" rx="4"/>
+                  <rect x="89" y="73" width="58" height="8" rx="4"/>
+                </g>
+              </svg>
+            </div>
+            <ul class="device-list">
+              <li>Usa teclado, ratón, impresora y otros periféricos.</li>
+              <li>Permite trabajar con varios programas y archivos.</li>
+              <li>Suele tener ventanas, menús y carpetas visibles.</li>
+            </ul>
+            <p class="examples"><strong>Ejemplos:</strong> Windows, macOS, Ubuntu.</p>
+          </article>
+
+          <article class="device-card mobile">
+            <h3>Móvil</h3>
+            <p>Está pensado para teléfonos inteligentes y otros dispositivos táctiles.</p>
+            <div class="device-visual">
+              <svg viewBox="0 0 250 150" aria-hidden="true">
+                <rect x="88" y="12" width="74" height="126" rx="16" fill="#183F3A" stroke="#9C7A44" stroke-width="3"/>
+                <rect x="95" y="23" width="60" height="100" rx="10" fill="#FAF4E3"/>
+                <circle cx="125" cy="130" r="4" fill="#D7C4A4"/>
+                <rect x="112" y="17" width="26" height="4" rx="2" fill="#E6D7BA"/>
+                <rect x="104" y="37" width="16" height="16" rx="4" fill="#DCEEE6" stroke="#88AA9E"/>
+                <rect x="129" y="37" width="16" height="16" rx="4" fill="#DDF47D" stroke="#7FA355"/>
+                <rect x="104" y="59" width="16" height="16" rx="4" fill="#F0CA84" stroke="#B68C4A"/>
+                <rect x="129" y="59" width="16" height="16" rx="4" fill="#B8D9CC" stroke="#7EAAA0"/>
+                <path d="M81 79c-10 0-17 7-17 16" fill="none" stroke="#C09453" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="63" cy="99" r="4" fill="#C09453"/>
+              </svg>
+            </div>
+            <ul class="device-list">
+              <li>Se adapta a la pantalla táctil y a la batería.</li>
+              <li>Gestiona sensores como GPS, cámara o acelerómetro.</li>
+              <li>Está preparado para llamadas, datos móviles y apps táctiles.</li>
+            </ul>
+            <p class="examples"><strong>Ejemplos:</strong> Android, iOS.</p>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div><strong>Idea final</strong> Un mismo sistema operativo puede describirse con varios criterios a la vez.</div>
+        <div><strong>Iconos SVG</strong> Inspirados en <a href="https://lucide.dev/">Lucide Icons</a> · Licencia <a href="https://lucide.dev/license">ISC</a></div>
+      </footer>
+    </section>
+
+    <section class="sheet">
+      <header class="masthead">
+        <div class="brand">
+          <svg xmlns="http://www.w3.org/2000/svg" class="brand-mark" viewBox="0 0 21 21" aria-hidden="true" focusable="false">
+            <rect x="0" y="0" width="9" height="9" rx="1.1" fill="#006D62"/>
+            <rect x="12" y="0" width="9" height="9" rx="1.1" fill="#173C39"/>
+            <rect x="0" y="12" width="9" height="9" rx="1.1" fill="#173C39"/>
+            <rect x="12" y="12" width="9" height="9" rx="1.1" fill="#91B64F"/>
+          </svg>
+          <span>Digitalización</span>
+        </div>
+        <span class="page-info">4.º de ESO · Página 2/2</span>
+      </header>
+
+      <div class="hero-2">
+        <div>
+          <p class="kicker">C / Según la interfaz</p>
+          <h2>GUI o CLI</h2>
+          <p>La interfaz es la forma en la que el usuario se comunica con el sistema operativo. No son sistemas diferentes: son <strong>dos maneras de usarlo</strong>.</p>
+        </div>
+        <div class="big-number">02</div>
+      </div>
+
+      <section aria-labelledby="interfaces">
+        <div class="interface-grid">
+          <article class="interface">
+            <div class="interface-top">
+              <div class="icon-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="ico" x="3" y="4" width="18" height="16" rx="2"/><path class="ico" d="M3 9h18"/><path class="ico" d="M8 14h3"/><path class="ico" d="M14 14h2"/></svg>
+              </div>
+              <div>
+                <p class="mini-label">Graphical User Interface</p>
+                <h3>GUI · Interfaz gráfica</h3>
+              </div>
+            </div>
+            <p>Permite usar el sistema mediante <strong>ventanas, iconos, menús y botones</strong>.</p>
+            <ul>
+              <li>Hace más visual y sencilla la interacción.</li>
+              <li>Sirve para abrir programas, mover archivos y cambiar ajustes.</li>
+              <li>Se usa con ratón, teclado o pantalla táctil.</li>
+            </ul>
+          </article>
+
+          <article class="interface cli">
+            <div class="interface-top">
+              <div class="icon-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ico" d="m4 7 5 5-5 5"/><path class="ico" d="M12 17h8"/><rect class="ico" x="2" y="3" width="20" height="18" rx="2"/></svg>
+              </div>
+              <div>
+                <p class="mini-label">Command-Line Interface</p>
+                <h3>CLI · Línea de comandos</h3>
+              </div>
+            </div>
+            <p>Permite usar el sistema escribiendo <strong>comandos de texto</strong> en una terminal o consola.</p>
+            <ul>
+              <li>Es muy útil para tareas rápidas y repetitivas.</li>
+              <li>Sirve para consultar información, gestionar archivos y automatizar procesos.</li>
+              <li>Requiere conocer los comandos adecuados.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="task-compare" aria-labelledby="comparacion">
+        <p class="kicker">D / La misma tarea, dos caminos</p>
+        <h2 id="comparacion">Crear una carpeta llamada «Tareas»</h2>
+        <div class="compare-wrap">
+          <article class="compare-card">
+            <h3>Con GUI</h3>
+            <p>Usas el explorador de archivos y seleccionas la opción de crear carpeta.</p>
+            <div class="panel">
+              <div class="panel-bar"><span class="ball"></span><span class="ball"></span><span class="ball"></span></div>
+              <div class="panel-body">
+                <svg viewBox="0 0 220 92" aria-hidden="true">
+                  <rect x="10" y="10" width="200" height="72" rx="7" fill="#EEF6F0" stroke="#A7C1B6"/>
+                  <path d="M26 28h35l8 10h42v28H26Z" fill="#B7D26D" stroke="#5C7C45" stroke-width="1.5"/>
+                  <rect x="127" y="20" width="61" height="12" rx="4" fill="#CADFD6"/>
+                  <rect x="127" y="39" width="52" height="9" rx="4" fill="#D9E9E2"/>
+                  <rect x="127" y="54" width="40" height="9" rx="4" fill="#D9E9E2"/>
+                  <path d="M26 68h50" stroke="#6D8F83" stroke-width="2" stroke-linecap="round"/>
+                  <text x="118" y="72" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#173C39">Nueva carpeta</text>
+                </svg>
+              </div>
+            </div>
+            <p class="result"><strong>Acción:</strong> clic derecho → Nuevo → Carpeta.</p>
+          </article>
+
+          <article class="compare-card terminal">
+            <h3>Con CLI</h3>
+            <p>Abres una terminal y escribes una instrucción para crearla.</p>
+            <div class="panel">
+              <div class="panel-bar"><span class="ball"></span><span class="ball"></span><span class="ball"></span></div>
+              <div class="panel-body">
+                <svg viewBox="0 0 220 92" aria-hidden="true">
+                  <text x="16" y="34" font-family="Courier New, monospace" font-size="14" fill="#DDF47D">&gt;</text>
+                  <text x="31" y="34" font-family="Courier New, monospace" font-size="14" fill="#FFFFFF">mkdir Tareas</text>
+                  <rect x="16" y="48" width="76" height="18" rx="4" fill="#2F5F57" stroke="#8EB8A8"/>
+                  <text x="54" y="61" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#D7EEE3">Tareas</text>
+                  <rect x="95" y="23" width="8" height="15" fill="#CBE1D7"/>
+                </svg>
+              </div>
+            </div>
+            <p class="result"><strong>Comando:</strong> <code>mkdir Tareas</code></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="summary-grid" aria-labelledby="resumen-final">
+        <article class="summary-card">
+          <p class="kicker">E / Esquema final</p>
+          <h3 id="resumen-final">Tres criterios de clasificación</h3>
+          <div class="scheme">
+            <div class="scheme-box">
+              <strong>1. Según la licencia</strong>
+              <p>Libres · podemos estudiar, modificar y compartir el código. Privativos · su uso depende de una licencia más cerrada.</p>
+            </div>
+            <div class="scheme-box">
+              <strong>2. Según el dispositivo</strong>
+              <p>De escritorio · para ordenadores. Móviles · para teléfonos y dispositivos táctiles.</p>
+            </div>
+            <div class="scheme-box">
+              <strong>3. Según la interfaz</strong>
+              <p>GUI · visual, con ventanas e iconos. CLI · textual, mediante comandos.</p>
+            </div>
+            <div class="scheme-box">
+              <strong>Ejemplo completo</strong>
+              <p>Ubuntu puede describirse como un sistema operativo de escritorio, de software libre y que permite usar GUI y CLI.</p>
+            </div>
+          </div>
+        </article>
+
+        <aside class="questions">
+          <p class="kicker">F / Comprueba si lo entendiste</p>
+          <h3>Preguntas rápidas</h3>
+          <ol>
+            <li>¿Qué diferencia principal hay entre un sistema operativo libre y uno privativo?</li>
+            <li>¿En qué se diferencia un sistema operativo de escritorio de uno móvil?</li>
+            <li>¿Qué tipo de interfaz utilizas cuando haces clic en iconos y menús?</li>
+            <li>¿Qué ventaja puede tener la CLI frente a la GUI?</li>
+            <li>Escribe cómo clasificarías Windows usando los tres criterios vistos.</li>
+          </ol>
+        </aside>
+      </section>
+
+      <footer class="footer">
+        <div><strong>Recuerda</strong> Un mismo sistema operativo puede pertenecer a varias categorías al mismo tiempo.</div>
+        <div><strong>Iconos SVG</strong> Inspirados en <a href="https://lucide.dev/">Lucide Icons and Contributors</a> · Licencia <a href="https://lucide.dev/license">ISC</a></div>
+      </footer>
+    </section>
+  </div>
+</body>
+</html>

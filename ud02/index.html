@@ -41,7 +41,7 @@ main { max-width:var(--max); margin:0 auto; padding:43px 18px 72px; }
 .section-kicker { display:block; font-size:.79rem; font-weight:900; letter-spacing:.12em; color:var(--primary); text-transform:uppercase; margin-bottom:7px; }
 .section-intro h2 { font-size:clamp(1.65rem,3vw,2.25rem); letter-spacing:-.035em; margin:0 0 7px; line-height:1.18; }
 .section-intro p { margin:0; color:var(--muted); max-width:790px; }
-.cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
 .card { min-width:0; display:flex; flex-direction:column; position:relative; overflow:hidden; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); }
 .card::after { position:absolute; content:""; width:160px; height:160px; right:-76px; top:-75px; background:var(--accent); border-radius:50%; pointer-events:none; }
 .card > * { position:relative; z-index:1; }
@@ -87,7 +87,7 @@ footer { max-width:var(--max); margin:0 auto; padding:0 18px 42px; color:var(--m
       <div>
         <span class="eyebrow">Unidad didáctica 02</span>
         <h1>Sistemas<br>operativos</h1>
-        <p class="hero-copy">Aprende qué es un sistema operativo, para qué sirve, cuáles son sus funciones y qué sucede desde que enciendes un ordenador hasta que puedes utilizarlo.</p>
+        <p class="hero-copy">Aprende qué es un sistema operativo, para qué sirve, cuáles son sus funciones y qué sucede al encender un ordenador y cómo se clasifican los sistemas operativos.</p>
         <nav class="quick-nav" aria-label="Secciones de esta unidad">
           <a href="#contenidos">Ver contenidos ↓</a>
           <a href="#actividades">Ir a actividades ↓</a>
@@ -95,7 +95,7 @@ footer { max-width:var(--max); margin:0 auto; padding:0 18px 42px; color:var(--m
       </div>
       <aside class="hero-panel">
         <strong>Tu recorrido por la unidad</strong>
-        <p>Consulta las tres explicaciones en orden. Después, entra en las actividades para poner en práctica lo aprendido.</p>
+        <p>Consulta las cuatro explicaciones en orden. Después, entra en las actividades para poner en práctica lo aprendido.</p>
       </aside>
     </div>
   </div>
@@ -105,7 +105,7 @@ footer { max-width:var(--max); margin:0 auto; padding:0 18px 42px; color:var(--m
     <div class="section-intro">
       <span class="section-kicker">01 · Materiales de estudio</span>
       <h2 id="titulo-contenidos">Explora los contenidos</h2>
-      <p>Tres explicaciones visuales para consultar en clase, repasar conceptos y comprender cómo funciona un ordenador.</p>
+      <p>Cuatro explicaciones visuales para consultar en clase, repasar conceptos y comprender cómo funciona un ordenador.</p>
     </div>
     <div class="cards">
       <article class="card">
@@ -128,6 +128,13 @@ footer { max-width:var(--max); margin:0 auto; padding:0 18px 42px; color:var(--m
         <p>Distingue estos conceptos y sigue los pasos que realiza el equipo desde que pulsas el botón de encendido hasta iniciar el sistema operativo.</p>
         <ul class="tags"><li>Firmware</li><li>BIOS / UEFI</li><li>Secuencia de arranque</li></ul>
         <a class="action" href="3-bios_uefi_firmware_arranque.html" aria-label="Abrir BIOS, UEFI, firmware y arranque">Consultar contenido →</a>
+      </article>
+      <article class="card">
+        <div class="card-top"><span class="number">04</span><span class="type">Infografía</span></div>
+        <h3>Clasificación de los sistemas operativos</h3>
+        <p>Aprende a distinguir los sistemas operativos según su licencia, el dispositivo en el que funcionan y su interfaz de usuario.</p>
+        <ul class="tags"><li>Software libre y privativo</li><li>Escritorio y móvil</li><li>GUI y CLI</li></ul>
+        <a class="action" href="4-clasificacion_sistemas_operativos.html" aria-label="Abrir clasificación de los sistemas operativos">Consultar contenido →</a>
       </article>
     </div>
   </section>
